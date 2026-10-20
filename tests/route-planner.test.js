@@ -6,6 +6,7 @@ import {
   buildOsrmRouteUrl,
   buildOsrmTableUrl,
   createEffectiveMatrix,
+  createRoutePlan,
   findOptimalOrder,
 } from "../dist/route-planner.js";
 
@@ -18,6 +19,29 @@ test("findOptimalOrder chooses the shortest open path from index 0", () => {
   ];
 
   assert.deepEqual(findOptimalOrder(matrix), [0, 1, 2, 3]);
+});
+
+test("createRoutePlan returns an open ordered path and fallback state", () => {
+  const points = [
+    { id: "origin", lat: 25, lng: 121 },
+    { id: "a", lat: 25.01, lng: 121.01 },
+    { id: "b", lat: 25.02, lng: 121.02 },
+  ];
+  const matrix = [
+    [0, 1, 2],
+    [1, 0, 1],
+    [2, 1, 0],
+  ];
+
+  const plan = createRoutePlan(points, matrix);
+
+  assert.deepEqual(plan.order, [0, 1, 2]);
+  assert.deepEqual(
+    plan.orderedPoints.map(({ id }) => id),
+    ["origin", "a", "b"],
+  );
+  assert.equal(plan.usedFallback, false);
+  assert.notEqual(plan.order.at(-1), 0);
 });
 
 test("createEffectiveMatrix replaces missing road distances", () => {

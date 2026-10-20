@@ -71,6 +71,17 @@ export function findOptimalOrder(matrix) {
   return bestOrder;
 }
 
+export function createRoutePlan(points, roadMatrix) {
+  const { matrix, usedFallback } = createEffectiveMatrix(roadMatrix, points);
+  const order = findOptimalOrder(matrix);
+
+  return {
+    order,
+    orderedPoints: order.map((index) => points[index]),
+    usedFallback,
+  };
+}
+
 function coordinates(points) {
   return points.map(({ lng, lat }) => `${lng},${lat}`).join(";");
 }
