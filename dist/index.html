@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="查看台北示範門市位置、啟動單店導航，或規劃一次走訪所有門市的最佳路線。"
+    />
+    <title>台北門市地圖</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <div>
+          <p class="eyebrow">TAIPEI STORE GUIDE</p>
+          <h1>台北門市地圖</h1>
+        </div>
+        <p class="hero-copy">
+          從清單挑選門市查看位置，也可以從現在的位置出發，一次規劃最順的走訪路線。
+        </p>
+      </header>
+
+      <section class="workspace" aria-label="門市與地圖">
+        <section class="directory" aria-labelledby="directory-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">STORE DIRECTORY</p>
+              <h2 id="directory-title">門市列表</h2>
+            </div>
+            <button id="plan-route" class="primary-button" type="button">
+              <span aria-hidden="true">↗</span>
+              規劃最佳路線
+            </button>
+          </div>
+
+          <p id="route-status" class="status" aria-live="polite">
+            選擇店家查看位置。
+          </p>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">店名</th>
+                  <th scope="col">地址</th>
+                </tr>
+              </thead>
+              <tbody id="store-list"></tbody>
+            </table>
+          </div>
+
+          <ol
+            id="route-summary"
+            class="route-summary"
+            aria-label="建議拜訪順序"
+          ></ol>
+        </section>
+
+        <section class="map-panel" aria-label="互動地圖">
+          <div class="map-label" aria-hidden="true">
+            <span>25.0330° N</span>
+            <span>121.5654° E</span>
+          </div>
+          <div id="map"></div>
+        </section>
+      </section>
+    </main>
+
+    <noscript>請啟用 JavaScript 以顯示店家與互動地圖。</noscript>
+  </body>
+</html>
