@@ -20,6 +20,9 @@ test("page exposes the required interactive regions", async () => {
     assert.match(html, new RegExp(`id=["']${id}["']`));
   }
   assert.match(html, /aria-live=["']polite["']/);
+  assert.match(html, /leaflet\.css/);
+  assert.match(html, /leaflet\.js/);
+  assert.match(html, /src=["']\.\/app\.js["']/);
 });
 
 test("five Taipei sample stores have coordinates and addresses", () => {

@@ -182,6 +182,74 @@ td {
   vertical-align: top;
 }
 
+.store-row {
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+
+.store-row:hover,
+.store-row.is-selected {
+  background: #f2ede1;
+}
+
+.store-row.is-selected td:first-child {
+  box-shadow: inset 4px 0 0 var(--accent);
+}
+
+.store-name-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.store-index {
+  color: var(--accent-dark);
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+}
+
+.store-name,
+.store-address,
+.selection-copy {
+  display: block;
+}
+
+.store-name {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.selection-copy {
+  margin-top: 4px;
+  color: var(--accent-dark);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.store-address {
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.navigate-button {
+  margin-top: 9px;
+  padding: 5px 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent-dark);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.navigate-button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
 .map-panel {
   position: relative;
   min-width: 0;
@@ -209,6 +277,24 @@ td {
   font-weight: 700;
   letter-spacing: 0.08em;
   backdrop-filter: blur(10px);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 14px;
+  box-shadow: 0 14px 38px rgb(23 53 45 / 22%);
+}
+
+.leaflet-popup-content {
+  color: var(--ink);
+  font-family: "Noto Sans TC", system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+.popup-address {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
 }
 
 .route-summary {
