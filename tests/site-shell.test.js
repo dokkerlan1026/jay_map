@@ -32,3 +32,15 @@ test("five Taipei sample stores have coordinates and addresses", () => {
     assert.ok(Number.isFinite(store.lat) && Number.isFinite(store.lng));
   }
 });
+
+test("hidden selection labels remain visually hidden", async () => {
+  const css = await readFile(
+    new URL("../dist/styles.css", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(
+    css,
+    /\.selection-copy\[hidden\]\s*\{[^}]*display:\s*none\s*!important;/s,
+  );
+});
