@@ -1,0 +1,1043 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="查看花蓮店家位置、啟動單店導航，或規劃一次走訪所有店家的最佳路線。"
+    />
+    <title>花蓮店家地圖</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <style>
+:root {
+  color-scheme: light;
+  --ink: #17352d;
+  --ink-soft: #60756e;
+  --paper: #f6f1e7;
+  --paper-strong: #fffcf5;
+  --line: #d8d4c7;
+  --accent: #e6613e;
+  --accent-dark: #bc3f23;
+  --mint: #dce9df;
+  --shadow: 0 24px 70px rgb(24 49 41 / 14%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+  font-family: "Noto Sans TC", system-ui, sans-serif;
+  color: var(--ink);
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background:
+    radial-gradient(circle at 10% 10%, rgb(229 97 62 / 10%), transparent 24rem),
+    linear-gradient(135deg, #faf7ef 0%, var(--paper) 64%, #e8eee6 100%);
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #235d50;
+  outline-offset: 3px;
+}
+
+main {
+  width: min(1440px, calc(100% - 48px));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 52px 0;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr minmax(320px, 520px);
+  align-items: end;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--accent-dark);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+h1,
+h2 {
+  margin: 0;
+  letter-spacing: -0.045em;
+}
+
+h1 {
+  font-size: clamp(2.7rem, 6vw, 5.8rem);
+  font-weight: 800;
+  line-height: 0.98;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+}
+
+.hero-copy {
+  max-width: 48ch;
+  margin: 0 0 5px;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(330px, 0.9fr) minmax(460px, 1.4fr);
+  min-height: 650px;
+  overflow: hidden;
+  border: 1px solid rgb(23 53 45 / 12%);
+  border-radius: 28px;
+  background: var(--paper-strong);
+  box-shadow: var(--shadow);
+}
+
+.directory {
+  z-index: 2;
+  padding: 36px;
+  background: rgb(255 252 245 / 92%);
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgb(23 53 45 / 18%);
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.primary-button:hover {
+  background: #245347;
+  transform: translateY(-2px);
+}
+
+.primary-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+  transform: none;
+}
+
+.primary-button.is-loading span {
+  animation: orbit 800ms linear infinite;
+}
+
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.status {
+  min-height: 46px;
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  background: #fbede8;
+  color: #704235;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.status[data-tone="success"] {
+  border-color: #377a63;
+  background: #e6f1e9;
+  color: #245846;
+}
+
+.status[data-tone="warning"] {
+  border-color: #d39b2d;
+  background: #fff2cf;
+  color: #745517;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-align: left;
+}
+
+th:first-child {
+  width: 35%;
+}
+
+td {
+  padding: 18px 12px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.store-row {
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+
+.store-row:hover,
+.store-row.is-selected {
+  background: #f2ede1;
+}
+
+.store-row.is-selected td:first-child {
+  box-shadow: inset 4px 0 0 var(--accent);
+}
+
+.store-name-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.store-index {
+  color: var(--accent-dark);
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+}
+
+.store-name,
+.store-address,
+.selection-copy {
+  display: block;
+}
+
+.store-name {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.selection-copy {
+  margin-top: 4px;
+  color: var(--accent-dark);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.selection-copy[hidden] {
+  display: none !important;
+}
+
+.store-address {
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.navigate-button {
+  margin-top: 9px;
+  padding: 5px 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent-dark);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.navigate-button:hover {
+  color: var(--ink);
+}
+
+.map-panel {
+  position: relative;
+  min-width: 0;
+  background: var(--mint);
+}
+
+#map {
+  min-height: 650px;
+  height: 100%;
+}
+
+.map-label {
+  position: absolute;
+  z-index: 500;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  gap: 10px;
+  padding: 9px 13px;
+  border: 1px solid rgb(23 53 45 / 16%);
+  border-radius: 999px;
+  background: rgb(255 252 245 / 90%);
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(10px);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 14px;
+  box-shadow: 0 14px 38px rgb(23 53 45 / 22%);
+}
+
+.leaflet-popup-content {
+  color: var(--ink);
+  font-family: "Noto Sans TC", system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+.popup-address {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+}
+
+.popup-estimate {
+  display: block;
+  margin-top: 4px;
+  color: #b45309;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+
+.route-summary {
+  display: none;
+}
+
+.route-summary:not(:empty) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 22px 0 0;
+  padding: 18px;
+  border-radius: 16px;
+  background: var(--mint);
+  list-style: none;
+}
+
+.route-summary li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  font-size: 0.74rem;
+}
+
+.route-summary strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.route-stop {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  min-width: 25px;
+  height: 25px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: white;
+  font-size: 0.64rem;
+  font-weight: 800;
+}
+
+noscript {
+  display: block;
+  padding: 16px;
+  background: #fff1c8;
+  text-align: center;
+}
+
+@media (max-width: 960px) {
+  main {
+    width: min(100% - 28px, 820px);
+    padding: 32px 0;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  #map {
+    min-height: 460px;
+  }
+}
+
+@media (max-width: 580px) {
+  main {
+    width: calc(100% - 20px);
+    padding: 24px 0;
+  }
+
+  .directory {
+    padding: 24px 18px;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .route-summary:not(:empty) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .primary-button {
+    width: 100%;
+  }
+
+  th:first-child {
+    width: 38%;
+  }
+
+  td,
+  th {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .map-label {
+    display: none;
+  }
+
+  #map {
+    min-height: 420px;
+  }
+}
+
+</style>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <div>
+          <p class="eyebrow">HUALIEN STORE GUIDE</p>
+          <h1>花蓮店家地圖</h1>
+        </div>
+        <p class="hero-copy">
+          從清單挑選店家查看位置，也可以從現在的位置出發，一次規劃最順的走訪路線。
+        </p>
+      </header>
+
+      <section class="workspace" aria-label="門市與地圖">
+        <section class="directory" aria-labelledby="directory-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">STORE DIRECTORY</p>
+              <h2 id="directory-title">門市列表</h2>
+            </div>
+            <button id="plan-route" class="primary-button" type="button">
+              <span aria-hidden="true">↗</span>
+              規劃最佳路線
+            </button>
+          </div>
+
+          <p id="route-status" class="status" aria-live="polite">
+            選擇店家查看位置。
+          </p>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">店名</th>
+                  <th scope="col">地址</th>
+                </tr>
+              </thead>
+              <tbody id="store-list"></tbody>
+            </table>
+          </div>
+
+          <ol
+            id="route-summary"
+            class="route-summary"
+            aria-label="建議拜訪順序"
+          ></ol>
+        </section>
+
+        <section class="map-panel" aria-label="互動地圖">
+          <div class="map-label" aria-hidden="true">
+            <span>23.9872° N</span>
+            <span>121.6016° E</span>
+          </div>
+          <div id="map"></div>
+        </section>
+      </section>
+    </main>
+
+    <noscript>請啟用 JavaScript 以顯示店家與互動地圖。</noscript>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+
+// === stores.js ===
+const HUALIEN_STATION = {
+  name: "花蓮車站",
+  lat: 23.9929,
+  lng: 121.6013,
+};
+
+const stores = [
+  { id: "liu-guo-jun", name: "劉國鈞公館", address: "花蓮縣花蓮市明心街47號", lat: 23.986292, lng: 121.6081 },
+  { id: "yao-ding-guo", name: "姚定國公館", address: "花蓮縣花蓮市中山路412巷2-2號", lat: 23.98541, lng: 121.603186, estimated: true },
+  { id: "tian-quan", name: "天泉銀樓", address: "花蓮縣花蓮市中華路25號", lat: 23.97604, lng: 121.60933 },
+  { id: "jiu-zhan", name: "酒棧商行", address: "花蓮縣花蓮市建國路1段60號一樓", lat: 23.985245, lng: 121.594659 },
+  { id: "you-chang-parking", name: "佑昌企業社無人停車場", address: "花蓮縣花蓮市國聯一路18號", lat: 23.994077, lng: 121.60386 },
+  { id: "tiramisu-b", name: "提拉米蘇精緻蛋糕B棟", address: "花蓮縣花蓮市中原路738號", lat: 23.976975, lng: 121.592062 },
+  { id: "tiramisu", name: "提拉米蘇精緻蛋糕", address: "花蓮縣花蓮市中原路738號", lat: 23.976975, lng: 121.592062 },
+  { id: "east-service-center", name: "行政院東部聯合服務中心", address: "花蓮縣花蓮市中山路371號7-8樓", lat: 23.981376, lng: 121.605797 },
+  { id: "ren-he-pharmacy", name: "仁和堂藥房", address: "花蓮縣花蓮市中山路316號", lat: 23.981487, lng: 121.606055 },
+  { id: "peng-gui-chun", name: "彭貴春營業所", address: "花蓮縣花蓮市林森路243巷1號", lat: 23.978972, lng: 121.601117 },
+  { id: "heng-kang-clinic", name: "恆康診所-溫控", address: "花蓮縣花蓮市中原路711號", lat: 23.976126, lng: 121.593109, estimated: true },
+  { id: "ji-yang-building", name: "繼陽建材行", address: "花蓮縣花蓮市重慶路386號", lat: 23.970772, lng: 121.606765 },
+  { id: "ri-pin-models", name: "日品模型玩具", address: "花蓮縣吉安鄉中原路1段131號", lat: 23.978708, lng: 121.588141 },
+  { id: "zhuang-qian-xin", name: "莊謙信公館", address: "花蓮縣花蓮市復興街61號", lat: 23.979726, lng: 121.608107 },
+  { id: "quan-ren-clinic", name: "全人診所", address: "花蓮縣花蓮市中福路158號", lat: 23.972664, lng: 121.601724 },
+  { id: "byeyer-hotel", name: "百悅休閒飯店有限公司", address: "花蓮縣花蓮市新港街80巷5號", lat: 23.980811, lng: 121.605509, estimated: true },
+  { id: "da-fang", name: "大芳名產行", address: "花蓮縣花蓮市中山路301號", lat: 23.979529, lng: 121.607265 },
+  { id: "yuan-sheng", name: "元盛百貨股份有限公司", address: "花蓮縣花蓮市國興二街148號", lat: 23.989036, lng: 121.601354 },
+  { id: "san-jia-yi", name: "三傢一活蝦料理", address: "花蓮縣花蓮市南濱32號", lat: 23.969325, lng: 121.610974, estimated: true },
+  { id: "zheng-qi-cong", name: "鄭啟聰公館", address: "花蓮縣吉安鄉自立路1段148巷18號", lat: 23.979909, lng: 121.592707 },
+  { id: "tatung-heping", name: "大同綜合花蓮和平門市", address: "花蓮縣花蓮市和平路415號(415.417號)", lat: 23.974991, lng: 121.602409, estimated: true },
+  { id: "fu-jia-li", name: "富甲里實業有限公司", address: "花蓮縣吉安鄉自強路184號1樓", lat: 23.97996, lng: 121.587488 },
+  { id: "li-feng", name: "藶峰有限公司", address: "花蓮縣花蓮市國聯五路126號旁", lat: 23.992251, lng: 121.605308, estimated: true },
+  { id: "te-xin", name: "特欣行開發股份有限公司", address: "花蓮縣吉安鄉建國路1段137之2號", lat: 23.985742, lng: 121.591431, estimated: true },
+  { id: "pxmart-2110", name: "全聯花蓮2110", address: "花蓮縣花蓮市國聯二路110號", lat: 23.988928, lng: 121.602101 },
+];
+
+
+// === route-planner.js ===
+const OSRM_BASE = "https://router.project-osrm.org";
+
+function distanceMeters(a, b) {
+  const toRadians = (value) => (value * Math.PI) / 180;
+  const deltaLat = toRadians(b.lat - a.lat);
+  const deltaLng = toRadians(b.lng - a.lng);
+  const lat1 = toRadians(a.lat);
+  const lat2 = toRadians(b.lat);
+  const haversine =
+    Math.sin(deltaLat / 2) ** 2 +
+    Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLng / 2) ** 2;
+
+  return (
+    6_371_000 *
+    2 *
+    Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine))
+  );
+}
+
+function createEffectiveMatrix(matrix, points) {
+  let usedFallback = false;
+  const effectiveMatrix = points.map((from, fromIndex) =>
+    points.map((to, toIndex) => {
+      const roadDistance = matrix?.[fromIndex]?.[toIndex];
+      if (Number.isFinite(roadDistance)) {
+        return roadDistance;
+      }
+
+      usedFallback = true;
+      return distanceMeters(from, to);
+    }),
+  );
+
+  return { matrix: effectiveMatrix, usedFallback };
+}
+
+function findOptimalOrder(matrix) {
+  if (matrix.length <= 1) {
+    return matrix.length ? [0] : [];
+  }
+
+  if (matrix.length > 10) {
+    return buildScalableRouteOrder(matrix);
+  }
+
+  const destinations = Array.from(
+    { length: matrix.length - 1 },
+    (_, index) => index + 1,
+  );
+  let bestOrder = null;
+  let bestDistance = Number.POSITIVE_INFINITY;
+
+  function visit(prefix, remaining, totalDistance) {
+    if (totalDistance >= bestDistance) {
+      return;
+    }
+
+    if (remaining.length === 0) {
+      bestOrder = [0, ...prefix];
+      bestDistance = totalDistance;
+      return;
+    }
+
+    const currentIndex = prefix.length ? prefix.at(-1) : 0;
+    for (const nextIndex of remaining) {
+      visit(
+        [...prefix, nextIndex],
+        remaining.filter((value) => value !== nextIndex),
+        totalDistance + matrix[currentIndex][nextIndex],
+      );
+    }
+  }
+
+  visit([], destinations, 0);
+  return bestOrder;
+}
+
+function routeDistance(order, matrix) {
+  let total = 0;
+  for (let index = 1; index < order.length; index += 1) {
+    total += matrix[order[index - 1]][order[index]];
+  }
+  return total;
+}
+
+function buildScalableRouteOrder(matrix) {
+  if (matrix.length <= 1) {
+    return matrix.length ? [0] : [];
+  }
+
+  const unvisited = new Set(
+    Array.from({ length: matrix.length - 1 }, (_, index) => index + 1),
+  );
+  let current = 0;
+  let order = [0];
+
+  while (unvisited.size) {
+    let nearest = null;
+    let nearestDistance = Number.POSITIVE_INFINITY;
+    for (const candidate of unvisited) {
+      if (matrix[current][candidate] < nearestDistance) {
+        nearest = candidate;
+        nearestDistance = matrix[current][candidate];
+      }
+    }
+    order.push(nearest);
+    unvisited.delete(nearest);
+    current = nearest;
+  }
+
+  let bestDistance = routeDistance(order, matrix);
+  for (let pass = 0; pass < 100; pass += 1) {
+    let improvedOrder = null;
+    let improvedDistance = bestDistance;
+
+    for (let start = 1; start < order.length - 1; start += 1) {
+      for (let end = start + 1; end < order.length; end += 1) {
+        const candidate = [
+          ...order.slice(0, start),
+          ...order.slice(start, end + 1).reverse(),
+          ...order.slice(end + 1),
+        ];
+        const candidateDistance = routeDistance(candidate, matrix);
+        if (candidateDistance + 0.001 < improvedDistance) {
+          improvedOrder = candidate;
+          improvedDistance = candidateDistance;
+        }
+      }
+    }
+
+    if (!improvedOrder) break;
+    order = improvedOrder;
+    bestDistance = improvedDistance;
+  }
+
+  return order;
+}
+
+function createRoutePlan(points, roadMatrix) {
+  const { matrix, usedFallback } = createEffectiveMatrix(roadMatrix, points);
+  const order = findOptimalOrder(matrix);
+
+  return {
+    order,
+    orderedPoints: order.map((index) => points[index]),
+    usedFallback,
+  };
+}
+
+function coordinates(points) {
+  return points.map(({ lng, lat }) => `${lng},${lat}`).join(";");
+}
+
+function buildOsrmTableUrl(points) {
+  return `${OSRM_BASE}/table/v1/driving/${coordinates(points)}?annotations=distance`;
+}
+
+function buildOsrmRouteUrl(points) {
+  return `${OSRM_BASE}/route/v1/driving/${coordinates(points)}?overview=full&geometries=geojson&steps=false`;
+}
+
+function buildGoogleMapsUrl(destination, origin) {
+  const params = new URLSearchParams({
+    api: "1",
+    destination: `${destination.lat},${destination.lng}`,
+    travelmode: "driving",
+  });
+
+  if (origin) {
+    params.set("origin", `${origin.lat},${origin.lng}`);
+  }
+
+  return `https://www.google.com/maps/dir/?${params}`;
+}
+
+
+// === app.js ===
+
+
+
+const listElement = document.querySelector("#store-list");
+const statusElement = document.querySelector("#route-status");
+const planButton = document.querySelector("#plan-route");
+const routeSummaryElement = document.querySelector("#route-summary");
+const markers = new Map();
+const rows = new Map();
+let currentOrigin = null;
+let routeLayer = null;
+let originMarker = null;
+
+if (!window.L) {
+  statusElement.textContent = "地圖暫時無法載入，店家地址仍可正常查看。";
+  statusElement.dataset.tone = "warning";
+}
+
+const map = window.L
+  ? window.L.map("map", {
+      zoomControl: true,
+      scrollWheelZoom: false,
+    }).setView([23.98, 121.6], 13)
+  : null;
+
+if (map) {
+  window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(map);
+}
+
+function popupContent(store) {
+  return `
+    <strong>${store.name}</strong>
+    <span class="popup-address">${store.address}</span>
+    ${store.estimated ? '<span class="popup-estimate">位置為地址估算</span>' : ""}
+  `;
+}
+
+function selectStore(storeId, { focusMap = true } = {}) {
+  for (const [id, row] of rows) {
+    const isSelected = id === storeId;
+    row.classList.toggle("is-selected", isSelected);
+    row.setAttribute("aria-current", isSelected ? "true" : "false");
+    row.querySelector(".selection-copy").hidden = !isSelected;
+  }
+
+  const store = stores.find(({ id }) => id === storeId);
+  const marker = markers.get(storeId);
+  if (!store) return;
+
+  statusElement.textContent = `已選擇 ${store.name}。`;
+  statusElement.dataset.tone = "neutral";
+
+  if (map && marker) {
+    if (focusMap) {
+      map.flyTo([store.lat, store.lng], 15, { duration: 0.7 });
+    }
+    marker.openPopup();
+  }
+}
+
+function createStoreRow(store, index) {
+  const row = document.createElement("tr");
+  row.className = "store-row";
+  row.tabIndex = 0;
+  row.dataset.storeId = store.id;
+  row.setAttribute("aria-current", "false");
+  row.setAttribute("aria-label", `${store.name}，${store.address}`);
+  row.innerHTML = `
+    <td>
+      <span class="store-name-wrap">
+        <span class="store-index" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>
+        <span>
+          <strong class="store-name">${store.name}</strong>
+          <span class="selection-copy" hidden>目前選取</span>
+        </span>
+      </span>
+    </td>
+    <td>
+      <span class="store-address">${store.address}</span>
+      <button class="navigate-button" type="button" aria-label="導航到 ${store.name}">
+        導航
+        <span aria-hidden="true">↗</span>
+      </button>
+    </td>
+  `;
+
+  row.addEventListener("click", () => selectStore(store.id));
+  row.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      selectStore(store.id);
+    }
+  });
+  row.querySelector(".navigate-button").addEventListener("click", (event) => {
+    event.stopPropagation();
+    const origin = currentOrigin?.isFallback ? null : currentOrigin;
+    window.open(buildGoogleMapsUrl(store, origin), "_blank", "noopener,noreferrer");
+  });
+
+  rows.set(store.id, row);
+  return row;
+}
+
+for (const [index, store] of stores.entries()) {
+  listElement.append(createStoreRow(store, index));
+
+  if (map) {
+    const marker = window.L.marker([store.lat, store.lng])
+      .addTo(map)
+      .bindPopup(popupContent(store));
+    marker.on("click", () => selectStore(store.id, { focusMap: false }));
+    markers.set(store.id, marker);
+  }
+}
+
+if (map && markers.size) {
+  const bounds = window.L.featureGroup([...markers.values()]).getBounds();
+  map.fitBounds(bounds.pad(0.16));
+}
+
+function setStatus(message, tone = "neutral") {
+  statusElement.textContent = message;
+  statusElement.dataset.tone = tone;
+}
+
+function getOrigin() {
+  if (currentOrigin) {
+    return Promise.resolve(currentOrigin);
+  }
+
+  if (!navigator.geolocation) {
+    currentOrigin = { ...HUALIEN_STATION, isFallback: true };
+    return Promise.resolve(currentOrigin);
+  }
+
+  return new Promise((resolve) => {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        currentOrigin = {
+          name: "目前位置",
+          lat: coords.latitude,
+          lng: coords.longitude,
+          isFallback: false,
+        };
+        resolve(currentOrigin);
+      },
+      () => {
+        currentOrigin = { ...HUALIEN_STATION, isFallback: true };
+        resolve(currentOrigin);
+      },
+      { enableHighAccuracy: false, timeout: 8_000, maximumAge: 60_000 },
+    );
+  });
+}
+
+async function fetchJson(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Request failed with ${response.status}`);
+  }
+
+  const payload = await response.json();
+  if (payload.code !== "Ok") {
+    throw new Error(payload.message || "Route service returned an error");
+  }
+  return payload;
+}
+
+function clearRoute() {
+  if (!map) return;
+  if (routeLayer) map.removeLayer(routeLayer);
+  if (originMarker) map.removeLayer(originMarker);
+  routeLayer = null;
+  originMarker = null;
+}
+
+function drawOrigin(origin) {
+  if (!map) return;
+  originMarker = window.L.circleMarker([origin.lat, origin.lng], {
+    radius: 9,
+    weight: 4,
+    color: "#ffffff",
+    fillColor: "#17352d",
+    fillOpacity: 1,
+  })
+    .addTo(map)
+    .bindPopup(`<strong>${origin.name}</strong><span class="popup-address">路線起點</span>`);
+}
+
+function drawFallbackRoute(orderedPoints) {
+  if (!map) return;
+  routeLayer = window.L.polyline(
+    orderedPoints.map(({ lat, lng }) => [lat, lng]),
+    { color: "#e6613e", weight: 5, dashArray: "10 10", opacity: 0.86 },
+  ).addTo(map);
+}
+
+function drawRoadRoute(geometry) {
+  if (!map) return;
+  routeLayer = window.L.geoJSON(geometry, {
+    style: { color: "#e6613e", weight: 6, opacity: 0.9 },
+  }).addTo(map);
+}
+
+function updateRouteOrder(origin, orderedStores) {
+  routeSummaryElement.replaceChildren();
+
+  const startItem = document.createElement("li");
+  startItem.innerHTML = `<span class="route-stop">起點</span><strong>${origin.name}</strong>`;
+  routeSummaryElement.append(startItem);
+
+  for (const [index, store] of orderedStores.entries()) {
+    const row = rows.get(store.id);
+    row.querySelector(".store-index").textContent = String(index + 1).padStart(2, "0");
+    listElement.append(row);
+
+    const item = document.createElement("li");
+    const badge = document.createElement("span");
+    const name = document.createElement("strong");
+    badge.className = "route-stop";
+    badge.textContent = String(index + 1);
+    name.textContent = store.name;
+    item.append(badge, name);
+    routeSummaryElement.append(item);
+  }
+}
+
+function fitRoute(orderedPoints) {
+  if (!map) return;
+  const bounds = window.L.latLngBounds(
+    orderedPoints.map(({ lat, lng }) => [lat, lng]),
+  );
+  map.fitBounds(bounds.pad(0.14));
+}
+
+async function planBestRoute() {
+  planButton.disabled = true;
+  planButton.classList.add("is-loading");
+  setStatus("正在取得起點並計算最佳順序…");
+
+  try {
+    const origin = await getOrigin();
+    const allPoints = [origin, ...stores];
+    if (origin.isFallback) {
+      setStatus("無法取得目前位置，改由花蓮車站出發規劃。", "warning");
+    } else {
+      setStatus("已取得目前位置，正在比較道路距離…");
+    }
+
+    const tablePayload = await fetchJson(buildOsrmTableUrl(allPoints));
+    const plan = createRoutePlan(allPoints, tablePayload.distances);
+    const orderedStores = plan.order.slice(1).map((index) => stores[index - 1]);
+
+    clearRoute();
+    drawOrigin(origin);
+
+    let usedEstimatedGeometry = false;
+    let roadDistance = null;
+    try {
+      const routePayload = await fetchJson(buildOsrmRouteUrl(plan.orderedPoints));
+      const route = routePayload.routes?.[0];
+      if (!route?.geometry) throw new Error("Missing route geometry");
+      drawRoadRoute(route.geometry);
+      roadDistance = route.distance;
+    } catch {
+      usedEstimatedGeometry = true;
+      drawFallbackRoute(plan.orderedPoints);
+    }
+
+    updateRouteOrder(origin, orderedStores);
+    fitRoute(plan.orderedPoints);
+
+    const distanceText = Number.isFinite(roadDistance)
+      ? `，全程約 ${(roadDistance / 1000).toFixed(1)} 公里`
+      : "";
+    if (usedEstimatedGeometry || plan.usedFallback) {
+      setStatus(`已排出建議順序${distanceText}；部分路段以直線距離估算。`, "warning");
+    } else {
+      setStatus(`最佳路線已完成${distanceText}。`, "success");
+    }
+  } catch (error) {
+    console.error(error);
+    setStatus("目前無法取得道路路線，仍可使用各店導航。", "warning");
+  } finally {
+    planButton.disabled = false;
+    planButton.classList.remove("is-loading");
+  }
+}
+
+planButton.addEventListener("click", planBestRoute);
+
+
+</script>
+  </body>
+</html>

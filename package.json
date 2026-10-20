@@ -1,8 +1,9 @@
 {
-  "name": "taipei-store-map",
+  "name": "hualien-store-map",
   "private": true,
   "type": "module",
   "scripts": {
+    "start": "node server.js",
     "test": "node --test"
   }
 }
