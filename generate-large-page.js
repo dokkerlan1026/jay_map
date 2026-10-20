@@ -6,20 +6,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const jsonPath = path.join(__dirname, "large_stores.json");
-if (!fs.existsSync(jsonPath)) {
-  console.log("等待 large_stores.json 產出...");
-  process.exit(1);
-}
-
 const stores = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
+const primaryCount = stores.filter(s => s.isPrimary488).length;
+const diffCount = stores.filter(s => !s.isPrimary488).length;
 
 const html = `<!doctype html>
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="花蓮市與吉安鄉共 ${stores.length} 筆店家大規模互動地圖，支援即時搜尋、群聚檢視、Google Maps 導航與一鍵匯出。" />
-    <title>花蓮大規模店家地圖 (共 ${stores.length} 筆)</title>
+    <meta name="description" content="花蓮市與吉安鄉共 ${stores.length} 筆店家大規模互動地圖，支援雙色標記（主要488 vs 非488名單）、即時搜尋、群聚檢視與 Google Maps 導航。" />
+    <title>花蓮店家地圖 (雙色標記 - 共 ${stores.length} 筆)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -34,6 +31,8 @@ const html = `<!doctype html>
         --card: #ffffff;
         --accent: #e6613e;
         --accent-dark: #b84324;
+        --primary-green: #257a4e;
+        --diff-orange: #d9531e;
         --line: #ded7c8;
         --mint: #e8f0ec;
       }
@@ -110,7 +109,7 @@ const html = `<!doctype html>
         overflow: hidden;
       }
       .sidebar {
-        width: 420px;
+        width: 440px;
         background: white;
         border-right: 1px solid var(--line);
         display: flex;
@@ -119,21 +118,52 @@ const html = `<!doctype html>
         z-index: 500;
       }
       .search-bar {
-        padding: 16px;
+        padding: 14px 16px;
         border-bottom: 1px solid var(--line);
         background: #faf8f3;
       }
       .search-input {
         width: 100%;
-        padding: 10px 14px;
+        padding: 9px 12px;
         border: 1px solid var(--line);
         border-radius: 8px;
-        font-size: 0.92rem;
+        font-size: 0.9rem;
         font-family: inherit;
         outline: none;
         transition: border-color 160ms ease;
       }
       .search-input:focus { border-color: var(--accent); }
+      .filter-tabs {
+        display: flex;
+        gap: 6px;
+        margin-top: 10px;
+      }
+      .filter-tab {
+        flex: 1;
+        text-align: center;
+        padding: 6px 4px;
+        font-size: 0.76rem;
+        font-weight: 700;
+        border-radius: 6px;
+        cursor: pointer;
+        border: 1px solid var(--line);
+        background: white;
+        color: var(--ink-soft);
+        transition: all 140ms ease;
+      }
+      .filter-tab.active {
+        background: var(--ink);
+        color: white;
+        border-color: var(--ink);
+      }
+      .filter-tab.tab-diff.active {
+        background: var(--diff-orange);
+        border-color: var(--diff-orange);
+      }
+      .filter-tab.tab-primary.active {
+        background: var(--primary-green);
+        border-color: var(--primary-green);
+      }
       .filter-stats {
         margin-top: 8px;
         font-size: 0.78rem;
@@ -146,7 +176,7 @@ const html = `<!doctype html>
         overflow-y: auto;
       }
       .store-item {
-        padding: 14px 16px;
+        padding: 12px 16px;
         border-bottom: 1px solid var(--line);
         cursor: pointer;
         transition: background 120ms ease;
@@ -157,6 +187,12 @@ const html = `<!doctype html>
       .store-item.active {
         border-left: 4px solid var(--accent);
       }
+      .store-item.is-diff {
+        background: #fff8f5;
+      }
+      .store-item.is-diff:hover, .store-item.is-diff.active {
+        background: #fdeee7;
+      }
       .item-header {
         display: flex;
         align-items: flex-start;
@@ -164,14 +200,30 @@ const html = `<!doctype html>
         gap: 8px;
       }
       .item-name {
-        font-size: 0.95rem;
+        font-size: 0.94rem;
         font-weight: 700;
         color: var(--ink);
       }
-      .item-index {
-        font-size: 0.72rem;
+      .item-badges {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex-shrink: 0;
+      }
+      .badge-tag {
+        font-size: 0.68rem;
         font-weight: 800;
-        color: var(--accent-dark);
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+      .badge-primary {
+        background: #e4f3ea;
+        color: var(--primary-green);
+      }
+      .badge-diff {
+        background: #fdeee7;
+        color: var(--diff-orange);
+        border: 1px solid #f9cdb8;
       }
       .item-address {
         font-size: 0.82rem;
@@ -179,7 +231,7 @@ const html = `<!doctype html>
         margin-top: 4px;
       }
       .item-footer {
-        margin-top: 8px;
+        margin-top: 6px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -201,6 +253,16 @@ const html = `<!doctype html>
         height: 100%;
         background: #e5e3df;
       }
+      .popup-group {
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 800;
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin-bottom: 4px;
+      }
+      .popup-group.primary { background: #e4f3ea; color: var(--primary-green); }
+      .popup-group.diff { background: #fdeee7; color: var(--diff-orange); }
       .popup-title { font-weight: 700; font-size: 0.96rem; margin-bottom: 4px; color: var(--ink); }
       .popup-addr { font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 8px; }
       .popup-btn {
@@ -213,6 +275,22 @@ const html = `<!doctype html>
         font-weight: 600;
         text-decoration: none;
       }
+
+      /* 自訂雙色標記樣式 */
+      .custom-pin {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 2px solid white;
+        box-shadow: 0 0 4px rgba(0,0,0,0.4);
+      }
+      .custom-pin.pin-primary { background: var(--primary-green); }
+      .custom-pin.pin-diff {
+        background: var(--diff-orange);
+        border: 2px solid #ffffff;
+        box-shadow: 0 0 6px rgba(217,83,30,0.8);
+      }
+
       @media (max-width: 860px) {
         body { height: auto; overflow: auto; }
         .main-content { flex-direction: column-reverse; height: auto; }
@@ -224,18 +302,18 @@ const html = `<!doctype html>
   <body>
     <header>
       <div class="brand-title">
-        <span>花蓮大規模店家地圖</span>
+        <span>花蓮店家地圖 (雙色標記)</span>
         <span class="badge-count">全收錄 ${stores.length} 筆</span>
       </div>
       <div class="header-actions">
-        <a href="./hualien_large_stores.kml" download="hualien_large_stores.kml" class="btn btn-primary" title="可直接匯入 Google 我的地圖">
-          <span>↓ 匯出 Google 地圖 (KML)</span>
+        <a href="./hualien_large_stores.kml" download="hualien_large_stores.kml" class="btn btn-primary" title="可直接匯入 Google 我的地圖（包含雙色與雙資料夾）">
+          <span>↓ 匯出 Google 地圖 (KML 雙色版)</span>
         </a>
-        <a href="./hualien_large_stores.csv" download="hualien_large_stores.csv" class="btn" title="下載 CSV 試算表">
+        <a href="./hualien_large_stores.csv" download="hualien_large_stores.csv" class="btn" title="下載 CSV 試算表（含分組欄位）">
           <span>↓ 匯出 CSV</span>
         </a>
-        <a href="./index.html" class="btn" title="切換回 25 家精選示範與最佳路線規劃">
-          <span>← 精選 25 店路線規劃</span>
+        <a href="./index.html" class="btn" title="切換回精選示範路線規劃">
+          <span>← 路線規劃版</span>
         </a>
       </div>
     </header>
@@ -243,10 +321,15 @@ const html = `<!doctype html>
     <div class="main-content">
       <aside class="sidebar">
         <div class="search-bar">
-          <input type="text" id="searchInput" class="search-input" placeholder="搜尋店家名稱、道路名稱、號碼…" />
+          <input type="text" id="searchInput" class="search-input" placeholder="搜尋店名、道路名稱、號碼…" />
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">全部 (${stores.length})</button>
+            <button class="filter-tab tab-primary" data-filter="primary">🟢 主要488名單 (${primaryCount})</button>
+            <button class="filter-tab tab-diff" data-filter="diff">🟠 非488名單 (${diffCount})</button>
+          </div>
           <div class="filter-stats">
             <span id="resultCount">顯示 ${stores.length} / ${stores.length} 筆</span>
-            <span>點擊項目聚焦地圖</span>
+            <span>點擊卡片聚焦標記</span>
           </div>
         </div>
         <div id="storeList" class="store-list-wrap"></div>
@@ -272,6 +355,20 @@ const html = `<!doctype html>
         zoomToBoundsOnClick: true
       });
 
+      const primaryIcon = L.divIcon({
+        className: '',
+        html: '<div class="custom-pin pin-primary"></div>',
+        iconSize: [14, 14],
+        iconAnchor: [7, 7]
+      });
+
+      const diffIcon = L.divIcon({
+        className: '',
+        html: '<div class="custom-pin pin-diff"></div>',
+        iconSize: [16, 16],
+        iconAnchor: [8, 8]
+      });
+
       const markerMap = new Map();
       const storeItemMap = new Map();
 
@@ -280,9 +377,16 @@ const html = `<!doctype html>
       }
 
       stores.forEach((store, index) => {
-        const marker = L.marker([store.lat, store.lng]);
+        const icon = store.isPrimary488 ? primaryIcon : diffIcon;
+        const marker = L.marker([store.lat, store.lng], { icon: icon });
+
+        const groupTag = store.isPrimary488 
+          ? '<span class="popup-group primary">主要 488 名單</span>' 
+          : '<span class="popup-group diff">★ 非 488 名單 (另色標記)</span>';
+
         const popupContent = document.createElement('div');
         popupContent.innerHTML = 
+          groupTag +
           '<div class="popup-title">' + (index + 1) + '. ' + store.name + '</div>' +
           '<div class="popup-addr">' + store.address + '</div>' +
           (store.estimated ? '<div style="color:#b45309;font-size:11px;margin-bottom:6px;">※ 位置為地址估算</div>' : '') +
@@ -290,17 +394,26 @@ const html = `<!doctype html>
         
         marker.bindPopup(popupContent);
         marker.on('click', () => highlightStore(store.id, false));
-        clusterGroup.addLayer(marker);
         markerMap.set(store.id, marker);
       });
+
+      function rebuildCluster(storesToShow) {
+        clusterGroup.clearLayers();
+        storesToShow.forEach(s => {
+          const m = markerMap.get(s.id);
+          if (m) clusterGroup.addLayer(m);
+        });
+      }
 
       map.addLayer(clusterGroup);
 
       const storeListEl = document.getElementById('storeList');
       const searchInput = document.getElementById('searchInput');
       const resultCountEl = document.getElementById('resultCount');
+      const filterTabs = document.querySelectorAll('.filter-tab');
 
       let currentActiveId = null;
+      let activeFilter = 'all';
 
       function highlightStore(storeId, scrollList = true) {
         if (currentActiveId && storeItemMap.has(currentActiveId)) {
@@ -324,18 +437,39 @@ const html = `<!doctype html>
         }
       }
 
-      function renderList(filteredStores) {
+      function getFilteredStores() {
+        const query = searchInput.value.trim().toLowerCase();
+        return stores.filter(s => {
+          if (activeFilter === 'primary' && !s.isPrimary488) return false;
+          if (activeFilter === 'diff' && s.isPrimary488) return false;
+          if (!query) return true;
+          return s.name.toLowerCase().includes(query) || s.address.toLowerCase().includes(query);
+        });
+      }
+
+      function renderList() {
+        const filtered = getFilteredStores();
         storeListEl.innerHTML = '';
         storeItemMap.clear();
 
-        filteredStores.forEach((store) => {
+        filtered.forEach((store) => {
           const originalIndex = stores.findIndex(s => s.id === store.id);
           const el = document.createElement('div');
-          el.className = 'store-item' + (store.id === currentActiveId ? ' active' : '');
+          el.className = 'store-item' + 
+            (store.isPrimary488 ? '' : ' is-diff') + 
+            (store.id === currentActiveId ? ' active' : '');
+
+          const badgeHtml = store.isPrimary488
+            ? '<span class="badge-tag badge-primary">主要488</span>'
+            : '<span class="badge-tag badge-diff">非488</span>';
+
           el.innerHTML = 
             '<div class="item-header">' +
               '<span class="item-name">' + store.name + '</span>' +
-              '<span class="item-index">#' + (originalIndex + 1) + '</span>' +
+              '<div class="item-badges">' +
+                badgeHtml +
+                '<span style="font-size:11px;color:#888;">#' + (originalIndex + 1) + '</span>' +
+              '</div>' +
             '</div>' +
             '<div class="item-address">' + store.address + '</div>' +
             '<div class="item-footer">' +
@@ -348,23 +482,24 @@ const html = `<!doctype html>
           storeItemMap.set(store.id, el);
         });
 
-        resultCountEl.textContent = '顯示 ' + filteredStores.length + ' / ' + stores.length + ' 筆';
+        resultCountEl.textContent = '顯示 ' + filtered.length + ' / ' + stores.length + ' 筆';
+        rebuildCluster(filtered);
       }
 
-      searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.trim().toLowerCase();
-        if (!query) {
-          renderList(stores);
-          return;
-        }
-        const filtered = stores.filter(s => 
-          s.name.toLowerCase().includes(query) || 
-          s.address.toLowerCase().includes(query)
-        );
-        renderList(filtered);
+      filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          filterTabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          activeFilter = tab.dataset.filter;
+          renderList();
+        });
       });
 
-      renderList(stores);
+      searchInput.addEventListener('input', () => {
+        renderList();
+      });
+
+      renderList();
     </script>
   </body>
 </html>
@@ -372,4 +507,4 @@ const html = `<!doctype html>
 
 fs.writeFileSync(path.join(__dirname, "large.html"), html, "utf8");
 fs.writeFileSync(path.join(__dirname, "dist", "large.html"), html, "utf8");
-console.log("large.html 網頁已生成！");
+console.log("雙色版 large.html 網頁已生成！");
