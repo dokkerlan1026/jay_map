@@ -39,6 +39,10 @@ export function findOptimalOrder(matrix) {
     return matrix.length ? [0] : [];
   }
 
+  if (matrix.length > 10) {
+    return buildScalableRouteOrder(matrix);
+  }
+
   const destinations = Array.from(
     { length: matrix.length - 1 },
     (_, index) => index + 1,
@@ -69,6 +73,67 @@ export function findOptimalOrder(matrix) {
 
   visit([], destinations, 0);
   return bestOrder;
+}
+
+function routeDistance(order, matrix) {
+  let total = 0;
+  for (let index = 1; index < order.length; index += 1) {
+    total += matrix[order[index - 1]][order[index]];
+  }
+  return total;
+}
+
+export function buildScalableRouteOrder(matrix) {
+  if (matrix.length <= 1) {
+    return matrix.length ? [0] : [];
+  }
+
+  const unvisited = new Set(
+    Array.from({ length: matrix.length - 1 }, (_, index) => index + 1),
+  );
+  let current = 0;
+  let order = [0];
+
+  while (unvisited.size) {
+    let nearest = null;
+    let nearestDistance = Number.POSITIVE_INFINITY;
+    for (const candidate of unvisited) {
+      if (matrix[current][candidate] < nearestDistance) {
+        nearest = candidate;
+        nearestDistance = matrix[current][candidate];
+      }
+    }
+    order.push(nearest);
+    unvisited.delete(nearest);
+    current = nearest;
+  }
+
+  let bestDistance = routeDistance(order, matrix);
+  for (let pass = 0; pass < 100; pass += 1) {
+    let improvedOrder = null;
+    let improvedDistance = bestDistance;
+
+    for (let start = 1; start < order.length - 1; start += 1) {
+      for (let end = start + 1; end < order.length; end += 1) {
+        const candidate = [
+          ...order.slice(0, start),
+          ...order.slice(start, end + 1).reverse(),
+          ...order.slice(end + 1),
+        ];
+        const candidateDistance = routeDistance(candidate, matrix);
+        if (candidateDistance + 0.001 < improvedDistance) {
+          improvedOrder = candidate;
+          improvedDistance = candidateDistance;
+        }
+      }
+    }
+
+    if (!improvedOrder) break;
+    order = improvedOrder;
+    bestDistance = improvedDistance;
+  }
+
+  return order;
 }
 
 export function createRoutePlan(points, roadMatrix) {

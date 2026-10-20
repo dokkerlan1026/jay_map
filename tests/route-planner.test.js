@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import {
+  buildScalableRouteOrder,
   buildGoogleMapsUrl,
   buildOsrmRouteUrl,
   buildOsrmTableUrl,
@@ -9,6 +10,24 @@ import {
   createRoutePlan,
   findOptimalOrder,
 } from "../dist/route-planner.js";
+
+test("buildScalableRouteOrder visits 25 destinations once without returning", () => {
+  const size = 26;
+  const matrix = Array.from({ length: size }, (_, from) =>
+    Array.from({ length: size }, (_, to) => Math.abs(from - to)),
+  );
+
+  const order = buildScalableRouteOrder(matrix);
+
+  assert.equal(order.length, size);
+  assert.equal(order[0], 0);
+  assert.equal(new Set(order).size, size);
+  assert.deepEqual(
+    [...order].sort((a, b) => a - b),
+    [...Array(size).keys()],
+  );
+  assert.notEqual(order.at(-1), 0);
+});
 
 test("findOptimalOrder chooses the shortest open path from index 0", () => {
   const matrix = [
