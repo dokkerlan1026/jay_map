@@ -83,3 +83,21 @@ test("hidden selection labels remain visually hidden", async () => {
     /\.selection-copy\[hidden\]\s*\{[^}]*display:\s*none\s*!important;/s,
   );
 });
+
+test("page branding and estimated markers reflect Hualien context", async () => {
+  const html = await readFile(
+    new URL("../dist/index.html", import.meta.url),
+    "utf8",
+  );
+  const appSource = await readFile(
+    new URL("../dist/app.js", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(html, /花蓮店家地圖/);
+  assert.doesNotMatch(html, /台北門市地圖/);
+  assert.match(appSource, /位置為地址估算/);
+  assert.match(appSource, /HUALIEN_STATION/);
+  assert.doesNotMatch(appSource, /TAIPEI_MAIN_STATION/);
+});
+

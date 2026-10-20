@@ -4,7 +4,7 @@ import {
   buildOsrmTableUrl,
   createRoutePlan,
 } from "./route-planner.js";
-import { stores, TAIPEI_MAIN_STATION } from "./stores.js";
+import { stores, HUALIEN_STATION } from "./stores.js";
 
 const listElement = document.querySelector("#store-list");
 const statusElement = document.querySelector("#route-status");
@@ -25,7 +25,7 @@ const map = window.L
   ? window.L.map("map", {
       zoomControl: true,
       scrollWheelZoom: false,
-    }).setView([25.0445, 121.535], 13)
+    }).setView([23.98, 121.6], 13)
   : null;
 
 if (map) {
@@ -40,6 +40,7 @@ function popupContent(store) {
   return `
     <strong>${store.name}</strong>
     <span class="popup-address">${store.address}</span>
+    ${store.estimated ? '<span class="popup-estimate">位置為地址估算</span>' : ""}
   `;
 }
 
@@ -137,7 +138,7 @@ function getOrigin() {
   }
 
   if (!navigator.geolocation) {
-    currentOrigin = { ...TAIPEI_MAIN_STATION, isFallback: true };
+    currentOrigin = { ...HUALIEN_STATION, isFallback: true };
     return Promise.resolve(currentOrigin);
   }
 
@@ -153,7 +154,7 @@ function getOrigin() {
         resolve(currentOrigin);
       },
       () => {
-        currentOrigin = { ...TAIPEI_MAIN_STATION, isFallback: true };
+        currentOrigin = { ...HUALIEN_STATION, isFallback: true };
         resolve(currentOrigin);
       },
       { enableHighAccuracy: false, timeout: 8_000, maximumAge: 60_000 },
@@ -250,7 +251,7 @@ async function planBestRoute() {
     const origin = await getOrigin();
     const allPoints = [origin, ...stores];
     if (origin.isFallback) {
-      setStatus("無法取得目前位置，改由台北車站出發規劃。", "warning");
+      setStatus("無法取得目前位置，改由花蓮車站出發規劃。", "warning");
     } else {
       setStatus("已取得目前位置，正在比較道路距離…");
     }
