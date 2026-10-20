@@ -39,10 +39,18 @@
               <p class="eyebrow">STORE DIRECTORY</p>
               <h2 id="directory-title">門市列表</h2>
             </div>
-            <button id="plan-route" class="primary-button" type="button">
-              <span aria-hidden="true">↗</span>
-              規劃最佳路線
-            </button>
+            <div class="action-buttons">
+              <button id="plan-route" class="primary-button" type="button">
+                <span aria-hidden="true">↗</span>
+                規劃最佳路線
+              </button>
+              <a href="./hualien_stores.kml" download="hualien_stores.kml" class="secondary-button" title="下載可直接匯入 Google 我的地圖的 KML 檔案">
+                匯出 KML
+              </a>
+              <a href="./hualien_stores.csv" download="hualien_stores.csv" class="secondary-button" title="下載 CSV 試算表">
+                匯出 CSV
+              </a>
+            </div>
           </div>
 
           <p id="route-status" class="status" aria-live="polite">
