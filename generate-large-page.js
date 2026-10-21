@@ -7,574 +7,922 @@ const __dirname = path.dirname(__filename);
 
 const jsonPath = path.join(__dirname, "large_stores.json");
 const stores = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
-const eastCount = stores.filter(s => s.subGroup === "主要名單-東區").length;
-const westCount = stores.filter(s => s.subGroup === "主要名單-西區").length;
-const diffCount = stores.filter(s => s.subGroup === "非488名單").length;
+
+const eastStores = stores.filter(s => s.subGroup === "主要名單-東區");
+const westStores = stores.filter(s => s.subGroup === "主要名單-西區");
+const diffStores = stores.filter(s => s.subGroup === "非488名單");
 
 const html = `<!doctype html>
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="花蓮市與吉安鄉共 ${stores.length} 筆店家三色分區互動地圖：主要名單拆為東區（綠色 194 筆）、西區（紅色 194 筆），非 488 名單（亮橙色 112 筆），支援即時搜尋與導航。" />
-    <title>花蓮店家地圖 (東區綠色 / 西區紅色 / 非488橙色 - 共 ${stores.length} 筆)</title>
+    <meta name="description" content="花蓮店家地圖 - Google 我的地圖風格，支援三色分區、大分組全選與個別店家勾選顯示。" />
+    <title>jay的地圖 - 花蓮店家地圖 (三色分區與單點勾選控制)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
     <style>
       :root {
-        --ink: #17352d;
-        --ink-soft: #526760;
-        --paper: #f8f5ee;
-        --card: #ffffff;
-        --accent: #257a4e;
-        --primary-green: #257a4e;
-        --primary-red: #dc2626;
-        --diff-orange: #d9531e;
-        --line: #ded7c8;
-        --mint: #e8f0ec;
+        --google-red: #c5221f;
+        --google-red-dark: #a51b18;
+        --google-hover: #f1f3f4;
+        --color-east: #2e7d32;       /* 綠色 */
+        --color-west: #d32f2f;       /* 紅色 */
+        --color-diff: #e65100;       /* 橙色 */
+        --border-color: #dadce0;
+        --text-primary: #202124;
+        --text-secondary: #5f6368;
+        --sidebar-width: 380px;
       }
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body {
-        font-family: "Noto Sans TC", system-ui, sans-serif;
-        background: var(--paper);
-        color: var(--ink);
+        font-family: "Noto Sans TC", "Roboto", system-ui, sans-serif;
+        background: #f8f9fa;
+        color: var(--text-primary);
         height: 100vh;
         display: flex;
         flex-direction: column;
         overflow: hidden;
       }
+
+      /* 頂部 Google 我的地圖經典紅色工具列 */
       header {
-        background: white;
-        border-bottom: 1px solid var(--line);
-        padding: 12px 24px;
+        background: var(--google-red);
+        color: white;
+        height: 56px;
+        padding: 0 16px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 12px;
+        gap: 16px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.1);
         z-index: 1000;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        flex-shrink: 0;
+      }
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .menu-btn {
+        background: none;
+        border: none;
+        color: white;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 150ms;
+      }
+      .menu-btn:hover { background: rgba(255,255,255,0.18); }
+      .brand-box {
+        display: flex;
+        flex-direction: column;
       }
       .brand-title {
-        font-size: 1.25rem;
-        font-weight: 800;
-        color: var(--ink);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .badge-count {
-        background: var(--mint);
-        color: var(--ink);
-        font-size: 0.8rem;
-        padding: 3px 8px;
-        border-radius: 999px;
+        font-size: 1.15rem;
         font-weight: 700;
-      }
-      .header-actions {
+        letter-spacing: 0.3px;
         display: flex;
         align-items: center;
         gap: 8px;
-        flex-wrap: wrap;
       }
-      .btn {
+      .brand-sub {
+        font-size: 0.75rem;
+        opacity: 0.88;
+      }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .header-btn {
+        background: rgba(255,255,255,0.15);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-decoration: none;
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 8px 14px;
-        border-radius: 8px;
-        font-size: 0.84rem;
-        font-weight: 600;
-        text-decoration: none;
         cursor: pointer;
-        transition: all 160ms ease;
-        border: 1px solid var(--line);
+        transition: all 140ms ease;
+      }
+      .header-btn:hover {
         background: white;
-        color: var(--ink);
+        color: var(--google-red);
       }
-      .btn:hover { background: #f3efe6; border-color: var(--ink-soft); }
-      .btn-primary {
-        background: var(--ink);
-        color: white;
-        border-color: var(--ink);
-      }
-      .btn-primary:hover { background: #245347; }
-      .main-content {
+
+      /* 主版面：左側欄 + 右側地圖 */
+      .layout-body {
         flex: 1;
         display: flex;
         position: relative;
         overflow: hidden;
       }
+
+      /* 左側抽屜 / 面板 */
       .sidebar {
-        width: 440px;
+        width: var(--sidebar-width);
         background: white;
-        border-right: 1px solid var(--line);
+        border-right: 1px solid var(--border-color);
         display: flex;
         flex-direction: column;
         height: 100%;
         z-index: 500;
+        box-shadow: 2px 0 6px rgba(0,0,0,0.06);
+        transition: transform 240ms ease;
       }
-      .search-bar {
-        padding: 14px 16px;
-        border-bottom: 1px solid var(--line);
-        background: #faf8f3;
+      .sidebar.collapsed {
+        transform: translateX(calc(-1 * var(--sidebar-width)));
+      }
+
+      /* 地圖資訊與快速操作區 */
+      .panel-intro {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border-color);
+        background: #fafafa;
+      }
+      .intro-meta {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+      .quick-actions {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .btn-chip {
+        padding: 4px 8px;
+        border: 1px solid var(--border-color);
+        background: white;
+        border-radius: 14px;
+        font-size: 0.74rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 120ms;
+      }
+      .btn-chip:hover {
+        background: var(--google-hover);
+        color: var(--text-primary);
+        border-color: #bdc1c6;
+      }
+      .btn-chip.primary {
+        background: #e8f0fe;
+        color: #1a73e8;
+        border-color: #d2e3fc;
+      }
+
+      /* 搜尋列 */
+      .search-box {
+        padding: 8px 16px 12px;
+        border-bottom: 1px solid var(--border-color);
+        background: #ffffff;
+      }
+      .search-input-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
       }
       .search-input {
         width: 100%;
-        padding: 9px 12px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        font-size: 0.9rem;
+        padding: 8px 32px 8px 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        font-size: 0.88rem;
         font-family: inherit;
         outline: none;
-        transition: border-color 160ms ease;
+        transition: border-color 150ms;
       }
-      .search-input:focus { border-color: var(--primary-green); }
-      .filter-tabs {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 4px;
-        margin-top: 10px;
-      }
-      .filter-tab {
-        text-align: center;
-        padding: 6px 2px;
-        font-size: 0.72rem;
-        font-weight: 700;
-        border-radius: 6px;
+      .search-input:focus { border-color: #1a73e8; }
+      .search-clear {
+        position: absolute;
+        right: 8px;
+        background: none;
+        border: none;
+        font-size: 16px;
+        color: #9aa0a6;
         cursor: pointer;
-        border: 1px solid var(--line);
-        background: white;
-        color: var(--ink-soft);
-        transition: all 140ms ease;
+        display: none;
+      }
+
+      /* 圖層清單（樹狀結構） */
+      .layer-tree {
+        flex: 1;
+        overflow-y: auto;
+      }
+
+      /* 單一圖層群組（東區 / 西區 / 非488） */
+      .layer-group {
+        border-bottom: 1px solid var(--border-color);
+      }
+      .group-header {
+        display: flex;
+        align-items: center;
+        padding: 10px 12px 10px 16px;
+        background: #ffffff;
+        cursor: pointer;
+        user-select: none;
+        transition: background 120ms;
+        gap: 10px;
+      }
+      .group-header:hover {
+        background: #f1f3f4;
+      }
+      .group-checkbox {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: var(--google-red);
+      }
+      .group-icon {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .group-icon.east { background: var(--color-east); }
+      .group-icon.west { background: var(--color-west); }
+      .group-icon.diff { background: var(--color-diff); }
+
+      .group-title-wrap {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .group-title {
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .group-stats {
+        font-size: 0.72rem;
+        color: var(--text-secondary);
+      }
+      .arrow-btn {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        transition: transform 180ms ease;
+      }
+      .layer-group.expanded .arrow-btn {
+        transform: rotate(180deg);
+      }
+
+      /* 群組底下的店家列表 */
+      .item-list {
+        display: none;
+        background: #ffffff;
+      }
+      .layer-group.expanded .item-list {
+        display: block;
+      }
+
+      /* 單一店家項目（支援獨立勾選） */
+      .store-row {
+        display: flex;
+        align-items: center;
+        padding: 8px 12px 8px 24px;
+        border-top: 1px solid #f1f3f4;
+        cursor: pointer;
+        transition: background 100ms;
+        gap: 10px;
+      }
+      .store-row:hover {
+        background: #f8f9fa;
+      }
+      .store-row.active {
+        background: #e8f0fe;
+      }
+      .store-row.disabled {
+        opacity: 0.5;
+      }
+      .item-checkbox {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        accent-color: var(--google-red);
+        flex-shrink: 0;
+      }
+      .pin-svg {
+        width: 14px;
+        height: 18px;
+        flex-shrink: 0;
+      }
+      .store-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .store-name-text {
+        font-size: 0.86rem;
+        font-weight: 500;
+        color: var(--text-primary);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      .filter-tab.active {
-        background: var(--ink);
-        color: white;
-        border-color: var(--ink);
+      .store-addr-text {
+        font-size: 0.72rem;
+        color: var(--text-secondary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
-      .filter-tab.tab-east.active {
-        background: var(--primary-green);
-        border-color: var(--primary-green);
-        color: white;
-      }
-      .filter-tab.tab-west.active {
-        background: var(--primary-red);
-        border-color: var(--primary-red);
-        color: white;
-      }
-      .filter-tab.tab-diff.active {
-        background: var(--diff-orange);
-        border-color: var(--diff-orange);
-        color: white;
-      }
-      .filter-stats {
-        margin-top: 8px;
-        font-size: 0.78rem;
-        color: var(--ink-soft);
-        display: flex;
-        justify-content: space-between;
-      }
-      .store-list-wrap {
-        flex: 1;
-        overflow-y: auto;
-      }
-      .store-item {
-        padding: 12px 16px;
-        border-bottom: 1px solid var(--line);
-        cursor: pointer;
-        transition: background 120ms ease;
-      }
-      .store-item:hover, .store-item.active {
-        background: #f4efe4;
-      }
-      .store-item.active {
-        border-left: 4px solid var(--ink);
-      }
-      .store-item.is-diff {
-        background: #fff8f5;
-      }
-      .store-item.is-diff:hover, .store-item.is-diff.active {
-        background: #fdeee7;
-      }
-      .store-item.is-west:hover, .store-item.is-west.active {
-        background: #fef2f2;
-      }
-      .store-item.is-east:hover, .store-item.is-east.active {
-        background: #f0fdf4;
-      }
-      .item-header {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 8px;
-      }
-      .item-name {
-        font-size: 0.94rem;
-        font-weight: 700;
-        color: var(--ink);
-      }
-      .item-badges {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        flex-shrink: 0;
-      }
-      .badge-tag {
-        font-size: 0.68rem;
-        font-weight: 800;
-        padding: 2px 6px;
+
+      /* 側邊欄收合展開切換浮動按鈕 */
+      .toggle-sidebar-btn {
+        position: absolute;
+        top: 14px;
+        left: calc(var(--sidebar-width) + 12px);
+        z-index: 999;
+        background: white;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 1px 4px rgba(0,0,0,0.18);
         border-radius: 4px;
-      }
-      .badge-east {
-        background: #e4f3ea;
-        color: var(--primary-green);
-        border: 1px solid #bbf0d0;
-      }
-      .badge-west {
-        background: #fee2e2;
-        color: var(--primary-red);
-        border: 1px solid #fecaca;
-      }
-      .badge-diff {
-        background: #fdeee7;
-        color: var(--diff-orange);
-        border: 1px solid #f9cdb8;
-      }
-      .item-address {
-        font-size: 0.82rem;
-        color: var(--ink-soft);
-        margin-top: 4px;
-      }
-      .item-footer {
-        margin-top: 6px;
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 6px;
+        transition: all 200ms ease;
       }
-      .tag-est {
-        font-size: 0.7rem;
-        color: #b45309;
-        font-weight: 600;
+      .sidebar.collapsed ~ .toggle-sidebar-btn {
+        left: 14px;
       }
-      .nav-link {
-        font-size: 0.78rem;
-        color: #2563eb;
-        text-decoration: none;
-        font-weight: 700;
+      .toggle-sidebar-btn:hover {
+        background: #f1f3f4;
       }
-      .nav-link:hover { text-decoration: underline; }
+
+      /* 右側 Leaflet 地圖容器 */
       #map {
         flex: 1;
         height: 100%;
-        background: #e5e3df;
+        background: #f2efe9;
       }
-      .popup-group {
-        display: inline-block;
-        font-size: 0.72rem;
-        font-weight: 800;
-        padding: 2px 6px;
-        border-radius: 4px;
+
+      /* 自訂 Google 經典水滴圖釘 Marker */
+      .gmarker-wrap {
+        background: transparent;
+        border: none;
+      }
+      .gmarker-svg {
+        filter: drop-shadow(0 2px 3px rgba(0,0,0,0.35));
+        transition: transform 120ms ease;
+      }
+      .gmarker-svg:hover {
+        transform: scale(1.2) translateY(-2px);
+      }
+
+      /* Leaflet Popup 美化 */
+      .leaflet-popup-content-wrapper {
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.22);
+        padding: 0;
+        overflow: hidden;
+      }
+      .leaflet-popup-content {
+        margin: 0;
+        padding: 14px 16px;
+        min-width: 240px;
+        max-width: 300px;
+        font-family: inherit;
+      }
+      .pop-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 6px;
+      }
+      .pop-badge {
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 12px;
+      }
+      .pop-badge.east { background: #e8f5e9; color: var(--color-east); }
+      .pop-badge.west { background: #ffebee; color: var(--color-west); }
+      .pop-badge.diff { background: #fff3e0; color: var(--color-diff); }
+
+      .pop-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text-primary);
         margin-bottom: 4px;
       }
-      .popup-group.east { background: #e4f3ea; color: var(--primary-green); }
-      .popup-group.west { background: #fee2e2; color: var(--primary-red); }
-      .popup-group.diff { background: #fdeee7; color: var(--diff-orange); }
-      .popup-title { font-weight: 700; font-size: 0.96rem; margin-bottom: 4px; color: var(--ink); }
-      .popup-addr { font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 8px; }
-      .popup-btn {
-        display: inline-block;
-        padding: 4px 10px;
-        background: var(--ink);
+      .pop-addr {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        margin-bottom: 12px;
+        line-height: 1.4;
+      }
+      .pop-actions {
+        display: flex;
+        gap: 8px;
+      }
+      .pop-nav-btn {
+        flex: 1;
+        text-align: center;
+        padding: 6px 10px;
+        background: #1a73e8;
         color: white !important;
-        border-radius: 6px;
-        font-size: 0.75rem;
-        font-weight: 600;
         text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        transition: background 120ms;
       }
+      .pop-nav-btn:hover { background: #1557b0; }
+      .pop-toggle-btn {
+        padding: 6px 10px;
+        background: #f1f3f4;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        cursor: pointer;
+        color: var(--text-secondary);
+      }
+      .pop-toggle-btn:hover { background: #e8eaed; color: var(--text-primary); }
 
-      /* 自訂三色標記樣式 */
-      .custom-pin {
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        border: 2px solid white;
-        box-shadow: 0 0 4px rgba(0,0,0,0.4);
-      }
-      .custom-pin.pin-east {
-        background: var(--primary-green);
-        box-shadow: 0 0 5px rgba(37,122,78,0.7);
-      }
-      .custom-pin.pin-west {
-        background: var(--primary-red);
-        box-shadow: 0 0 5px rgba(220,38,38,0.7);
-      }
-      .custom-pin.pin-diff {
-        width: 16px;
-        height: 16px;
-        background: var(--diff-orange);
-        border: 2px solid #ffffff;
-        box-shadow: 0 0 6px rgba(217,83,30,0.8);
-      }
-
-      @media (max-width: 860px) {
-        body { height: auto; overflow: auto; }
-        .main-content { flex-direction: column-reverse; height: auto; }
+      @media (max-width: 768px) {
+        .layout-body { flex-direction: column-reverse; }
         .sidebar { width: 100%; height: 50vh; }
         #map { width: 100%; height: 50vh; }
+        .toggle-sidebar-btn { display: none; }
       }
     </style>
   </head>
   <body>
     <header>
-      <div class="brand-title">
-        <span>花蓮店家地圖 (三色分區版)</span>
-        <span class="badge-count">全收錄 ${stores.length} 筆</span>
+      <div class="header-left">
+        <button class="menu-btn" id="menuToggleBtn" title="展開/收合側邊欄">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </button>
+        <div class="brand-box">
+          <div class="brand-title">
+            <span>jay的地圖</span>
+            <span style="font-size:0.75rem;background:rgba(255,255,255,0.22);padding:2px 8px;border-radius:12px;">花蓮店家地圖</span>
+          </div>
+          <div class="brand-sub">主要名單拆為東區 (綠) / 西區 (紅) 與非488名單 (橙)</div>
+        </div>
       </div>
-      <div class="header-actions">
-        <a href="./hualien_large_stores.kml" download="hualien_large_stores.kml" class="btn btn-primary" title="可直接匯入 Google 我的地圖（包含三組獨立資料夾與東綠/西紅/非橙圖標）">
-          <span>↓ 整合 KML</span>
+      <div class="header-right">
+        <a href="./hualien_large_stores.kml" download="hualien_large_stores.kml" class="header-btn" title="下載完整 KML">
+          <span>↓ KML</span>
         </a>
-        <a href="./hualien_east_green.kml" download="hualien_east_green.kml" class="btn" style="border-color:var(--primary-green);color:var(--primary-green);" title="🟢 東區主要名單 (194筆) 獨立圖層 KML">
-          <span>🟢 東區 (${eastCount})</span>
+        <a href="./hualien_google_mymaps.csv" download="hualien_google_mymaps.csv" class="header-btn" title="下載 Google 地圖專用 CSV">
+          <span>↓ CSV</span>
         </a>
-        <a href="./hualien_west_red.kml" download="hualien_west_red.kml" class="btn" style="border-color:var(--primary-red);color:var(--primary-red);" title="🔴 西區主要名單 (194筆) 獨立圖層 KML">
-          <span>🔴 西區 (${westCount})</span>
-        </a>
-        <a href="./hualien_diff_orange.kml" download="hualien_diff_orange.kml" class="btn" style="border-color:var(--diff-orange);color:var(--diff-orange);" title="🟠 非488名單 (112筆) 獨立圖層 KML">
-          <span>🟠 非488 (${diffCount})</span>
-        </a>
-        <a href="./hualien_google_mymaps.csv" download="hualien_google_mymaps.csv" class="btn" title="Google 我的地圖專用 CSV（依分區一鍵分色）">
-          <span>↓ MyMaps CSV</span>
-        </a>
-        <a href="./index.html" class="btn" title="切換回精選示範路線規劃">
-          <span>← 路線規劃版</span>
+        <a href="./index.html" class="header-btn" title="示範路線規劃版">
+          <span>← 路線規劃</span>
         </a>
       </div>
     </header>
 
-    <div class="main-content">
-      <aside class="sidebar">
-        <div class="search-bar">
-          <input type="text" id="searchInput" class="search-input" placeholder="搜尋店名、道路名稱、號碼…" />
-          <div class="filter-tabs">
-            <button class="filter-tab active" data-filter="all" title="全部店家">全部 (${stores.length})</button>
-            <button class="filter-tab tab-east" data-filter="east" title="界線以東主要名單">🟢 東區 (${eastCount})</button>
-            <button class="filter-tab tab-west" data-filter="west" title="界線以西主要名單">🔴 西區 (${westCount})</button>
-            <button class="filter-tab tab-diff" data-filter="diff" title="非 488 名單店家">🟠 非488 (${diffCount})</button>
-          </div>
-          <div class="filter-stats">
-            <span id="resultCount">顯示 ${stores.length} / ${stores.length} 筆</span>
+    <div class="layout-body">
+      <aside class="sidebar" id="sidebar">
+        <!-- 頂部資訊與快速操作按鈕 -->
+        <div class="panel-intro">
+          <div class="intro-meta">
+            <span id="activeCountLabel">目前顯示：500 / 500 處店家</span>
             <span>以林森路+德安一街為界</span>
           </div>
+          <div class="quick-actions">
+            <button class="btn-chip primary" id="btnShowAll">全部顯示</button>
+            <button class="btn-chip" id="btnHideAll">全部隱藏</button>
+            <button class="btn-chip" id="btnOnlyEast">僅看東區 (綠)</button>
+            <button class="btn-chip" id="btnOnlyWest">僅看西區 (紅)</button>
+            <button class="btn-chip" id="btnOnlyDiff">僅看非488 (橙)</button>
+          </div>
         </div>
-        <div id="storeList" class="store-list-wrap"></div>
+
+        <!-- 搜尋輸入框 -->
+        <div class="search-box">
+          <div class="search-input-wrap">
+            <input type="text" id="searchInput" class="search-input" placeholder="搜尋店名、路名、地址…" />
+            <button id="searchClearBtn" class="search-clear">×</button>
+          </div>
+        </div>
+
+        <!-- 圖層清單 -->
+        <div class="layer-tree">
+          <!-- 1. 東區主要名單 (綠色) -->
+          <div class="layer-group expanded" id="group-east">
+            <div class="group-header">
+              <input type="checkbox" class="group-checkbox" id="chk-group-east" checked title="全選/取消東區" />
+              <div class="group-icon east"></div>
+              <div class="group-title-wrap" onclick="toggleGroupExpand('group-east')">
+                <span class="group-title">🟢 主要名單-東區 (界線以東)</span>
+                <span class="group-stats" id="stats-east">顯示 ${eastStores.length} / ${eastStores.length} 筆</span>
+              </div>
+              <div class="arrow-btn" onclick="toggleGroupExpand('group-east')">▼</div>
+            </div>
+            <div class="item-list" id="list-east"></div>
+          </div>
+
+          <!-- 2. 西區主要名單 (紅色) -->
+          <div class="layer-group expanded" id="group-west">
+            <div class="group-header">
+              <input type="checkbox" class="group-checkbox" id="chk-group-west" checked title="全選/取消西區" />
+              <div class="group-icon west"></div>
+              <div class="group-title-wrap" onclick="toggleGroupExpand('group-west')">
+                <span class="group-title">🔴 主要名單-西區 (界線以西)</span>
+                <span class="group-stats" id="stats-west">顯示 ${westStores.length} / ${westStores.length} 筆</span>
+              </div>
+              <div class="arrow-btn" onclick="toggleGroupExpand('group-west')">▼</div>
+            </div>
+            <div class="item-list" id="list-west"></div>
+          </div>
+
+          <!-- 3. 非 488 店家名單 (橙色) -->
+          <div class="layer-group expanded" id="group-diff">
+            <div class="group-header">
+              <input type="checkbox" class="group-checkbox" id="chk-group-diff" checked title="全選/取消非488名單" />
+              <div class="group-icon diff"></div>
+              <div class="group-title-wrap" onclick="toggleGroupExpand('group-diff')">
+                <span class="group-title">🟠 非488名單 (亮橙色標記)</span>
+                <span class="group-stats" id="stats-diff">顯示 ${diffStores.length} / ${diffStores.length} 筆</span>
+              </div>
+              <div class="arrow-btn" onclick="toggleGroupExpand('group-diff')">▼</div>
+            </div>
+            <div class="item-list" id="list-diff"></div>
+          </div>
+        </div>
       </aside>
+
+      <!-- 側邊欄浮動收合切換鈕 -->
+      <button class="toggle-sidebar-btn" id="floatingToggleBtn">
+        <span id="toggleIcon">◀</span>
+        <span id="toggleText">收合清單</span>
+      </button>
+
       <div id="map"></div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <script>
       const stores = ${JSON.stringify(stores)};
 
+      // 初始化 Leaflet 地圖
       const map = L.map('map', { zoomControl: true }).setView([23.985, 121.605], 13);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: '&copy; OpenStreetMap & Google My Maps Style'
       }).addTo(map);
 
-      // 繪製林森路 + 德安一街分界線輔助視覺
+      // 林森路 + 德安一街分界輔助虛線
       const boundaryLine = L.polyline([
         [23.960, 121.581],
         [23.970, 121.5925],
         [23.983, 121.6070],
         [23.995, 121.620]
       ], {
-        color: '#4b5563',
+        color: '#6b7280',
         weight: 2,
         dashArray: '6, 6',
-        opacity: 0.55
+        opacity: 0.6
       }).addTo(map);
-      boundaryLine.bindTooltip('← 界線以西 (紅) ｜ 林森路+德安一街分界線 ｜ 界線以東 (綠) →', { sticky: true });
+      boundaryLine.bindTooltip('← 界線以西 (西區紅) ｜ 林森路+德安一街分界 ｜ 界線以東 (東區綠) →', { sticky: true });
 
-      const clusterGroup = L.markerClusterGroup({
-        maxClusterRadius: 40,
-        spiderfyOnMaxZoom: true,
-        showCoverageOnHover: false,
-        zoomToBoundsOnClick: true
-      });
-
-      const eastIcon = L.divIcon({
-        className: '',
-        html: '<div class="custom-pin pin-east"></div>',
-        iconSize: [14, 14],
-        iconAnchor: [7, 7]
-      });
-
-      const westIcon = L.divIcon({
-        className: '',
-        html: '<div class="custom-pin pin-west"></div>',
-        iconSize: [14, 14],
-        iconAnchor: [7, 7]
-      });
-
-      const diffIcon = L.divIcon({
-        className: '',
-        html: '<div class="custom-pin pin-diff"></div>',
-        iconSize: [16, 16],
-        iconAnchor: [8, 8]
-      });
-
-      const markerMap = new Map();
-      const storeItemMap = new Map();
-
-      function getGoogleMapsNavUrl(store) {
-        return 'https://www.google.com/maps/dir/?api=1&destination=' + store.lat + ',' + store.lng;
+      // 水滴型 SVG Marker 生成函式（依顏色回傳 Leaflet DivIcon）
+      function createPinIcon(colorHex) {
+        const svg = \`
+          <svg class="gmarker-svg" width="22" height="30" viewBox="0 0 24 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C5.372 0 0 5.373 0 12C0 19.5 12 34 12 34C12 34 24 19.5 24 12C24 5.373 18.628 0 12 0Z" fill="\${colorHex}" stroke="#ffffff" stroke-width="1.5"/>
+            <circle cx="12" cy="11" r="4.5" fill="#ffffff"/>
+          </svg>
+        \`;
+        return L.divIcon({
+          className: 'gmarker-wrap',
+          html: svg,
+          iconSize: [22, 30],
+          iconAnchor: [11, 30],
+          popupAnchor: [0, -28]
+        });
       }
 
+      const iconEast = createPinIcon('#2e7d32'); // 綠色
+      const iconWest = createPinIcon('#d32f2f'); // 紅色
+      const iconDiff = createPinIcon('#e65100'); // 橙色
+
+      // 小圖釘 SVG 給左側清單使用
+      function getSmallPinSvg(colorHex) {
+        return \`<svg class="pin-svg" viewBox="0 0 24 34" fill="none"><path d="M12 0C5.372 0 0 5.373 0 12C0 19.5 12 34 12 34C12 34 24 19.5 24 12C24 5.373 18.628 0 12 0Z" fill="\${colorHex}" stroke="#ffffff" stroke-width="1.5"/><circle cx="12" cy="11" r="4" fill="#ffffff"/></svg>\`;
+      }
+
+      // 儲存狀態的資料結構
+      // storeStates: Map<storeId, { store, marker, isVisible, rowElement, chkElement }>
+      const storeStates = new Map();
+
+      function getGoogleMapsNavUrl(s) {
+        return 'https://www.google.com/maps/dir/?api=1&destination=' + s.lat + ',' + s.lng;
+      }
+
+      // 建立地圖 Marker 與彈出視窗
       stores.forEach((store, index) => {
-        let icon = eastIcon;
-        let groupTag = '<span class="popup-group east">🟢 主要名單 - 界線以東</span>';
+        let icon = iconEast;
+        let badgeClass = 'east';
+        let badgeText = '🟢 主要名單 - 界線以東';
         if (store.subGroup === '主要名單-西區') {
-          icon = westIcon;
-          groupTag = '<span class="popup-group west">🔴 主要名單 - 界線以西</span>';
+          icon = iconWest;
+          badgeClass = 'west';
+          badgeText = '🔴 主要名單 - 界線以西';
         } else if (store.subGroup === '非488名單') {
-          icon = diffIcon;
-          groupTag = '<span class="popup-group diff">🟠 非 488 名單店家</span>';
+          icon = iconDiff;
+          badgeClass = 'diff';
+          badgeText = '🟠 非 488 名單店家';
         }
 
         const marker = L.marker([store.lat, store.lng], { icon: icon });
 
-        const popupContent = document.createElement('div');
-        popupContent.innerHTML = 
-          groupTag +
-          '<div class="popup-title">' + (index + 1) + '. ' + store.name + '</div>' +
-          '<div class="popup-addr">' + store.address + '</div>' +
-          (store.estimated ? '<div style="color:#b45309;font-size:11px;margin-bottom:6px;">※ 位置為地址估算</div>' : '') +
-          '<a class="popup-btn" href="' + getGoogleMapsNavUrl(store) + '" target="_blank" rel="noopener">Google Maps 導航 ↗</a>';
-        
-        marker.bindPopup(popupContent);
-        marker.on('click', () => highlightStore(store.id, false));
-        markerMap.set(store.id, marker);
+        // Popup 內容
+        const popupDiv = document.createElement('div');
+        popupDiv.innerHTML = \`
+          <div class="pop-header">
+            <span class="pop-badge \${badgeClass}">\${badgeText}</span>
+            <span style="font-size:0.75rem;color:#888;">#\${index + 1}</span>
+          </div>
+          <div class="pop-title">\${store.name}</div>
+          <div class="pop-addr">\${store.address}\${store.estimated ? '<br/><span style="color:#b45309;font-size:11px;">※ 位置為地址估算</span>' : ''}</div>
+          <div class="pop-actions">
+            <a class="pop-nav-btn" href="\${getGoogleMapsNavUrl(store)}" target="_blank" rel="noopener">Google 導航 ↗</a>
+            <button class="pop-toggle-btn" onclick="toggleSingleStoreVisible(\${store.id}, false)">隱藏此點</button>
+          </div>
+        \`;
+        marker.bindPopup(popupDiv);
+
+        marker.on('click', () => {
+          highlightStoreRow(store.id);
+        });
+
+        // 預設加入地圖
+        marker.addTo(map);
+
+        storeStates.set(store.id, {
+          store,
+          marker,
+          isVisible: true,
+          rowElement: null,
+          chkElement: null
+        });
       });
 
-      function rebuildCluster(storesToShow) {
-        clusterGroup.clearLayers();
-        storesToShow.forEach(s => {
-          const m = markerMap.get(s.id);
-          if (m) clusterGroup.addLayer(m);
+      // 渲染左側店家列表清單（帶獨立 Checkbox）
+      const listEast = document.getElementById('list-east');
+      const listWest = document.getElementById('list-west');
+      const listDiff = document.getElementById('list-diff');
+
+      stores.forEach((store, index) => {
+        const state = storeStates.get(store.id);
+        const row = document.createElement('div');
+        row.className = 'store-row';
+        row.id = 'store-row-' + store.id;
+
+        const pinColor = store.subGroup === '主要名單-東區' ? '#2e7d32' : (store.subGroup === '主要名單-西區' ? '#d32f2f' : '#e65100');
+
+        row.innerHTML = \`
+          <input type="checkbox" class="item-checkbox" id="chk-store-\${store.id}" checked />
+          \${getSmallPinSvg(pinColor)}
+          <div class="store-info">
+            <div class="store-name-text" title="\${store.name}">\${index + 1}. \${store.name}</div>
+            <div class="store-addr-text" title="\${store.address}">\${store.address}</div>
+          </div>
+        \`;
+
+        const chk = row.querySelector('.item-checkbox');
+        state.rowElement = row;
+        state.chkElement = chk;
+
+        // 單獨 Checkbox 切換事件（不觸發 row 的聚焦）
+        chk.addEventListener('click', (e) => {
+          e.stopPropagation();
+          setStoreVisibility(store.id, chk.checked);
         });
+
+        // 點擊整列：聚焦到地圖該點並彈出 Popup
+        row.addEventListener('click', () => {
+          focusStoreOnMap(store.id);
+        });
+
+        if (store.subGroup === '主要名單-東區') {
+          listEast.appendChild(row);
+        } else if (store.subGroup === '主要名單-西區') {
+          listWest.appendChild(row);
+        } else {
+          listDiff.appendChild(row);
+        }
+      });
+
+      // 設定單一店家的顯示 / 隱藏狀態
+      function setStoreVisibility(storeId, isVisible) {
+        const state = storeStates.get(storeId);
+        if (!state) return;
+        state.isVisible = isVisible;
+        state.chkElement.checked = isVisible;
+        if (isVisible) {
+          state.marker.addTo(map);
+          state.rowElement.classList.remove('disabled');
+        } else {
+          map.removeLayer(state.marker);
+          state.rowElement.classList.add('disabled');
+        }
+        updateGroupCheckboxes();
+        updateStats();
       }
 
-      map.addLayer(clusterGroup);
+      window.toggleSingleStoreVisible = function(storeId, forceState) {
+        const state = storeStates.get(storeId);
+        if (state) {
+          const next = forceState !== undefined ? forceState : !state.isVisible;
+          setStoreVisibility(storeId, next);
+        }
+      };
 
-      const storeListEl = document.getElementById('storeList');
+      // 聚焦特定店家並開啟 Popup
+      function focusStoreOnMap(storeId) {
+        const state = storeStates.get(storeId);
+        if (!state) return;
+
+        // 若該點目前被隱藏，點擊時自動開啟顯示
+        if (!state.isVisible) {
+          setStoreVisibility(storeId, true);
+        }
+
+        map.flyTo([state.store.lat, state.store.lng], 16, { duration: 0.5 });
+        state.marker.openPopup();
+        highlightStoreRow(storeId);
+      }
+
+      let currentActiveRow = null;
+      function highlightStoreRow(storeId) {
+        if (currentActiveRow) {
+          currentActiveRow.classList.remove('active');
+        }
+        const state = storeStates.get(storeId);
+        if (state && state.rowElement) {
+          state.rowElement.classList.add('active');
+          state.rowElement.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          currentActiveRow = state.rowElement;
+        }
+      }
+
+      // 群組全選 / 取消全選
+      function setGroupVisibility(groupName, isVisible) {
+        stores.filter(s => s.subGroup === groupName).forEach(s => {
+          const state = storeStates.get(s.id);
+          state.isVisible = isVisible;
+          state.chkElement.checked = isVisible;
+          if (isVisible) {
+            state.marker.addTo(map);
+            state.rowElement.classList.remove('disabled');
+          } else {
+            map.removeLayer(state.marker);
+            state.rowElement.classList.add('disabled');
+          }
+        });
+        updateGroupCheckboxes();
+        updateStats();
+      }
+
+      // 監聽三大群組的 Checkbox 事件
+      const chkGroupEast = document.getElementById('chk-group-east');
+      const chkGroupWest = document.getElementById('chk-group-west');
+      const chkGroupDiff = document.getElementById('chk-group-diff');
+
+      chkGroupEast.addEventListener('change', () => setGroupVisibility('主要名單-東區', chkGroupEast.checked));
+      chkGroupWest.addEventListener('change', () => setGroupVisibility('主要名單-西區', chkGroupWest.checked));
+      chkGroupDiff.addEventListener('change', () => setGroupVisibility('非488名單', chkGroupDiff.checked));
+
+      // 根據群組底下店家的勾選狀況，自動更新大組 Checkbox（支援半選 indeterminate）
+      function updateGroupCheckboxes() {
+        function checkStatus(groupName, groupChk) {
+          const groupStores = stores.filter(s => s.subGroup === groupName);
+          const visibleCount = groupStores.filter(s => storeStates.get(s.id).isVisible).length;
+          if (visibleCount === groupStores.length) {
+            groupChk.checked = true;
+            groupChk.indeterminate = false;
+          } else if (visibleCount === 0) {
+            groupChk.checked = false;
+            groupChk.indeterminate = false;
+          } else {
+            groupChk.checked = false;
+            groupChk.indeterminate = true;
+          }
+          return { visibleCount, total: groupStores.length };
+        }
+
+        const eastStats = checkStatus('主要名單-東區', chkGroupEast);
+        const westStats = checkStatus('主要名單-西區', chkGroupWest);
+        const diffStats = checkStatus('非488名單', chkGroupDiff);
+
+        document.getElementById('stats-east').textContent = \`顯示 \${eastStats.visibleCount} / \${eastStats.total} 筆\`;
+        document.getElementById('stats-west').textContent = \`顯示 \${westStats.visibleCount} / \${westStats.total} 筆\`;
+        document.getElementById('stats-diff').textContent = \`顯示 \${diffStats.visibleCount} / \${diffStats.total} 筆\`;
+      }
+
+      // 更新頂部總統計
+      function updateStats() {
+        let visibleCount = 0;
+        storeStates.forEach(st => {
+          if (st.isVisible) visibleCount++;
+        });
+        document.getElementById('activeCountLabel').textContent = \`目前顯示：\${visibleCount} / \${stores.length} 處店家\`;
+      }
+
+      // 快捷操作按鈕事件
+      document.getElementById('btnShowAll').addEventListener('click', () => {
+        stores.forEach(s => setStoreVisibility(s.id, true));
+      });
+      document.getElementById('btnHideAll').addEventListener('click', () => {
+        stores.forEach(s => setStoreVisibility(s.id, false));
+      });
+      document.getElementById('btnOnlyEast').addEventListener('click', () => {
+        stores.forEach(s => setStoreVisibility(s.id, s.subGroup === '主要名單-東區'));
+      });
+      document.getElementById('btnOnlyWest').addEventListener('click', () => {
+        stores.forEach(s => setStoreVisibility(s.id, s.subGroup === '主要名單-西區'));
+      });
+      document.getElementById('btnOnlyDiff').addEventListener('click', () => {
+        stores.forEach(s => setStoreVisibility(s.id, s.subGroup === '非488名單'));
+      });
+
+      // 摺疊 / 展開群組
+      window.toggleGroupExpand = function(groupId) {
+        const el = document.getElementById(groupId);
+        if (el) el.classList.toggle('expanded');
+      };
+
+      // 側邊欄收合切換
+      const sidebar = document.getElementById('sidebar');
+      const floatingToggleBtn = document.getElementById('floatingToggleBtn');
+      const menuToggleBtn = document.getElementById('menuToggleBtn');
+      const toggleIcon = document.getElementById('toggleIcon');
+      const toggleText = document.getElementById('toggleText');
+
+      function toggleSidebar() {
+        const isCollapsed = sidebar.classList.toggle('collapsed');
+        if (isCollapsed) {
+          toggleIcon.textContent = '▶';
+          toggleText.textContent = '展開清單';
+        } else {
+          toggleIcon.textContent = '◀';
+          toggleText.textContent = '收合清單';
+        }
+        setTimeout(() => map.invalidateSize(), 260);
+      }
+      floatingToggleBtn.addEventListener('click', toggleSidebar);
+      menuToggleBtn.addEventListener('click', toggleSidebar);
+
+      // 即時關鍵字搜尋過濾
       const searchInput = document.getElementById('searchInput');
-      const resultCountEl = document.getElementById('resultCount');
-      const filterTabs = document.querySelectorAll('.filter-tab');
-
-      let currentActiveId = null;
-      let activeFilter = 'all';
-
-      function highlightStore(storeId, scrollList = true) {
-        if (currentActiveId && storeItemMap.has(currentActiveId)) {
-          storeItemMap.get(currentActiveId).classList.remove('active');
-        }
-        currentActiveId = storeId;
-        const itemEl = storeItemMap.get(storeId);
-        if (itemEl) {
-          itemEl.classList.add('active');
-          if (scrollList) {
-            itemEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-          }
-        }
-        const store = stores.find(s => s.id === storeId);
-        const marker = markerMap.get(storeId);
-        if (store && marker) {
-          clusterGroup.zoomToShowLayer(marker, () => {
-            map.flyTo([store.lat, store.lng], 16, { duration: 0.5 });
-            marker.openPopup();
-          });
-        }
-      }
-
-      function getFilteredStores() {
-        const query = searchInput.value.trim().toLowerCase();
-        return stores.filter(s => {
-          if (activeFilter === 'east' && s.subGroup !== '主要名單-東區') return false;
-          if (activeFilter === 'west' && s.subGroup !== '主要名單-西區') return false;
-          if (activeFilter === 'diff' && s.subGroup !== '非488名單') return false;
-          if (!query) return true;
-          return s.name.toLowerCase().includes(query) || s.address.toLowerCase().includes(query);
-        });
-      }
-
-      function renderList() {
-        const filtered = getFilteredStores();
-        storeListEl.innerHTML = '';
-        storeItemMap.clear();
-
-        filtered.forEach((store) => {
-          const originalIndex = stores.findIndex(s => s.id === store.id);
-          const el = document.createElement('div');
-          
-          let groupClass = ' is-east';
-          let badgeHtml = '<span class="badge-tag badge-east">🟢 東區</span>';
-          if (store.subGroup === '主要名單-西區') {
-            groupClass = ' is-west';
-            badgeHtml = '<span class="badge-tag badge-west">🔴 西區</span>';
-          } else if (store.subGroup === '非488名單') {
-            groupClass = ' is-diff';
-            badgeHtml = '<span class="badge-tag badge-diff">🟠 非488</span>';
-          }
-
-          el.className = 'store-item' + groupClass + (store.id === currentActiveId ? ' active' : '');
-
-          el.innerHTML = 
-            '<div class="item-header">' +
-              '<span class="item-name">' + store.name + '</span>' +
-              '<div class="item-badges">' +
-                badgeHtml +
-                '<span style="font-size:11px;color:#888;">#' + (originalIndex + 1) + '</span>' +
-              '</div>' +
-            '</div>' +
-            '<div class="item-address">' + store.address + '</div>' +
-            '<div class="item-footer">' +
-              (store.estimated ? '<span class="tag-est">估算位置</span>' : '<span></span>') +
-              '<a class="nav-link" href="' + getGoogleMapsNavUrl(store) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">導航 ↗</a>' +
-            '</div>';
-
-          el.addEventListener('click', () => highlightStore(store.id, false));
-          storeListEl.appendChild(el);
-          storeItemMap.set(store.id, el);
-        });
-
-        resultCountEl.textContent = '顯示 ' + filtered.length + ' / ' + stores.length + ' 筆';
-        rebuildCluster(filtered);
-      }
-
-      filterTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          filterTabs.forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          activeFilter = tab.dataset.filter;
-          renderList();
-        });
-      });
+      const searchClearBtn = document.getElementById('searchClearBtn');
 
       searchInput.addEventListener('input', () => {
-        renderList();
+        const q = searchInput.value.trim().toLowerCase();
+        searchClearBtn.style.display = q ? 'block' : 'none';
+
+        stores.forEach(store => {
+          const state = storeStates.get(store.id);
+          const matches = !q || store.name.toLowerCase().includes(q) || store.address.toLowerCase().includes(q);
+          state.rowElement.style.display = matches ? 'flex' : 'none';
+        });
       });
 
-      renderList();
+      searchClearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchClearBtn.style.display = 'none';
+        stores.forEach(store => {
+          storeStates.get(store.id).rowElement.style.display = 'flex';
+        });
+      });
+
+      // 初始化統計與勾選狀態
+      updateGroupCheckboxes();
+      updateStats();
     </script>
   </body>
 </html>
@@ -582,4 +930,4 @@ const html = `<!doctype html>
 
 fs.writeFileSync(path.join(__dirname, "large.html"), html, "utf8");
 fs.writeFileSync(path.join(__dirname, "dist", "large.html"), html, "utf8");
-console.log("三色分區版 large.html 網頁已生成！");
+console.log("全新 Google 我的地圖風格 + 單點勾選 large.html 網頁已生成！");
