@@ -1,0 +1,2537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>🟢 主要名單-東區 (194筆 - 界線以東)</name>
+    <Style id="layerStyle">
+      <IconStyle>
+        <color>ff2d8a4e</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/paddle/grn-blank.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Placemark>
+      <name><![CDATA[1. 蘇姵綸營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣吉安鄉中山路50號(G49.G50攤位)<br/>※ 位置為地址估算]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[蘇姵綸營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣吉安鄉中山路50號(G49.G50攤位)]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.611724,23.97419,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[56. 台灣銀行花蓮分行倉庫]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市三民街1號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[台灣銀行花蓮分行倉庫]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市三民街1號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610994,23.977502,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[58. 花蓮縣縣定古蹟檢察長宿舍]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市三民街23號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮縣縣定古蹟檢察長宿舍]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市三民街23號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608916,23.979902,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[59. 花蓮縣私立佳姿幼兒園]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市三民街82-6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮縣私立佳姿幼兒園]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市三民街82-6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608693,23.980689,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[60. 志成電子材料行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市三民街84之1號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[志成電子材料行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市三民街84之1號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.607924,23.981589,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[61. 承天佛具]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市三民街88號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[承天佛具]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市三民街88號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60772,23.981947,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[62. 鄒永強公館]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市大同街110號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[鄒永強公館]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市大同街110號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608962,23.982316,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[63. 郭彩玉洗衣店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市大同街31號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[郭彩玉洗衣店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市大同街31號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.605663,23.9803,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[64. 信香行超市]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市大同街33號B1]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[信香行超市]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市大同街33號B1]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.605964,23.980514,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[65. 利東工礦股份有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市大同街5號1-3樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[利東工礦股份有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市大同街5號1-3樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60432,23.979416,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[68. 吳明株營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市大禹街64號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[吳明株營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市大禹街64號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608141,23.977215,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[69. 花蓮汽車客運股份有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路137號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮汽車客運股份有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路137號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610354,23.975647,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[70. 日興珠寶有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路142-15號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[日興珠寶有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路142-15號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60996,23.97652,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[71. 曾記臻隆達有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路142號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[曾記臻隆達有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路142號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60996,23.97652,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[72. 台灣大哥大花蓮舊站直營店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路157號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[台灣大哥大花蓮舊站直營店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路157號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610055,23.976011,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[74. 巨匠電腦花蓮認證]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路180號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[巨匠電腦花蓮認證]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路180號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60879,23.97795,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[76. 金六福珠寶銀樓]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路199-1號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[金六福珠寶銀樓]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路199-1號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.6092,23.977124,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[79. 悠旅生活花蓮門市]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路231號1-2樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[悠旅生活花蓮門市]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路231號1-2樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608365,23.978093,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[80. 台灣大哥大花蓮民國直營店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路240號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[台灣大哥大花蓮民國直營店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路240號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.607196,23.979981,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[82. 科林國際助聽器花蓮中山店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路276號1樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[科林國際助聽器花蓮中山店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路276號1樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606701,23.980704,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[83. 麵匡匡拉麵食堂花蓮中山店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路280號1樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[麵匡匡拉麵食堂花蓮中山店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路280號1樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.6067,23.98081,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[85. 全球通訊行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路311號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[全球通訊行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路311號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60688,23.97988,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[87. 仁和堂藥房]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路316號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[仁和堂藥房]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路316號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606055,23.981487,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[88. 順發電腦花蓮店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路321號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[順發電腦花蓮店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路321號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.612302,23.973521,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[89. 佑全藥品1701花蓮中山店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路326號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[佑全藥品1701花蓮中山店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路326號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.605787,23.981772,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[93. 合作金庫北花蓮分行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路371號1-2樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[合作金庫北花蓮分行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路371號1-2樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.605797,23.981376,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[94. 內政部入出國及移民署北區事務大]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路371號5樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[內政部入出國及移民署北區事務大]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路371號5樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.605797,23.981376,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[95. 外交部領事事務局花蓮辦事處]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路371號6樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[外交部領事事務局花蓮辦事處]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路371號6樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.605797,23.981376,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[96. 行政院東部聯合服務中心]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路371號7-8樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[行政院東部聯合服務中心]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路371號7-8樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.605797,23.981376,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[98. 爭鮮外帶花蓮中山店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路373號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[爭鮮外帶花蓮中山店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路373號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.605628,23.981666,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[101. 顏暐力營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路406之2號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[顏暐力營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路406之2號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.612331,23.972609,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[107. 姚定國公館]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路412巷2-2號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[姚定國公館]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路412巷2-2號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.612331,23.972609,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[131. 神將坊]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中山路6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[神將坊]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.612421,23.97249,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[134. 劉品岑公館]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路125巷1號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[劉品岑公館]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路125巷1號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.597262,23.97099,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[135. 黃淳洋營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路143巷7號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[黃淳洋營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路143巷7號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.597522,23.971293,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[136. 國泰聯合診所-中正路]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路194號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[國泰聯合診所-中正路]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路194號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.598754,23.971416,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[137. 中正國小A系統]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路210號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[中正國小A系統]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路210號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.599571,23.971884,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[138. 中正國小B系統]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路210號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[中正國小B系統]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路210號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.599571,23.971884,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[139. 李學智婦產科診所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路216號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[李學智婦產科診所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路216號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.59999,23.97209,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[140. 國泰世華銀行ATM全聯花蓮中正店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路230號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[國泰世華銀行ATM全聯花蓮中正店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路230號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.600308,23.972414,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[141. 全聯花蓮中正2111]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路230號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[全聯花蓮中正2111]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路230號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.600308,23.972414,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[144. 呂外科診所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路322號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[呂外科診所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路322號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.602182,23.97366,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[146. 三商拿帕里花蓮店火災系統]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路342號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[三商拿帕里花蓮店火災系統]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路342號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.602655,23.973964,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[147. 三商拿帕里花蓮店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路342號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[三商拿帕里花蓮店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路342號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.602655,23.973964,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[150. 中英鐘錶眼鏡行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路440號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[中英鐘錶眼鏡行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路440號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.604763,23.975414,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[151. 曾記後山廣播電台3F.5F]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路446號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[曾記後山廣播電台3F.5F]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路446號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60491,23.97543,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[152. 曾記麻糬公司中華門市1F.2F]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路446號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[曾記麻糬公司中華門市1F.2F]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路446號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60491,23.97543,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[153. 建華精品服飾店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路462號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[建華精品服飾店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路462號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.605846,23.976122,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[155. 黃烈堂內科診所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路482號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[黃烈堂內科診所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路482號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606604,23.976596,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[157. 瑞寶企業社]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路506號1樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[瑞寶企業社]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路506號1樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.607188,23.976973,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[159. 三立通訊配件行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路520號1樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[三立通訊配件行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路520號1樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.607868,23.977438,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[160. 冠毅服飾店住家]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路521號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[冠毅服飾店住家]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路521號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606611,23.976853,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[161. 香港商捷時海外貿易花蓮門市]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路526號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[香港商捷時海外貿易花蓮門市]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路526號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608051,23.977552,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[162. 三商行花蓮第二分公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路530號3樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[三商行花蓮第二分公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路530號3樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608153,23.977606,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[163. 亞諾有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路549號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[亞諾有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路549號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.607271,23.977298,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[164. 凱基銀行ATM花蓮分行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路560-562號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[凱基銀行ATM花蓮分行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路560-562號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.609049,23.978077,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[165. 凱基銀行花蓮分行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路560號(562號)]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[凱基銀行花蓮分行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路560號(562號)]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.609049,23.978077,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[167. 環球通訊行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路566號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[環球通訊行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路566號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.609161,23.978156,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[168. 長榮通訊行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路568號1樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[長榮通訊行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路568號1樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.609214,23.97831,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[169. 張家華營業所娃娃機商店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路571號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[張家華營業所娃娃機商店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路571號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.607918,23.977744,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[170. 宣寶石珊瑚行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路572號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[宣寶石珊瑚行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路572號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.609438,23.978438,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[171. 新光銀行花蓮分行司反偵測]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路588號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[新光銀行花蓮分行司反偵測]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路588號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.609951,23.978717,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[172. 新光銀行花蓮分行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路588號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[新光銀行花蓮分行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路588號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.609951,23.978717,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[173. 花蓮二信中正分社]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路58號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮二信中正分社]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路58號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.595692,23.969425,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[174. 凌群電腦股份有限公司花蓮店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路60號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[凌群電腦股份有限公司花蓮店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路60號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.595785,23.969446,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[175. 誠食生活家-將軍府-A棟]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路622巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[誠食生活家-將軍府-A棟]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路622巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61313,23.980467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[176. 誠食生活家-將軍府C棟]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路622巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[誠食生活家-將軍府C棟]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路622巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61313,23.980467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[177. 誠食生活家-將軍府D棟]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路622巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[誠食生活家-將軍府D棟]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路622巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61313,23.980467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[178. 誠食生活家-將軍府E棟]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路622巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[誠食生活家-將軍府E棟]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路622巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61313,23.980467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[179. 誠食生活家-將軍府F棟]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路622巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[誠食生活家-將軍府F棟]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路622巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61313,23.980467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[180. 誠食-將軍府G棟(G1)]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路622巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[誠食-將軍府G棟(G1)]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路622巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61313,23.980467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[181. 誠食-將軍府G棟(G2)]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路622巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[誠食-將軍府G棟(G2)]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路622巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61313,23.980467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[182. 誠食-將軍府H棟(H1)]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路622巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[誠食-將軍府H棟(H1)]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路622巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61313,23.980467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[183. 誠食-將軍府H棟(H2)]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路622巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[誠食-將軍府H棟(H2)]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路622巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61313,23.980467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[184. 誠食生活家-將軍府儲藏室]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路622巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[誠食生活家-將軍府儲藏室]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路622巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61313,23.980467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[185. 誠食生活家-將軍府咖啡店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路622巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[誠食生活家-將軍府咖啡店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路622巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61313,23.980467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[186. 誠食生活家-將軍府(管理室)]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路622巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[誠食生活家-將軍府(管理室)]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路622巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61313,23.980467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[187. 誠食生活家-將軍府B棟]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路622巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[誠食生活家-將軍府B棟]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路622巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61313,23.980467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[188. 台灣麥當勞和德昌花蓮中正路店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路625號B1-2樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[台灣麥當勞和德昌花蓮中正路店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路625號B1-2樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610077,23.979181,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[189. 富利餐飲肯德基花蓮中正店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中正路637-1號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[富利餐飲肯德基花蓮中正店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路637-1號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610426,23.979404,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[193. 本居立有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中原路294號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[本居立有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中原路294號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.601165,23.967238,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[194. 美麗坊自助洗衣店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中原路394巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[美麗坊自助洗衣店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中原路394巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.599287,23.969632,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[195. 花蓮縣花蓮市中原國民小學]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中原路531號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮縣花蓮市中原國民小學]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中原路531號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.59641,23.9721,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[201. 陳坤亮公館]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中強街126-1號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[陳坤亮公館]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中強街126-1號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.601406,23.96951,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[202. 臻好翫休閒運動事業博愛門市]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中華路101號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[臻好翫休閒運動事業博愛門市]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路101號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60716,23.97571,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[204. 黃詠翔彩卷行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中華路112號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[黃詠翔彩卷行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路112號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.6058,23.97599,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[206. 協源工具行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中華路166號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[協源工具行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路166號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60357,23.97582,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[208. 花蓮一信信義分社]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中華路180號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮一信信義分社]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路180號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60304,23.97578,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[209. 肉肉豐盛餐飲有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中華路183號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[肉肉豐盛餐飲有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路183號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60384,23.97533,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[210. 張祖清營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中華路24號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[張祖清營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路24號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608557,23.976287,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[211. 天泉銀樓]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中華路25號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[天泉銀樓]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路25號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60933,23.97604,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[213. 怡信鞋店企業社]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中華路27號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[怡信鞋店企業社]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路27號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.6093,23.97598,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[229. 鈺發銀樓]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中華路50號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[鈺發銀樓]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路50號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60782,23.97622,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[232. 賴資凱彩券行-花蓮店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中華路85號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[賴資凱彩券行-花蓮店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路85號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60772,23.9759,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[233. 瑪格莉特生活精品館]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中華路86號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[瑪格莉特生活精品館]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路86號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60672,23.97623,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[234. 王馥華稅務記帳士事務所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中順街102號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[王馥華稅務記帳士事務所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中順街102號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.596974,23.968983,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[235. 全人診所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中福路158號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[全人診所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中福路158號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.601724,23.972664,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[236. 朱震雄倉庫]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中福路167號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[朱震雄倉庫]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中福路167號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60142,23.9727,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[237. 朱美雪自助洗衣中福店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中福路192號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[朱美雪自助洗衣中福店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中福路192號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60093,23.973665,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[238. 林建中診所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中福路193號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[林建中診所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中福路193號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.600682,23.973631,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[239. 花蓮二信主里分社]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市中福路232號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮二信主里分社]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市中福路232號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60015,23.974711,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[240. 經濟部水利署第九河川分署]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市仁愛街19號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[經濟部水利署第九河川分署]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市仁愛街19號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606163,23.972932,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[241. 台灣菸酒花蓮營業處]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市仁愛街75號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[台灣菸酒花蓮營業處]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市仁愛街75號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.603222,23.976527,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[242. 甄饌私廚酒館有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市仁愛街91、95號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[甄饌私廚酒館有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市仁愛街91、95號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.602049,23.978307,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[243. 張啟仲營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市公正街6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[張啟仲營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市公正街6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61011,23.97751,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[244. 花蓮縣政府老人會館]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市公園路39號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮縣政府老人會館]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市公園路39號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610375,23.976725,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[245. 台灣銀行花蓮分行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市公園路3號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[台灣銀行花蓮分行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市公園路3號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610664,23.976996,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[250. 台灣菸酒公司花蓮營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市民國路16-1號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[台灣菸酒公司花蓮營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市民國路16-1號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60424,23.977805,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[251. 國泰世華銀行花蓮分行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市民國路163號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[國泰世華銀行花蓮分行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市民國路163號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608266,23.980642,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[252. 國泰世華銀行花蓮分公司倉庫]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市民國路163號3樓-1]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[國泰世華銀行花蓮分公司倉庫]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市民國路163號3樓-1]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608266,23.980642,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[253. 新光銀行ATM元富證券反偵測]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市民國路167號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[新光銀行ATM元富證券反偵測]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市民國路167號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60868,23.980949,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[254. 新光銀行ATM元富證券收付處]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市民國路167號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[新光銀行ATM元富證券收付處]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市民國路167號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60868,23.980949,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[255. 元富證券花蓮分公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市民國路167號1-2號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[元富證券花蓮分公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市民國路167號1-2號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60868,23.980949,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[256. 劉玉萍營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市民國路2-1號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[劉玉萍營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市民國路2-1號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.601983,23.976336,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[257. 吳欣潔信欣中醫]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市民國路26號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[吳欣潔信欣中醫]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市民國路26號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60516,23.97841,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[258. 雄瑋饗樂有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市民國路32-3號1樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[雄瑋饗樂有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市民國路32-3號1樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60561,23.978681,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[259. 頂興食品事業有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市民國路69號1-2樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[頂興食品事業有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市民國路69號1-2樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60333,23.977432,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[260. 波提娜麗]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市民國路80巷18號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[波提娜麗]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市民國路80巷18號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.609473,23.980407,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[261. 徐名宏公館]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市光復街126號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[徐名宏公館]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市光復街126號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.604981,23.98046,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[262. 曾鈺倫營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市光復街128號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[曾鈺倫營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市光復街128號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.604823,23.980508,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[263. 花蓮二信總社]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市光復街36號1-2樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮二信總社]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市光復街36號1-2樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608011,23.976366,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[264. 艾萊實業]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市光復街45號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[艾萊實業]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市光復街45號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.607734,23.976513,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[265. 精誠輪業有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市光復街69號1-2樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[精誠輪業有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市光復街69號1-2樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606263,23.978422,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[270. 花蓮一信自由分社]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市自由街72號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮一信自由分社]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市自由街72號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.607034,23.975298,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[272. 臺富國際食品股份有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市和平路1段110號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[臺富國際食品股份有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市和平路1段110號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60826,23.967317,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[273. 寶]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市和平路285號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[寶]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市和平路285號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606224,23.970279,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[276. 原相中醫診所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市和平路332-2號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[原相中醫診所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市和平路332-2號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.603972,23.973561,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[277. 朱美雪營業所無人自助洗]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市和平路362號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[朱美雪營業所無人自助洗]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市和平路362號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.603517,23.974115,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[278. 冠潓商行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市和平路403號1樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[冠潓商行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市和平路403號1樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.602591,23.974809,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[280. 泰多車行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市和平路511號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[泰多車行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市和平路511號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.601095,23.976779,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[286. 映達企業社]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市和平路92-1號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[映達企業社]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市和平路92-1號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.607744,23.968645,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[290. 晶新企業社]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市忠孝街60-1號1樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[晶新企業社]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市忠孝街60-1號1樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60641,23.974201,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[299. 花蓮二信ATM明義國小]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮二信ATM明義國小]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[300. 明義國小-健康中心]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小-健康中心]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[301. 明義國小-學務處]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小-學務處]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[302. 明義國小總務處]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小總務處]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[303. 明義國小-教務處]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小-教務處]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[304. 明義國小-圖書館]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小-圖書館]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[305. 明義國小舊總務處]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小舊總務處]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[306. 明義國小-電腦教室]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小-電腦教室]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[307. 明義國小-資訊研究室]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小-資訊研究室]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[308. 明義國小民國樓]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小民國樓]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[309. 明義國小演藝廳]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小演藝廳]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[310. 明義國小-音樂教室3樓]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小-音樂教室3樓]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[311. 明義國小藝才樓1樓]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小藝才樓1樓]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[312. 明義國小-藝才班4樓]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小-藝才班4樓]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[313. 明義國小仁愛樓]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小仁愛樓]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[314. 明義國小林森樓]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街107號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明義國小林森樓]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街107號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.610205,23.97051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[315. 陳子軒-無限可能國際有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明義街21號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[陳子軒-無限可能國際有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街21號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.609568,23.971291,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[319. 李淑惠公館]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市明禮路67巷6號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[李淑惠公館]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市明禮路67巷6號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608776,23.981414,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[320. 許漢中營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市東大門夜市各省一條街G42<br/>※ 位置為地址估算]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[許漢中營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市東大門夜市各省一條街G42]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.61352,23.974012,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[332. 永豐銀行花蓮分行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市林森路218-1號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[永豐銀行花蓮分行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市林森路218-1號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.604911,23.980906,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[333. 台灣知識庫股份有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市林森路242號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[台灣知識庫股份有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市林森路242號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606136,23.981723,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[341. 臺灣花蓮地方法院所屬民間公證人]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市林森路399號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[臺灣花蓮地方法院所屬民間公證人]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市林森路399號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606619,23.982327,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[342. 神田屋食品行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市林森路407號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[神田屋食品行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市林森路407號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606853,23.982531,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[350. 黃微翔公館]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市信義街47號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[黃微翔公館]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市信義街47號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.604397,23.974016,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[353. 陳麗華營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市南京街38號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[陳麗華營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市南京街38號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.601945,23.971572,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[354. 三傢一活蝦料理]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市南濱32號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[三傢一活蝦料理]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市南濱32號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606847,23.982173,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[373. 重慶九九五金日用品]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市重慶路105號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[重慶九九五金日用品]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市重慶路105號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.601267,23.967607,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[374. 國泰世華銀行ATM全聯花蓮重慶店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市重慶路331.333號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[國泰世華銀行ATM全聯花蓮重慶店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市重慶路331.333號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.607468,23.97192,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[375. 全聯花蓮重慶2100]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市重慶路331號,333號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[全聯花蓮重慶2100]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市重慶路331號,333號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.607468,23.97192,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[376. 繼陽建材行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市重慶路386號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[繼陽建材行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市重慶路386號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606765,23.970772,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[377. 台新銀行ATM統冠超市重慶店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市重慶路415號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[台新銀行ATM統冠超市重慶店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市重慶路415號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.609895,23.973287,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[378. 統冠超商重慶店]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市重慶路415號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[統冠超商重慶店]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市重慶路415號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.609895,23.973287,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[380. 陳秉越營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市海濱街31號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[陳秉越營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市海濱街31號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.6143,23.972778,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[381. 衛生福利部中央健康保險署]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市軒轅路36號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[衛生福利部中央健康保險署]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市軒轅路36號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.612048,23.976552,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[382. 台灣銀行ATM花蓮健保局]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市軒轅路36號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[台灣銀行ATM花蓮健保局]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市軒轅路36號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.612048,23.976552,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[457. 國王光學眼鏡有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市博愛街109-1號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[國王光學眼鏡有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市博愛街109-1號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.609769,23.972928,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[458. 博愛燒肉工房]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市博愛街136]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[博愛燒肉工房]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市博愛街136]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606535,23.977319,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[459. 初樂美學空間]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市博愛街146號1樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[初樂美學空間]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市博愛街146號1樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606343,23.977547,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[460. 阿色紀有限公司-藝托邦藝文空間]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市博愛街156-5號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[阿色紀有限公司-藝托邦藝文空間]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市博愛街156-5號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.605975,23.978037,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[462. 樂津廚坊]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市博愛街185號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[樂津廚坊]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市博愛街185號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606995,23.976467,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[467. 懷德診所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市復興街10號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[懷德診所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市復興街10號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.611384,23.975854,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[469. 莊謙信公館]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市復興街61號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[莊謙信公館]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市復興街61號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608107,23.979726,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[471. 花蓮女中總務室]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市菁華街2號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮女中總務室]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市菁華街2號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.615071,23.979622,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[472. 花蓮女中學藝大樓]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市菁華街2號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮女中學藝大樓]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市菁華街2號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.615071,23.979622,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[473. 台新銀行ATM花蓮女中OK超商]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市菁華街2號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[台新銀行ATM花蓮女中OK超商]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市菁華街2號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.615071,23.979622,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[474. 花蓮女中女生宿舍]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市菁華街2號B1-2樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮女中女生宿舍]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市菁華街2號B1-2樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.615071,23.979622,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[475. 找到了可頌小賣所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市菁華街35巷1弄18號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[找到了可頌小賣所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市菁華街35巷1弄18號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.615415,23.981038,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[476. 菁華學苑大樓]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市菁華街4巷1弄2號7樓(B2及頂樓)<br/>※ 位置為地址估算]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[菁華學苑大樓]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市菁華街4巷1弄2號7樓(B2及頂樓)]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.616551,23.979802,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[479. 星璇展業東洋營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市新港街11巷2號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[星璇展業東洋營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市新港街11巷2號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.607328,23.977932,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[482. 遠見通訊]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市新港街52-2號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[遠見通訊]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市新港街52-2號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606785,23.979215,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[483. 精誠輪業有限公司]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市節約街12號1-5樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[精誠輪業有限公司]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市節約街12號1-5樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606491,23.97795,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[484. 健野戶外休閒用品]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市節約街29號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[健野戶外休閒用品]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市節約街29號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.606916,23.978418,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[486. 曾記米麻糬榮正街金碧華廈地下室]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市榮正街125巷1之33號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[曾記米麻糬榮正街金碧華廈地下室]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市榮正街125巷1之33號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.597364,23.973752,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[487. 幸生外科診所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市榮正街87號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[幸生外科診所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市榮正街87號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.597641,23.973394,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[488. 東尼斯美容養生館]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市福建街439號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[東尼斯美容養生館]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市福建街439號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.608864,23.974397,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[489. 建發行]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市福建街525號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[建發行]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市福建街525號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.611463,23.97613,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[490. 曾記臻匯饌資材室]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市福德段91-1地號<br/>※ 位置為地址估算]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[曾記臻匯饌資材室]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市福德段91-1地號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.611,23.9705,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[491. 曾記雿來農產福德農舍]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市福德段91地號<br/>※ 位置為地址估算]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[曾記雿來農產福德農舍]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市福德段91地號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.611,23.9705,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[492. 明昌食品號(店面、倉庫)]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市綜合市場內68號<br/>※ 位置為地址估算]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[明昌食品號(店面、倉庫)]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市綜合市場內68號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.6075,23.9785,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[493. 顏清雲營業所]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市綜合市場固定攤位8號<br/>※ 位置為地址估算]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[顏清雲營業所]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市綜合市場固定攤位8號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.6075,23.9785,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[498. 花蓮縣新象社區交流協會]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市鎮國街15號]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[花蓮縣新象社區交流協會]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市鎮國街15號]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60129,23.975904,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[499. 社團法人花蓮縣新象社區交流協會]]></name>
+      <description><![CDATA[【🟢 主要名單 - 界線以東】<br/>地址：花蓮縣花蓮市鎮國街15號2樓]]></description>
+      <styleUrl>#layerStyle</styleUrl>
+      <ExtendedData>
+        <Data name="店名"><value><![CDATA[社團法人花蓮縣新象社區交流協會]]></value></Data>
+        <Data name="地址"><value><![CDATA[花蓮縣花蓮市鎮國街15號2樓]]></value></Data>
+        <Data name="分區"><value><![CDATA[🟢 主要名單 - 界線以東]]></value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>121.60129,23.975904,0</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>

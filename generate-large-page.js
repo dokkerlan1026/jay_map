@@ -340,10 +340,19 @@ const html = `<!doctype html>
       </div>
       <div class="header-actions">
         <a href="./hualien_large_stores.kml" download="hualien_large_stores.kml" class="btn btn-primary" title="可直接匯入 Google 我的地圖（包含三組獨立資料夾與東綠/西紅/非橙圖標）">
-          <span>↓ 匯出 Google 地圖 (KML 三色版)</span>
+          <span>↓ 整合 KML</span>
         </a>
-        <a href="./hualien_large_stores.csv" download="hualien_large_stores.csv" class="btn" title="下載 CSV 試算表（含分組與區域欄位）">
-          <span>↓ 匯出 CSV</span>
+        <a href="./hualien_east_green.kml" download="hualien_east_green.kml" class="btn" style="border-color:var(--primary-green);color:var(--primary-green);" title="🟢 東區主要名單 (194筆) 獨立圖層 KML">
+          <span>🟢 東區 (${eastCount})</span>
+        </a>
+        <a href="./hualien_west_red.kml" download="hualien_west_red.kml" class="btn" style="border-color:var(--primary-red);color:var(--primary-red);" title="🔴 西區主要名單 (194筆) 獨立圖層 KML">
+          <span>🔴 西區 (${westCount})</span>
+        </a>
+        <a href="./hualien_diff_orange.kml" download="hualien_diff_orange.kml" class="btn" style="border-color:var(--diff-orange);color:var(--diff-orange);" title="🟠 非488名單 (112筆) 獨立圖層 KML">
+          <span>🟠 非488 (${diffCount})</span>
+        </a>
+        <a href="./hualien_google_mymaps.csv" download="hualien_google_mymaps.csv" class="btn" title="Google 我的地圖專用 CSV（依分區一鍵分色）">
+          <span>↓ MyMaps CSV</span>
         </a>
         <a href="./index.html" class="btn" title="切換回精選示範路線規劃">
           <span>← 路線規劃版</span>

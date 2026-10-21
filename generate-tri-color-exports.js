@@ -85,6 +85,13 @@ function makePlacemark(s, idx, styleId, badgeText) {
         <name><![CDATA[${idx + 1}. ${s.name}]]></name>
         <description><![CDATA[【${badgeText}】<br/>地址：${s.address}${note}]]></description>
         <styleUrl>#${styleId}</styleUrl>
+        <ExtendedData>
+          <Data name="店名"><value><![CDATA[${s.name}]]></value></Data>
+          <Data name="地址"><value><![CDATA[${s.address}]]></value></Data>
+          <Data name="分區"><value><![CDATA[${s.subGroup}]]></value></Data>
+          <Data name="區域"><value><![CDATA[${s.region}]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[${s.color}]]></value></Data>
+        </ExtendedData>
         <Point>
           <coordinates>${s.lng},${s.lat},0</coordinates>
         </Point>
