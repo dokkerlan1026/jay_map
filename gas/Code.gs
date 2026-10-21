@@ -1,22 +1,18 @@
 /**
- * Google Apps Script - 花蓮店家每日開關排程與地圖 Web App
+ * Google Apps Script - 花蓮店家每日開關排程與地圖 Web App (三色打卡版)
  * 支援功能：
- * 1. Google 試算表多人共同編輯、打勾控制店家「顯示/關閉」
- * 2. 每日獨立紀錄，隔天可一鍵「載入全開啟」或「載入昨天/指定日期」
- * 3. 試算表與地圖 Web App 雙向同步連動
+ * 1. 橘色改黃色 (東區綠 / 西區紅 / 非488黃)
+ * 2. 支援「紅綠同時顯示」
+ * 3. 店家即時「打卡 / 已打卡」功能與試算表同步備註
+ * 4. Google 試算表多人共同編輯、每日排程載入全開或複製前日
  */
 
-// ------------------------------------------
-// Web App 進入點 (doGet)
-// ------------------------------------------
 function doGet(e) {
   var template = HtmlService.createTemplateFromFile('Index');
   
-  // 取得目標日期（未指定則為今日 YYYY-MM-DD）
   var targetDate = (e && e.parameter && e.parameter.date) ? e.parameter.date : getTodayString();
   template.currentDate = targetDate;
   
-  // 載入該日期的店家資料與開關狀態
   var storeData = getStoresForDate(targetDate);
   template.storesJson = JSON.stringify(storeData);
   
@@ -26,9 +22,6 @@ function doGet(e) {
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
-// ------------------------------------------
-// 試算表自訂選單 (多人共同編輯與快速載入)
-// ------------------------------------------
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('🗺️ 店家地圖與每日排程')
@@ -43,9 +36,6 @@ function onOpen() {
     .addToUi();
 }
 
-// ------------------------------------------
-// 日期工具函式
-// ------------------------------------------
 function getTodayString() {
   return Utilities.formatDate(new Date(), "Asia/Taipei", "yyyy-MM-dd");
 }
@@ -56,9 +46,6 @@ function getYesterdayString(dateStr) {
   return Utilities.formatDate(d, "Asia/Taipei", "yyyy-MM-dd");
 }
 
-// ------------------------------------------
-// 取得指定日期的店家資料與開關狀態
-// ------------------------------------------
 function getStoresForDate(dateStr) {
   var defaultList = getDefaultStores();
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -67,41 +54,39 @@ function getStoresForDate(dateStr) {
   var sheet = ss.getSheetByName("當日店家清單");
   if (!sheet) return defaultList;
 
-  // 檢查試算表頂部的日期是否與查詢日期相符
   var sheetDate = String(sheet.getRange("B1").getValue()).trim();
-  
-  // 讀取當前工作表中的開關狀態
   var data = sheet.getDataRange().getValues();
   if (data.length <= 3) return defaultList;
 
-  // 若目前工作表不是該日期的資料，嘗試從歷史紀錄抓取該日期的狀態
   var hiddenStoreIds = new Set();
+  var checkedInStoreIds = new Set();
+
   if (sheetDate === dateStr) {
     for (var i = 3; i < data.length; i++) {
       var row = data[i];
       var isVisible = (row[1] === true || String(row[1]).toUpperCase() === "TRUE");
-      var storeId = row[0]; // 序號
+      var storeId = Number(row[0]);
       if (!isVisible) {
-        hiddenStoreIds.add(Number(storeId));
+        hiddenStoreIds.add(storeId);
+      }
+      var note = String(row[9] || "");
+      if (note.indexOf("已打卡") !== -1) {
+        checkedInStoreIds.add(storeId);
       }
     }
   } else {
-    // 從歷史表讀取
     hiddenStoreIds = getHiddenStoreIdsFromHistory(dateStr);
   }
 
-  // 套用狀態
   return defaultList.map(function(s, idx) {
     var num = idx + 1;
     return Object.assign({}, s, {
-      isVisible: !hiddenStoreIds.has(num)
+      isVisible: !hiddenStoreIds.has(num),
+      isCheckedIn: checkedInStoreIds.has(num)
     });
   });
 }
 
-// ------------------------------------------
-// 歷史紀錄處理函式
-// ------------------------------------------
 function getHiddenStoreIdsFromHistory(dateStr) {
   var hiddenSet = new Set();
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -127,7 +112,6 @@ function getHiddenStoreIdsFromHistory(dateStr) {
   return hiddenSet;
 }
 
-// 儲存目前試算表的狀態至歷史紀錄
 function saveCurrentStatusToHistory(customDate) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   if (!ss) return;
@@ -158,7 +142,6 @@ function saveCurrentStatusToHistory(customDate) {
     histSheet.getRange(1, 1, 1, 5).setFontWeight("bold").setBackground("#e8f0fe");
   }
 
-  // 尋找是否已有該日期的紀錄，有則更新，無則新增
   var histData = histSheet.getDataRange().getValues();
   var foundRow = -1;
   for (var j = 1; j < histData.length; j++) {
@@ -179,11 +162,6 @@ function saveCurrentStatusToHistory(customDate) {
   }
 }
 
-// ------------------------------------------
-// 核心操作：隔天載入全開 / 載入昨天 / 載入指定日期
-// ------------------------------------------
-
-// 1. 載入全開啟（全部勾選顯示）
 function loadAllActive(targetDate) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   if (!ss) throw new Error("請先在 Google 試算表中執行！");
@@ -205,12 +183,10 @@ function loadAllActive(targetDate) {
     sheet.getRange("D1").setValue("已顯示: " + numRows + " / " + numRows + " (全開啟)");
   }
 
-  // 自動同步存檔到歷史
   saveCurrentStatusToHistory(dateToSet);
   return { success: true, date: dateToSet, activeCount: numRows };
 }
 
-// 2. 載入指定日期的狀態（若為昨天，由外部傳入昨天的日期字串）
 function loadStatusFromDate(sourceDateStr, targetDateStr) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   if (!ss) throw new Error("請先在 Google 試算表中執行！");
@@ -236,38 +212,47 @@ function loadStatusFromDate(sourceDateStr, targetDateStr) {
     sheet.getRange("D1").setValue("已顯示: " + activeCount + " / " + numRows + " (來自 " + sourceDateStr + ")");
   }
 
-  // 自動同步更新今日歷史紀錄
   saveCurrentStatusToHistory(dateToSet);
   return { success: true, targetDate: dateToSet, sourceDate: sourceDateStr, activeCount: activeCount };
 }
 
 // ------------------------------------------
-// 前端 Web App 呼叫的 API（雙向同步連動）
+// API 函式：打卡、狀態連動
 // ------------------------------------------
-
-// 單點狀態更新（外勤在網頁打勾/取消，即時寫回 Sheet）
-function apiUpdateStoreStatus(storeId, isVisible) {
+function apiToggleCheckin(storeId, isCheckedIn) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    if (!ss) return { success: false, msg: "No active sheet" };
+    if (!ss) return { success: false };
 
     var sheet = ss.getSheetByName("當日店家清單");
-    if (!sheet) return { success: false, msg: "Sheet not found" };
+    if (!sheet) return { success: false };
 
-    var rowNumber = Number(storeId) + 3; // 第 4 列開始為序號 1
-    sheet.getRange(rowNumber, 2).setValue(isVisible);
-    
-    // 更新備註時間
-    var nowStr = Utilities.formatDate(new Date(), "Asia/Taipei", "HH:mm:ss");
-    sheet.getRange(rowNumber, 10).setValue("網頁更新 " + nowStr);
-
+    var rowNumber = Number(storeId) + 3;
+    var nowTime = Utilities.formatDate(new Date(), "Asia/Taipei", "HH:mm");
+    var noteVal = isCheckedIn ? ("已打卡 " + nowTime) : "";
+    sheet.getRange(rowNumber, 10).setValue(noteVal);
     return { success: true };
   } catch (err) {
     return { success: false, error: String(err) };
   }
 }
 
-// 批次狀態更新
+function apiUpdateStoreStatus(storeId, isVisible) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) return { success: false };
+
+    var sheet = ss.getSheetByName("當日店家清單");
+    if (!sheet) return { success: false };
+
+    var rowNumber = Number(storeId) + 3;
+    sheet.getRange(rowNumber, 2).setValue(isVisible);
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: String(err) };
+  }
+}
+
 function apiBatchUpdateStatus(updates) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -288,9 +273,6 @@ function apiBatchUpdateStatus(updates) {
   }
 }
 
-// ------------------------------------------
-// 試算表選單按鈕執行函式
-// ------------------------------------------
 function menuLoadAllActive() {
   var ui = SpreadsheetApp.getUi();
   var res = ui.alert("載入全開啟", "確定要將今天的店家狀態全部設為【開啟顯示】嗎？", ui.ButtonSet.YES_NO);
@@ -349,9 +331,6 @@ function openWebAppUrl() {
   ui.showModalDialog(HtmlService.createHtmlOutput(html).setWidth(420).setHeight(220), "開啟地圖網頁");
 }
 
-// ------------------------------------------
-// 一鍵建立 / 初始化 500 筆店家工作表
-// ------------------------------------------
 function setupSheetWithData() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   if (!ss) {
@@ -368,23 +347,20 @@ function setupSheetWithData() {
   var today = getTodayString();
   var stores = getDefaultStores();
 
-  // 頂部控制與日期列
   sheet.getRange("A1").setValue("📅 排程日期：").setFontWeight("bold");
   sheet.getRange("B1").setValue(today).setFontWeight("bold").setFontColor("#1a73e8").setFontSize(12);
   sheet.getRange("C1").setValue("📊 狀態統計：").setFontWeight("bold");
   sheet.getRange("D1").setValue("已顯示: " + stores.length + " / " + stores.length).setFontWeight("bold");
   sheet.getRange("E1").setValue("💡 提示：勾選/取消 B 欄可立即切換地圖顯示；透過上方選單可載入昨天或全開！").setFontColor("#5f6368");
 
-  // 表頭
-  var headers = [["序號", "顯示開關", "店名", "地址", "分組分類", "區域", "標記顏色", "緯度", "經度", "備註"]];
+  var headers = [["序號", "顯示開關", "店名", "地址", "分組分類", "區域", "標記顏色", "緯度", "經度", "備註/打卡"]];
   sheet.getRange(3, 1, 1, headers[0].length).setValues(headers);
   sheet.getRange(3, 1, 1, headers[0].length).setFontWeight("bold").setBackground("#c5221f").setFontColor("#ffffff");
 
-  // 資料列（B 欄為原生 Checkbox）
   var rows = stores.map(function(s, idx) {
     return [
       idx + 1,
-      true, // 預設全部顯示 (打勾)
+      true,
       s.name,
       s.address,
       s.subGroup,
@@ -398,31 +374,25 @@ function setupSheetWithData() {
 
   sheet.getRange(4, 1, rows.length, rows[0].length).setValues(rows);
 
-  // 在 B 欄建立漂亮的核取方塊 (Checkbox)
   var chkRange = sheet.getRange(4, 2, rows.length, 1);
   chkRange.insertCheckboxes();
 
-  // 凍結前 3 列
   sheet.setFrozenRows(3);
   sheet.setFrozenColumns(3);
 
-  // 欄寬美化
-  sheet.setColumnWidth(1, 50);  // 序號
-  sheet.setColumnWidth(2, 80);  // 顯示開關
-  sheet.setColumnWidth(3, 200); // 店名
-  sheet.setColumnWidth(4, 260); // 地址
-  sheet.setColumnWidth(5, 140); // 分組分類
+  sheet.setColumnWidth(1, 50);
+  sheet.setColumnWidth(2, 80);
+  sheet.setColumnWidth(3, 200);
+  sheet.setColumnWidth(4, 260);
+  sheet.setColumnWidth(5, 140);
+  sheet.setColumnWidth(10, 130);
 
-  // 同步初始化歷史表
   saveCurrentStatusToHistory(today);
 
   var ui = SpreadsheetApp.getUi();
-  ui.alert("初始化完成！", "已成功建立【當日店家清單】工作表！\n\n1. B 欄已設定為核取方塊，打勾即可開啟/關閉顯示\n2. 點擊上方選單【🗺️ 店家地圖與每日排程】可進行隔天載入或全開\n3. 任何人共同編輯此試算表，地圖皆可即時連動！", ui.ButtonSet.OK);
+  ui.alert("初始化完成！", "已成功建立【當日店家清單】工作表！\n\n1. B 欄已設定為核取方塊，打勾即可開啟/關閉顯示\n2. 第 10 欄會自動同步手機網頁端打卡狀態\n3. 點擊上方選單【🗺️ 店家地圖與每日排程】可進行隔天載入或全開！", ui.ButtonSet.OK);
 }
 
-// ------------------------------------------
-// 內建 500 筆資料
-// ------------------------------------------
 function getDefaultStores() {
   return [
   {
@@ -496,8 +466,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-6",
@@ -705,8 +675,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-20",
@@ -719,8 +689,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-21",
@@ -733,8 +703,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-22",
@@ -762,8 +732,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-24",
@@ -776,8 +746,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-25",
@@ -835,8 +805,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-29",
@@ -849,8 +819,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-30",
@@ -878,8 +848,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-32",
@@ -892,8 +862,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-33",
@@ -981,8 +951,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-39",
@@ -1010,8 +980,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-41",
@@ -1024,8 +994,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-42",
@@ -1038,8 +1008,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-43",
@@ -1262,8 +1232,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-58",
@@ -1411,8 +1381,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-68",
@@ -1500,8 +1470,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-74",
@@ -1529,8 +1499,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-76",
@@ -1558,8 +1528,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-78",
@@ -1572,8 +1542,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-79",
@@ -1616,8 +1586,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-82",
@@ -1660,8 +1630,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-85",
@@ -1689,8 +1659,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-87",
@@ -1778,8 +1748,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-93",
@@ -1852,8 +1822,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-98",
@@ -1896,8 +1866,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-101",
@@ -1925,8 +1895,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-103",
@@ -2074,8 +2044,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-113",
@@ -2193,8 +2163,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-121",
@@ -2207,8 +2177,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-122",
@@ -2221,8 +2191,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-123",
@@ -2295,8 +2265,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-128",
@@ -2369,8 +2339,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-133",
@@ -2383,8 +2353,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-134",
@@ -2517,8 +2487,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-143",
@@ -2606,8 +2576,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-149",
@@ -2620,8 +2590,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-150",
@@ -2694,8 +2664,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-155",
@@ -2723,8 +2693,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-157",
@@ -2752,8 +2722,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-159",
@@ -2871,8 +2841,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-167",
@@ -3230,8 +3200,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-191",
@@ -3259,8 +3229,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-193",
@@ -3318,8 +3288,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-197",
@@ -3422,8 +3392,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-204",
@@ -3451,8 +3421,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-206",
@@ -3480,8 +3450,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-208",
@@ -3554,8 +3524,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-213",
@@ -3583,8 +3553,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-215",
@@ -3597,8 +3567,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-216",
@@ -3626,8 +3596,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-218",
@@ -3640,8 +3610,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-219",
@@ -3684,8 +3654,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-222",
@@ -3773,8 +3743,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-228",
@@ -4057,8 +4027,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-247",
@@ -4101,8 +4071,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-250",
@@ -4385,8 +4355,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-269",
@@ -4429,8 +4399,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-272",
@@ -4473,8 +4443,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-275",
@@ -4487,8 +4457,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-276",
@@ -4546,8 +4516,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-280",
@@ -4635,8 +4605,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-286",
@@ -4664,8 +4634,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-288",
@@ -4693,8 +4663,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-290",
@@ -4737,8 +4707,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-293",
@@ -4751,8 +4721,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-294",
@@ -4825,8 +4795,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-299",
@@ -5094,8 +5064,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-317",
@@ -5108,8 +5078,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-318",
@@ -5122,8 +5092,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-319",
@@ -5241,8 +5211,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-327",
@@ -5270,8 +5240,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-329",
@@ -5389,8 +5359,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-337",
@@ -5433,8 +5403,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-340",
@@ -5507,8 +5477,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-345",
@@ -5566,8 +5536,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-349",
@@ -5580,8 +5550,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-350",
@@ -5609,8 +5579,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-352",
@@ -5623,8 +5593,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-353",
@@ -5667,8 +5637,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-356",
@@ -5726,8 +5696,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-360",
@@ -5785,8 +5755,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-364",
@@ -5829,8 +5799,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-367",
@@ -5843,8 +5813,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-368",
@@ -6022,8 +5992,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-380",
@@ -6081,8 +6051,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-384",
@@ -6095,8 +6065,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-385",
@@ -6184,8 +6154,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-391",
@@ -6198,8 +6168,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-392",
@@ -6227,8 +6197,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-394",
@@ -6241,8 +6211,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-395",
@@ -6315,8 +6285,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-400",
@@ -6329,8 +6299,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-401",
@@ -6373,8 +6343,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-404",
@@ -6582,8 +6552,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-418",
@@ -6716,8 +6686,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-427",
@@ -6805,8 +6775,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-433",
@@ -6849,8 +6819,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-436",
@@ -6863,8 +6833,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-437",
@@ -6877,8 +6847,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-438",
@@ -6981,8 +6951,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-445",
@@ -7130,8 +7100,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-455",
@@ -7234,8 +7204,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-462",
@@ -7293,8 +7263,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-466",
@@ -7307,8 +7277,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-467",
@@ -7336,8 +7306,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-469",
@@ -7365,8 +7335,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-471",
@@ -7514,8 +7484,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-481",
@@ -7528,8 +7498,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-482",
@@ -7587,8 +7557,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-486",
@@ -7721,8 +7691,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   },
   {
     "id": "store-495",
@@ -7810,8 +7780,8 @@ function getDefaultStores() {
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
-    "color": "橙色",
-    "colorHex": "#d9531e"
+    "color": "黃色",
+    "colorHex": "#f59e0b"
   }
 ];
 }

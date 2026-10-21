@@ -17,24 +17,20 @@ if (!fs.existsSync(gasDir)) {
 // 1. 生成 gas/Code.gs (後端 Apps Script)
 // ==========================================
 const codeGsContent = `/**
- * Google Apps Script - 花蓮店家每日開關排程與地圖 Web App
+ * Google Apps Script - 花蓮店家每日開關排程與地圖 Web App (三色打卡版)
  * 支援功能：
- * 1. Google 試算表多人共同編輯、打勾控制店家「顯示/關閉」
- * 2. 每日獨立紀錄，隔天可一鍵「載入全開啟」或「載入昨天/指定日期」
- * 3. 試算表與地圖 Web App 雙向同步連動
+ * 1. 橘色改黃色 (東區綠 / 西區紅 / 非488黃)
+ * 2. 支援「紅綠同時顯示」
+ * 3. 店家即時「打卡 / 已打卡」功能與試算表同步備註
+ * 4. Google 試算表多人共同編輯、每日排程載入全開或複製前日
  */
 
-// ------------------------------------------
-// Web App 進入點 (doGet)
-// ------------------------------------------
 function doGet(e) {
   var template = HtmlService.createTemplateFromFile('Index');
   
-  // 取得目標日期（未指定則為今日 YYYY-MM-DD）
   var targetDate = (e && e.parameter && e.parameter.date) ? e.parameter.date : getTodayString();
   template.currentDate = targetDate;
   
-  // 載入該日期的店家資料與開關狀態
   var storeData = getStoresForDate(targetDate);
   template.storesJson = JSON.stringify(storeData);
   
@@ -44,9 +40,6 @@ function doGet(e) {
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
-// ------------------------------------------
-// 試算表自訂選單 (多人共同編輯與快速載入)
-// ------------------------------------------
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('🗺️ 店家地圖與每日排程')
@@ -61,9 +54,6 @@ function onOpen() {
     .addToUi();
 }
 
-// ------------------------------------------
-// 日期工具函式
-// ------------------------------------------
 function getTodayString() {
   return Utilities.formatDate(new Date(), "Asia/Taipei", "yyyy-MM-dd");
 }
@@ -74,9 +64,6 @@ function getYesterdayString(dateStr) {
   return Utilities.formatDate(d, "Asia/Taipei", "yyyy-MM-dd");
 }
 
-// ------------------------------------------
-// 取得指定日期的店家資料與開關狀態
-// ------------------------------------------
 function getStoresForDate(dateStr) {
   var defaultList = getDefaultStores();
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -85,41 +72,39 @@ function getStoresForDate(dateStr) {
   var sheet = ss.getSheetByName("當日店家清單");
   if (!sheet) return defaultList;
 
-  // 檢查試算表頂部的日期是否與查詢日期相符
   var sheetDate = String(sheet.getRange("B1").getValue()).trim();
-  
-  // 讀取當前工作表中的開關狀態
   var data = sheet.getDataRange().getValues();
   if (data.length <= 3) return defaultList;
 
-  // 若目前工作表不是該日期的資料，嘗試從歷史紀錄抓取該日期的狀態
   var hiddenStoreIds = new Set();
+  var checkedInStoreIds = new Set();
+
   if (sheetDate === dateStr) {
     for (var i = 3; i < data.length; i++) {
       var row = data[i];
       var isVisible = (row[1] === true || String(row[1]).toUpperCase() === "TRUE");
-      var storeId = row[0]; // 序號
+      var storeId = Number(row[0]);
       if (!isVisible) {
-        hiddenStoreIds.add(Number(storeId));
+        hiddenStoreIds.add(storeId);
+      }
+      var note = String(row[9] || "");
+      if (note.indexOf("已打卡") !== -1) {
+        checkedInStoreIds.add(storeId);
       }
     }
   } else {
-    // 從歷史表讀取
     hiddenStoreIds = getHiddenStoreIdsFromHistory(dateStr);
   }
 
-  // 套用狀態
   return defaultList.map(function(s, idx) {
     var num = idx + 1;
     return Object.assign({}, s, {
-      isVisible: !hiddenStoreIds.has(num)
+      isVisible: !hiddenStoreIds.has(num),
+      isCheckedIn: checkedInStoreIds.has(num)
     });
   });
 }
 
-// ------------------------------------------
-// 歷史紀錄處理函式
-// ------------------------------------------
 function getHiddenStoreIdsFromHistory(dateStr) {
   var hiddenSet = new Set();
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -145,7 +130,6 @@ function getHiddenStoreIdsFromHistory(dateStr) {
   return hiddenSet;
 }
 
-// 儲存目前試算表的狀態至歷史紀錄
 function saveCurrentStatusToHistory(customDate) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   if (!ss) return;
@@ -176,7 +160,6 @@ function saveCurrentStatusToHistory(customDate) {
     histSheet.getRange(1, 1, 1, 5).setFontWeight("bold").setBackground("#e8f0fe");
   }
 
-  // 尋找是否已有該日期的紀錄，有則更新，無則新增
   var histData = histSheet.getDataRange().getValues();
   var foundRow = -1;
   for (var j = 1; j < histData.length; j++) {
@@ -197,11 +180,6 @@ function saveCurrentStatusToHistory(customDate) {
   }
 }
 
-// ------------------------------------------
-// 核心操作：隔天載入全開 / 載入昨天 / 載入指定日期
-// ------------------------------------------
-
-// 1. 載入全開啟（全部勾選顯示）
 function loadAllActive(targetDate) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   if (!ss) throw new Error("請先在 Google 試算表中執行！");
@@ -223,12 +201,10 @@ function loadAllActive(targetDate) {
     sheet.getRange("D1").setValue("已顯示: " + numRows + " / " + numRows + " (全開啟)");
   }
 
-  // 自動同步存檔到歷史
   saveCurrentStatusToHistory(dateToSet);
   return { success: true, date: dateToSet, activeCount: numRows };
 }
 
-// 2. 載入指定日期的狀態（若為昨天，由外部傳入昨天的日期字串）
 function loadStatusFromDate(sourceDateStr, targetDateStr) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   if (!ss) throw new Error("請先在 Google 試算表中執行！");
@@ -254,38 +230,47 @@ function loadStatusFromDate(sourceDateStr, targetDateStr) {
     sheet.getRange("D1").setValue("已顯示: " + activeCount + " / " + numRows + " (來自 " + sourceDateStr + ")");
   }
 
-  // 自動同步更新今日歷史紀錄
   saveCurrentStatusToHistory(dateToSet);
   return { success: true, targetDate: dateToSet, sourceDate: sourceDateStr, activeCount: activeCount };
 }
 
 // ------------------------------------------
-// 前端 Web App 呼叫的 API（雙向同步連動）
+// API 函式：打卡、狀態連動
 // ------------------------------------------
-
-// 單點狀態更新（外勤在網頁打勾/取消，即時寫回 Sheet）
-function apiUpdateStoreStatus(storeId, isVisible) {
+function apiToggleCheckin(storeId, isCheckedIn) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    if (!ss) return { success: false, msg: "No active sheet" };
+    if (!ss) return { success: false };
 
     var sheet = ss.getSheetByName("當日店家清單");
-    if (!sheet) return { success: false, msg: "Sheet not found" };
+    if (!sheet) return { success: false };
 
-    var rowNumber = Number(storeId) + 3; // 第 4 列開始為序號 1
-    sheet.getRange(rowNumber, 2).setValue(isVisible);
-    
-    // 更新備註時間
-    var nowStr = Utilities.formatDate(new Date(), "Asia/Taipei", "HH:mm:ss");
-    sheet.getRange(rowNumber, 10).setValue("網頁更新 " + nowStr);
-
+    var rowNumber = Number(storeId) + 3;
+    var nowTime = Utilities.formatDate(new Date(), "Asia/Taipei", "HH:mm");
+    var noteVal = isCheckedIn ? ("已打卡 " + nowTime) : "";
+    sheet.getRange(rowNumber, 10).setValue(noteVal);
     return { success: true };
   } catch (err) {
     return { success: false, error: String(err) };
   }
 }
 
-// 批次狀態更新
+function apiUpdateStoreStatus(storeId, isVisible) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) return { success: false };
+
+    var sheet = ss.getSheetByName("當日店家清單");
+    if (!sheet) return { success: false };
+
+    var rowNumber = Number(storeId) + 3;
+    sheet.getRange(rowNumber, 2).setValue(isVisible);
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: String(err) };
+  }
+}
+
 function apiBatchUpdateStatus(updates) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -306,9 +291,6 @@ function apiBatchUpdateStatus(updates) {
   }
 }
 
-// ------------------------------------------
-// 試算表選單按鈕執行函式
-// ------------------------------------------
 function menuLoadAllActive() {
   var ui = SpreadsheetApp.getUi();
   var res = ui.alert("載入全開啟", "確定要將今天的店家狀態全部設為【開啟顯示】嗎？", ui.ButtonSet.YES_NO);
@@ -367,9 +349,6 @@ function openWebAppUrl() {
   ui.showModalDialog(HtmlService.createHtmlOutput(html).setWidth(420).setHeight(220), "開啟地圖網頁");
 }
 
-// ------------------------------------------
-// 一鍵建立 / 初始化 500 筆店家工作表
-// ------------------------------------------
 function setupSheetWithData() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   if (!ss) {
@@ -386,23 +365,20 @@ function setupSheetWithData() {
   var today = getTodayString();
   var stores = getDefaultStores();
 
-  // 頂部控制與日期列
   sheet.getRange("A1").setValue("📅 排程日期：").setFontWeight("bold");
   sheet.getRange("B1").setValue(today).setFontWeight("bold").setFontColor("#1a73e8").setFontSize(12);
   sheet.getRange("C1").setValue("📊 狀態統計：").setFontWeight("bold");
   sheet.getRange("D1").setValue("已顯示: " + stores.length + " / " + stores.length).setFontWeight("bold");
   sheet.getRange("E1").setValue("💡 提示：勾選/取消 B 欄可立即切換地圖顯示；透過上方選單可載入昨天或全開！").setFontColor("#5f6368");
 
-  // 表頭
-  var headers = [["序號", "顯示開關", "店名", "地址", "分組分類", "區域", "標記顏色", "緯度", "經度", "備註"]];
+  var headers = [["序號", "顯示開關", "店名", "地址", "分組分類", "區域", "標記顏色", "緯度", "經度", "備註/打卡"]];
   sheet.getRange(3, 1, 1, headers[0].length).setValues(headers);
   sheet.getRange(3, 1, 1, headers[0].length).setFontWeight("bold").setBackground("#c5221f").setFontColor("#ffffff");
 
-  // 資料列（B 欄為原生 Checkbox）
   var rows = stores.map(function(s, idx) {
     return [
       idx + 1,
-      true, // 預設全部顯示 (打勾)
+      true,
       s.name,
       s.address,
       s.subGroup,
@@ -416,31 +392,25 @@ function setupSheetWithData() {
 
   sheet.getRange(4, 1, rows.length, rows[0].length).setValues(rows);
 
-  // 在 B 欄建立漂亮的核取方塊 (Checkbox)
   var chkRange = sheet.getRange(4, 2, rows.length, 1);
   chkRange.insertCheckboxes();
 
-  // 凍結前 3 列
   sheet.setFrozenRows(3);
   sheet.setFrozenColumns(3);
 
-  // 欄寬美化
-  sheet.setColumnWidth(1, 50);  // 序號
-  sheet.setColumnWidth(2, 80);  // 顯示開關
-  sheet.setColumnWidth(3, 200); // 店名
-  sheet.setColumnWidth(4, 260); // 地址
-  sheet.setColumnWidth(5, 140); // 分組分類
+  sheet.setColumnWidth(1, 50);
+  sheet.setColumnWidth(2, 80);
+  sheet.setColumnWidth(3, 200);
+  sheet.setColumnWidth(4, 260);
+  sheet.setColumnWidth(5, 140);
+  sheet.setColumnWidth(10, 130);
 
-  // 同步初始化歷史表
   saveCurrentStatusToHistory(today);
 
   var ui = SpreadsheetApp.getUi();
-  ui.alert("初始化完成！", "已成功建立【當日店家清單】工作表！\\n\\n1. B 欄已設定為核取方塊，打勾即可開啟/關閉顯示\\n2. 點擊上方選單【🗺️ 店家地圖與每日排程】可進行隔天載入或全開\\n3. 任何人共同編輯此試算表，地圖皆可即時連動！", ui.ButtonSet.OK);
+  ui.alert("初始化完成！", "已成功建立【當日店家清單】工作表！\\n\\n1. B 欄已設定為核取方塊，打勾即可開啟/關閉顯示\\n2. 第 10 欄會自動同步手機網頁端打卡狀態\\n3. 點擊上方選單【🗺️ 店家地圖與每日排程】可進行隔天載入或全開！", ui.ButtonSet.OK);
 }
 
-// ------------------------------------------
-// 內建 500 筆資料
-// ------------------------------------------
 function getDefaultStores() {
   return STORE_DATA_PLACEHOLDER;
 }
@@ -451,11 +421,10 @@ const fullCodeGs = codeGsContent.replace(
   JSON.stringify(stores, null, 2)
 );
 fs.writeFileSync(path.join(gasDir, "Code.gs"), fullCodeGs, "utf8");
-console.log("gas/Code.gs 已成功生成！");
+console.log("gas/Code.gs 已生成！");
 
 // ==========================================
 // 2. 生成 gas/Index.html (前端 Web App)
-// 包含：頂部日期切換、隔天全開載入、複製昨天、多人共同編輯即時同步
 // ==========================================
 const eastStores = stores.filter(s => s.subGroup === "主要名單-東區");
 const westStores = stores.filter(s => s.subGroup === "主要名單-西區");
@@ -477,11 +446,11 @@ const indexHtml = `<!doctype html>
         --google-hover: #f1f3f4;
         --color-east: #2e7d32;       /* 綠色 */
         --color-west: #d32f2f;       /* 紅色 */
-        --color-diff: #e65100;       /* 橙色 */
+        --color-diff: #f59e0b;       /* 黃色/金黃色 */
         --border-color: #dadce0;
         --text-primary: #202124;
         --text-secondary: #5f6368;
-        --sidebar-width: 380px;
+        --sidebar-width: 400px;
       }
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body {
@@ -494,7 +463,6 @@ const indexHtml = `<!doctype html>
         overflow: hidden;
       }
 
-      /* 頂部 Google 我的地圖經典紅色工具列 */
       header {
         background: var(--google-red);
         color: white;
@@ -572,7 +540,6 @@ const indexHtml = `<!doctype html>
         color: var(--google-red);
       }
 
-      /* 每日排程快捷工具列 (Google Sheets 連動專用) */
       .schedule-bar {
         background: #ffffff;
         border-bottom: 1px solid var(--border-color);
@@ -623,11 +590,7 @@ const indexHtml = `<!doctype html>
         color: #137333;
         border-color: #ceead6;
       }
-      .sched-btn.action-primary:hover {
-        background: #ceead6;
-      }
 
-      /* 主版面：左側欄 + 右側地圖 */
       .layout-body {
         flex: 1;
         display: flex;
@@ -635,7 +598,6 @@ const indexHtml = `<!doctype html>
         overflow: hidden;
       }
 
-      /* 左側抽屜 / 面板 */
       .sidebar {
         width: var(--sidebar-width);
         background: white;
@@ -651,7 +613,6 @@ const indexHtml = `<!doctype html>
         transform: translateX(calc(-1 * var(--sidebar-width)));
       }
 
-      /* 統計與過濾操作區 */
       .panel-intro {
         padding: 10px 16px;
         border-bottom: 1px solid var(--border-color);
@@ -671,7 +632,7 @@ const indexHtml = `<!doctype html>
         flex-wrap: wrap;
       }
       .btn-chip {
-        padding: 3px 8px;
+        padding: 4px 8px;
         border: 1px solid var(--border-color);
         background: white;
         border-radius: 12px;
@@ -680,19 +641,25 @@ const indexHtml = `<!doctype html>
         color: var(--text-secondary);
         cursor: pointer;
         transition: all 120ms;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
       }
       .btn-chip:hover {
         background: var(--google-hover);
         color: var(--text-primary);
         border-color: #bdc1c6;
       }
-      .btn-chip.primary {
-        background: #e8f0fe;
-        color: #1a73e8;
-        border-color: #d2e3fc;
+      .btn-chip.highlight-redgreen {
+        background: #e8f5e9;
+        color: #1b5e20;
+        border-color: #a5d6a7;
+        font-weight: 700;
+      }
+      .btn-chip.highlight-redgreen:hover {
+        background: #c8e6c9;
       }
 
-      /* 搜尋列 */
       .search-box {
         padding: 8px 16px;
         border-bottom: 1px solid var(--border-color);
@@ -724,13 +691,11 @@ const indexHtml = `<!doctype html>
         display: none;
       }
 
-      /* 圖層清單（樹狀結構） */
       .layer-tree {
         flex: 1;
         overflow-y: auto;
       }
 
-      /* 單一圖層群組 */
       .layer-group {
         border-bottom: 1px solid var(--border-color);
       }
@@ -802,15 +767,14 @@ const indexHtml = `<!doctype html>
         display: block;
       }
 
-      /* 單一店家項目（支援獨立勾選） */
       .store-row {
         display: flex;
         align-items: center;
-        padding: 8px 12px 8px 24px;
+        padding: 8px 12px 8px 16px;
         border-top: 1px solid #f1f3f4;
         cursor: pointer;
         transition: background 100ms;
-        gap: 10px;
+        gap: 8px;
       }
       .store-row:hover {
         background: #f8f9fa;
@@ -853,7 +817,34 @@ const indexHtml = `<!doctype html>
         text-overflow: ellipsis;
       }
 
-      /* 側邊欄收合切換浮動按鈕 */
+      /* 打卡按鈕 */
+      .checkin-btn {
+        padding: 4px 8px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        border-radius: 4px;
+        border: 1px solid #d1d5db;
+        background: #ffffff;
+        color: #4b5563;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: all 140ms ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        user-select: none;
+      }
+      .checkin-btn:hover {
+        background: #f3f4f6;
+        border-color: #9ca3af;
+      }
+      .checkin-btn.checked-in {
+        background: #16a34a;
+        color: #ffffff;
+        border-color: #15803d;
+        box-shadow: 0 1px 3px rgba(22,163,74,0.3);
+      }
+
       .toggle-sidebar-btn {
         position: absolute;
         top: 14px;
@@ -876,14 +867,12 @@ const indexHtml = `<!doctype html>
         left: 14px;
       }
 
-      /* 右側 Leaflet 地圖容器 */
       #map {
         flex: 1;
         height: 100%;
         background: #f2efe9;
       }
 
-      /* 自訂 Google 經典水滴圖釘 Marker */
       .gmarker-wrap {
         background: transparent;
         border: none;
@@ -896,7 +885,6 @@ const indexHtml = `<!doctype html>
         transform: scale(1.2) translateY(-2px);
       }
 
-      /* Popup 美化 */
       .leaflet-popup-content-wrapper {
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.22);
@@ -906,8 +894,8 @@ const indexHtml = `<!doctype html>
       .leaflet-popup-content {
         margin: 0;
         padding: 14px 16px;
-        min-width: 240px;
-        max-width: 300px;
+        min-width: 250px;
+        max-width: 320px;
         font-family: inherit;
       }
       .pop-header {
@@ -924,7 +912,7 @@ const indexHtml = `<!doctype html>
       }
       .pop-badge.east { background: #e8f5e9; color: var(--color-east); }
       .pop-badge.west { background: #ffebee; color: var(--color-west); }
-      .pop-badge.diff { background: #fff3e0; color: var(--color-diff); }
+      .pop-badge.diff { background: #fef3c7; color: #b45309; }
 
       .pop-title {
         font-size: 1rem;
@@ -940,44 +928,58 @@ const indexHtml = `<!doctype html>
       }
       .pop-actions {
         display: flex;
-        gap: 8px;
+        gap: 6px;
+        flex-wrap: wrap;
       }
-      .pop-nav-btn {
-        flex: 1;
-        text-align: center;
+      .pop-btn {
         padding: 6px 10px;
-        background: #1a73e8;
-        color: white !important;
-        text-decoration: none;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        font-weight: 600;
-      }
-      .pop-nav-btn:hover { background: #1557b0; }
-      .pop-toggle-btn {
-        padding: 6px 10px;
-        background: #f1f3f4;
-        border: 1px solid var(--border-color);
         border-radius: 4px;
         font-size: 0.78rem;
         font-weight: 600;
         cursor: pointer;
-        color: var(--text-secondary);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .pop-btn-nav {
+        background: #1a73e8;
+        color: white !important;
+        border: none;
+        flex: 1;
+        justify-content: center;
+      }
+      .pop-btn-nav:hover { background: #1557b0; }
+      .pop-btn-checkin {
+        background: #ffffff;
+        border: 1px solid #d1d5db;
+        color: #374151;
+      }
+      .pop-btn-checkin.checked-in {
+        background: #16a34a;
+        color: white;
+        border-color: #15803d;
       }
 
-      /* 儲存中 / 同步中 Toast 提示 */
-      .sync-toast {
+      .toast {
         position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: #323232;
-        color: white;
-        padding: 10px 16px;
-        border-radius: 6px;
-        font-size: 0.82rem;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #1f2937;
+        color: #ffffff;
+        padding: 10px 18px;
+        border-radius: 20px;
+        font-size: 0.84rem;
+        font-weight: 500;
         z-index: 2000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
         display: none;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+        animation: fadeIn 150ms ease-in-out;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translate(-50%, 10px); }
+        to { opacity: 1; transform: translate(-50%, 0); }
       }
 
       @media (max-width: 768px) {
@@ -990,7 +992,6 @@ const indexHtml = `<!doctype html>
     </style>
   </head>
   <body>
-    <!-- 頂部 Google 我的地圖工具列 -->
     <header>
       <div class="header-left">
         <button class="menu-btn" id="menuToggleBtn" title="展開/收合側邊欄">
@@ -1006,13 +1007,12 @@ const indexHtml = `<!doctype html>
         </div>
       </div>
       <div class="header-right">
-        <button class="header-btn" id="btnSyncFromSheet" title="讀取 Google 試算表最新勾選狀態">
+        <button class="header-btn" id="btnSyncFromSheet" title="讀取 Google 試算表最新狀態">
           <span>🔄 同步試算表</span>
         </button>
       </div>
     </header>
 
-    <!-- 每日排程與範本快速載入列 -->
     <div class="schedule-bar">
       <div class="schedule-left">
         <span>📅 日期：</span>
@@ -1034,22 +1034,24 @@ const indexHtml = `<!doctype html>
 
     <div class="layout-body">
       <aside class="sidebar" id="sidebar">
-        <!-- 頂部資訊與快速操作按鈕 -->
         <div class="panel-intro">
           <div class="intro-meta">
             <span id="activeCountLabel">目前顯示：計算中...</span>
-            <span>以林森路+德安一街為界</span>
+            <span id="checkinStatsLabel" style="color:#16a34a;font-weight:700;">已打卡：0 家</span>
           </div>
           <div class="quick-actions">
-            <button class="btn-chip primary" id="btnShowAll">全部顯示</button>
+            <button class="btn-chip" id="btnShowAll">全部顯示</button>
             <button class="btn-chip" id="btnHideAll">全部隱藏</button>
-            <button class="btn-chip" id="btnOnlyEast">僅看東區 (綠)</button>
-            <button class="btn-chip" id="btnOnlyWest">僅看西區 (紅)</button>
-            <button class="btn-chip" id="btnOnlyDiff">僅看非488 (橙)</button>
+            <!-- 🌟 使用者指定：紅綠同時顯示 -->
+            <button class="btn-chip highlight-redgreen" id="btnShowRedGreen" title="僅顯示東區(綠)與西區(紅)，隱藏非488名單">
+              <span>🟢🔴 紅綠同時顯示</span>
+            </button>
+            <button class="btn-chip" id="btnOnlyEast">僅東區 (綠)</button>
+            <button class="btn-chip" id="btnOnlyWest">僅西區 (紅)</button>
+            <button class="btn-chip" id="btnOnlyDiff" style="color:#b45309;">僅非488 (黃)</button>
           </div>
         </div>
 
-        <!-- 搜尋輸入框 -->
         <div class="search-box">
           <div class="search-input-wrap">
             <input type="text" id="searchInput" class="search-input" placeholder="搜尋店名、路名、地址…" />
@@ -1057,7 +1059,6 @@ const indexHtml = `<!doctype html>
           </div>
         </div>
 
-        <!-- 圖層清單 -->
         <div class="layer-tree">
           <!-- 1. 東區主要名單 (綠色) -->
           <div class="layer-group expanded" id="group-east">
@@ -1087,13 +1088,13 @@ const indexHtml = `<!doctype html>
             <div class="item-list" id="list-west"></div>
           </div>
 
-          <!-- 3. 非 488 店家名單 (橙色) -->
+          <!-- 3. 非 488 店家名單 (黃色) -->
           <div class="layer-group expanded" id="group-diff">
             <div class="group-header">
               <input type="checkbox" class="group-checkbox" id="chk-group-diff" checked title="全選/取消非488名單" />
               <div class="group-icon diff"></div>
               <div class="group-title-wrap" onclick="toggleGroupExpand('group-diff')">
-                <span class="group-title">🟠 非488名單 (亮橙色標記)</span>
+                <span class="group-title">🟡 非488名單 (黃色標記)</span>
                 <span class="group-stats" id="stats-diff">計算中...</span>
               </div>
               <div class="arrow-btn" onclick="toggleGroupExpand('group-diff')">▼</div>
@@ -1103,7 +1104,6 @@ const indexHtml = `<!doctype html>
         </div>
       </aside>
 
-      <!-- 側邊欄浮動收合切換鈕 -->
       <button class="toggle-sidebar-btn" id="floatingToggleBtn">
         <span id="toggleIcon">◀</span>
         <span id="toggleText">收合清單</span>
@@ -1112,8 +1112,7 @@ const indexHtml = `<!doctype html>
       <div id="map"></div>
     </div>
 
-    <!-- 同步中提示 -->
-    <div id="syncToast" class="sync-toast">正在與 Google 試算表同步...</div>
+    <div id="toastBox" class="toast">已完成打卡！</div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
@@ -1124,14 +1123,12 @@ const indexHtml = `<!doctype html>
         stores = ${JSON.stringify(stores)};
       }
 
-      // 初始化 Leaflet 地圖
       const map = L.map('map', { zoomControl: true }).setView([23.985, 121.605], 13);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; OpenStreetMap & Google Sheets Sync'
       }).addTo(map);
 
-      // 林森路 + 德安一街分界輔助虛線
       const boundaryLine = L.polyline([
         [23.960, 121.581],
         [23.970, 121.5925],
@@ -1163,11 +1160,23 @@ const indexHtml = `<!doctype html>
 
       const iconEast = createPinIcon('#2e7d32');
       const iconWest = createPinIcon('#d32f2f');
-      const iconDiff = createPinIcon('#e65100');
+      const iconDiff = createPinIcon('#f59e0b');
 
       function getSmallPinSvg(colorHex) {
         return \`<svg class="pin-svg" viewBox="0 0 24 34" fill="none"><path d="M12 0C5.372 0 0 5.373 0 12C0 19.5 12 34 12 34C12 34 24 19.5 24 12C24 5.373 18.628 0 12 0Z" fill="\${colorHex}" stroke="#ffffff" stroke-width="1.5"/><circle cx="12" cy="11" r="4" fill="#ffffff"/></svg>\`;
       }
+
+      function showToast(text) {
+        const toast = document.getElementById('toastBox');
+        toast.textContent = text;
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 2000);
+      }
+
+      const checkinSet = new Set();
+      stores.forEach(s => {
+        if (s.isCheckedIn) checkinSet.add(s.id);
+      });
 
       const storeStates = new Map();
 
@@ -1175,14 +1184,6 @@ const indexHtml = `<!doctype html>
         return 'https://www.google.com/maps/dir/?api=1&destination=' + s.lat + ',' + s.lng;
       }
 
-      function showToast(text, duration = 2000) {
-        const t = document.getElementById('syncToast');
-        t.textContent = text;
-        t.style.display = 'block';
-        setTimeout(() => { t.style.display = 'none'; }, duration);
-      }
-
-      // 建立地圖 Marker
       stores.forEach((store, index) => {
         let icon = iconEast;
         let badgeClass = 'east';
@@ -1194,28 +1195,46 @@ const indexHtml = `<!doctype html>
         } else if (store.subGroup === '非488名單') {
           icon = iconDiff;
           badgeClass = 'diff';
-          badgeText = '🟠 非 488 名單店家';
+          badgeText = '🟡 非 488 名單店家';
         }
 
         const marker = L.marker([store.lat, store.lng], { icon: icon });
 
-        const popupDiv = document.createElement('div');
-        popupDiv.innerHTML = \`
-          <div class="pop-header">
-            <span class="pop-badge \${badgeClass}">\${badgeText}</span>
-            <span style="font-size:0.75rem;color:#888;">#\${index + 1}</span>
-          </div>
-          <div class="pop-title">\${store.name}</div>
-          <div class="pop-addr">\${store.address}\${store.estimated ? '<br/><span style="color:#b45309;font-size:11px;">※ 位置為地址估算</span>' : ''}</div>
-          <div class="pop-actions">
-            <a class="pop-nav-btn" href="\${getGoogleMapsNavUrl(store)}" target="_blank" rel="noopener">Google 導航 ↗</a>
-            <button class="pop-toggle-btn" onclick="toggleSingleStoreVisible(\${store.id}, false)">隱藏此點</button>
-          </div>
-        \`;
-        marker.bindPopup(popupDiv);
-        marker.on('click', () => highlightStoreRow(store.id));
+        function updatePopupContent() {
+          const isCheckedIn = checkinSet.has(store.id);
+          const popupDiv = document.createElement('div');
+          popupDiv.innerHTML = \`
+            <div class="pop-header">
+              <span class="pop-badge \${badgeClass}">\${badgeText}</span>
+              <span style="font-size:0.75rem;color:#888;">#\${index + 1}</span>
+            </div>
+            <div class="pop-title">\${store.name}</div>
+            <div class="pop-addr">\${store.address}\${store.estimated ? '<br/><span style="color:#b45309;font-size:11px;">※ 位置為地址估算</span>' : ''}</div>
+            <div class="pop-actions">
+              <a class="pop-btn pop-btn-nav" href="\${getGoogleMapsNavUrl(store)}" target="_blank" rel="noopener">Google 導航 ↗</a>
+              <button class="pop-btn pop-btn-checkin \${isCheckedIn ? 'checked-in' : ''}" id="pop-checkin-\${store.id}">
+                \${isCheckedIn ? '✅ 已打卡' : '📍 打卡'}
+              </button>
+            </div>
+          \`;
 
-        // 判斷預設是否顯示 (若資料有 isVisible 則遵循，否則預設 true)
+          const btn = popupDiv.querySelector('#pop-checkin-' + store.id);
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleCheckin(store.id);
+            updatePopupContent();
+            marker.setPopupContent(popupDiv);
+          });
+
+          return popupDiv;
+        }
+
+        marker.bindPopup(updatePopupContent());
+        marker.on('click', () => {
+          marker.setPopupContent(updatePopupContent());
+          highlightStoreRow(store.id);
+        });
+
         const isInitiallyVisible = (store.isVisible !== undefined) ? store.isVisible : true;
         if (isInitiallyVisible) {
           marker.addTo(map);
@@ -1226,11 +1245,11 @@ const indexHtml = `<!doctype html>
           marker,
           isVisible: isInitiallyVisible,
           rowElement: null,
-          chkElement: null
+          chkElement: null,
+          checkinBtn: null
         });
       });
 
-      // 渲染左側店家列表清單（帶獨立 Checkbox）
       const listEast = document.getElementById('list-east');
       const listWest = document.getElementById('list-west');
       const listDiff = document.getElementById('list-diff');
@@ -1241,7 +1260,8 @@ const indexHtml = `<!doctype html>
         row.className = 'store-row' + (state.isVisible ? '' : ' disabled');
         row.id = 'store-row-' + store.id;
 
-        const pinColor = store.subGroup === '主要名單-東區' ? '#2e7d32' : (store.subGroup === '主要名單-西區' ? '#d32f2f' : '#e65100');
+        const pinColor = store.subGroup === '主要名單-東區' ? '#2e7d32' : (store.subGroup === '主要名單-西區' ? '#d32f2f' : '#f59e0b');
+        const isCheckedIn = checkinSet.has(store.id);
 
         row.innerHTML = \`
           <input type="checkbox" class="item-checkbox" id="chk-store-\${store.id}" \${state.isVisible ? 'checked' : ''} />
@@ -1250,15 +1270,25 @@ const indexHtml = `<!doctype html>
             <div class="store-name-text" title="\${store.name}">\${index + 1}. \${store.name}</div>
             <div class="store-addr-text" title="\${store.address}">\${store.address}</div>
           </div>
+          <button class="checkin-btn \${isCheckedIn ? 'checked-in' : ''}" id="btn-chk-\${store.id}" title="點擊打卡">
+            \${isCheckedIn ? '✅ 已打卡' : '📍 打卡'}
+          </button>
         \`;
 
         const chk = row.querySelector('.item-checkbox');
+        const btnCheckin = row.querySelector('#btn-chk-' + store.id);
         state.rowElement = row;
         state.chkElement = chk;
+        state.checkinBtn = btnCheckin;
 
         chk.addEventListener('click', (e) => {
           e.stopPropagation();
           setStoreVisibility(store.id, chk.checked, true);
+        });
+
+        btnCheckin.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleCheckin(store.id);
         });
 
         row.addEventListener('click', () => {
@@ -1274,7 +1304,39 @@ const indexHtml = `<!doctype html>
         }
       });
 
-      // 設定單一店家的顯示 / 隱藏狀態（syncToSheet: 是否透過 GAS 寫回 Google Sheet）
+      function toggleCheckin(storeId) {
+        const state = storeStates.get(storeId);
+        if (!state) return;
+
+        let isNowCheckedIn = false;
+        if (checkinSet.has(storeId)) {
+          checkinSet.delete(storeId);
+          state.checkinBtn.classList.remove('checked-in');
+          state.checkinBtn.innerHTML = '📍 打卡';
+          showToast('已取消【' + state.store.name + '】打卡');
+          isNowCheckedIn = false;
+        } else {
+          checkinSet.add(storeId);
+          state.checkinBtn.classList.add('checked-in');
+          state.checkinBtn.innerHTML = '✅ 已打卡';
+          showToast('✅ 已完成【' + state.store.name + '】打卡！');
+          isNowCheckedIn = true;
+        }
+
+        updateCheckinStats();
+
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          google.script.run.apiToggleCheckin(storeId, isNowCheckedIn);
+        }
+      }
+
+      function updateCheckinStats() {
+        const label = document.getElementById('checkinStatsLabel');
+        if (label) {
+          label.textContent = '已打卡：' + checkinSet.size + ' 家';
+        }
+      }
+
       function setStoreVisibility(storeId, isVisible, syncToSheet = false) {
         const state = storeStates.get(storeId);
         if (!state) return;
@@ -1290,20 +1352,10 @@ const indexHtml = `<!doctype html>
         updateGroupCheckboxes();
         updateStats();
 
-        // 寫回 Google Sheet
         if (syncToSheet && typeof google !== 'undefined' && google.script && google.script.run) {
-          showToast('正在同步至 Google 試算表...', 1200);
           google.script.run.apiUpdateStoreStatus(storeId, isVisible);
         }
       }
-
-      window.toggleSingleStoreVisible = function(storeId, forceState) {
-        const state = storeStates.get(storeId);
-        if (state) {
-          const next = forceState !== undefined ? forceState : !state.isVisible;
-          setStoreVisibility(storeId, next, true);
-        }
-      };
 
       function focusStoreOnMap(storeId) {
         const state = storeStates.get(storeId);
@@ -1348,7 +1400,6 @@ const indexHtml = `<!doctype html>
         updateStats();
 
         if (typeof google !== 'undefined' && google.script && google.script.run) {
-          showToast('正在批次儲存至試算表...', 1500);
           google.script.run.apiBatchUpdateStatus(updates);
         }
       }
@@ -1395,13 +1446,27 @@ const indexHtml = `<!doctype html>
         document.getElementById('activeCountLabel').textContent = \`目前顯示：\${visibleCount} / \${stores.length} 處店家\`;
       }
 
-      // 快捷篩選
       document.getElementById('btnShowAll').addEventListener('click', () => {
         stores.forEach(s => setStoreVisibility(s.id, true));
       });
       document.getElementById('btnHideAll').addEventListener('click', () => {
         stores.forEach(s => setStoreVisibility(s.id, false));
       });
+
+      // 🌟 使用者指定：紅綠同時顯示
+      document.getElementById('btnShowRedGreen').addEventListener('click', () => {
+        const updates = [];
+        stores.forEach(s => {
+          const isRedOrGreen = (s.subGroup === '主要名單-東區' || s.subGroup === '主要名單-西區');
+          setStoreVisibility(s.id, isRedOrGreen);
+          updates.push({ id: s.id, isVisible: isRedOrGreen });
+        });
+        showToast('已切換為：🟢🔴 紅綠主要名單同時顯示 (388筆)');
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          google.script.run.apiBatchUpdateStatus(updates);
+        }
+      });
+
       document.getElementById('btnOnlyEast').addEventListener('click', () => {
         stores.forEach(s => setStoreVisibility(s.id, s.subGroup === '主要名單-東區'));
       });
@@ -1412,9 +1477,6 @@ const indexHtml = `<!doctype html>
         stores.forEach(s => setStoreVisibility(s.id, s.subGroup === '非488名單'));
       });
 
-      // ----------------------------------------------------
-      // 隔天載入全開啟 / 載入昨天 / 載入指定日期按鈕事件
-      // ----------------------------------------------------
       document.getElementById('btnLoadAllOpen').addEventListener('click', () => {
         if (!confirm('確定要將今天的所有店家設為【全部開啟顯示】嗎？')) return;
         showToast('正在載入全開啟並同步至試算表...', 2000);
@@ -1515,10 +1577,11 @@ const indexHtml = `<!doctype html>
 
       updateGroupCheckboxes();
       updateStats();
+      updateCheckinStats();
     </script>
   </body>
 </html>
 `;
 
 fs.writeFileSync(path.join(gasDir, "Index.html"), indexHtml, "utf8");
-console.log("gas/Index.html 已成功生成！");
+console.log("gas/Index.html 已成功生成 (含紅綠同時顯示、黃色標記、打卡功能)！");

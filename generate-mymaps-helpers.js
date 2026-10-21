@@ -92,15 +92,15 @@ const westKml = buildSingleKml(
 fs.writeFileSync(path.join(__dirname, "hualien_west_red.kml"), westKml, "utf8");
 fs.writeFileSync(path.join(__dirname, "dist", "hualien_west_red.kml"), westKml, "utf8");
 
-// 🟠 非 488 店家 (112 筆 - 橙色)
+// 🟡 非 488 店家 (112 筆 - 黃色)
 const diffKml = buildSingleKml(
   diffStores,
-  `🟠 非488名單 (${diffStores.length}筆 - 橙色標記)`,
-  "ff1e60e6",
-  "http://maps.google.com/mapfiles/kml/paddle/orange-blank.png",
-  "🟠 非 488 名單店家"
+  `🟡 非488名單 (${diffStores.length}筆 - 黃色標記)`,
+  "ff14c8f5",
+  "http://maps.google.com/mapfiles/kml/paddle/ylw-blank.png",
+  "🟡 非 488 名單店家"
 );
-fs.writeFileSync(path.join(__dirname, "hualien_diff_orange.kml"), diffKml, "utf8");
-fs.writeFileSync(path.join(__dirname, "dist", "hualien_diff_orange.kml"), diffKml, "utf8");
+fs.writeFileSync(path.join(__dirname, "hualien_diff_yellow.kml"), diffKml, "utf8");
+fs.writeFileSync(path.join(__dirname, "dist", "hualien_diff_yellow.kml"), diffKml, "utf8");
 
 console.log("3 個獨立分區 KML 檔案已生成！");

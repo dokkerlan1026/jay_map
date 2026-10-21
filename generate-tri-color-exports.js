@@ -46,8 +46,8 @@ const diffStores = nonPrimaryStores.map(s => ({
   ...s,
   subGroup: "非488名單",
   region: "非488店家",
-  color: "橙色",
-  colorHex: "#d9531e"
+  color: "黃色",
+  colorHex: "#f59e0b"
 }));
 
 // 依原本 id 順序重新組合完整 500 筆
@@ -58,7 +58,7 @@ const updatedStores = stores.map(s => fullStoresMap.get(s.id));
 console.log("=== 分組結果 ===");
 console.log(`- 🟢 主要名單-東區 (界線以東，綠色): ${eastStores.length} 筆`);
 console.log(`- 🔴 主要名單-西區 (界線以西，紅色): ${westStores.length} 筆`);
-console.log(`- 🟠 非 488 名單店家 (亮橙色): ${diffStores.length} 筆`);
+console.log(`- 🟡 非 488 名單店家 (黃色): ${diffStores.length} 筆`);
 console.log(`- 總計: ${updatedStores.length} 筆`);
 
 // 1. 寫回 large_stores.json
@@ -113,14 +113,14 @@ const westPlacemarks = updatedStores
 const diffPlacemarks = updatedStores
   .map((s, idx) => ({ s, idx }))
   .filter(({ s }) => s.subGroup === "非488名單")
-  .map(({ s, idx }) => makePlacemark(s, idx, "style-diff-orange", "🟠 非 488 名單店家"))
+  .map(({ s, idx }) => makePlacemark(s, idx, "style-diff-yellow", "🟡 非 488 名單店家"))
   .join("\n");
 
 const kmlContent = `<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>花蓮店家地圖 (東區綠色 / 西區紅色 / 非488橙色 - 共 ${updatedStores.length} 筆)</name>
-    <description>界線以東：綠色標記 (${eastStores.length} 筆)；界線以西：紅色標記 (${westStores.length} 筆)；非488名單：橙色標記 (${diffStores.length} 筆)</description>
+    <name>花蓮店家地圖 (東區綠色 / 西區紅色 / 非488黃色 - 共 ${updatedStores.length} 筆)</name>
+    <description>界線以東：綠色標記 (${eastStores.length} 筆)；界線以西：紅色標記 (${westStores.length} 筆)；非488名單：黃色標記 (${diffStores.length} 筆)</description>
     
     <!-- 樣式1: 主要東區 (綠色圖標) -->
     <Style id="style-east-green">
@@ -144,13 +144,13 @@ const kmlContent = `<?xml version="1.0" encoding="UTF-8"?>
       </IconStyle>
     </Style>
 
-    <!-- 樣式3: 非 488 店家 (橙色圖標) -->
-    <Style id="style-diff-orange">
+    <!-- 樣式3: 非 488 店家 (黃色圖標) -->
+    <Style id="style-diff-yellow">
       <IconStyle>
-        <color>ff1e60e6</color>
-        <scale>1.25</scale>
+        <color>ff14c8f5</color>
+        <scale>1.2</scale>
         <Icon>
-          <href>http://maps.google.com/mapfiles/ms/icons/orange-dot.png</href>
+          <href>http://maps.google.com/mapfiles/ms/icons/yellow-dot.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -166,7 +166,7 @@ ${westPlacemarks}
     </Folder>
 
     <Folder>
-      <name>🟠 非 488 名單店家 (${diffStores.length} 筆 - 橙色標記)</name>
+      <name>🟡 非 488 名單店家 (${diffStores.length} 筆 - 黃色標記)</name>
 ${diffPlacemarks}
     </Folder>
 

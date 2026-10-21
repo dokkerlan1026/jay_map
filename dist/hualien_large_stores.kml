@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>花蓮店家地圖 (東區綠色 / 西區紅色 / 非488橙色 - 共 500 筆)</name>
-    <description>界線以東：綠色標記 (194 筆)；界線以西：紅色標記 (194 筆)；非488名單：橙色標記 (112 筆)</description>
+    <name>花蓮店家地圖 (東區綠色 / 西區紅色 / 非488黃色 - 共 500 筆)</name>
+    <description>界線以東：綠色標記 (194 筆)；界線以西：紅色標記 (194 筆)；非488名單：黃色標記 (112 筆)</description>
     
     <!-- 樣式1: 主要東區 (綠色圖標) -->
     <Style id="style-east-green">
@@ -26,13 +26,13 @@
       </IconStyle>
     </Style>
 
-    <!-- 樣式3: 非 488 店家 (橙色圖標) -->
-    <Style id="style-diff-orange">
+    <!-- 樣式3: 非 488 店家 (黃色圖標) -->
+    <Style id="style-diff-yellow">
       <IconStyle>
-        <color>ff1e60e6</color>
-        <scale>1.25</scale>
+        <color>ff14c8f5</color>
+        <scale>1.2</scale>
         <Icon>
-          <href>http://maps.google.com/mapfiles/ms/icons/orange-dot.png</href>
+          <href>http://maps.google.com/mapfiles/ms/icons/yellow-dot.png</href>
         </Icon>
       </IconStyle>
     </Style>
@@ -5866,17 +5866,17 @@
     </Folder>
 
     <Folder>
-      <name>🟠 非 488 名單店家 (112 筆 - 橙色標記)</name>
+      <name>🟡 非 488 名單店家 (112 筆 - 黃色標記)</name>
       <Placemark>
         <name><![CDATA[5. 廣隆進企業有限公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉中原路82號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉中原路82號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[廣隆進企業有限公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉中原路82號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.60324,23.964778,0</coordinates>
@@ -5884,14 +5884,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[19. 劉銓二手車行]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉自強路418-1號旁<br/>※ 位置為地址估算]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉自強路418-1號旁<br/>※ 位置為地址估算]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[劉銓二手車行]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉自強路418-1號旁]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.58961,23.983558,0</coordinates>
@@ -5899,14 +5899,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[20. 陸德環保有限公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉自強路471號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉自強路471號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[陸德環保有限公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉自強路471號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.590493,23.985029,0</coordinates>
@@ -5914,14 +5914,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[21. 陸德環保有限公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉自強路471號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉自強路471號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[陸德環保有限公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉自強路471號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.590493,23.985029,0</coordinates>
@@ -5929,14 +5929,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[23. 台新銀行ATM花蓮統冠超市自強]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉自強路532號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉自強路532號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[台新銀行ATM花蓮統冠超市自強]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉自強路532號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.592203,23.98685,0</coordinates>
@@ -5944,14 +5944,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[24. 統冠超商－自強店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉自強路532號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉自強路532號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[統冠超商－自強店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉自強路532號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.592203,23.98685,0</coordinates>
@@ -5959,14 +5959,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[28. 吳秀娟營業所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉自強路590號1樓]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉自強路590號1樓]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[吳秀娟營業所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉自強路590號1樓]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.592985,23.987694,0</coordinates>
@@ -5974,14 +5974,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[29. 上和不動產]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉和平路1段116號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉和平路1段116號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[上和不動產]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉和平路1段116號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.590329,23.982601,0</coordinates>
@@ -5989,14 +5989,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[31. 凱娜汽車美研社通報]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉和平路1段149號1樓]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉和平路1段149號1樓]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[凱娜汽車美研社通報]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉和平路1段149號1樓]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.589428,23.982771,0</coordinates>
@@ -6004,14 +6004,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[32. 凱娜汽車美研社]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉和平路1段149號1樓]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉和平路1段149號1樓]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[凱娜汽車美研社]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉和平路1段149號1樓]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.589428,23.982771,0</coordinates>
@@ -6019,14 +6019,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[38. 大樹藥局花蓮吉安加盟店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉建國路1段137之1號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉建國路1段137之1號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[大樹藥局花蓮吉安加盟店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉建國路1段137之1號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.591431,23.985742,0</coordinates>
@@ -6034,14 +6034,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[40. 富利餐飲必勝客吉安店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉建國路1段138號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉建國路1段138號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[富利餐飲必勝客吉安店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉建國路1段138號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.591803,23.985969,0</coordinates>
@@ -6049,14 +6049,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[41. 小天下電腦]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉建國路1段144號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉建國路1段144號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[小天下電腦]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉建國路1段144號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.5911,23.986185,0</coordinates>
@@ -6064,14 +6064,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[42. 銓來旺彩券行]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣吉安鄉建國路1段149號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣吉安鄉建國路1段149號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[銓來旺彩券行]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣吉安鄉建國路1段149號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.590843,23.985947,0</coordinates>
@@ -6079,14 +6079,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[57. 普客二四花蓮三民街]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市三民街1號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市三民街1號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[普客二四花蓮三民街]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市三民街1號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.610994,23.977502,0</coordinates>
@@ -6094,14 +6094,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[67. 吳明株營業所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市大禹街50號1.2樓]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市大禹街50號1.2樓]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[吳明株營業所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市大禹街50號1.2樓]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.608305,23.977107,0</coordinates>
@@ -6109,14 +6109,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[73. 釗聖體育用品有限公司花蓮分公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路171、173、175號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路171、173、175號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[釗聖體育用品有限公司花蓮分公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路171、173、175號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.609711,23.976459,0</coordinates>
@@ -6124,14 +6124,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[75. 大樹醫藥花蓮中山直營店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路192號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路192號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[大樹醫藥花蓮中山直營店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路192號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.608287,23.97859,0</coordinates>
@@ -6139,14 +6139,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[77. 科訊工坊花蓮店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路207號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路207號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[科訊工坊花蓮店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路207號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.608946,23.977411,0</coordinates>
@@ -6154,14 +6154,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[78. Snapshot花蓮店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路207號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路207號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[Snapshot花蓮店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路207號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.608946,23.977411,0</coordinates>
@@ -6169,14 +6169,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[81. 陳宏瑋營業所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路253號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路253號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[陳宏瑋營業所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路253號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.608079,23.978482,0</coordinates>
@@ -6184,14 +6184,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[84. 俞碧玲營業所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路301號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路301號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[俞碧玲營業所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路301號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.607265,23.979529,0</coordinates>
@@ -6199,14 +6199,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[86. 科林國際助聽器花蓮中山門市]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路315號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路315號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[科林國際助聽器花蓮中山門市]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路315號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.606937,23.979965,0</coordinates>
@@ -6214,14 +6214,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[92. 百悅休閒飯店有限公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路361號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路361號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[百悅休閒飯店有限公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路361號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.605926,23.981226,0</coordinates>
@@ -6229,14 +6229,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[97. 張慧蘭營業所WeMe]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路372號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路372號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[張慧蘭營業所WeMe]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路372號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.604955,23.982862,0</coordinates>
@@ -6244,14 +6244,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[100. 聯爵廣告代銷中山路383號]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路383號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路383號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[聯爵廣告代銷中山路383號]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路383號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.605464,23.981866,0</coordinates>
@@ -6259,14 +6259,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[102. 全球當鋪]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路408-7號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路408-7號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[全球當鋪]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路408-7號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.604438,23.98402,0</coordinates>
@@ -6274,14 +6274,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[112. 許庭崧-串串門子鴛鴦火鍋]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路434號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路434號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[許庭崧-串串門子鴛鴦火鍋]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路434號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.601003,23.988086,0</coordinates>
@@ -6289,14 +6289,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[120. 翹宇宙有限公司中山店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路48.50號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路48.50號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[翹宇宙有限公司中山店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路48.50號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.611771,23.974133,0</coordinates>
@@ -6304,14 +6304,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[121. 鍾思瑀營業所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路50號(E73、E74攤位）<br/>※ 位置為地址估算]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路50號(E73、E74攤位）<br/>※ 位置為地址估算]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[鍾思瑀營業所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路50號(E73、E74攤位）]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.611724,23.97419,0</coordinates>
@@ -6319,14 +6319,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[122. 政大書城公司花蓮分公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路547-2號3樓]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路547-2號3樓]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[政大書城公司花蓮分公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路547-2號3樓]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.601811,23.986502,0</coordinates>
@@ -6334,14 +6334,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[127. 台新銀行ATM丁丁藥局花蓮店內部]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路553號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中山路553號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[台新銀行ATM丁丁藥局花蓮店內部]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中山路553號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.600927,23.987607,0</coordinates>
@@ -6349,14 +6349,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[132. 劉財來營業所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路10號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路10號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[劉財來營業所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路10號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.610115,23.978944,0</coordinates>
@@ -6364,14 +6364,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[133. 大樹醫藥花蓮中正直營店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路123號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路123號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[大樹醫藥花蓮中正直營店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路123號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.597319,23.9708,0</coordinates>
@@ -6379,14 +6379,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[142. 中正華廈速食店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路231號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路231號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[中正華廈速食店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路231號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.61028,24.02451,0</coordinates>
@@ -6394,14 +6394,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[148. 全國電子08020花蓮中正店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路359.361.363號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路359.361.363號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[全國電子08020花蓮中正店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路359.361.363號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.602409,23.97413,0</coordinates>
@@ -6409,14 +6409,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[149. 五州中醫診所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路380號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路380號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[五州中醫診所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路380號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.603421,23.974493,0</coordinates>
@@ -6424,14 +6424,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[154. 職牛商號]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路474號2、3樓]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路474號2、3樓]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[職牛商號]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路474號2、3樓]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.606436,23.976479,0</coordinates>
@@ -6439,14 +6439,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[156. 黛安芬直營花蓮中正店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路499號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路499號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[黛安芬直營花蓮中正店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路499號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.606157,23.97657,0</coordinates>
@@ -6454,14 +6454,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[158. 德誼數位科技花蓮店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路511號1樓及3樓]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路511號1樓及3樓]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[德誼數位科技花蓮店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路511號1樓及3樓]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.606404,23.976733,0</coordinates>
@@ -6469,14 +6469,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[166. 金珍時尚珠寶]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路562-1號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路562-1號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[金珍時尚珠寶]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路562-1號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.609086,23.978098,0</coordinates>
@@ -6484,14 +6484,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[190. 嘉豐健康廚房]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路76號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中正路76號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[嘉豐健康廚房]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中正路76號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.596212,23.969758,0</coordinates>
@@ -6499,14 +6499,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[192. 馥邑京華大廈管理委員會]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中和街207號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中和街207號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[馥邑京華大廈管理委員會]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中和街207號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.59813,23.974469,0</coordinates>
@@ -6514,14 +6514,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[196. 賴桑海鮮有限公司倉庫]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中原路575號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中原路575號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[賴桑海鮮有限公司倉庫]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中原路575號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.595452,23.973208,0</coordinates>
@@ -6529,14 +6529,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[203. 林千仕營業所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路104號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路104號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[林千仕營業所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路104號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.604751,23.975779,0</coordinates>
@@ -6544,14 +6544,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[205. 雅婷智慧股份有限公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路144號第19棟<br/>※ 位置為地址估算]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路144號第19棟<br/>※ 位置為地址估算]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[雅婷智慧股份有限公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路144號第19棟]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.604534,23.975833,0</coordinates>
@@ -6559,14 +6559,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[207. 陳韻琳營業所-娃娃機商店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路18、20號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路18、20號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[陳韻琳營業所-娃娃機商店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路18、20號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.60883,23.97634,0</coordinates>
@@ -6574,14 +6574,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[212. 陳韻琳-娃娃機]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路264之三號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路264之三號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[陳韻琳-娃娃機]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路264之三號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.60044,23.97554,0</coordinates>
@@ -6589,14 +6589,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[214. 瀧寅醉居]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路289號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路289號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[瀧寅醉居]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路289號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.599662,23.975003,0</coordinates>
@@ -6604,14 +6604,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[215. 印地安那服飾店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路32號1樓]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路32號1樓]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[印地安那服飾店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路32號1樓]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.60833,23.97644,0</coordinates>
@@ -6619,14 +6619,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[217. Sammi空間髮藝]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路366號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路366號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[Sammi空間髮藝]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路366號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.59601,23.97501,0</coordinates>
@@ -6634,14 +6634,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[218. 新橋管理顧問有限公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路39號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路39號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[新橋管理顧問有限公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路39號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.60898,23.97603,0</coordinates>
@@ -6649,14 +6649,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[221. 林秀香富美便當]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路435-3號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路435-3號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[林秀香富美便當]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路435-3號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.592834,23.974339,0</coordinates>
@@ -6664,14 +6664,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[227. 禾美建設有限公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路498巷1弄13號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市中華路498巷1弄13號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[禾美建設有限公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市中華路498巷1弄13號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.591166,23.974755,0</coordinates>
@@ -6679,14 +6679,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[246. 台灣銀行ATM反偵測花蓮分行]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市公園路3號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市公園路3號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[台灣銀行ATM反偵測花蓮分行]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市公園路3號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.610664,23.976996,0</coordinates>
@@ -6694,14 +6694,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[249. 林子芹營業所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市民國路103之2號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市民國路103之2號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[林子芹營業所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市民國路103之2號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.605184,23.978665,0</coordinates>
@@ -6709,14 +6709,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[268. 郭香韻公館]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市成功街225號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市成功街225號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[郭香韻公館]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市成功街225號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.607705,23.974556,0</coordinates>
@@ -6724,14 +6724,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[271. 楊淑芬公館]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市自立路148巷70號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市自立路148巷70號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[楊淑芬公館]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市自立路148巷70號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.596418,23.987933,0</coordinates>
@@ -6739,14 +6739,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[274. 鑫饕寶炭烤鍋物]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市和平路302-1號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市和平路302-1號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[鑫饕寶炭烤鍋物]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市和平路302-1號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.604576,23.97279,0</coordinates>
@@ -6754,14 +6754,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[275. 朱美雪鍋物]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市和平路307號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市和平路307號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[朱美雪鍋物]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市和平路307號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.604285,23.972753,0</coordinates>
@@ -6769,14 +6769,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[279. 大同綜合訊電和平門市]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市和平路415號(417號)]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市和平路415號(417號)]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[大同綜合訊電和平門市]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市和平路415號(417號)]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.602409,23.974991,0</coordinates>
@@ -6784,14 +6784,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[285. 動吃動循環工作室]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市和平路79號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市和平路79號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[動吃動循環工作室]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市和平路79號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.607343,23.968829,0</coordinates>
@@ -6799,14 +6799,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[287. 崧煌工程行張哲維公館]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市延平街210號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市延平街210號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[崧煌工程行張哲維公館]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市延平街210號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.597787,23.985962,0</coordinates>
@@ -6814,14 +6814,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[289. 重慶南北雜貨店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市忠孝街2號旁<br/>※ 位置為地址估算]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市忠孝街2號旁<br/>※ 位置為地址估算]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[重慶南北雜貨店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市忠孝街2號旁]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.608191,23.972152,0</coordinates>
@@ -6829,14 +6829,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[292. 明正不動產有限公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市明心街1-28號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市明心街1-28號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[明正不動產有限公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市明心街1-28號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.606603,23.985338,0</coordinates>
@@ -6844,14 +6844,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[293. 台新銀行ATM花蓮城中OK超商]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市明心街1之18號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市明心街1之18號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[台新銀行ATM花蓮城中OK超商]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市明心街1之18號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.606207,23.985168,0</coordinates>
@@ -6859,14 +6859,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[298. 花蔬生鮮超市供應中心]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市明智街13號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市明智街13號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[花蔬生鮮超市供應中心]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市明智街13號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.602809,23.984103,0</coordinates>
@@ -6874,14 +6874,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[316. Mia藝術美甲]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市明義街61-1號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市明義街61-1號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[Mia藝術美甲]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市明義街61-1號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.609568,23.971291,0</coordinates>
@@ -6889,14 +6889,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[317. 林郡淵-營業所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市明禮路109號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市明禮路109號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[林郡淵-營業所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市明禮路109號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.607258,23.983729,0</coordinates>
@@ -6904,14 +6904,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[318. 款款廚藝有限公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市明禮路22-2號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市明禮路22-2號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[款款廚藝有限公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市明禮路22-2號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.608368,23.982615,0</coordinates>
@@ -6919,14 +6919,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[326. 台灣大哥大花蓮林森直營店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市林森路157號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市林森路157號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[台灣大哥大花蓮林森直營店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市林森路157號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.599716,23.977807,0</coordinates>
@@ -6934,14 +6934,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[328. 曾琇瑛公館]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市林森路167號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市林森路167號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[曾琇瑛公館]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市林森路167號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.599921,23.977932,0</coordinates>
@@ -6949,14 +6949,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[336. 台灣銀行ATM反偵測北花蓮分行]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市林森路281號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市林森路281號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[台灣銀行ATM反偵測北花蓮分行]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市林森路281號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.60224,23.97962,0</coordinates>
@@ -6964,14 +6964,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[339. 大同綜合訊電花蓮林森展售中心]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市林森路317號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市林森路317號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[大同綜合訊電花蓮林森展售中心]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市林森路317號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.603645,23.980363,0</coordinates>
@@ -6979,14 +6979,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[344. 永旭室內裝修有限公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市林森路77號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市林森路77號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[永旭室內裝修有限公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市林森路77號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.597604,23.976323,0</coordinates>
@@ -6994,14 +6994,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[348. 穆心儀公館]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市信義街21巷2號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市信義街21巷2號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[穆心儀公館]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市信義街21巷2號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.604823,23.973114,0</coordinates>
@@ -7009,14 +7009,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[349. 勇鉅輪胎商行]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市信義街32號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市信義街32號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[勇鉅輪胎商行]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市信義街32號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.604734,23.973842,0</coordinates>
@@ -7024,14 +7024,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[351. 台電電源開發處東部水文管理站]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市南京街125號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市南京街125號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[台電電源開發處東部水文管理站]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市南京街125號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.604606,23.973525,0</coordinates>
@@ -7039,14 +7039,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[352. 陳威廷營業所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市南京街302號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市南京街302號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[陳威廷營業所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市南京街302號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.607554,23.975294,0</coordinates>
@@ -7054,14 +7054,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[355. 亭停車花蓮中山營業所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市建中街68號對面空地停車場<br/>※ 位置為地址估算]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市建中街68號對面空地停車場<br/>※ 位置為地址估算]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[亭停車花蓮中山營業所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市建中街68號對面空地停車場]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.601643,23.986592,0</coordinates>
@@ -7069,14 +7069,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[359. 莫非廚房]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市建國路105號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市建國路105號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[莫非廚房]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市建國路105號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.602711,23.983481,0</coordinates>
@@ -7084,14 +7084,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[363. 萬達寵物花蓮建國店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市建國路168號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市建國路168號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[萬達寵物花蓮建國店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市建國路168號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.601632,23.983975,0</coordinates>
@@ -7099,14 +7099,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[366. 曾欣玉不動產有限公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市建國路1段129號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市建國路1段129號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[曾欣玉不動產有限公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市建國路1段129號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.591782,23.985532,0</coordinates>
@@ -7114,14 +7114,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[367. 禾太食品有限公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市建國路1段53之3號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市建國路1段53之3號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[禾太食品有限公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市建國路1段53之3號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.594926,23.984966,0</coordinates>
@@ -7129,14 +7129,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[379. 李永康公館]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市重慶路89號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市重慶路89號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[李永康公館]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市重慶路89號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.600563,23.967119,0</coordinates>
@@ -7144,14 +7144,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[383. 台灣銀行ATM反偵測健保局]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市軒轅路36號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市軒轅路36號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[台灣銀行ATM反偵測健保局]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市軒轅路36號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.612048,23.976552,0</coordinates>
@@ -7159,14 +7159,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[384. 衫溫暖洗衣店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市軒轅路7號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市軒轅路7號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[衫溫暖洗衣店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市軒轅路7號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.611575,23.974742,0</coordinates>
@@ -7174,14 +7174,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[390. 藶峰有限公司火車站右機車停車場]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國民段466、476、477-2、483地號<br/>※ 位置為地址估算]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國民段466、476、477-2、483地號<br/>※ 位置為地址估算]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[藶峰有限公司火車站右機車停車場]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國民段466、476、477-2、483地號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.6034,23.9926,0</coordinates>
@@ -7189,14 +7189,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[391. 藶峰有限公司火車站左汽車停車場]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國民段483-2地號<br/>※ 位置為地址估算]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國民段483-2地號<br/>※ 位置為地址估算]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[藶峰有限公司火車站左汽車停車場]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國民段483-2地號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.6034,23.9926,0</coordinates>
@@ -7204,14 +7204,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[393. 啟業餐飲文化企業社]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國風街22號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國風街22號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[啟業餐飲文化企業社]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國風街22號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.59779,23.977453,0</coordinates>
@@ -7219,14 +7219,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[394. 賴炤霖國風自助洗衣店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國風街23號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國風街23號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[賴炤霖國風自助洗衣店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國風街23號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.59777,23.97722,0</coordinates>
@@ -7234,14 +7234,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[399. 劉莉淳公館]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國興一街129號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國興一街129號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[劉莉淳公館]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國興一街129號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.604321,23.996368,0</coordinates>
@@ -7249,14 +7249,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[400. 集福行]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國興一街300號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國興一街300號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[集福行]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國興一街300號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.607259,24.000819,0</coordinates>
@@ -7264,14 +7264,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[403. 朝瓏展示天地]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國興二街21號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國興二街21號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[朝瓏展示天地]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國興二街21號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.604212,23.992515,0</coordinates>
@@ -7279,14 +7279,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[417. 新光產物保險花蓮分公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯一路34號7樓]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯一路34號7樓]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[新光產物保險花蓮分公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國聯一路34號7樓]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.603904,23.99383,0</coordinates>
@@ -7294,14 +7294,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[426. 和運租車花蓮站]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯一路69號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯一路69號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[和運租車花蓮站]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國聯一路69號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.60332,23.99186,0</coordinates>
@@ -7309,14 +7309,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[432. 台灣松下銷售股份有限公司花蓮處]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯二路153號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯二路153號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[台灣松下銷售股份有限公司花蓮處]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國聯二路153號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.601954,23.988368,0</coordinates>
@@ -7324,14 +7324,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[435. 灶咖餐廳]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯二路70-1號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯二路70-1號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[灶咖餐廳]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國聯二路70-1號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.603039,23.990015,0</coordinates>
@@ -7339,14 +7339,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[436. 許永銳營業所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯二路81號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯二路81號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[許永銳營業所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國聯二路81號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.603267,23.989709,0</coordinates>
@@ -7354,14 +7354,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[437. 家豐家居生活館]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯二路90號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯二路90號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[家豐家居生活館]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國聯二路90號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.602751,23.989646,0</coordinates>
@@ -7369,14 +7369,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[444. 豐眼鏡]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯五路44號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯五路44號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[豐眼鏡]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國聯五路44號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.605995,23.989953,0</coordinates>
@@ -7384,14 +7384,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[454. 廖治德營業所(秀泰影城B1)]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯五路69號B1]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市國聯五路69號B1]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[廖治德營業所(秀泰影城B1)]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市國聯五路69號B1]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.605345,23.99087,0</coordinates>
@@ -7399,14 +7399,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[461. 小村日壽司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市博愛街175號(平信)]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市博愛街175號(平信)]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[小村日壽司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市博愛街175號(平信)]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.607166,23.976268,0</coordinates>
@@ -7414,14 +7414,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[465. 聯登物業有限公司]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市富國段富國一小段4地號<br/>※ 位置為地址估算]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市富國段富國一小段4地號<br/>※ 位置為地址估算]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[聯登物業有限公司]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市富國段富國一小段4地號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.5995,23.9938,0</coordinates>
@@ -7429,14 +7429,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[466. 藶峰-站前]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市富國段富國一小段7號地號<br/>※ 位置為地址估算]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市富國段富國一小段7號地號<br/>※ 位置為地址估算]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[藶峰-站前]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市富國段富國一小段7號地號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.5995,23.9938,0</coordinates>
@@ -7444,14 +7444,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[468. 花蓮一信復興分社]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市復興街17號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市復興街17號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[花蓮一信復興分社]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市復興街17號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.611033,23.97608,0</coordinates>
@@ -7459,14 +7459,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[470. 林木田聯合地政士事務所]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市復興街96-1號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市復興街96-1號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[林木田聯合地政士事務所]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市復興街96-1號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.606945,23.981501,0</coordinates>
@@ -7474,14 +7474,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[480. Morni莫尼早餐花蓮新港店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市新港街13號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市新港街13號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[Morni莫尼早餐花蓮新港店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市新港街13號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.607586,23.97794,0</coordinates>
@@ -7489,14 +7489,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[481. 李翼丞-娃娃機新港店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市新港街41號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市新港街41號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[李翼丞-娃娃機新港店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市新港街41號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.607096,23.978527,0</coordinates>
@@ -7504,14 +7504,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[485. 日月亭停車場花蓮節約街]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市節約街83號對面<br/>※ 位置為地址估算]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市節約街83號對面<br/>※ 位置為地址估算]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[日月亭停車場花蓮節約街]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市節約街83號對面]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.609605,23.980238,0</coordinates>
@@ -7519,14 +7519,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[494. 陳民宏公館]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市廣東街210號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市廣東街210號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[陳民宏公館]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市廣東街210號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.606668,23.971812,0</coordinates>
@@ -7534,14 +7534,14 @@
       </Placemark>
       <Placemark>
         <name><![CDATA[500. 陳雨晞早安山丘花市和平店]]></name>
-        <description><![CDATA[【🟠 非 488 名單店家】<br/>地址：花蓮縣花蓮市鎮國街1號]]></description>
-        <styleUrl>#style-diff-orange</styleUrl>
+        <description><![CDATA[【🟡 非 488 名單店家】<br/>地址：花蓮縣花蓮市鎮國街1號]]></description>
+        <styleUrl>#style-diff-yellow</styleUrl>
         <ExtendedData>
           <Data name="店名"><value><![CDATA[陳雨晞早安山丘花市和平店]]></value></Data>
           <Data name="地址"><value><![CDATA[花蓮縣花蓮市鎮國街1號]]></value></Data>
           <Data name="分區"><value><![CDATA[非488名單]]></value></Data>
           <Data name="區域"><value><![CDATA[非488店家]]></value></Data>
-          <Data name="標記顏色"><value><![CDATA[橙色]]></value></Data>
+          <Data name="標記顏色"><value><![CDATA[黃色]]></value></Data>
         </ExtendedData>
         <Point>
           <coordinates>121.601568,23.976137,0</coordinates>
