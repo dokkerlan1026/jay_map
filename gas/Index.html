@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>jay的地圖 - 花蓮店家地圖</title>
+    <title>jay的地圖 - 花蓮店家每日排程地圖</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -40,7 +40,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 16px;
+        gap: 12px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         z-index: 1000;
         flex-shrink: 0;
@@ -76,16 +76,92 @@
         align-items: center;
         gap: 8px;
       }
-      .brand-sub {
-        font-size: 0.75rem;
-        opacity: 0.88;
-      }
-      .gas-badge {
-        font-size: 0.7rem;
-        background: rgba(255,255,255,0.25);
+      .date-badge {
+        font-size: 0.76rem;
+        background: #ffffff;
+        color: var(--google-red);
         padding: 2px 8px;
-        border-radius: 10px;
+        border-radius: 12px;
+        font-weight: 800;
+      }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .header-btn {
+        background: rgba(255,255,255,0.18);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 6px 10px;
+        border-radius: 4px;
+        font-size: 0.78rem;
         font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        transition: all 140ms ease;
+      }
+      .header-btn:hover {
+        background: white;
+        color: var(--google-red);
+      }
+
+      /* 每日排程快捷工具列 (Google Sheets 連動專用) */
+      .schedule-bar {
+        background: #ffffff;
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-size: 0.82rem;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      }
+      .schedule-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .date-input {
+        padding: 4px 8px;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        font-size: 0.82rem;
+        font-family: inherit;
+        outline: none;
+      }
+      .sched-btn {
+        padding: 5px 10px;
+        border: 1px solid var(--border-color);
+        background: #f8f9fa;
+        border-radius: 4px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        cursor: pointer;
+        color: var(--text-primary);
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: all 120ms;
+      }
+      .sched-btn:hover {
+        background: #e8f0fe;
+        color: #1a73e8;
+        border-color: #d2e3fc;
+      }
+      .sched-btn.action-primary {
+        background: #e6f4ea;
+        color: #137333;
+        border-color: #ceead6;
+      }
+      .sched-btn.action-primary:hover {
+        background: #ceead6;
       }
 
       /* 主版面：左側欄 + 右側地圖 */
@@ -112,14 +188,14 @@
         transform: translateX(calc(-1 * var(--sidebar-width)));
       }
 
-      /* 地圖資訊與快速操作區 */
+      /* 統計與過濾操作區 */
       .panel-intro {
-        padding: 12px 16px;
+        padding: 10px 16px;
         border-bottom: 1px solid var(--border-color);
         background: #fafafa;
       }
       .intro-meta {
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         color: var(--text-secondary);
         display: flex;
         align-items: center;
@@ -128,15 +204,15 @@
       }
       .quick-actions {
         display: flex;
-        gap: 6px;
+        gap: 4px;
         flex-wrap: wrap;
       }
       .btn-chip {
-        padding: 4px 8px;
+        padding: 3px 8px;
         border: 1px solid var(--border-color);
         background: white;
-        border-radius: 14px;
-        font-size: 0.74rem;
+        border-radius: 12px;
+        font-size: 0.72rem;
         font-weight: 600;
         color: var(--text-secondary);
         cursor: pointer;
@@ -155,7 +231,7 @@
 
       /* 搜尋列 */
       .search-box {
-        padding: 8px 16px 12px;
+        padding: 8px 16px;
         border-bottom: 1px solid var(--border-color);
         background: #ffffff;
       }
@@ -166,13 +242,12 @@
       }
       .search-input {
         width: 100%;
-        padding: 8px 32px 8px 10px;
+        padding: 7px 30px 7px 10px;
         border: 1px solid var(--border-color);
         border-radius: 6px;
-        font-size: 0.88rem;
+        font-size: 0.86rem;
         font-family: inherit;
         outline: none;
-        transition: border-color 150ms;
       }
       .search-input:focus { border-color: #1a73e8; }
       .search-clear {
@@ -192,7 +267,7 @@
         overflow-y: auto;
       }
 
-      /* 單一圖層群組（東區 / 西區 / 非488） */
+      /* 單一圖層群組 */
       .layer-group {
         border-bottom: 1px solid var(--border-color);
       }
@@ -231,7 +306,7 @@
         flex-direction: column;
       }
       .group-title {
-        font-size: 0.92rem;
+        font-size: 0.9rem;
         font-weight: 700;
         color: var(--text-primary);
         display: flex;
@@ -256,7 +331,6 @@
         transform: rotate(180deg);
       }
 
-      /* 群組底下的店家列表 */
       .item-list {
         display: none;
         background: #ffffff;
@@ -282,7 +356,7 @@
         background: #e8f0fe;
       }
       .store-row.disabled {
-        opacity: 0.45;
+        opacity: 0.42;
       }
       .item-checkbox {
         width: 16px;
@@ -316,7 +390,7 @@
         text-overflow: ellipsis;
       }
 
-      /* 側邊欄收合展開切換浮動按鈕 */
+      /* 側邊欄收合切換浮動按鈕 */
       .toggle-sidebar-btn {
         position: absolute;
         top: 14px;
@@ -337,9 +411,6 @@
       }
       .sidebar.collapsed ~ .toggle-sidebar-btn {
         left: 14px;
-      }
-      .toggle-sidebar-btn:hover {
-        background: #f1f3f4;
       }
 
       /* 右側 Leaflet 地圖容器 */
@@ -362,7 +433,7 @@
         transform: scale(1.2) translateY(-2px);
       }
 
-      /* Leaflet Popup 美化 */
+      /* Popup 美化 */
       .leaflet-popup-content-wrapper {
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.22);
@@ -430,17 +501,33 @@
         cursor: pointer;
         color: var(--text-secondary);
       }
-      .pop-toggle-btn:hover { background: #e8eaed; color: var(--text-primary); }
+
+      /* 儲存中 / 同步中 Toast 提示 */
+      .sync-toast {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #323232;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 6px;
+        font-size: 0.82rem;
+        z-index: 2000;
+        display: none;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+      }
 
       @media (max-width: 768px) {
         .layout-body { flex-direction: column-reverse; }
         .sidebar { width: 100%; height: 50vh; }
         #map { width: 100%; height: 50vh; }
         .toggle-sidebar-btn { display: none; }
+        .schedule-bar { font-size: 0.75rem; }
       }
     </style>
   </head>
   <body>
+    <!-- 頂部 Google 我的地圖工具列 -->
     <header>
       <div class="header-left">
         <button class="menu-btn" id="menuToggleBtn" title="展開/收合側邊欄">
@@ -451,19 +538,43 @@
         <div class="brand-box">
           <div class="brand-title">
             <span>jay的地圖</span>
-            <span class="gas-badge">Google Apps Script Web App</span>
+            <span class="date-badge" id="headerDateLabel"><?= currentDate ?></span>
           </div>
-          <div class="brand-sub">花蓮店家地圖 (東區綠色 / 西區紅色 / 非488橙色)</div>
         </div>
       </div>
+      <div class="header-right">
+        <button class="header-btn" id="btnSyncFromSheet" title="讀取 Google 試算表最新勾選狀態">
+          <span>🔄 同步試算表</span>
+        </button>
+      </div>
     </header>
+
+    <!-- 每日排程與範本快速載入列 -->
+    <div class="schedule-bar">
+      <div class="schedule-left">
+        <span>📅 日期：</span>
+        <input type="date" id="dateSelector" class="date-input" value="<?= currentDate ?>" />
+        <button class="sched-btn action-primary" id="btnLoadAllOpen" title="隔天快速載入全部打勾開啟">
+          <span>☀️ 載入全開啟</span>
+        </button>
+        <button class="sched-btn" id="btnLoadYesterday" title="複製昨天的開關狀態到今天">
+          <span>📋 載入昨天的設定</span>
+        </button>
+        <button class="sched-btn" id="btnLoadCustom" title="載入選取日期的歷史設定">
+          <span>📅 載入所選日期</span>
+        </button>
+      </div>
+      <div style="color:var(--text-secondary);font-size:0.75rem;">
+        <span>💡 共同編輯：在試算表打勾，地圖自動同步！</span>
+      </div>
+    </div>
 
     <div class="layout-body">
       <aside class="sidebar" id="sidebar">
         <!-- 頂部資訊與快速操作按鈕 -->
         <div class="panel-intro">
           <div class="intro-meta">
-            <span id="activeCountLabel">目前顯示：載入中...</span>
+            <span id="activeCountLabel">目前顯示：計算中...</span>
             <span>以林森路+德安一街為界</span>
           </div>
           <div class="quick-actions">
@@ -538,9 +649,11 @@
       <div id="map"></div>
     </div>
 
+    <!-- 同步中提示 -->
+    <div id="syncToast" class="sync-toast">正在與 Google 試算表同步...</div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-      // 從 Apps Script 後端樣板注入資料，或 Fallback 預設資料
       let stores = [];
       try {
         stores = JSON.parse(<?= storesJson ?>);
@@ -552,7 +665,7 @@
       const map = L.map('map', { zoomControl: true }).setView([23.985, 121.605], 13);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '&copy; OpenStreetMap & Google My Maps Style'
+        attribution: '&copy; OpenStreetMap & Google Sheets Sync'
       }).addTo(map);
 
       // 林森路 + 德安一街分界輔助虛線
@@ -569,7 +682,6 @@
       }).addTo(map);
       boundaryLine.bindTooltip('← 界線以西 (西區紅) ｜ 林森路+德安一街分界 ｜ 界線以東 (東區綠) →', { sticky: true });
 
-      // 水滴型 SVG Marker 生成函式
       function createPinIcon(colorHex) {
         const svg = `
           <svg class="gmarker-svg" width="22" height="30" viewBox="0 0 24 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -586,9 +698,9 @@
         });
       }
 
-      const iconEast = createPinIcon('#2e7d32'); // 綠色
-      const iconWest = createPinIcon('#d32f2f'); // 紅色
-      const iconDiff = createPinIcon('#e65100'); // 橙色
+      const iconEast = createPinIcon('#2e7d32');
+      const iconWest = createPinIcon('#d32f2f');
+      const iconDiff = createPinIcon('#e65100');
 
       function getSmallPinSvg(colorHex) {
         return `<svg class="pin-svg" viewBox="0 0 24 34" fill="none"><path d="M12 0C5.372 0 0 5.373 0 12C0 19.5 12 34 12 34C12 34 24 19.5 24 12C24 5.373 18.628 0 12 0Z" fill="${colorHex}" stroke="#ffffff" stroke-width="1.5"/><circle cx="12" cy="11" r="4" fill="#ffffff"/></svg>`;
@@ -600,7 +712,14 @@
         return 'https://www.google.com/maps/dir/?api=1&destination=' + s.lat + ',' + s.lng;
       }
 
-      // 建立地圖 Marker 與彈出視窗
+      function showToast(text, duration = 2000) {
+        const t = document.getElementById('syncToast');
+        t.textContent = text;
+        t.style.display = 'block';
+        setTimeout(() => { t.style.display = 'none'; }, duration);
+      }
+
+      // 建立地圖 Marker
       stores.forEach((store, index) => {
         let icon = iconEast;
         let badgeClass = 'east';
@@ -632,18 +751,23 @@
         `;
         marker.bindPopup(popupDiv);
         marker.on('click', () => highlightStoreRow(store.id));
-        marker.addTo(map);
+
+        // 判斷預設是否顯示 (若資料有 isVisible 則遵循，否則預設 true)
+        const isInitiallyVisible = (store.isVisible !== undefined) ? store.isVisible : true;
+        if (isInitiallyVisible) {
+          marker.addTo(map);
+        }
 
         storeStates.set(store.id, {
           store,
           marker,
-          isVisible: true,
+          isVisible: isInitiallyVisible,
           rowElement: null,
           chkElement: null
         });
       });
 
-      // 渲染左側店家列表清單
+      // 渲染左側店家列表清單（帶獨立 Checkbox）
       const listEast = document.getElementById('list-east');
       const listWest = document.getElementById('list-west');
       const listDiff = document.getElementById('list-diff');
@@ -651,13 +775,13 @@
       stores.forEach((store, index) => {
         const state = storeStates.get(store.id);
         const row = document.createElement('div');
-        row.className = 'store-row';
+        row.className = 'store-row' + (state.isVisible ? '' : ' disabled');
         row.id = 'store-row-' + store.id;
 
         const pinColor = store.subGroup === '主要名單-東區' ? '#2e7d32' : (store.subGroup === '主要名單-西區' ? '#d32f2f' : '#e65100');
 
         row.innerHTML = `
-          <input type="checkbox" class="item-checkbox" id="chk-store-${store.id}" checked />
+          <input type="checkbox" class="item-checkbox" id="chk-store-${store.id}" ${state.isVisible ? 'checked' : ''} />
           ${getSmallPinSvg(pinColor)}
           <div class="store-info">
             <div class="store-name-text" title="${store.name}">${index + 1}. ${store.name}</div>
@@ -671,7 +795,7 @@
 
         chk.addEventListener('click', (e) => {
           e.stopPropagation();
-          setStoreVisibility(store.id, chk.checked);
+          setStoreVisibility(store.id, chk.checked, true);
         });
 
         row.addEventListener('click', () => {
@@ -687,7 +811,8 @@
         }
       });
 
-      function setStoreVisibility(storeId, isVisible) {
+      // 設定單一店家的顯示 / 隱藏狀態（syncToSheet: 是否透過 GAS 寫回 Google Sheet）
+      function setStoreVisibility(storeId, isVisible, syncToSheet = false) {
         const state = storeStates.get(storeId);
         if (!state) return;
         state.isVisible = isVisible;
@@ -701,13 +826,19 @@
         }
         updateGroupCheckboxes();
         updateStats();
+
+        // 寫回 Google Sheet
+        if (syncToSheet && typeof google !== 'undefined' && google.script && google.script.run) {
+          showToast('正在同步至 Google 試算表...', 1200);
+          google.script.run.apiUpdateStoreStatus(storeId, isVisible);
+        }
       }
 
       window.toggleSingleStoreVisible = function(storeId, forceState) {
         const state = storeStates.get(storeId);
         if (state) {
           const next = forceState !== undefined ? forceState : !state.isVisible;
-          setStoreVisibility(storeId, next);
+          setStoreVisibility(storeId, next, true);
         }
       };
 
@@ -715,7 +846,7 @@
         const state = storeStates.get(storeId);
         if (!state) return;
         if (!state.isVisible) {
-          setStoreVisibility(storeId, true);
+          setStoreVisibility(storeId, true, true);
         }
         map.flyTo([state.store.lat, state.store.lng], 16, { duration: 0.5 });
         state.marker.openPopup();
@@ -736,6 +867,7 @@
       }
 
       function setGroupVisibility(groupName, isVisible) {
+        const updates = [];
         stores.filter(s => s.subGroup === groupName).forEach(s => {
           const state = storeStates.get(s.id);
           state.isVisible = isVisible;
@@ -747,9 +879,15 @@
             map.removeLayer(state.marker);
             state.rowElement.classList.add('disabled');
           }
+          updates.push({ id: s.id, isVisible: isVisible });
         });
         updateGroupCheckboxes();
         updateStats();
+
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          showToast('正在批次儲存至試算表...', 1500);
+          google.script.run.apiBatchUpdateStatus(updates);
+        }
       }
 
       const chkGroupEast = document.getElementById('chk-group-east');
@@ -794,6 +932,7 @@
         document.getElementById('activeCountLabel').textContent = `目前顯示：${visibleCount} / ${stores.length} 處店家`;
       }
 
+      // 快捷篩選
       document.getElementById('btnShowAll').addEventListener('click', () => {
         stores.forEach(s => setStoreVisibility(s.id, true));
       });
@@ -808,6 +947,60 @@
       });
       document.getElementById('btnOnlyDiff').addEventListener('click', () => {
         stores.forEach(s => setStoreVisibility(s.id, s.subGroup === '非488名單'));
+      });
+
+      // ----------------------------------------------------
+      // 隔天載入全開啟 / 載入昨天 / 載入指定日期按鈕事件
+      // ----------------------------------------------------
+      document.getElementById('btnLoadAllOpen').addEventListener('click', () => {
+        if (!confirm('確定要將今天的所有店家設為【全部開啟顯示】嗎？')) return;
+        showToast('正在載入全開啟並同步至試算表...', 2000);
+        stores.forEach(s => setStoreVisibility(s.id, true));
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          google.script.run.withSuccessHandler(() => {
+            showToast('已成功載入全開啟！', 1800);
+          }).loadAllActive();
+        }
+      });
+
+      document.getElementById('btnLoadYesterday').addEventListener('click', () => {
+        if (!confirm('確定要載入【昨天的開關設定】到今天嗎？')) return;
+        showToast('正在讀取昨日設定...', 2500);
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          const today = document.getElementById('dateSelector').value;
+          const yesterdayDate = new Date(today);
+          yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+          const yStr = yesterdayDate.toISOString().slice(0, 10);
+
+          google.script.run.withSuccessHandler((res) => {
+            alert('已成功載入昨日（' + res.sourceDate + '）的開關設定！目前開啟：' + res.activeCount + ' 家');
+            location.reload();
+          }).loadStatusFromDate(yStr, today);
+        } else {
+          alert('請在 Google Apps Script 發佈環境下執行！');
+        }
+      });
+
+      document.getElementById('btnLoadCustom').addEventListener('click', () => {
+        const chosenDate = document.getElementById('dateSelector').value;
+        if (!chosenDate) {
+          alert('請先選擇日期！');
+          return;
+        }
+        if (confirm('確定要載入指定日期【' + chosenDate + '】的開關設定嗎？')) {
+          showToast('正在載入指定日期設定...', 2500);
+          if (typeof google !== 'undefined' && google.script && google.script.run) {
+            google.script.run.withSuccessHandler((res) => {
+              alert('已成功載入 ' + chosenDate + ' 的開關設定！目前開啟：' + res.activeCount + ' 家');
+              location.reload();
+            }).loadStatusFromDate(chosenDate, chosenDate);
+          }
+        }
+      });
+
+      document.getElementById('btnSyncFromSheet').addEventListener('click', () => {
+        showToast('重新載入最新狀態...', 1200);
+        location.reload();
       });
 
       window.toggleGroupExpand = function(groupId) {
