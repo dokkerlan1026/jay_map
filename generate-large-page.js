@@ -7,16 +7,17 @@ const __dirname = path.dirname(__filename);
 
 const jsonPath = path.join(__dirname, "large_stores.json");
 const stores = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
-const primaryCount = stores.filter(s => s.isPrimary488).length;
-const diffCount = stores.filter(s => !s.isPrimary488).length;
+const eastCount = stores.filter(s => s.subGroup === "主要名單-東區").length;
+const westCount = stores.filter(s => s.subGroup === "主要名單-西區").length;
+const diffCount = stores.filter(s => s.subGroup === "非488名單").length;
 
 const html = `<!doctype html>
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="花蓮市與吉安鄉共 ${stores.length} 筆店家大規模互動地圖，支援雙色標記（主要488 vs 非488名單）、即時搜尋、群聚檢視與 Google Maps 導航。" />
-    <title>花蓮店家地圖 (雙色標記 - 共 ${stores.length} 筆)</title>
+    <meta name="description" content="花蓮市與吉安鄉共 ${stores.length} 筆店家三色分區互動地圖：主要名單拆為東區（綠色 194 筆）、西區（紅色 194 筆），非 488 名單（亮橙色 112 筆），支援即時搜尋與導航。" />
+    <title>花蓮店家地圖 (東區綠色 / 西區紅色 / 非488橙色 - 共 ${stores.length} 筆)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -29,9 +30,9 @@ const html = `<!doctype html>
         --ink-soft: #526760;
         --paper: #f8f5ee;
         --card: #ffffff;
-        --accent: #e6613e;
-        --accent-dark: #b84324;
+        --accent: #257a4e;
         --primary-green: #257a4e;
+        --primary-red: #dc2626;
         --diff-orange: #d9531e;
         --line: #ded7c8;
         --mint: #e8f0ec;
@@ -132,17 +133,17 @@ const html = `<!doctype html>
         outline: none;
         transition: border-color 160ms ease;
       }
-      .search-input:focus { border-color: var(--accent); }
+      .search-input:focus { border-color: var(--primary-green); }
       .filter-tabs {
-        display: flex;
-        gap: 6px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4px;
         margin-top: 10px;
       }
       .filter-tab {
-        flex: 1;
         text-align: center;
-        padding: 6px 4px;
-        font-size: 0.76rem;
+        padding: 6px 2px;
+        font-size: 0.72rem;
         font-weight: 700;
         border-radius: 6px;
         cursor: pointer;
@@ -150,19 +151,29 @@ const html = `<!doctype html>
         background: white;
         color: var(--ink-soft);
         transition: all 140ms ease;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .filter-tab.active {
         background: var(--ink);
         color: white;
         border-color: var(--ink);
       }
+      .filter-tab.tab-east.active {
+        background: var(--primary-green);
+        border-color: var(--primary-green);
+        color: white;
+      }
+      .filter-tab.tab-west.active {
+        background: var(--primary-red);
+        border-color: var(--primary-red);
+        color: white;
+      }
       .filter-tab.tab-diff.active {
         background: var(--diff-orange);
         border-color: var(--diff-orange);
-      }
-      .filter-tab.tab-primary.active {
-        background: var(--primary-green);
-        border-color: var(--primary-green);
+        color: white;
       }
       .filter-stats {
         margin-top: 8px;
@@ -185,13 +196,19 @@ const html = `<!doctype html>
         background: #f4efe4;
       }
       .store-item.active {
-        border-left: 4px solid var(--accent);
+        border-left: 4px solid var(--ink);
       }
       .store-item.is-diff {
         background: #fff8f5;
       }
       .store-item.is-diff:hover, .store-item.is-diff.active {
         background: #fdeee7;
+      }
+      .store-item.is-west:hover, .store-item.is-west.active {
+        background: #fef2f2;
+      }
+      .store-item.is-east:hover, .store-item.is-east.active {
+        background: #f0fdf4;
       }
       .item-header {
         display: flex;
@@ -216,9 +233,15 @@ const html = `<!doctype html>
         padding: 2px 6px;
         border-radius: 4px;
       }
-      .badge-primary {
+      .badge-east {
         background: #e4f3ea;
         color: var(--primary-green);
+        border: 1px solid #bbf0d0;
+      }
+      .badge-west {
+        background: #fee2e2;
+        color: var(--primary-red);
+        border: 1px solid #fecaca;
       }
       .badge-diff {
         background: #fdeee7;
@@ -243,7 +266,7 @@ const html = `<!doctype html>
       }
       .nav-link {
         font-size: 0.78rem;
-        color: var(--accent-dark);
+        color: #2563eb;
         text-decoration: none;
         font-weight: 700;
       }
@@ -261,7 +284,8 @@ const html = `<!doctype html>
         border-radius: 4px;
         margin-bottom: 4px;
       }
-      .popup-group.primary { background: #e4f3ea; color: var(--primary-green); }
+      .popup-group.east { background: #e4f3ea; color: var(--primary-green); }
+      .popup-group.west { background: #fee2e2; color: var(--primary-red); }
       .popup-group.diff { background: #fdeee7; color: var(--diff-orange); }
       .popup-title { font-weight: 700; font-size: 0.96rem; margin-bottom: 4px; color: var(--ink); }
       .popup-addr { font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 8px; }
@@ -276,7 +300,7 @@ const html = `<!doctype html>
         text-decoration: none;
       }
 
-      /* 自訂雙色標記樣式 */
+      /* 自訂三色標記樣式 */
       .custom-pin {
         width: 14px;
         height: 14px;
@@ -284,8 +308,17 @@ const html = `<!doctype html>
         border: 2px solid white;
         box-shadow: 0 0 4px rgba(0,0,0,0.4);
       }
-      .custom-pin.pin-primary { background: var(--primary-green); }
+      .custom-pin.pin-east {
+        background: var(--primary-green);
+        box-shadow: 0 0 5px rgba(37,122,78,0.7);
+      }
+      .custom-pin.pin-west {
+        background: var(--primary-red);
+        box-shadow: 0 0 5px rgba(220,38,38,0.7);
+      }
       .custom-pin.pin-diff {
+        width: 16px;
+        height: 16px;
         background: var(--diff-orange);
         border: 2px solid #ffffff;
         box-shadow: 0 0 6px rgba(217,83,30,0.8);
@@ -302,14 +335,14 @@ const html = `<!doctype html>
   <body>
     <header>
       <div class="brand-title">
-        <span>花蓮店家地圖 (雙色標記)</span>
+        <span>花蓮店家地圖 (三色分區版)</span>
         <span class="badge-count">全收錄 ${stores.length} 筆</span>
       </div>
       <div class="header-actions">
-        <a href="./hualien_large_stores.kml" download="hualien_large_stores.kml" class="btn btn-primary" title="可直接匯入 Google 我的地圖（包含雙色與雙資料夾）">
-          <span>↓ 匯出 Google 地圖 (KML 雙色版)</span>
+        <a href="./hualien_large_stores.kml" download="hualien_large_stores.kml" class="btn btn-primary" title="可直接匯入 Google 我的地圖（包含三組獨立資料夾與東綠/西紅/非橙圖標）">
+          <span>↓ 匯出 Google 地圖 (KML 三色版)</span>
         </a>
-        <a href="./hualien_large_stores.csv" download="hualien_large_stores.csv" class="btn" title="下載 CSV 試算表（含分組欄位）">
+        <a href="./hualien_large_stores.csv" download="hualien_large_stores.csv" class="btn" title="下載 CSV 試算表（含分組與區域欄位）">
           <span>↓ 匯出 CSV</span>
         </a>
         <a href="./index.html" class="btn" title="切換回精選示範路線規劃">
@@ -323,13 +356,14 @@ const html = `<!doctype html>
         <div class="search-bar">
           <input type="text" id="searchInput" class="search-input" placeholder="搜尋店名、道路名稱、號碼…" />
           <div class="filter-tabs">
-            <button class="filter-tab active" data-filter="all">全部 (${stores.length})</button>
-            <button class="filter-tab tab-primary" data-filter="primary">🟢 主要488名單 (${primaryCount})</button>
-            <button class="filter-tab tab-diff" data-filter="diff">🟠 非488名單 (${diffCount})</button>
+            <button class="filter-tab active" data-filter="all" title="全部店家">全部 (${stores.length})</button>
+            <button class="filter-tab tab-east" data-filter="east" title="界線以東主要名單">🟢 東區 (${eastCount})</button>
+            <button class="filter-tab tab-west" data-filter="west" title="界線以西主要名單">🔴 西區 (${westCount})</button>
+            <button class="filter-tab tab-diff" data-filter="diff" title="非 488 名單店家">🟠 非488 (${diffCount})</button>
           </div>
           <div class="filter-stats">
             <span id="resultCount">顯示 ${stores.length} / ${stores.length} 筆</span>
-            <span>點擊卡片聚焦標記</span>
+            <span>以林森路+德安一街為界</span>
           </div>
         </div>
         <div id="storeList" class="store-list-wrap"></div>
@@ -348,6 +382,20 @@ const html = `<!doctype html>
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
 
+      // 繪製林森路 + 德安一街分界線輔助視覺
+      const boundaryLine = L.polyline([
+        [23.960, 121.581],
+        [23.970, 121.5925],
+        [23.983, 121.6070],
+        [23.995, 121.620]
+      ], {
+        color: '#4b5563',
+        weight: 2,
+        dashArray: '6, 6',
+        opacity: 0.55
+      }).addTo(map);
+      boundaryLine.bindTooltip('← 界線以西 (紅) ｜ 林森路+德安一街分界線 ｜ 界線以東 (綠) →', { sticky: true });
+
       const clusterGroup = L.markerClusterGroup({
         maxClusterRadius: 40,
         spiderfyOnMaxZoom: true,
@@ -355,9 +403,16 @@ const html = `<!doctype html>
         zoomToBoundsOnClick: true
       });
 
-      const primaryIcon = L.divIcon({
+      const eastIcon = L.divIcon({
         className: '',
-        html: '<div class="custom-pin pin-primary"></div>',
+        html: '<div class="custom-pin pin-east"></div>',
+        iconSize: [14, 14],
+        iconAnchor: [7, 7]
+      });
+
+      const westIcon = L.divIcon({
+        className: '',
+        html: '<div class="custom-pin pin-west"></div>',
         iconSize: [14, 14],
         iconAnchor: [7, 7]
       });
@@ -377,12 +432,17 @@ const html = `<!doctype html>
       }
 
       stores.forEach((store, index) => {
-        const icon = store.isPrimary488 ? primaryIcon : diffIcon;
-        const marker = L.marker([store.lat, store.lng], { icon: icon });
+        let icon = eastIcon;
+        let groupTag = '<span class="popup-group east">🟢 主要名單 - 界線以東</span>';
+        if (store.subGroup === '主要名單-西區') {
+          icon = westIcon;
+          groupTag = '<span class="popup-group west">🔴 主要名單 - 界線以西</span>';
+        } else if (store.subGroup === '非488名單') {
+          icon = diffIcon;
+          groupTag = '<span class="popup-group diff">🟠 非 488 名單店家</span>';
+        }
 
-        const groupTag = store.isPrimary488 
-          ? '<span class="popup-group primary">主要 488 名單</span>' 
-          : '<span class="popup-group diff">★ 非 488 名單 (另色標記)</span>';
+        const marker = L.marker([store.lat, store.lng], { icon: icon });
 
         const popupContent = document.createElement('div');
         popupContent.innerHTML = 
@@ -440,8 +500,9 @@ const html = `<!doctype html>
       function getFilteredStores() {
         const query = searchInput.value.trim().toLowerCase();
         return stores.filter(s => {
-          if (activeFilter === 'primary' && !s.isPrimary488) return false;
-          if (activeFilter === 'diff' && s.isPrimary488) return false;
+          if (activeFilter === 'east' && s.subGroup !== '主要名單-東區') return false;
+          if (activeFilter === 'west' && s.subGroup !== '主要名單-西區') return false;
+          if (activeFilter === 'diff' && s.subGroup !== '非488名單') return false;
           if (!query) return true;
           return s.name.toLowerCase().includes(query) || s.address.toLowerCase().includes(query);
         });
@@ -455,13 +516,18 @@ const html = `<!doctype html>
         filtered.forEach((store) => {
           const originalIndex = stores.findIndex(s => s.id === store.id);
           const el = document.createElement('div');
-          el.className = 'store-item' + 
-            (store.isPrimary488 ? '' : ' is-diff') + 
-            (store.id === currentActiveId ? ' active' : '');
+          
+          let groupClass = ' is-east';
+          let badgeHtml = '<span class="badge-tag badge-east">🟢 東區</span>';
+          if (store.subGroup === '主要名單-西區') {
+            groupClass = ' is-west';
+            badgeHtml = '<span class="badge-tag badge-west">🔴 西區</span>';
+          } else if (store.subGroup === '非488名單') {
+            groupClass = ' is-diff';
+            badgeHtml = '<span class="badge-tag badge-diff">🟠 非488</span>';
+          }
 
-          const badgeHtml = store.isPrimary488
-            ? '<span class="badge-tag badge-primary">主要488</span>'
-            : '<span class="badge-tag badge-diff">非488</span>';
+          el.className = 'store-item' + groupClass + (store.id === currentActiveId ? ' active' : '');
 
           el.innerHTML = 
             '<div class="item-header">' +
@@ -507,4 +573,4 @@ const html = `<!doctype html>
 
 fs.writeFileSync(path.join(__dirname, "large.html"), html, "utf8");
 fs.writeFileSync(path.join(__dirname, "dist", "large.html"), html, "utf8");
-console.log("雙色版 large.html 網頁已生成！");
+console.log("三色分區版 large.html 網頁已生成！");

@@ -7,7 +7,12 @@
     "lng": 121.611724,
     "estimated": true,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.014550538461534757,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-2",
@@ -17,7 +22,12 @@
     "lng": 121.58844,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014114076923064545,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-3",
@@ -27,7 +37,12 @@
     "lng": 121.588141,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014071769230781683,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-4",
@@ -37,7 +52,12 @@
     "lng": 121.580642,
     "estimated": true,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0263992692307653,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-5",
@@ -47,7 +67,11 @@
     "lng": 121.60324,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-6",
@@ -57,7 +81,12 @@
     "lng": 121.591367,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.012049269230772097,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-7",
@@ -67,7 +96,12 @@
     "lng": 121.593721,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.00889107692307789,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-8",
@@ -77,7 +111,12 @@
     "lng": 121.592414,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.010808192307692366,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-9",
@@ -87,7 +126,12 @@
     "lng": 121.593287,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.00873280769231144,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-10",
@@ -97,7 +141,12 @@
     "lng": 121.592539,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.010025115384621586,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-11",
@@ -107,7 +156,12 @@
     "lng": 121.592707,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.010845346153843138,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-12",
@@ -117,7 +171,12 @@
     "lng": 121.592873,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.010422807692307856,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-13",
@@ -127,7 +186,12 @@
     "lng": 121.592474,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.013583499999995752,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-14",
@@ -137,7 +201,12 @@
     "lng": 121.591435,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.015659807692301797,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-15",
@@ -147,7 +216,12 @@
     "lng": 121.591435,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.015659807692301797,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-16",
@@ -157,7 +231,12 @@
     "lng": 121.591435,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.015659807692301797,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-17",
@@ -167,7 +246,12 @@
     "lng": 121.593464,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.012480846153849257,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-18",
@@ -177,7 +261,12 @@
     "lng": 121.587488,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.016121230769229555,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-19",
@@ -187,7 +276,11 @@
     "lng": 121.58961,
     "estimated": true,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-20",
@@ -197,7 +290,11 @@
     "lng": 121.590493,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-21",
@@ -207,7 +304,11 @@
     "lng": 121.590493,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-22",
@@ -217,7 +318,12 @@
     "lng": 121.59159,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.018798538461538783,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-23",
@@ -227,7 +333,11 @@
     "lng": 121.592203,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-24",
@@ -237,7 +347,11 @@
     "lng": 121.592203,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-25",
@@ -247,7 +361,12 @@
     "lng": 121.592358,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.019143692307679316,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-26",
@@ -257,7 +376,12 @@
     "lng": 121.59245,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.019119730769233456,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-27",
@@ -267,7 +391,12 @@
     "lng": 121.592806,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.019200961538459183,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-28",
@@ -277,7 +406,11 @@
     "lng": 121.592985,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-29",
@@ -287,7 +420,11 @@
     "lng": 121.590329,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-30",
@@ -297,7 +434,12 @@
     "lng": 121.58956,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.01707638461537897,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-31",
@@ -307,7 +449,11 @@
     "lng": 121.589428,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-32",
@@ -317,7 +463,11 @@
     "lng": 121.589428,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-33",
@@ -327,7 +477,12 @@
     "lng": 121.591977,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.013206038461532899,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-34",
@@ -337,7 +492,12 @@
     "lng": 121.592124,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.016928307692310796,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-35",
@@ -347,7 +507,12 @@
     "lng": 121.592366,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.017347730769230907,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-36",
@@ -357,7 +522,12 @@
     "lng": 121.592366,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.017347730769230907,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-37",
@@ -367,7 +537,12 @@
     "lng": 121.592366,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.017347730769230907,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-38",
@@ -377,7 +552,11 @@
     "lng": 121.591431,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-39",
@@ -387,7 +566,12 @@
     "lng": 121.591431,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.018627384615385267,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-40",
@@ -397,7 +581,11 @@
     "lng": 121.591803,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-41",
@@ -407,7 +595,11 @@
     "lng": 121.5911,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-42",
@@ -417,7 +609,11 @@
     "lng": 121.590843,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-43",
@@ -427,7 +623,12 @@
     "lng": 121.589296,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.021568807692304404,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-44",
@@ -437,7 +638,12 @@
     "lng": 121.588966,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.02192557692306707,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-45",
@@ -447,7 +653,12 @@
     "lng": 121.594541,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014689769230756156,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-46",
@@ -457,7 +668,12 @@
     "lng": 121.59454,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014744307692311054,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-47",
@@ -467,7 +683,12 @@
     "lng": 121.59454,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014744307692311054,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-48",
@@ -477,7 +698,12 @@
     "lng": 121.59454,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014744307692311054,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-49",
@@ -487,7 +713,12 @@
     "lng": 121.59454,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014744307692311054,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-50",
@@ -497,7 +728,12 @@
     "lng": 121.597069,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.011959884615379224,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-51",
@@ -507,7 +743,12 @@
     "lng": 121.587133,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.013629769230774968,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-52",
@@ -517,7 +758,12 @@
     "lng": 121.588348,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.009011730769231008,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-53",
@@ -527,7 +773,12 @@
     "lng": 121.586694,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.012163692307694873,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-54",
@@ -537,7 +788,12 @@
     "lng": 121.585426,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.015327846153851965,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-55",
@@ -547,7 +803,12 @@
     "lng": 121.58808,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.013016269230760713,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-56",
@@ -557,7 +818,12 @@
     "lng": 121.610994,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.010126384615389838,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-57",
@@ -567,7 +833,11 @@
     "lng": 121.610994,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-58",
@@ -577,7 +847,12 @@
     "lng": 121.608916,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0053714615384592435,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-59",
@@ -587,7 +862,12 @@
     "lng": 121.608693,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.004270653846148775,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-60",
@@ -597,7 +877,12 @@
     "lng": 121.607924,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.002497807692307674,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-61",
@@ -607,7 +892,12 @@
     "lng": 121.60772,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0018945000000059053,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-62",
@@ -617,7 +907,12 @@
     "lng": 121.608962,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0027249230769257338,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-63",
@@ -627,7 +922,12 @@
     "lng": 121.605663,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0016745384615433068,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-64",
@@ -637,7 +937,12 @@
     "lng": 121.605964,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0017368461538467272,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-65",
@@ -647,7 +952,12 @@
     "lng": 121.60432,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0013175384615351504,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-66",
@@ -657,7 +967,12 @@
     "lng": 121.581054,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.028453384615389155,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-67",
@@ -667,7 +982,11 @@
     "lng": 121.608305,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-68",
@@ -677,7 +996,12 @@
     "lng": 121.608141,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0075934999999986985,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-69",
@@ -687,7 +1011,12 @@
     "lng": 121.610354,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.011555423076927696,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-70",
@@ -697,7 +1026,12 @@
     "lng": 121.60996,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.010187692307695784,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-71",
@@ -707,7 +1041,12 @@
     "lng": 121.60996,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.010187692307695784,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-72",
@@ -717,7 +1056,12 @@
     "lng": 121.610055,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.010850423076931293,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-73",
@@ -727,7 +1071,11 @@
     "lng": 121.609711,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-74",
@@ -737,7 +1085,12 @@
     "lng": 121.60879,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007422692307684997,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-75",
@@ -747,7 +1100,11 @@
     "lng": 121.608287,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-76",
@@ -757,7 +1114,12 @@
     "lng": 121.6092,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008753999999996154,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-77",
@@ -767,7 +1129,11 @@
     "lng": 121.608946,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-78",
@@ -777,7 +1143,11 @@
     "lng": 121.608946,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-79",
@@ -787,7 +1157,12 @@
     "lng": 121.608365,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.006838192307697,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-80",
@@ -797,7 +1172,12 @@
     "lng": 121.607196,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.003563346153853786,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-81",
@@ -807,7 +1187,11 @@
     "lng": 121.608079,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-82",
@@ -817,7 +1201,12 @@
     "lng": 121.606701,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0022619230769294063,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-83",
@@ -827,7 +1216,12 @@
     "lng": 121.6067,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0021426923077001447,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-84",
@@ -837,7 +1231,11 @@
     "lng": 121.607265,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-85",
@@ -847,7 +1245,12 @@
     "lng": 121.60688,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0033600000000006958,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-86",
@@ -857,7 +1260,11 @@
     "lng": 121.606937,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-87",
@@ -867,7 +1274,12 @@
     "lng": 121.606055,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0007425769230735568,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-88",
@@ -877,7 +1289,12 @@
     "lng": 121.612302,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.01587473076922663,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-89",
@@ -887,7 +1304,12 @@
     "lng": 121.605787,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.000156692307697881,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-90",
@@ -897,7 +1319,12 @@
     "lng": 121.605455,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0007965769230651176,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-91",
@@ -907,7 +1334,12 @@
     "lng": 121.60529,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.00114896153846189,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-92",
@@ -917,7 +1349,11 @@
     "lng": 121.605926,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-93",
@@ -927,7 +1363,12 @@
     "lng": 121.605797,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0006083846153757122,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-94",
@@ -937,7 +1378,12 @@
     "lng": 121.605797,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0006083846153757122,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-95",
@@ -947,7 +1393,12 @@
     "lng": 121.605797,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0006083846153757122,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-96",
@@ -957,7 +1408,12 @@
     "lng": 121.605797,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0006083846153757122,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-97",
@@ -967,7 +1423,11 @@
     "lng": 121.604955,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-98",
@@ -977,7 +1437,12 @@
     "lng": 121.605628,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.00011592307691898895,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-99",
@@ -987,7 +1452,12 @@
     "lng": 121.604931,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0019474230769276346,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-100",
@@ -997,7 +1467,11 @@
     "lng": 121.605464,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-101",
@@ -1007,7 +1481,12 @@
     "lng": 121.612331,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.016920961538460233,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-102",
@@ -1017,7 +1496,11 @@
     "lng": 121.604438,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-103",
@@ -1027,7 +1510,12 @@
     "lng": 121.604438,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0036996923076912935,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-104",
@@ -1037,7 +1525,12 @@
     "lng": 121.604438,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0036996923076912935,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-105",
@@ -1047,7 +1540,12 @@
     "lng": 121.604438,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0036996923076912935,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-106",
@@ -1057,7 +1555,12 @@
     "lng": 121.603633,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.006080730769227216,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-107",
@@ -1067,7 +1570,12 @@
     "lng": 121.612331,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.016920961538460233,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-108",
@@ -1077,7 +1585,12 @@
     "lng": 121.604964,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0014571153846247853,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-109",
@@ -1087,7 +1600,12 @@
     "lng": 121.602348,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.00840973076921614,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-110",
@@ -1097,7 +1615,12 @@
     "lng": 121.602348,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.00840973076921614,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-111",
@@ -1107,7 +1630,12 @@
     "lng": 121.604619,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.002167961538461327,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-112",
@@ -1117,7 +1645,11 @@
     "lng": 121.601003,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-113",
@@ -1127,7 +1659,12 @@
     "lng": 121.600475,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.012937346153833573,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-114",
@@ -1137,7 +1674,12 @@
     "lng": 121.603893,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.004031653846155336,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-115",
@@ -1147,7 +1689,12 @@
     "lng": 121.603893,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.004031653846155336,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-116",
@@ -1157,7 +1704,12 @@
     "lng": 121.603893,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.004031653846155336,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-117",
@@ -1167,7 +1719,12 @@
     "lng": 121.603893,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.004031653846155336,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-118",
@@ -1177,7 +1734,12 @@
     "lng": 121.603893,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.004031653846155336,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-119",
@@ -1187,7 +1749,12 @@
     "lng": 121.60351,
     "estimated": true,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.004817307692306372,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-120",
@@ -1197,7 +1764,11 @@
     "lng": 121.611771,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-121",
@@ -1207,7 +1778,11 @@
     "lng": 121.611724,
     "estimated": true,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-122",
@@ -1217,7 +1792,11 @@
     "lng": 121.601811,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-123",
@@ -1227,7 +1806,12 @@
     "lng": 121.601811,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.00909507692307443,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-124",
@@ -1237,7 +1821,12 @@
     "lng": 121.6015,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.009764115384612637,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-125",
@@ -1247,7 +1836,12 @@
     "lng": 121.6015,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.009764115384612637,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-126",
@@ -1257,7 +1851,12 @@
     "lng": 121.601158,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.010577923076922957,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-127",
@@ -1267,7 +1866,11 @@
     "lng": 121.600927,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-128",
@@ -1277,7 +1880,12 @@
     "lng": 121.600008,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.01204469230768268,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-129",
@@ -1287,7 +1895,12 @@
     "lng": 121.600461,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.012421538461538262,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-130",
@@ -1297,7 +1910,12 @@
     "lng": 121.60001,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.013231692307698495,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-131",
@@ -1307,7 +1925,12 @@
     "lng": 121.612421,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017143692307683978,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-132",
@@ -1317,7 +1940,11 @@
     "lng": 121.610115,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-133",
@@ -1327,7 +1954,11 @@
     "lng": 121.597319,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-134",
@@ -1337,7 +1968,12 @@
     "lng": 121.597262,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0036577692307702137,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-135",
@@ -1347,7 +1983,12 @@
     "lng": 121.597522,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.003579807692304371,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-136",
@@ -1357,7 +1998,12 @@
     "lng": 121.598754,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.004674615384615777,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-137",
@@ -1367,7 +2013,12 @@
     "lng": 121.599571,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.004969615384609938,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-138",
@@ -1377,7 +2028,12 @@
     "lng": 121.599571,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.004969615384609938,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-139",
@@ -1387,7 +2043,12 @@
     "lng": 121.59999,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0051588461538472075,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-140",
@@ -1397,7 +2058,12 @@
     "lng": 121.600308,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.005115461538451882,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-141",
@@ -1407,7 +2073,12 @@
     "lng": 121.600308,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.005115461538451882,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-142",
@@ -1417,7 +2088,11 @@
     "lng": 121.61028,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-143",
@@ -1427,7 +2102,12 @@
     "lng": 121.611032,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.04247730769229463,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-144",
@@ -1437,7 +2117,12 @@
     "lng": 121.602182,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.005599692307697524,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-145",
@@ -1447,7 +2132,12 @@
     "lng": 121.60936,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0435157692307655,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-146",
@@ -1457,7 +2147,12 @@
     "lng": 121.602655,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0057336153846136995,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-147",
@@ -1467,7 +2162,12 @@
     "lng": 121.602655,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0057336153846136995,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-148",
@@ -1477,7 +2177,11 @@
     "lng": 121.602409,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-149",
@@ -1487,7 +2191,11 @@
     "lng": 121.603421,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-150",
@@ -1497,7 +2205,12 @@
     "lng": 121.604763,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.006224307692306752,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-151",
@@ -1507,7 +2220,12 @@
     "lng": 121.60491,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.006353461538466831,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-152",
@@ -1517,7 +2235,12 @@
     "lng": 121.60491,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.006353461538466831,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-153",
@@ -1527,7 +2250,12 @@
     "lng": 121.605846,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0065176153846095986,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-154",
@@ -1537,7 +2265,11 @@
     "lng": 121.606436,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-155",
@@ -1547,7 +2279,12 @@
     "lng": 121.606604,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.006746923076931921,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-156",
@@ -1557,7 +2294,11 @@
     "lng": 121.606157,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-157",
@@ -1567,7 +2308,12 @@
     "lng": 121.607188,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.006910423076917027,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-158",
@@ -1577,7 +2323,11 @@
     "lng": 121.606404,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-159",
@@ -1587,7 +2337,12 @@
     "lng": 121.607868,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.00707176923076247,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-160",
@@ -1597,7 +2352,12 @@
     "lng": 121.606611,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0064672692307681245,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-161",
@@ -1607,7 +2367,12 @@
     "lng": 121.608051,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.00712761538461848,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-162",
@@ -1617,7 +2382,12 @@
     "lng": 121.608153,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007169384615380636,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-163",
@@ -1627,7 +2397,12 @@
     "lng": 121.607271,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.006630923076912154,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-164",
@@ -1637,7 +2412,12 @@
     "lng": 121.609049,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0075400384615420535,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-165",
@@ -1647,7 +2427,12 @@
     "lng": 121.609049,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0075400384615420535,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-166",
@@ -1657,7 +2442,11 @@
     "lng": 121.609086,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-167",
@@ -1667,7 +2456,12 @@
     "lng": 121.609161,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007563923076929768,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-168",
@@ -1677,7 +2471,12 @@
     "lng": 121.609214,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007445153846148855,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-169",
@@ -1687,7 +2486,12 @@
     "lng": 121.607918,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.006780461538454574,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-170",
@@ -1697,7 +2501,12 @@
     "lng": 121.609438,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007526384615374582,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-171",
@@ -1707,7 +2516,12 @@
     "lng": 121.609951,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.00772819230768107,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-172",
@@ -1717,7 +2531,12 @@
     "lng": 121.609951,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.00772819230768107,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-173",
@@ -1727,7 +2546,12 @@
     "lng": 121.595692,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0038333461538400115,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-174",
@@ -1737,7 +2561,12 @@
     "lng": 121.595785,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0039029230769216383,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-175",
@@ -1747,7 +2576,12 @@
     "lng": 121.61313,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008955269230767726,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-176",
@@ -1757,7 +2591,12 @@
     "lng": 121.61313,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008955269230767726,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-177",
@@ -1767,7 +2606,12 @@
     "lng": 121.61313,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008955269230767726,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-178",
@@ -1777,7 +2621,12 @@
     "lng": 121.61313,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008955269230767726,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-179",
@@ -1787,7 +2636,12 @@
     "lng": 121.61313,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008955269230767726,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-180",
@@ -1797,7 +2651,12 @@
     "lng": 121.61313,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008955269230767726,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-181",
@@ -1807,7 +2666,12 @@
     "lng": 121.61313,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008955269230767726,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-182",
@@ -1817,7 +2681,12 @@
     "lng": 121.61313,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008955269230767726,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-183",
@@ -1827,7 +2696,12 @@
     "lng": 121.61313,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008955269230767726,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-184",
@@ -1837,7 +2711,12 @@
     "lng": 121.61313,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008955269230767726,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-185",
@@ -1847,7 +2726,12 @@
     "lng": 121.61313,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008955269230767726,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-186",
@@ -1857,7 +2741,12 @@
     "lng": 121.61313,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008955269230767726,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-187",
@@ -1867,7 +2756,12 @@
     "lng": 121.61313,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008955269230767726,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-188",
@@ -1877,7 +2771,12 @@
     "lng": 121.610077,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007336653846152785,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-189",
@@ -1887,7 +2786,12 @@
     "lng": 121.610426,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007436923076923563,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-190",
@@ -1897,7 +2801,11 @@
     "lng": 121.596212,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-191",
@@ -1907,7 +2815,12 @@
     "lng": 121.60913,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.04359407692307116,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-192",
@@ -1917,7 +2830,11 @@
     "lng": 121.59813,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-193",
@@ -1927,7 +2844,12 @@
     "lng": 121.601165,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.011745692307684408,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-194",
@@ -1937,7 +2859,12 @@
     "lng": 121.599287,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007197461538467564,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-195",
@@ -1947,7 +2874,12 @@
     "lng": 121.59641,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0015676923076881621,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-196",
@@ -1957,7 +2889,11 @@
     "lng": 121.595452,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-197",
@@ -1967,7 +2903,12 @@
     "lng": 121.594954,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.002124653846152569,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-198",
@@ -1977,7 +2918,12 @@
     "lng": 121.592062,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.008217807692304291,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-199",
@@ -1987,7 +2933,12 @@
     "lng": 121.592062,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.008217807692304291,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-200",
@@ -1997,7 +2948,12 @@
     "lng": 121.592062,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.008217807692304291,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-201",
@@ -2007,7 +2963,12 @@
     "lng": 121.601406,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.009452538461530935,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-202",
@@ -2017,7 +2978,12 @@
     "lng": 121.60716,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008291153846144539,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-203",
@@ -2027,7 +2993,11 @@
     "lng": 121.604751,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-204",
@@ -2037,7 +3007,12 @@
     "lng": 121.6058,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.006618846153841673,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-205",
@@ -2047,7 +3022,11 @@
     "lng": 121.604534,
     "estimated": true,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-206",
@@ -2057,7 +3036,12 @@
     "lng": 121.60357,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.004578461538471856,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-207",
@@ -2067,7 +3051,11 @@
     "lng": 121.60883,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-208",
@@ -2077,7 +3065,12 @@
     "lng": 121.60304,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.004093076923069816,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-209",
@@ -2087,7 +3080,12 @@
     "lng": 121.60384,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.005395000000007144,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-210",
@@ -2097,7 +3095,12 @@
     "lng": 121.608557,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.009044576923088243,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-211",
@@ -2107,7 +3110,12 @@
     "lng": 121.60933,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.010093076923070043,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-212",
@@ -2117,7 +3125,11 @@
     "lng": 121.60044,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-213",
@@ -2127,7 +3139,12 @@
     "lng": 121.6093,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.010130000000003747,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-214",
@@ -2137,7 +3154,11 @@
     "lng": 121.599662,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-215",
@@ -2147,7 +3168,11 @@
     "lng": 121.60833,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-216",
@@ -2157,7 +3182,12 @@
     "lng": 121.597374,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0004285384615343446,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-217",
@@ -2167,7 +3197,11 @@
     "lng": 121.59601,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-218",
@@ -2177,7 +3211,11 @@
     "lng": 121.60898,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-219",
@@ -2187,7 +3225,12 @@
     "lng": 121.59366,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0037253846153788572,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-220",
@@ -2197,7 +3240,12 @@
     "lng": 121.59492,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0029561538461564396,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-221",
@@ -2207,7 +3255,11 @@
     "lng": 121.592834,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-222",
@@ -2217,7 +3269,12 @@
     "lng": 121.590389,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.006613807692303908,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-223",
@@ -2227,7 +3284,12 @@
     "lng": 121.590389,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.006613807692303908,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-224",
@@ -2237,7 +3299,12 @@
     "lng": 121.590389,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.006613807692303908,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-225",
@@ -2247,7 +3314,12 @@
     "lng": 121.589841,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0072142307692217855,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-226",
@@ -2257,7 +3329,12 @@
     "lng": 121.588849,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.00812703846153795,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-227",
@@ -2267,7 +3344,11 @@
     "lng": 121.591166,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-228",
@@ -2277,7 +3358,12 @@
     "lng": 121.591184,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.006355307692317069,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-229",
@@ -2287,7 +3373,12 @@
     "lng": 121.60782,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008382307692315294,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-230",
@@ -2297,7 +3388,12 @@
     "lng": 121.590469,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.006935346153852606,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-231",
@@ -2307,7 +3403,12 @@
     "lng": 121.590469,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.006935346153852606,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-232",
@@ -2317,7 +3418,12 @@
     "lng": 121.60772,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008639230769233563,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-233",
@@ -2327,7 +3433,12 @@
     "lng": 121.60672,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007271153846147627,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-234",
@@ -2337,7 +3448,12 @@
     "lng": 121.596974,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0056083461538491974,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-235",
@@ -2347,7 +3463,12 @@
     "lng": 121.601724,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.006252615384610749,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-236",
@@ -2357,7 +3478,12 @@
     "lng": 121.60142,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.005908461538467691,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-237",
@@ -2367,7 +3493,12 @@
     "lng": 121.60093,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.004342115384616818,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-238",
@@ -2377,7 +3508,12 @@
     "lng": 121.600682,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.004132038461548859,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-239",
@@ -2387,7 +3523,12 @@
     "lng": 121.60015,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.002395423076919201,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-240",
@@ -2397,7 +3538,12 @@
     "lng": 121.606163,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0103926923076898,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-241",
@@ -2407,7 +3553,12 @@
     "lng": 121.603222,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.003441884615384083,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-242",
@@ -2417,7 +3568,12 @@
     "lng": 121.602049,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.00028349999999477404,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-243",
@@ -2427,7 +3583,12 @@
     "lng": 121.61011,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.009233461538471488,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-244",
@@ -2437,7 +3598,12 @@
     "lng": 121.610375,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.010374038461549162,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-245",
@@ -2447,7 +3613,12 @@
     "lng": 121.610664,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.010360769230771893,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-246",
@@ -2457,7 +3628,11 @@
     "lng": 121.610664,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-247",
@@ -2467,7 +3642,12 @@
     "lng": 121.594172,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.017493653846159418,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-248",
@@ -2477,7 +3657,12 @@
     "lng": 121.606317,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0011101923076921594,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-249",
@@ -2487,7 +3672,11 @@
     "lng": 121.605184,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-250",
@@ -2497,7 +3686,12 @@
     "lng": 121.60424,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0030344230769259184,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-251",
@@ -2507,7 +3701,12 @@
     "lng": 121.608266,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.003896076923084024,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-252",
@@ -2517,7 +3716,12 @@
     "lng": 121.608266,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.003896076923084024,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-253",
@@ -2527,7 +3731,12 @@
     "lng": 121.60868,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0039676538461606015,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-254",
@@ -2537,7 +3746,12 @@
     "lng": 121.60868,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0039676538461606015,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-255",
@@ -2547,7 +3761,12 @@
     "lng": 121.60868,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0039676538461606015,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-256",
@@ -2557,7 +3776,12 @@
     "lng": 121.601983,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0024159230769242868,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-257",
@@ -2567,7 +3791,12 @@
     "lng": 121.60516,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.003279615384613521,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-258",
@@ -2577,7 +3806,12 @@
     "lng": 121.60561,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0034273461538418815,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-259",
@@ -2587,7 +3821,12 @@
     "lng": 121.60333,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0025404615384587714,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-260",
@@ -2597,7 +3836,12 @@
     "lng": 121.609473,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.005365192307692723,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-261",
@@ -2607,7 +3851,12 @@
     "lng": 121.604981,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0008140769230777778,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-262",
@@ -2617,7 +3866,12 @@
     "lng": 121.604823,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0006025384615355733,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-263",
@@ -2627,7 +3881,12 @@
     "lng": 121.608011,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008410461538460368,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-264",
@@ -2637,7 +3896,12 @@
     "lng": 121.607734,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007969499999987306,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-265",
@@ -2647,7 +3911,12 @@
     "lng": 121.606263,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.004369230769228238,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-266",
@@ -2657,7 +3926,12 @@
     "lng": 121.608374,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.044761653846137506,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-267",
@@ -2667,7 +3941,12 @@
     "lng": 121.590228,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.018235384615380212,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-268",
@@ -2677,7 +3956,11 @@
     "lng": 121.607705,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-269",
@@ -2687,7 +3970,12 @@
     "lng": 121.603517,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.00007396153846173092,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-270",
@@ -2697,7 +3985,12 @@
     "lng": 121.607034,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.008624692307691362,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-271",
@@ -2707,7 +4000,11 @@
     "lng": 121.596418,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-272",
@@ -2717,7 +4014,12 @@
     "lng": 121.60826,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.018752576923077413,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-273",
@@ -2727,7 +4029,12 @@
     "lng": 121.606224,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.013412807692304796,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-274",
@@ -2737,7 +4044,11 @@
     "lng": 121.604576,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-275",
@@ -2747,7 +4058,11 @@
     "lng": 121.604285,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-276",
@@ -2757,7 +4072,12 @@
     "lng": 121.603972,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007500115384615924,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-277",
@@ -2767,7 +4087,12 @@
     "lng": 121.603517,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.006427192307683072,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-278",
@@ -2777,7 +4102,12 @@
     "lng": 121.602591,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.004727115384611125,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-279",
@@ -2787,7 +4117,11 @@
     "lng": 121.602409,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-280",
@@ -2797,7 +4131,12 @@
     "lng": 121.601095,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0010338076923090966,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-281",
@@ -2807,7 +4146,12 @@
     "lng": 121.599729,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0021190384615437097,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-282",
@@ -2817,7 +4161,12 @@
     "lng": 121.599729,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0021190384615437097,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-283",
@@ -2827,7 +4176,12 @@
     "lng": 121.599729,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0021190384615437097,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-284",
@@ -2837,7 +4191,12 @@
     "lng": 121.599729,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0021190384615437097,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-285",
@@ -2847,7 +4206,11 @@
     "lng": 121.607343,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-286",
@@ -2857,7 +4220,12 @@
     "lng": 121.607744,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.01675534615384322,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-287",
@@ -2867,7 +4235,11 @@
     "lng": 121.597787,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-288",
@@ -2877,7 +4249,12 @@
     "lng": 121.60471,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.04709834615383102,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-289",
@@ -2887,7 +4264,11 @@
     "lng": 121.608191,
     "estimated": true,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-290",
@@ -2897,7 +4278,12 @@
     "lng": 121.60641,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.009224269230770687,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-291",
@@ -2907,7 +4293,12 @@
     "lng": 121.606603,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.00300476923075621,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-292",
@@ -2917,7 +4308,11 @@
     "lng": 121.606603,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-293",
@@ -2927,7 +4322,11 @@
     "lng": 121.606207,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-294",
@@ -2937,7 +4336,12 @@
     "lng": 121.606603,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.00300476923075621,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-295",
@@ -2947,7 +4351,12 @@
     "lng": 121.6081,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0025718461538559723,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-296",
@@ -2957,7 +4366,12 @@
     "lng": 121.605581,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0046580769230786245,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-297",
@@ -2967,7 +4381,12 @@
     "lng": 121.605234,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.004691653846151667,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-298",
@@ -2977,7 +4396,11 @@
     "lng": 121.602809,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-299",
@@ -2987,7 +4410,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-300",
@@ -2997,7 +4425,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-301",
@@ -3007,7 +4440,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-302",
@@ -3017,7 +4455,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-303",
@@ -3027,7 +4470,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-304",
@@ -3037,7 +4485,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-305",
@@ -3047,7 +4500,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-306",
@@ -3057,7 +4515,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-307",
@@ -3067,7 +4530,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-308",
@@ -3077,7 +4545,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-309",
@@ -3087,7 +4560,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-310",
@@ -3097,7 +4575,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-311",
@@ -3107,7 +4590,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-312",
@@ -3117,7 +4605,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-313",
@@ -3127,7 +4620,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-314",
@@ -3137,7 +4635,12 @@
     "lng": 121.610205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017136153846138313,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-315",
@@ -3147,7 +4650,12 @@
     "lng": 121.609568,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.015628038461528604,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-316",
@@ -3157,7 +4665,11 @@
     "lng": 121.609568,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-317",
@@ -3167,7 +4679,11 @@
     "lng": 121.607258,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-318",
@@ -3177,7 +4693,11 @@
     "lng": 121.608368,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-319",
@@ -3187,7 +4707,12 @@
     "lng": 121.608776,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.003545000000002574,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-320",
@@ -3197,7 +4722,12 @@
     "lng": 121.61352,
     "estimated": true,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.01654507692306595,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-321",
@@ -3207,7 +4737,12 @@
     "lng": 121.59639,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.007208076923078011,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-322",
@@ -3217,7 +4752,12 @@
     "lng": 121.5962,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.005385923076929089,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-323",
@@ -3227,7 +4767,12 @@
     "lng": 121.596099,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.007273769230778271,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-324",
@@ -3237,7 +4782,12 @@
     "lng": 121.595377,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.006580346153853611,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-325",
@@ -3247,7 +4797,12 @@
     "lng": 121.595273,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.004260615384609423,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-326",
@@ -3257,7 +4812,11 @@
     "lng": 121.599716,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-327",
@@ -3267,7 +4826,12 @@
     "lng": 121.600766,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0008801538461682412,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-328",
@@ -3277,7 +4841,11 @@
     "lng": 121.599921,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-329",
@@ -3287,7 +4855,12 @@
     "lng": 121.601265,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.000765961538462534,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-330",
@@ -3297,7 +4870,12 @@
     "lng": 121.600561,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0012357307692383301,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-331",
@@ -3307,7 +4885,12 @@
     "lng": 121.603962,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.000023115384621519297,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-332",
@@ -3317,7 +4900,12 @@
     "lng": 121.604911,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0002466153846114594,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-333",
@@ -3327,7 +4915,12 @@
     "lng": 121.606136,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0005603461538612464,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-334",
@@ -3337,7 +4930,12 @@
     "lng": 121.601117,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0013902307692319482,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-335",
@@ -3347,7 +4945,12 @@
     "lng": 121.601332,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.002609615384614017,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-336",
@@ -3357,7 +4960,11 @@
     "lng": 121.60224,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-337",
@@ -3367,7 +4974,12 @@
     "lng": 121.60224,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0009900000000016007,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-338",
@@ -3377,7 +4989,12 @@
     "lng": 121.602764,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0006667692307757989,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-339",
@@ -3387,7 +5004,11 @@
     "lng": 121.603645,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-340",
@@ -3397,7 +5018,12 @@
     "lng": 121.605208,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.000018269230778855672,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-341",
@@ -3407,7 +5033,12 @@
     "lng": 121.606619,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0003696538461497312,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-342",
@@ -3417,7 +5048,12 @@
     "lng": 121.606853,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.00037611538461135297,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-343",
@@ -3427,7 +5063,12 @@
     "lng": 121.5962,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.001966153846154839,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-344",
@@ -3437,7 +5078,11 @@
     "lng": 121.597604,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-345",
@@ -3447,7 +5092,12 @@
     "lng": 121.599416,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0012296538461527007,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-346",
@@ -3457,7 +5107,12 @@
     "lng": 121.599416,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0012296538461527007,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-347",
@@ -3467,7 +5122,12 @@
     "lng": 121.596935,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0026398846153767863,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-348",
@@ -3477,7 +5137,11 @@
     "lng": 121.604823,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-349",
@@ -3487,7 +5151,11 @@
     "lng": 121.604734,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-350",
@@ -3497,7 +5165,12 @@
     "lng": 121.604397,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007417615384625265,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-351",
@@ -3507,7 +5180,11 @@
     "lng": 121.604606,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-352",
@@ -3517,7 +5194,11 @@
     "lng": 121.607554,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-353",
@@ -3527,7 +5208,12 @@
     "lng": 121.601945,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007691615384615602,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-354",
@@ -3537,7 +5223,12 @@
     "lng": 121.606847,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0007694230769317301,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-355",
@@ -3547,7 +5238,11 @@
     "lng": 121.601643,
     "estimated": true,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-356",
@@ -3557,7 +5252,12 @@
     "lng": 121.60082,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.00537469230769716,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-357",
@@ -3567,7 +5267,12 @@
     "lng": 121.60082,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.00537469230769716,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-358",
@@ -3577,7 +5282,12 @@
     "lng": 121.598074,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.004270384615395528,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-359",
@@ -3587,7 +5297,11 @@
     "lng": 121.602711,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-360",
@@ -3597,7 +5311,12 @@
     "lng": 121.602127,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.004609769230768279,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-361",
@@ -3607,7 +5326,12 @@
     "lng": 121.602,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.006093076923065155,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-362",
@@ -3617,7 +5341,12 @@
     "lng": 121.598963,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.00868615384615623,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-363",
@@ -3627,7 +5356,11 @@
     "lng": 121.601632,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-364",
@@ -3637,7 +5370,12 @@
     "lng": 121.593369,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.016188576923084952,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-365",
@@ -3647,7 +5385,12 @@
     "lng": 121.593193,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0164024999999981,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-366",
@@ -3657,7 +5400,11 @@
     "lng": 121.591782,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-367",
@@ -3667,7 +5414,11 @@
     "lng": 121.594926,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-368",
@@ -3677,7 +5428,12 @@
     "lng": 121.594659,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014845038461544391,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-369",
@@ -3687,7 +5443,12 @@
     "lng": 121.600554,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.007750999999998953,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-370",
@@ -3697,7 +5458,12 @@
     "lng": 121.606205,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0005975769230701644,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-371",
@@ -3707,7 +5473,12 @@
     "lng": 121.599658,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.008856692307688263,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-372",
@@ -3717,7 +5488,12 @@
     "lng": 121.603418,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.004257923076920633,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-373",
@@ -3727,7 +5503,12 @@
     "lng": 121.601267,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.011436115384611867,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-374",
@@ -3737,7 +5518,12 @@
     "lng": 121.607468,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.01282646153845235,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-375",
@@ -3747,7 +5533,12 @@
     "lng": 121.607468,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.01282646153845235,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-376",
@@ -3757,7 +5548,12 @@
     "lng": 121.606765,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.013403923076921842,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-377",
@@ -3767,7 +5563,12 @@
     "lng": 121.609895,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.013728730769230424,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-378",
@@ -3777,7 +5578,12 @@
     "lng": 121.609895,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.013728730769230424,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-379",
@@ -3787,7 +5593,11 @@
     "lng": 121.600563,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-380",
@@ -3797,7 +5607,12 @@
     "lng": 121.6143,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.018701461538455533,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-381",
@@ -3807,7 +5622,12 @@
     "lng": 121.612048,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.01224000000000558,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-382",
@@ -3817,7 +5637,12 @@
     "lng": 121.612048,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.01224000000000558,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-383",
@@ -3827,7 +5652,11 @@
     "lng": 121.612048,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-384",
@@ -3837,7 +5666,11 @@
     "lng": 121.611575,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-385",
@@ -3847,7 +5680,12 @@
     "lng": 121.600653,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.01094015384614977,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-386",
@@ -3857,7 +5695,12 @@
     "lng": 121.59976,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.011646884615373665,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-387",
@@ -3867,7 +5710,12 @@
     "lng": 121.59832,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.012789076923070297,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-388",
@@ -3877,7 +5725,12 @@
     "lng": 121.604397,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.008194423076915314,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-389",
@@ -3887,7 +5740,12 @@
     "lng": 121.605182,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.013380076923070305,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-390",
@@ -3897,7 +5755,11 @@
     "lng": 121.6034,
     "estimated": true,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-391",
@@ -3907,7 +5769,11 @@
     "lng": 121.6034,
     "estimated": true,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-392",
@@ -3917,7 +5783,12 @@
     "lng": 121.597632,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0026890769230760725,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-393",
@@ -3927,7 +5798,11 @@
     "lng": 121.59779,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-394",
@@ -3937,7 +5812,11 @@
     "lng": 121.59777,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-395",
@@ -3947,7 +5826,12 @@
     "lng": 121.597664,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0032616153846163343,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-396",
@@ -3957,7 +5841,12 @@
     "lng": 121.596765,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.004978192307689255,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-397",
@@ -3967,7 +5856,12 @@
     "lng": 121.605281,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.01268992307691974,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-398",
@@ -3977,7 +5871,12 @@
     "lng": 121.598264,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.015031230769224635,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-399",
@@ -3987,7 +5886,11 @@
     "lng": 121.604321,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-400",
@@ -3997,7 +5900,11 @@
     "lng": 121.607259,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-401",
@@ -4007,7 +5914,12 @@
     "lng": 121.604881,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.01792065384614716,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-402",
@@ -4017,7 +5929,12 @@
     "lng": 121.601354,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.012378461538460783,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-403",
@@ -4027,7 +5944,11 @@
     "lng": 121.604212,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-404",
@@ -4037,7 +5958,12 @@
     "lng": 121.60326,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.009437384615381461,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-405",
@@ -4047,7 +5973,12 @@
     "lng": 121.601329,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.016395423076914994,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-406",
@@ -4057,7 +5988,12 @@
     "lng": 121.601329,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.016395423076914994,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-407",
@@ -4067,7 +6003,12 @@
     "lng": 121.601329,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.016395423076914994,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-408",
@@ -4077,7 +6018,12 @@
     "lng": 121.601303,
     "estimated": true,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.016725923076919003,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-409",
@@ -4087,7 +6033,12 @@
     "lng": 121.604195,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.01500284615383407,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-410",
@@ -4097,7 +6048,12 @@
     "lng": 121.601835,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0131645384615382,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-411",
@@ -4107,7 +6063,12 @@
     "lng": 121.601386,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.01315846153845257,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-412",
@@ -4117,7 +6078,12 @@
     "lng": 121.601386,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.01315846153845257,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-413",
@@ -4127,7 +6093,12 @@
     "lng": 121.601248,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.013149230769229803,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-414",
@@ -4137,7 +6108,12 @@
     "lng": 121.601156,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.013090653846148825,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-415",
@@ -4147,7 +6123,12 @@
     "lng": 121.60386,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.015495115384609903,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-416",
@@ -4157,7 +6138,12 @@
     "lng": 121.60386,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.015495115384609903,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-417",
@@ -4167,7 +6153,11 @@
     "lng": 121.603904,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-418",
@@ -4177,7 +6167,12 @@
     "lng": 121.603923,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014719384615389686,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-419",
@@ -4187,7 +6182,12 @@
     "lng": 121.603923,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014719384615389686,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-420",
@@ -4197,7 +6197,12 @@
     "lng": 121.603923,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014719384615389686,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-421",
@@ -4207,7 +6212,12 @@
     "lng": 121.603923,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014719384615389686,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-422",
@@ -4217,7 +6227,12 @@
     "lng": 121.603923,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014719384615389686,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-423",
@@ -4227,7 +6242,12 @@
     "lng": 121.603923,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014719384615389686,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-424",
@@ -4237,7 +6257,12 @@
     "lng": 121.603923,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014719384615389686,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-425",
@@ -4247,7 +6272,12 @@
     "lng": 121.603813,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.014541615384601414,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-426",
@@ -4257,7 +6287,11 @@
     "lng": 121.60332,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-427",
@@ -4267,7 +6301,12 @@
     "lng": 121.602723,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.013441000000000258,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-428",
@@ -4277,7 +6316,12 @@
     "lng": 121.601849,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.016293692307684182,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-429",
@@ -4287,7 +6331,12 @@
     "lng": 121.602101,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.011510999999998717,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-430",
@@ -4297,7 +6346,12 @@
     "lng": 121.602101,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.011510999999998717,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-431",
@@ -4307,7 +6361,12 @@
     "lng": 121.601642,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.011483692307692195,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-432",
@@ -4317,7 +6376,11 @@
     "lng": 121.601954,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-433",
@@ -4327,7 +6390,12 @@
     "lng": 121.604494,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.011455846153836546,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-434",
@@ -4337,7 +6405,12 @@
     "lng": 121.603915,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.011389038461530276,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-435",
@@ -4347,7 +6420,11 @@
     "lng": 121.603039,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-436",
@@ -4357,7 +6434,11 @@
     "lng": 121.603267,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-437",
@@ -4367,7 +6448,11 @@
     "lng": 121.602751,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-438",
@@ -4377,7 +6462,12 @@
     "lng": 121.602983,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.01108407692308333,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-439",
@@ -4387,7 +6477,12 @@
     "lng": 121.602983,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.01108407692308333,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-440",
@@ -4397,7 +6492,12 @@
     "lng": 121.603016,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.013303038461529582,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-441",
@@ -4407,7 +6507,12 @@
     "lng": 121.605098,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.009849115384611196,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-442",
@@ -4417,7 +6522,12 @@
     "lng": 121.605281,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.01268992307691974,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-443",
@@ -4427,7 +6537,12 @@
     "lng": 121.604452,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.01585342307691917,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-444",
@@ -4437,7 +6552,11 @@
     "lng": 121.605995,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-445",
@@ -4447,7 +6566,12 @@
     "lng": 121.605407,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.009508884615385682,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-446",
@@ -4457,7 +6581,12 @@
     "lng": 121.605931,
     "estimated": true,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.007754615384612862,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-447",
@@ -4467,7 +6596,12 @@
     "lng": 121.605931,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.007754615384612862,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-448",
@@ -4477,7 +6611,12 @@
     "lng": 121.605931,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.007754615384612862,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-449",
@@ -4487,7 +6626,12 @@
     "lng": 121.605345,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.010433076923078488,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-450",
@@ -4497,7 +6641,12 @@
     "lng": 121.605345,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.010433076923078488,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-451",
@@ -4507,7 +6656,12 @@
     "lng": 121.605345,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.010433076923078488,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-452",
@@ -4517,7 +6671,12 @@
     "lng": 121.605345,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.010433076923078488,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-453",
@@ -4527,7 +6686,12 @@
     "lng": 121.605345,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.010433076923078488,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-454",
@@ -4537,7 +6701,11 @@
     "lng": 121.605345,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-455",
@@ -4547,7 +6715,12 @@
     "lng": 121.605736,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.008068961538469921,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-456",
@@ -4557,7 +6730,12 @@
     "lng": 121.605601,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.010399038461542887,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-457",
@@ -4567,7 +6745,12 @@
     "lng": 121.609769,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.014003153846147143,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-458",
@@ -4577,7 +6760,12 @@
     "lng": 121.606535,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.005871499999997809,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-459",
@@ -4587,7 +6775,12 @@
     "lng": 121.606343,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.005425192307683346,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-460",
@@ -4597,7 +6790,12 @@
     "lng": 121.605975,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0045106538461539,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-461",
@@ -4607,7 +6805,11 @@
     "lng": 121.607166,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-462",
@@ -4617,7 +6819,12 @@
     "lng": 121.606995,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.007281807692308462,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-463",
@@ -4627,7 +6834,12 @@
     "lng": 121.603386,
     "estimated": true,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0012304230769188962,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-464",
@@ -4637,7 +6849,12 @@
     "lng": 121.602526,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0027507307692360428,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-465",
@@ -4647,7 +6864,11 @@
     "lng": 121.5995,
     "estimated": true,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-466",
@@ -4657,7 +6878,11 @@
     "lng": 121.5995,
     "estimated": true,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-467",
@@ -4667,7 +6892,12 @@
     "lng": 121.611384,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.01235453846153689,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-468",
@@ -4677,7 +6907,11 @@
     "lng": 121.611033,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-469",
@@ -4687,7 +6921,12 @@
     "lng": 121.608107,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.004758769230775783,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-470",
@@ -4697,7 +6936,11 @@
     "lng": 121.606945,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-471",
@@ -4707,7 +6950,12 @@
     "lng": 121.615071,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.011838769230777757,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-472",
@@ -4717,7 +6965,12 @@
     "lng": 121.615071,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.011838769230777757,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-473",
@@ -4727,7 +6980,12 @@
     "lng": 121.615071,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.011838769230777757,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-474",
@@ -4737,7 +6995,12 @@
     "lng": 121.615071,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.011838769230777757,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-475",
@@ -4747,7 +7010,12 @@
     "lng": 121.615415,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.010603384615379241,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-476",
@@ -4757,7 +7025,12 @@
     "lng": 121.616551,
     "estimated": true,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.013118000000005736,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-477",
@@ -4767,7 +7040,12 @@
     "lng": 121.60653,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0053832692307622665,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-478",
@@ -4777,7 +7055,12 @@
     "lng": 121.607642,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.003692384615376909,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-479",
@@ -4787,7 +7070,12 @@
     "lng": 121.607328,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.005980769230760075,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-480",
@@ -4797,7 +7085,11 @@
     "lng": 121.607586,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-481",
@@ -4807,7 +7099,11 @@
     "lng": 121.607096,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-482",
@@ -4817,7 +7113,12 @@
     "lng": 121.606785,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.004006730769233968,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-483",
@@ -4827,7 +7128,12 @@
     "lng": 121.606491,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.005123692307691385,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-484",
@@ -4837,7 +7143,12 @@
     "lng": 121.606916,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.005026692307694702,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-485",
@@ -4847,7 +7158,11 @@
     "lng": 121.609605,
     "estimated": true,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-486",
@@ -4857,7 +7172,12 @@
     "lng": 121.597364,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0006790769230775595,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-487",
@@ -4867,7 +7187,12 @@
     "lng": 121.597641,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0013553846153797622,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-488",
@@ -4877,7 +7202,12 @@
     "lng": 121.608864,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.011459653846145557,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-489",
@@ -4887,7 +7217,12 @@
     "lng": 121.611463,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.012125692307691338,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-490",
@@ -4897,7 +7232,12 @@
     "lng": 121.611,
     "estimated": true,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017942307692308646,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-491",
@@ -4907,7 +7247,12 @@
     "lng": 121.611,
     "estimated": true,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.017942307692308646,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-492",
@@ -4917,7 +7262,12 @@
     "lng": 121.6075,
     "estimated": true,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.005519230769237993,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-493",
@@ -4927,7 +7277,12 @@
     "lng": 121.6075,
     "estimated": true,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.005519230769237993,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-494",
@@ -4937,7 +7292,11 @@
     "lng": 121.606668,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   },
   {
     "id": "store-495",
@@ -4947,7 +7306,12 @@
     "lng": 121.594151,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0006489230769233245,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-496",
@@ -4957,7 +7321,12 @@
     "lng": 121.594057,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0032112692307606494,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-497",
@@ -4967,7 +7336,12 @@
     "lng": 121.598807,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": -0.0009887307692366676,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-498",
@@ -4977,7 +7351,12 @@
     "lng": 121.60129,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0022047692307722855,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-499",
@@ -4987,7 +7366,12 @@
     "lng": 121.60129,
     "estimated": false,
     "isPrimary488": true,
-    "group": "主要488名單"
+    "group": "主要488名單",
+    "delta": 0.0022047692307722855,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-500",
@@ -4997,6 +7381,10 @@
     "lng": 121.601568,
     "estimated": false,
     "isPrimary488": false,
-    "group": "非488名單(另色標記)"
+    "group": "非488名單(另色標記)",
+    "subGroup": "非488名單",
+    "region": "非488店家",
+    "color": "橙色",
+    "colorHex": "#d9531e"
   }
 ]
