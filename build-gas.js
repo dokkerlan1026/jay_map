@@ -17,12 +17,13 @@ if (!fs.existsSync(gasDir)) {
 // 1. 生成 gas/Code.gs (後端 Apps Script)
 // ==========================================
 const codeGsContent = `/**
- * Google Apps Script - 花蓮店家每日開關排程與地圖 Web App (三色打卡版)
+ * Google Apps Script - 花蓮店家每日開關排程與地圖 Web App (雙重自動儲存版)
  * 支援功能：
- * 1. 橘色改黃色 (東區綠 / 西區紅 / 非488黃)
- * 2. 支援「紅綠同時顯示」
- * 3. 店家即時「打卡 / 已打卡」功能與試算表同步備註
- * 4. Google 試算表多人共同編輯、每日排程載入全開或複製前日
+ * 1. 徹底修復 storeId 轉換錯誤 (去除字母萃取純數字序號)
+ * 2. 自動儲存開關狀態與打卡時間至 Google 試算表
+ * 3. 一鍵開啟 Google 試算表按鈕
+ * 4. 背景非同步同步，絕不白畫面
+ * 5. 橘色改黃色、支援紅綠同時顯示
  */
 
 function doGet(e) {
@@ -30,6 +31,9 @@ function doGet(e) {
   
   var targetDate = (e && e.parameter && e.parameter.date) ? e.parameter.date : getTodayString();
   template.currentDate = targetDate;
+  
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  template.sheetUrl = ss ? ss.getUrl() : "";
   
   var storeData = getStoresForDate(targetDate);
   template.storesJson = JSON.stringify(storeData);
@@ -64,6 +68,13 @@ function getYesterdayString(dateStr) {
   return Utilities.formatDate(d, "Asia/Taipei", "yyyy-MM-dd");
 }
 
+// 輔助函式：從任意 storeId 格式 (例如 "store-56" 或 56) 萃取出純數字序號
+function parseStoreNum(rawId) {
+  if (typeof rawId === 'number') return rawId;
+  var digits = String(rawId).replace(/\\D/g, '');
+  return digits ? parseInt(digits, 10) : 0;
+}
+
 function getStoresForDate(dateStr) {
   var defaultList = getDefaultStores();
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -83,13 +94,13 @@ function getStoresForDate(dateStr) {
     for (var i = 3; i < data.length; i++) {
       var row = data[i];
       var isVisible = (row[1] === true || String(row[1]).toUpperCase() === "TRUE");
-      var storeId = Number(row[0]);
+      var storeNum = parseStoreNum(row[0]);
       if (!isVisible) {
-        hiddenStoreIds.add(storeId);
+        hiddenStoreIds.add(storeNum);
       }
       var note = String(row[9] || "");
       if (note.indexOf("已打卡") !== -1) {
-        checkedInStoreIds.add(storeId);
+        checkedInStoreIds.add(storeNum);
       }
     }
   } else {
@@ -120,7 +131,7 @@ function getHiddenStoreIdsFromHistory(dateStr) {
       var hiddenListStr = String(data[i][1] || "");
       if (hiddenListStr) {
         hiddenListStr.split(",").forEach(function(idStr) {
-          var n = Number(idStr.trim());
+          var n = parseInt(idStr.trim(), 10);
           if (!isNaN(n)) hiddenSet.add(n);
         });
       }
@@ -145,9 +156,9 @@ function saveCurrentStatusToHistory(customDate) {
   for (var i = 3; i < data.length; i++) {
     var row = data[i];
     var isVisible = (row[1] === true || String(row[1]).toUpperCase() === "TRUE");
-    var storeId = row[0];
+    var storeNum = parseStoreNum(row[0]);
     if (!isVisible) {
-      hiddenIds.push(storeId);
+      hiddenIds.push(storeNum);
     } else {
       activeCount++;
     }
@@ -235,17 +246,31 @@ function loadStatusFromDate(sourceDateStr, targetDateStr) {
 }
 
 // ------------------------------------------
-// API 函式：打卡、狀態連動
+// API 函式：非同步讀取與自動儲存
 // ------------------------------------------
-function apiToggleCheckin(storeId, isCheckedIn) {
+function apiGetStoresForDate(dateStr) {
+  try {
+    var targetDate = dateStr || getTodayString();
+    var list = getStoresForDate(targetDate);
+    return { success: true, stores: list };
+  } catch (err) {
+    return { success: false, error: String(err) };
+  }
+}
+
+// 🌟 修復核心：提取純數字序號寫入試算表
+function apiToggleCheckin(rawStoreId, isCheckedIn) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    if (!ss) return { success: false };
+    if (!ss) return { success: false, msg: "未綁定試算表" };
 
     var sheet = ss.getSheetByName("當日店家清單");
-    if (!sheet) return { success: false };
+    if (!sheet) return { success: false, msg: "找不到工作表" };
 
-    var rowNumber = Number(storeId) + 3;
+    var num = parseStoreNum(rawStoreId);
+    if (!num) return { success: false, msg: "無效序號" };
+
+    var rowNumber = num + 3; // 第 4 列開始為序號 1
     var nowTime = Utilities.formatDate(new Date(), "Asia/Taipei", "HH:mm");
     var noteVal = isCheckedIn ? ("已打卡 " + nowTime) : "";
     sheet.getRange(rowNumber, 10).setValue(noteVal);
@@ -255,15 +280,19 @@ function apiToggleCheckin(storeId, isCheckedIn) {
   }
 }
 
-function apiUpdateStoreStatus(storeId, isVisible) {
+// 🌟 修復核心：單點開關儲存
+function apiUpdateStoreStatus(rawStoreId, isVisible) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    if (!ss) return { success: false };
+    if (!ss) return { success: false, msg: "未綁定試算表" };
 
     var sheet = ss.getSheetByName("當日店家清單");
-    if (!sheet) return { success: false };
+    if (!sheet) return { success: false, msg: "找不到工作表" };
 
-    var rowNumber = Number(storeId) + 3;
+    var num = parseStoreNum(rawStoreId);
+    if (!num) return { success: false, msg: "無效序號" };
+
+    var rowNumber = num + 3;
     sheet.getRange(rowNumber, 2).setValue(isVisible);
     return { success: true };
   } catch (err) {
@@ -271,6 +300,7 @@ function apiUpdateStoreStatus(storeId, isVisible) {
   }
 }
 
+// 批次開關更新
 function apiBatchUpdateStatus(updates) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -280,8 +310,11 @@ function apiBatchUpdateStatus(updates) {
     if (!sheet) return { success: false };
 
     updates.forEach(function(u) {
-      var row = Number(u.id) + 3;
-      sheet.getRange(row, 2).setValue(u.isVisible);
+      var num = parseStoreNum(u.id);
+      if (num) {
+        var row = num + 3;
+        sheet.getRange(row, 2).setValue(u.isVisible);
+      }
     });
 
     saveCurrentStatusToHistory();
@@ -421,10 +454,10 @@ const fullCodeGs = codeGsContent.replace(
   JSON.stringify(stores, null, 2)
 );
 fs.writeFileSync(path.join(gasDir, "Code.gs"), fullCodeGs, "utf8");
-console.log("gas/Code.gs 已生成！");
+console.log("gas/Code.gs 已成功修復並生成！");
 
 // ==========================================
-// 2. 生成 gas/Index.html (前端 Web App)
+// 2. 生成 gas/Index.html (含雙重 localStorage 自動儲存)
 // ==========================================
 const eastStores = stores.filter(s => s.subGroup === "主要名單-東區");
 const westStores = stores.filter(s => s.subGroup === "主要名單-西區");
@@ -524,7 +557,7 @@ const indexHtml = `<!doctype html>
         background: rgba(255,255,255,0.18);
         color: white;
         border: 1px solid rgba(255,255,255,0.3);
-        padding: 6px 10px;
+        padding: 6px 12px;
         border-radius: 4px;
         font-size: 0.78rem;
         font-weight: 600;
@@ -538,6 +571,16 @@ const indexHtml = `<!doctype html>
       .header-btn:hover {
         background: white;
         color: var(--google-red);
+      }
+      .header-btn-sheet {
+        background: #ffffff;
+        color: #1a73e8;
+        border: 1px solid #ffffff;
+        font-weight: 700;
+      }
+      .header-btn-sheet:hover {
+        background: #e8f0fe;
+        color: #174ea6;
       }
 
       .schedule-bar {
@@ -817,7 +860,6 @@ const indexHtml = `<!doctype html>
         text-overflow: ellipsis;
       }
 
-      /* 打卡按鈕 */
       .checkin-btn {
         padding: 4px 8px;
         font-size: 0.72rem;
@@ -1007,8 +1049,11 @@ const indexHtml = `<!doctype html>
         </div>
       </div>
       <div class="header-right">
-        <button class="header-btn" id="btnSyncFromSheet" title="讀取 Google 試算表最新狀態">
-          <span>🔄 同步試算表</span>
+        <a href="<?= sheetUrl ?>" id="btnOpenSheetLink" target="_blank" rel="noopener" class="header-btn header-btn-sheet" title="在新分頁開啟 Google 試算表共同編輯">
+          <span>📊 開啟 Google 試算表 ↗</span>
+        </a>
+        <button class="header-btn" id="btnSyncFromSheet" title="讀取 Google 試算表最新狀態 (背景更新，不重整頁面)">
+          <span id="syncBtnText">🔄 同步狀態</span>
         </button>
       </div>
     </header>
@@ -1028,7 +1073,7 @@ const indexHtml = `<!doctype html>
         </button>
       </div>
       <div style="color:var(--text-secondary);font-size:0.75rem;">
-        <span>💡 共同編輯：在試算表打勾，地圖自動同步！</span>
+        <span>💡 自動儲存已啟動：勾選與打卡即時儲存！</span>
       </div>
     </div>
 
@@ -1042,7 +1087,6 @@ const indexHtml = `<!doctype html>
           <div class="quick-actions">
             <button class="btn-chip" id="btnShowAll">全部顯示</button>
             <button class="btn-chip" id="btnHideAll">全部隱藏</button>
-            <!-- 🌟 使用者指定：紅綠同時顯示 -->
             <button class="btn-chip highlight-redgreen" id="btnShowRedGreen" title="僅顯示東區(綠)與西區(紅)，隱藏非488名單">
               <span>🟢🔴 紅綠同時顯示</span>
             </button>
@@ -1060,7 +1104,6 @@ const indexHtml = `<!doctype html>
         </div>
 
         <div class="layer-tree">
-          <!-- 1. 東區主要名單 (綠色) -->
           <div class="layer-group expanded" id="group-east">
             <div class="group-header">
               <input type="checkbox" class="group-checkbox" id="chk-group-east" checked title="全選/取消東區" />
@@ -1074,7 +1117,6 @@ const indexHtml = `<!doctype html>
             <div class="item-list" id="list-east"></div>
           </div>
 
-          <!-- 2. 西區主要名單 (紅色) -->
           <div class="layer-group expanded" id="group-west">
             <div class="group-header">
               <input type="checkbox" class="group-checkbox" id="chk-group-west" checked title="全選/取消西區" />
@@ -1088,7 +1130,6 @@ const indexHtml = `<!doctype html>
             <div class="item-list" id="list-west"></div>
           </div>
 
-          <!-- 3. 非 488 店家名單 (黃色) -->
           <div class="layer-group expanded" id="group-diff">
             <div class="group-header">
               <input type="checkbox" class="group-checkbox" id="chk-group-diff" checked title="全選/取消非488名單" />
@@ -1122,6 +1163,40 @@ const indexHtml = `<!doctype html>
       } catch (e) {
         stores = ${JSON.stringify(stores)};
       }
+
+      const currentDate = document.getElementById('dateSelector').value || '<?= currentDate ?>';
+      const STORAGE_VIS_KEY = 'hualien_vis_' + currentDate;
+      const STORAGE_CHK_KEY = 'hualien_chk_' + currentDate;
+
+      // 🌟 第一重保險：本地持久化快取 (localStorage)
+      let localVisMap = {};
+      let localChkSet = new Set();
+      try {
+        const v = localStorage.getItem(STORAGE_VIS_KEY);
+        if (v) localVisMap = JSON.parse(v);
+        const c = localStorage.getItem(STORAGE_CHK_KEY);
+        if (c) localChkSet = new Set(JSON.parse(c));
+      } catch (err) {}
+
+      function persistLocalState() {
+        try {
+          const visObj = {};
+          storeStates.forEach((st, id) => {
+            visObj[id] = st.isVisible;
+          });
+          localStorage.setItem(STORAGE_VIS_KEY, JSON.stringify(visObj));
+          localStorage.setItem(STORAGE_CHK_KEY, JSON.stringify(Array.from(checkinSet)));
+        } catch (e) {}
+      }
+
+      const btnOpenSheetLink = document.getElementById('btnOpenSheetLink');
+      btnOpenSheetLink.addEventListener('click', (e) => {
+        const href = btnOpenSheetLink.getAttribute('href');
+        if (!href || href === '#' || href === 'null' || href === '') {
+          e.preventDefault();
+          alert('請直接開啟您在 Google 雲端硬碟建立的【花蓮店家每日排程管理表】試算表！');
+        }
+      });
 
       const map = L.map('map', { zoomControl: true }).setView([23.985, 121.605], 13);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -1166,16 +1241,19 @@ const indexHtml = `<!doctype html>
         return \`<svg class="pin-svg" viewBox="0 0 24 34" fill="none"><path d="M12 0C5.372 0 0 5.373 0 12C0 19.5 12 34 12 34C12 34 24 19.5 24 12C24 5.373 18.628 0 12 0Z" fill="\${colorHex}" stroke="#ffffff" stroke-width="1.5"/><circle cx="12" cy="11" r="4" fill="#ffffff"/></svg>\`;
       }
 
-      function showToast(text) {
+      function showToast(text, duration = 2000) {
         const toast = document.getElementById('toastBox');
         toast.textContent = text;
         toast.style.display = 'block';
-        setTimeout(() => { toast.style.display = 'none'; }, 2000);
+        setTimeout(() => { toast.style.display = 'none'; }, duration);
       }
 
+      // 初始化打卡 Set (優先從 localStorage 還原)
       const checkinSet = new Set();
       stores.forEach(s => {
-        if (s.isCheckedIn) checkinSet.add(s.id);
+        if (localChkSet.has(s.id) || s.isCheckedIn) {
+          checkinSet.add(s.id);
+        }
       });
 
       const storeStates = new Map();
@@ -1235,7 +1313,14 @@ const indexHtml = `<!doctype html>
           highlightStoreRow(store.id);
         });
 
-        const isInitiallyVisible = (store.isVisible !== undefined) ? store.isVisible : true;
+        // 🌟 優先遵循本地 localStorage 的開關狀態
+        let isInitiallyVisible = true;
+        if (localVisMap[store.id] !== undefined) {
+          isInitiallyVisible = localVisMap[store.id];
+        } else if (store.isVisible !== undefined) {
+          isInitiallyVisible = store.isVisible;
+        }
+
         if (isInitiallyVisible) {
           marker.addTo(map);
         }
@@ -1304,6 +1389,7 @@ const indexHtml = `<!doctype html>
         }
       });
 
+      // 🌟 打卡：本地即時存檔 + 後端試算表備註同步
       function toggleCheckin(storeId) {
         const state = storeStates.get(storeId);
         if (!state) return;
@@ -1323,6 +1409,7 @@ const indexHtml = `<!doctype html>
           isNowCheckedIn = true;
         }
 
+        persistLocalState();
         updateCheckinStats();
 
         if (typeof google !== 'undefined' && google.script && google.script.run) {
@@ -1337,6 +1424,7 @@ const indexHtml = `<!doctype html>
         }
       }
 
+      // 🌟 開關店家：本地即時存檔 + 後端試算表同步
       function setStoreVisibility(storeId, isVisible, syncToSheet = false) {
         const state = storeStates.get(storeId);
         if (!state) return;
@@ -1351,6 +1439,7 @@ const indexHtml = `<!doctype html>
         }
         updateGroupCheckboxes();
         updateStats();
+        persistLocalState();
 
         if (syncToSheet && typeof google !== 'undefined' && google.script && google.script.run) {
           google.script.run.apiUpdateStoreStatus(storeId, isVisible);
@@ -1398,6 +1487,7 @@ const indexHtml = `<!doctype html>
         });
         updateGroupCheckboxes();
         updateStats();
+        persistLocalState();
 
         if (typeof google !== 'undefined' && google.script && google.script.run) {
           google.script.run.apiBatchUpdateStatus(updates);
@@ -1453,7 +1543,6 @@ const indexHtml = `<!doctype html>
         stores.forEach(s => setStoreVisibility(s.id, false));
       });
 
-      // 🌟 使用者指定：紅綠同時顯示
       document.getElementById('btnShowRedGreen').addEventListener('click', () => {
         const updates = [];
         stores.forEach(s => {
@@ -1499,7 +1588,9 @@ const indexHtml = `<!doctype html>
 
           google.script.run.withSuccessHandler((res) => {
             alert('已成功載入昨日（' + res.sourceDate + '）的開關設定！目前開啟：' + res.activeCount + ' 家');
-            location.reload();
+            if (res.targetDate) {
+              refreshDataAsync(res.targetDate);
+            }
           }).loadStatusFromDate(yStr, today);
         } else {
           alert('請在 Google Apps Script 發佈環境下執行！');
@@ -1517,15 +1608,56 @@ const indexHtml = `<!doctype html>
           if (typeof google !== 'undefined' && google.script && google.script.run) {
             google.script.run.withSuccessHandler((res) => {
               alert('已成功載入 ' + chosenDate + ' 的開關設定！目前開啟：' + res.activeCount + ' 家');
-              location.reload();
+              refreshDataAsync(chosenDate);
             }).loadStatusFromDate(chosenDate, chosenDate);
           }
         }
       });
 
+      function refreshDataAsync(dateToFetch) {
+        const syncBtnText = document.getElementById('syncBtnText');
+        if (syncBtnText) syncBtnText.textContent = '⏳ 同步中...';
+        showToast('正在同步最新狀態...', 2000);
+
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          const targetDate = dateToFetch || document.getElementById('dateSelector').value;
+          google.script.run
+            .withSuccessHandler((res) => {
+              if (syncBtnText) syncBtnText.textContent = '🔄 同步狀態';
+              if (res && res.success && res.stores) {
+                res.stores.forEach(s => {
+                  setStoreVisibility(s.id, s.isVisible, false);
+                  const state = storeStates.get(s.id);
+                  if (state) {
+                    if (s.isCheckedIn) {
+                      checkinSet.add(s.id);
+                      state.checkinBtn.classList.add('checked-in');
+                      state.checkinBtn.innerHTML = '✅ 已打卡';
+                    } else {
+                      checkinSet.delete(s.id);
+                      state.checkinBtn.classList.remove('checked-in');
+                      state.checkinBtn.innerHTML = '📍 打卡';
+                    }
+                  }
+                });
+                persistLocalState();
+                updateCheckinStats();
+                showToast('✅ 試算表最新狀態同步完成！', 2000);
+              }
+            })
+            .withFailureHandler((err) => {
+              if (syncBtnText) syncBtnText.textContent = '🔄 同步狀態';
+              showToast('同步失敗: ' + err, 2500);
+            })
+            .apiGetStoresForDate(targetDate);
+        } else {
+          if (syncBtnText) syncBtnText.textContent = '🔄 同步狀態';
+          showToast('目前為本機離線模式', 1500);
+        }
+      }
+
       document.getElementById('btnSyncFromSheet').addEventListener('click', () => {
-        showToast('重新載入最新狀態...', 1200);
-        location.reload();
+        refreshDataAsync();
       });
 
       window.toggleGroupExpand = function(groupId) {
@@ -1575,6 +1707,7 @@ const indexHtml = `<!doctype html>
         });
       });
 
+      // 初始化
       updateGroupCheckboxes();
       updateStats();
       updateCheckinStats();
@@ -1584,4 +1717,4 @@ const indexHtml = `<!doctype html>
 `;
 
 fs.writeFileSync(path.join(gasDir, "Index.html"), indexHtml, "utf8");
-console.log("gas/Index.html 已成功生成 (含紅綠同時顯示、黃色標記、打卡功能)！");
+console.log("gas/Index.html 已成功生成 (含雙重自動儲存與無白畫面非同步更新)！");

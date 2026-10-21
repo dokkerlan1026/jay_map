@@ -1,10 +1,11 @@
 /**
- * Google Apps Script - 花蓮店家每日開關排程與地圖 Web App (三色打卡版)
+ * Google Apps Script - 花蓮店家每日開關排程與地圖 Web App (雙重自動儲存版)
  * 支援功能：
- * 1. 橘色改黃色 (東區綠 / 西區紅 / 非488黃)
- * 2. 支援「紅綠同時顯示」
- * 3. 店家即時「打卡 / 已打卡」功能與試算表同步備註
- * 4. Google 試算表多人共同編輯、每日排程載入全開或複製前日
+ * 1. 徹底修復 storeId 轉換錯誤 (去除字母萃取純數字序號)
+ * 2. 自動儲存開關狀態與打卡時間至 Google 試算表
+ * 3. 一鍵開啟 Google 試算表按鈕
+ * 4. 背景非同步同步，絕不白畫面
+ * 5. 橘色改黃色、支援紅綠同時顯示
  */
 
 function doGet(e) {
@@ -12,6 +13,9 @@ function doGet(e) {
   
   var targetDate = (e && e.parameter && e.parameter.date) ? e.parameter.date : getTodayString();
   template.currentDate = targetDate;
+  
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  template.sheetUrl = ss ? ss.getUrl() : "";
   
   var storeData = getStoresForDate(targetDate);
   template.storesJson = JSON.stringify(storeData);
@@ -46,6 +50,13 @@ function getYesterdayString(dateStr) {
   return Utilities.formatDate(d, "Asia/Taipei", "yyyy-MM-dd");
 }
 
+// 輔助函式：從任意 storeId 格式 (例如 "store-56" 或 56) 萃取出純數字序號
+function parseStoreNum(rawId) {
+  if (typeof rawId === 'number') return rawId;
+  var digits = String(rawId).replace(/\D/g, '');
+  return digits ? parseInt(digits, 10) : 0;
+}
+
 function getStoresForDate(dateStr) {
   var defaultList = getDefaultStores();
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -65,13 +76,13 @@ function getStoresForDate(dateStr) {
     for (var i = 3; i < data.length; i++) {
       var row = data[i];
       var isVisible = (row[1] === true || String(row[1]).toUpperCase() === "TRUE");
-      var storeId = Number(row[0]);
+      var storeNum = parseStoreNum(row[0]);
       if (!isVisible) {
-        hiddenStoreIds.add(storeId);
+        hiddenStoreIds.add(storeNum);
       }
       var note = String(row[9] || "");
       if (note.indexOf("已打卡") !== -1) {
-        checkedInStoreIds.add(storeId);
+        checkedInStoreIds.add(storeNum);
       }
     }
   } else {
@@ -102,7 +113,7 @@ function getHiddenStoreIdsFromHistory(dateStr) {
       var hiddenListStr = String(data[i][1] || "");
       if (hiddenListStr) {
         hiddenListStr.split(",").forEach(function(idStr) {
-          var n = Number(idStr.trim());
+          var n = parseInt(idStr.trim(), 10);
           if (!isNaN(n)) hiddenSet.add(n);
         });
       }
@@ -127,9 +138,9 @@ function saveCurrentStatusToHistory(customDate) {
   for (var i = 3; i < data.length; i++) {
     var row = data[i];
     var isVisible = (row[1] === true || String(row[1]).toUpperCase() === "TRUE");
-    var storeId = row[0];
+    var storeNum = parseStoreNum(row[0]);
     if (!isVisible) {
-      hiddenIds.push(storeId);
+      hiddenIds.push(storeNum);
     } else {
       activeCount++;
     }
@@ -217,17 +228,31 @@ function loadStatusFromDate(sourceDateStr, targetDateStr) {
 }
 
 // ------------------------------------------
-// API 函式：打卡、狀態連動
+// API 函式：非同步讀取與自動儲存
 // ------------------------------------------
-function apiToggleCheckin(storeId, isCheckedIn) {
+function apiGetStoresForDate(dateStr) {
+  try {
+    var targetDate = dateStr || getTodayString();
+    var list = getStoresForDate(targetDate);
+    return { success: true, stores: list };
+  } catch (err) {
+    return { success: false, error: String(err) };
+  }
+}
+
+// 🌟 修復核心：提取純數字序號寫入試算表
+function apiToggleCheckin(rawStoreId, isCheckedIn) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    if (!ss) return { success: false };
+    if (!ss) return { success: false, msg: "未綁定試算表" };
 
     var sheet = ss.getSheetByName("當日店家清單");
-    if (!sheet) return { success: false };
+    if (!sheet) return { success: false, msg: "找不到工作表" };
 
-    var rowNumber = Number(storeId) + 3;
+    var num = parseStoreNum(rawStoreId);
+    if (!num) return { success: false, msg: "無效序號" };
+
+    var rowNumber = num + 3; // 第 4 列開始為序號 1
     var nowTime = Utilities.formatDate(new Date(), "Asia/Taipei", "HH:mm");
     var noteVal = isCheckedIn ? ("已打卡 " + nowTime) : "";
     sheet.getRange(rowNumber, 10).setValue(noteVal);
@@ -237,15 +262,19 @@ function apiToggleCheckin(storeId, isCheckedIn) {
   }
 }
 
-function apiUpdateStoreStatus(storeId, isVisible) {
+// 🌟 修復核心：單點開關儲存
+function apiUpdateStoreStatus(rawStoreId, isVisible) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    if (!ss) return { success: false };
+    if (!ss) return { success: false, msg: "未綁定試算表" };
 
     var sheet = ss.getSheetByName("當日店家清單");
-    if (!sheet) return { success: false };
+    if (!sheet) return { success: false, msg: "找不到工作表" };
 
-    var rowNumber = Number(storeId) + 3;
+    var num = parseStoreNum(rawStoreId);
+    if (!num) return { success: false, msg: "無效序號" };
+
+    var rowNumber = num + 3;
     sheet.getRange(rowNumber, 2).setValue(isVisible);
     return { success: true };
   } catch (err) {
@@ -253,6 +282,7 @@ function apiUpdateStoreStatus(storeId, isVisible) {
   }
 }
 
+// 批次開關更新
 function apiBatchUpdateStatus(updates) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -262,8 +292,11 @@ function apiBatchUpdateStatus(updates) {
     if (!sheet) return { success: false };
 
     updates.forEach(function(u) {
-      var row = Number(u.id) + 3;
-      sheet.getRange(row, 2).setValue(u.isVisible);
+      var num = parseStoreNum(u.id);
+      if (num) {
+        var row = num + 3;
+        sheet.getRange(row, 2).setValue(u.isVisible);
+      }
     });
 
     saveCurrentStatusToHistory();

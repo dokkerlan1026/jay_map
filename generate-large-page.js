@@ -701,21 +701,30 @@ const html = `<!doctype html>
         return \`<svg class="pin-svg" viewBox="0 0 24 34" fill="none"><path d="M12 0C5.372 0 0 5.373 0 12C0 19.5 12 34 12 34C12 34 24 19.5 24 12C24 5.373 18.628 0 12 0Z" fill="\${colorHex}" stroke="#ffffff" stroke-width="1.5"/><circle cx="12" cy="11" r="4" fill="#ffffff"/></svg>\`;
       }
 
-      // 打卡持久化儲存 (localStorage)
+      // 打卡與開關持久化儲存 (localStorage)
       const CHECKIN_STORAGE_KEY = 'hualien_store_checkins';
+      const VISIBILITY_STORAGE_KEY = 'hualien_store_vis';
+
       let checkinSet = new Set();
+      let localVisMap = {};
+
       try {
-        const saved = localStorage.getItem(CHECKIN_STORAGE_KEY);
-        if (saved) {
-          checkinSet = new Set(JSON.parse(saved));
-        }
+        const savedChk = localStorage.getItem(CHECKIN_STORAGE_KEY);
+        if (savedChk) checkinSet = new Set(JSON.parse(savedChk));
+        const savedVis = localStorage.getItem(VISIBILITY_STORAGE_KEY);
+        if (savedVis) localVisMap = JSON.parse(savedVis);
       } catch (e) {
         console.warn('LocalStorage unavailable', e);
       }
 
-      function saveCheckins() {
+      function persistLocalState() {
         try {
           localStorage.setItem(CHECKIN_STORAGE_KEY, JSON.stringify(Array.from(checkinSet)));
+          const visObj = {};
+          storeStates.forEach((st, id) => {
+            visObj[id] = st.isVisible;
+          });
+          localStorage.setItem(VISIBILITY_STORAGE_KEY, JSON.stringify(visObj));
         } catch (e) {}
         updateCheckinStats();
       }
@@ -785,12 +794,16 @@ const html = `<!doctype html>
           highlightStoreRow(store.id);
         });
 
-        marker.addTo(map);
+        // 🌟 優先遵循本地 localStorage 的開關狀態
+        const isInitiallyVisible = (localVisMap[store.id] !== undefined) ? localVisMap[store.id] : true;
+        if (isInitiallyVisible) {
+          marker.addTo(map);
+        }
 
         storeStates.set(store.id, {
           store,
           marker,
-          isVisible: true,
+          isVisible: isInitiallyVisible,
           rowElement: null,
           chkElement: null,
           checkinBtn: null
@@ -871,7 +884,7 @@ const html = `<!doctype html>
           state.checkinBtn.innerHTML = '✅ 已打卡';
           showToast('✅ 已完成【' + state.store.name + '】打卡！');
         }
-        saveCheckins();
+        persistLocalState();
       }
 
       function updateCheckinStats() {
@@ -895,6 +908,7 @@ const html = `<!doctype html>
         }
         updateGroupCheckboxes();
         updateStats();
+        persistLocalState();
       }
 
       function focusStoreOnMap(storeId) {
