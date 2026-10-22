@@ -1,0 +1,1589 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jay的地圖 - 花蓮店家每日排程地圖 (Hugging Face 版)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+      :root {
+        --google-red: #c5221f;
+        --google-hover: #f1f3f4;
+        --color-east: #2e7d32;       /* 綠色 */
+        --color-west: #d32f2f;       /* 紅色 */
+        --color-diff: #f59e0b;       /* 黃色/金黃色 */
+        --border-color: #dadce0;
+        --text-primary: #202124;
+        --text-secondary: #5f6368;
+        --sidebar-width: 400px;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: "Noto Sans TC", "Roboto", system-ui, sans-serif;
+        background: #f8f9fa;
+        color: var(--text-primary);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      header {
+        background: var(--google-red);
+        color: white;
+        height: 56px;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        z-index: 1000;
+        flex-shrink: 0;
+      }
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .menu-btn {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 6px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .menu-btn:hover { background: rgba(255,255,255,0.15); }
+
+      .brand-box {
+        display: flex;
+        flex-direction: column;
+      }
+      .brand-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .date-badge {
+        font-size: 0.75rem;
+        background: rgba(255,255,255,0.25);
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-weight: 600;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .header-btn {
+        background: white;
+        color: var(--google-red);
+        border: none;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+        transition: background 150ms ease;
+      }
+      .header-btn:hover { background: #fce8e6; }
+      .header-btn.btn-excel {
+        background: #188038;
+        color: white;
+      }
+      .header-btn.btn-excel:hover { background: #137333; }
+
+      /* 排程控制條 */
+      .schedule-bar {
+        background: white;
+        border-bottom: 1px solid var(--border-color);
+        padding: 6px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-size: 0.85rem;
+        z-index: 990;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+        flex-shrink: 0;
+      }
+      .schedule-left {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .date-input {
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 4px 8px;
+        font-family: inherit;
+        font-size: 0.82rem;
+        color: var(--text-primary);
+        outline: none;
+      }
+      .date-input:focus { border-color: #1a73e8; }
+
+      .sched-btn {
+        background: #f1f3f4;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 5px 10px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: all 120ms ease;
+      }
+      .sched-btn:hover { background: #e8eaed; }
+
+      .sched-btn.action-sync {
+        background: #e0f2fe;
+        color: #0369a1;
+        border-color: #bae6fd;
+        font-weight: 700;
+      }
+      .sched-btn.action-sync:hover { background: #bae6fd; }
+      .sched-btn.action-sync.spinning .sync-icon {
+        display: inline-block;
+        animation: spinIcon 0.8s linear infinite;
+      }
+      @keyframes spinIcon { 100% { transform: rotate(360deg); } }
+
+      .sched-btn.action-primary {
+        background: #e8f0fe;
+        color: #1a73e8;
+        border-color: #c2e7ff;
+      }
+      .sched-btn.action-primary:hover { background: #d2e3fc; }
+
+      .sched-btn.action-save {
+        background: #e6f4ea;
+        color: #137333;
+        border-color: #a8dab5;
+        font-weight: 700;
+      }
+      .sched-btn.action-save:hover { background: #ceead6; }
+
+      .sched-btn.action-history {
+        background: #fef3c7;
+        color: #92400e;
+        border-color: #fde68a;
+      }
+      .sched-btn.action-history:hover { background: #fde68a; }
+
+      .sched-btn.action-named {
+        background: #f3e8ff;
+        color: #6b21a8;
+        border-color: #e9d5ff;
+        font-weight: 700;
+      }
+      .sched-btn.action-named:hover { background: #e9d5ff; }
+
+      .autosave-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        background: #f1f3f4;
+        color: var(--text-secondary);
+        transition: all 200ms ease;
+      }
+      .autosave-pill.saved {
+        background: #e6f4ea;
+        color: #137333;
+      }
+      .autosave-pill.saving {
+        background: #fef7e0;
+        color: #b06000;
+      }
+      .autosave-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #188038;
+      }
+      .autosave-pill.saving .autosave-dot {
+        background: #e37400;
+      }
+
+      /* 主版面佈局 */
+      .layout-body {
+        display: flex;
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .sidebar {
+        width: var(--sidebar-width);
+        min-width: var(--sidebar-width);
+        background: white;
+        border-right: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        transition: margin-left 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 500;
+        box-shadow: 2px 0 6px rgba(0,0,0,0.04);
+      }
+      .sidebar.collapsed {
+        margin-left: calc(-1 * var(--sidebar-width));
+      }
+
+      .panel-intro {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border-color);
+        background: #fafafa;
+      }
+      .intro-meta {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .quick-actions {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .btn-chip {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 3px 9px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 120ms ease;
+      }
+      .btn-chip:hover {
+        background: var(--google-hover);
+        border-color: #bdc1c6;
+      }
+      .btn-chip.highlight-redgreen {
+        background: #f0fdf4;
+        border-color: #86efac;
+        color: #166534;
+        font-weight: 700;
+      }
+      .btn-chip.highlight-redgreen:hover { background: #dcfce7; }
+
+      .search-box {
+        padding: 8px 16px;
+        border-bottom: 1px solid var(--border-color);
+        position: relative;
+      }
+      .search-input {
+        width: 100%;
+        padding: 7px 32px 7px 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        font-size: 0.82rem;
+        outline: none;
+        font-family: inherit;
+      }
+      .search-input:focus { border-color: #1a73e8; }
+      .search-clear {
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #888;
+        font-size: 14px;
+        display: none;
+      }
+
+      .stores-container {
+        flex: 1;
+        overflow-y: auto;
+      }
+
+      .group-block {
+        border-bottom: 1px solid #f1f3f4;
+      }
+      .group-header {
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        user-select: none;
+        transition: background 150ms ease;
+      }
+      .group-header:hover { background: #f8f9fa; }
+      .group-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.86rem;
+        font-weight: 700;
+      }
+      .color-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .color-dot.east { background: var(--color-east); }
+      .color-dot.west { background: var(--color-west); }
+      .color-dot.diff { background: var(--color-diff); }
+
+      .group-count {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+      .group-arrow {
+        font-size: 10px;
+        color: #80868b;
+        transition: transform 180ms ease;
+      }
+      .group-block.expanded .group-arrow {
+        transform: rotate(90deg);
+      }
+
+      .group-list {
+        display: none;
+        background: #fff;
+      }
+      .group-block.expanded .group-list {
+        display: block;
+      }
+
+      .store-row {
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 1px solid #f8f9fa;
+        cursor: pointer;
+        transition: background 120ms ease;
+      }
+      .store-row:hover { background: #f1f3f4; }
+      .store-row.highlighted { background: #e8f0fe !important; }
+      .store-row.disabled { opacity: 0.45; }
+
+      .item-checkbox {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        accent-color: #1a73e8;
+      }
+
+      .pin-svg {
+        width: 14px;
+        height: 19px;
+        flex-shrink: 0;
+      }
+
+      .store-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .store-name-text {
+        font-size: 0.82rem;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .store-addr-text {
+        font-size: 0.72rem;
+        color: var(--text-secondary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .checkin-btn {
+        background: #f1f3f4;
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+        padding: 3px 8px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: all 120ms ease;
+      }
+      .checkin-btn:hover { background: #e8eaed; }
+      .checkin-btn.checked-in {
+        background: #e6f4ea;
+        color: #137333;
+        border-color: #a8dab5;
+        font-weight: 700;
+      }
+
+      /* 地圖容器 */
+      #map {
+        flex: 1;
+        height: 100%;
+        background: #e5e3df;
+      }
+
+      /* 側邊欄懸浮切換鈕 */
+      .floating-toggle {
+        position: absolute;
+        top: 14px;
+        left: calc(var(--sidebar-width) + 12px);
+        z-index: 800;
+        background: white;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+        border-radius: 8px;
+        padding: 7px 12px;
+        cursor: pointer;
+        font-size: 0.78rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: left 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .sidebar.collapsed ~ .floating-toggle {
+        left: 12px;
+      }
+
+      /* Leaflet 彈窗美化 */
+      .leaflet-popup-content-wrapper {
+        border-radius: 10px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        padding: 0;
+        overflow: hidden;
+      }
+      .leaflet-popup-content {
+        margin: 12px 14px;
+        line-height: 1.4;
+      }
+      .pop-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 4px;
+      }
+      .pop-badge {
+        font-size: 0.68rem;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-weight: 700;
+        color: #ffffff !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      }
+      .pop-badge.east { background: #1b5e20 !important; }
+      .pop-badge.west { background: #b71c1c !important; }
+      .pop-badge.diff { background: #b45309 !important; }
+
+      .pop-title {
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: #1a1a1a;
+        margin-bottom: 2px;
+      }
+      .pop-addr {
+        font-size: 0.78rem;
+        color: #4a4a4a;
+        margin-bottom: 8px;
+      }
+      .pop-actions {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        border-top: 1px solid #f1f3f4;
+        padding-top: 8px;
+      }
+      .pop-btn {
+        padding: 4px 10px;
+        font-size: 0.75rem;
+        border-radius: 4px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        border: none;
+      }
+      .pop-btn-nav {
+        background: #1a73e8;
+        color: white;
+      }
+      .pop-btn-nav:hover { background: #1557b0; }
+      .pop-btn-search {
+        background: #f1f3f4;
+        color: #3c4043;
+        border: 1px solid #dadce0;
+      }
+      .pop-btn-search:hover { background: #e8eaed; }
+      .pop-btn-checkin {
+        background: #e6f4ea;
+        color: #137333;
+        border: 1px solid #a8dab5;
+        font-weight: 700;
+      }
+      .pop-btn-checkin.checked-in {
+        background: #188038;
+        color: white;
+        border-color: #137333;
+      }
+
+      /* 模態框 Modal */
+      .modal-overlay {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+      }
+      .modal-box {
+        background: white;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 580px;
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        overflow: hidden;
+      }
+      .modal-header {
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .modal-title {
+        font-size: 1.05rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .modal-close {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: #888;
+      }
+      .modal-body {
+        padding: 16px 20px;
+        overflow-y: auto;
+      }
+      .modal-footer {
+        padding: 12px 20px;
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        background: #fafafa;
+      }
+
+      .tab-header {
+        display: flex;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 12px;
+      }
+      .tab-btn {
+        padding: 8px 16px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        cursor: pointer;
+        border: none;
+        background: none;
+        color: var(--text-secondary);
+        border-bottom: 2px solid transparent;
+      }
+      .tab-btn.active {
+        color: #1a73e8;
+        border-bottom-color: #1a73e8;
+      }
+
+      .history-card {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 10px 14px;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 120ms ease;
+      }
+      .history-card:hover {
+        background: #f8f9fa;
+        border-color: #bdc1c6;
+      }
+      .history-card.is-named-card {
+        border-left: 4px solid #9333ea;
+        background: #faf5ff;
+      }
+      .history-badge {
+        font-size: 0.68rem;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: 700;
+        margin-left: 6px;
+      }
+      .badge-named { background: #e9d5ff; color: #6b21a8; }
+      .badge-latest { background: #dcfce7; color: #166534; }
+
+      .history-revert-btn {
+        background: white;
+        border: 1px solid #1a73e8;
+        color: #1a73e8;
+        border-radius: 6px;
+        padding: 5px 12px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .history-revert-btn:hover { background: #e8f0fe; }
+
+      /* Toast 提示條 */
+      .toast-box {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(32,33,36,0.92);
+        color: white;
+        padding: 9px 20px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        z-index: 3000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        display: none;
+        white-space: pre-line;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+        <button class="menu-btn" id="menuToggleBtn" title="展開/收合側邊欄">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </button>
+        <div class="brand-box">
+          <div class="brand-title">
+            <span>jay的地圖</span>
+            <span class="date-badge" id="headerDateLabel">2026-10-22</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <a href="/api/export-excel" id="btnExportExcel" target="_blank" class="header-btn btn-excel" title="一鍵下載今日 Excel 報表 (.xlsx)">
+          <span>📊 下載 Excel 報表 ↗</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="schedule-bar">
+      <div class="schedule-left">
+        <span>📅 日期：</span>
+        <input type="date" id="dateSelector" class="date-input" />
+
+        <button class="sched-btn action-sync" id="btnSyncServer" title="立即取得所有人的最新打卡與開關狀態">
+          <span class="sync-icon">🔄</span>
+          <span>同步最新狀態</span>
+        </button>
+
+        <button class="sched-btn action-primary" id="btnLoadAllOpen" title="隔天快速載入全部打勾開啟">
+          <span>☀️ 載入全開啟</span>
+        </button>
+
+        <button class="sched-btn action-history" id="btnLoadYesterday" title="一鍵回到昨天最後一次存檔紀錄">
+          <span>↩️ 回到昨天最後紀錄</span>
+        </button>
+
+        <button class="sched-btn action-save" id="btnOpenSaveModal" title="手動儲存並命名當前開關版本">
+          <span>💾 另存自訂版本</span>
+        </button>
+
+        <button class="sched-btn action-named" id="btnOpenHistoryModal" title="檢視所有歷史/自訂命名版本並一鍵讀取">
+          <span>📜 讀取版本歷程 ▼</span>
+        </button>
+      </div>
+
+      <div class="schedule-right">
+        <div class="autosave-pill saved" id="autoSaveIndicator" title="所有人共同編輯，自動同步雲端">
+          <span class="autosave-dot"></span>
+          <span id="autoSaveText">🟢 共同編輯中</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="layout-body">
+      <aside class="sidebar" id="sidebar">
+        <div class="panel-intro">
+          <div class="intro-meta">
+            <span id="activeCountLabel">目前顯示：計算中...</span>
+            <span id="checkinStatsLabel" style="color:#16a34a;font-weight:700;">已打卡：0 家</span>
+          </div>
+          <div class="quick-actions">
+            <button class="btn-chip" id="btnShowAll">全部顯示</button>
+            <button class="btn-chip" id="btnHideAll">全部隱藏</button>
+            <button class="btn-chip highlight-redgreen" id="btnShowRedGreen" title="僅顯示東區(綠)與西區(紅)，隱藏非488名單">
+              <span>🟢🔴 紅綠同時顯示</span>
+            </button>
+            <button class="btn-chip" id="btnOnlyEast">僅東區 (綠)</button>
+            <button class="btn-chip" id="btnOnlyWest">僅西區 (紅)</button>
+            <button class="btn-chip" id="btnOnlyDiff" style="color:#b45309;">僅非488 (黃)</button>
+          </div>
+        </div>
+
+        <div class="search-box">
+          <input type="text" id="searchInput" class="search-input" placeholder="搜尋店名、路名、地址… (按 Enter 直達定位)" />
+          <button class="search-clear" id="searchClearBtn">&times;</button>
+        </div>
+
+        <div class="stores-container">
+          <!-- 東區 (綠色) -->
+          <div class="group-block expanded" id="group-east-block">
+            <div class="group-header" onclick="toggleGroupExpand('group-east-block')">
+              <div class="group-title-wrap">
+                <input type="checkbox" class="item-checkbox" id="chk-group-east" checked onclick="event.stopPropagation();" />
+                <span class="color-dot east"></span>
+                <span>主要名單 - 界線以東 (綠)</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span class="group-count" id="count-east">0 家</span>
+                <span class="group-arrow">▶</span>
+              </div>
+            </div>
+            <div class="group-list" id="list-east"></div>
+          </div>
+
+          <!-- 西區 (紅色) -->
+          <div class="group-block expanded" id="group-west-block">
+            <div class="group-header" onclick="toggleGroupExpand('group-west-block')">
+              <div class="group-title-wrap">
+                <input type="checkbox" class="item-checkbox" id="chk-group-west" checked onclick="event.stopPropagation();" />
+                <span class="color-dot west"></span>
+                <span>主要名單 - 界線以西 (紅)</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span class="group-count" id="count-west">0 家</span>
+                <span class="group-arrow">▶</span>
+              </div>
+            </div>
+            <div class="group-list" id="list-west"></div>
+          </div>
+
+          <!-- 非 488 (黃色) -->
+          <div class="group-block expanded" id="group-diff-block">
+            <div class="group-header" onclick="toggleGroupExpand('group-diff-block')">
+              <div class="group-title-wrap">
+                <input type="checkbox" class="item-checkbox" id="chk-group-diff" checked onclick="event.stopPropagation();" />
+                <span class="color-dot diff"></span>
+                <span>非 488 名單店家 (黃)</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span class="group-count" id="count-diff">0 家</span>
+                <span class="group-arrow">▶</span>
+              </div>
+            </div>
+            <div class="group-list" id="list-diff"></div>
+          </div>
+        </div>
+      </aside>
+
+      <button class="floating-toggle" id="floatingToggleBtn">
+        <span id="toggleIcon">◀</span>
+        <span id="toggleText">收合清單</span>
+      </button>
+
+      <main id="map"></main>
+    </div>
+
+    <!-- 儲存自訂版本 Modal -->
+    <div class="modal-overlay" id="saveModalOverlay">
+      <div class="modal-box">
+        <div class="modal-header">
+          <div class="modal-title">💾 儲存自訂排程版本</div>
+          <button class="modal-close" id="saveModalCloseBtn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size:0.85rem;color:#555;margin-bottom:12px;">
+            請為當前的店家開關與打卡狀態命名（例如：「上午市區路線」、「下午吉安名單」），所有協同同仁皆可於【讀取版本歷程】隨時載入！
+          </p>
+          <input type="text" id="saveVersionNameInput" class="search-input" placeholder="請輸入版本名稱..." style="font-size:0.95rem;padding:8px 12px;" />
+          <div style="font-size:0.8rem;color:#666;margin-top:10px;" id="saveModalStatsInfo"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="sched-btn" id="saveModalCancelBtn" type="button">取消</button>
+          <button class="sched-btn action-save" id="saveModalConfirmBtn" type="button" style="background:#188038;color:white;border-color:#137333;">確認儲存此版本</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 讀取版本歷程 Modal -->
+    <div class="modal-overlay" id="historyModalOverlay">
+      <div class="modal-box" style="max-width:620px;">
+        <div class="modal-header">
+          <div class="modal-title">📜 讀取版本歷程</div>
+          <button class="modal-close" id="historyModalCloseBtn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="tab-header">
+            <button class="tab-btn active" id="tabAllVersions">全部更新紀錄</button>
+            <button class="tab-btn" id="tabNamedVersions">✏️ 僅看自訂命名版本</button>
+          </div>
+          <div id="historyListContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-box" id="toastBox"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      let stores = [];
+      const storeStates = new Map();
+      const checkinSet = new Set();
+      let currentDate = new Date().toISOString().split('T')[0];
+      let lastServerUpdateTime = '';
+      let isSyncing = false;
+      let autoPollInterval = null;
+
+      // 日期選擇器初始化
+      const dateSelector = document.getElementById('dateSelector');
+      dateSelector.value = currentDate;
+      document.getElementById('headerDateLabel').textContent = currentDate;
+      document.getElementById('btnExportExcel').href = '/api/export-excel?date=' + currentDate;
+
+      dateSelector.addEventListener('change', () => {
+        currentDate = dateSelector.value;
+        document.getElementById('headerDateLabel').textContent = currentDate;
+        document.getElementById('btnExportExcel').href = '/api/export-excel?date=' + currentDate;
+        loadStoresFromServer(currentDate);
+      });
+
+      // Toast
+      function showToast(text, duration = 2500) {
+        const toast = document.getElementById('toastBox');
+        toast.textContent = text;
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, duration);
+      }
+
+      function updateAutoSaveStatus(status, text) {
+        const pill = document.getElementById('autoSaveIndicator');
+        const txt = document.getElementById('autoSaveText');
+        if (!pill || !txt) return;
+        pill.className = 'autosave-pill ' + status;
+        txt.textContent = text;
+      }
+
+      // 地圖初始化
+      const map = L.map('map', { zoomControl: true }).setView([23.985, 121.605], 13);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap'
+      }).addTo(map);
+
+      // 分界線
+      const boundaryLine = L.polyline([
+        [23.960, 121.581],
+        [23.970, 121.5925],
+        [23.983, 121.6070],
+        [23.995, 121.620]
+      ], {
+        color: '#6b7280',
+        weight: 2,
+        dashArray: '6, 6',
+        opacity: 0.6
+      }).addTo(map);
+      boundaryLine.bindTooltip('← 界線以西 (西區紅) ｜ 林森路+德安一街分界 ｜ 界線以東 (東區綠) →', { sticky: true });
+
+      function createPinIcon(colorHex) {
+        const svg = `
+          <svg class="gmarker-svg" width="22" height="30" viewBox="0 0 24 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C5.372 0 0 5.373 0 12C0 19.5 12 34 12 34C12 34 24 19.5 24 12C24 5.373 18.628 0 12 0Z" fill="${colorHex}" stroke="#ffffff" stroke-width="1.5"/>
+            <circle cx="12" cy="11" r="4.5" fill="#ffffff"/>
+          </svg>
+        `;
+        return L.divIcon({
+          className: 'gmarker-wrap',
+          html: svg,
+          iconSize: [22, 30],
+          iconAnchor: [11, 30],
+          popupAnchor: [0, -28]
+        });
+      }
+      const iconEast = createPinIcon('#2e7d32');
+      const iconWest = createPinIcon('#d32f2f');
+      const iconDiff = createPinIcon('#f59e0b');
+
+      function getSmallPinSvg(colorHex) {
+        return `<svg class="pin-svg" viewBox="0 0 24 34" fill="none"><path d="M12 0C5.372 0 0 5.373 0 12C0 19.5 12 34 12 34C12 34 24 19.5 24 12C24 5.373 18.628 0 12 0Z" fill="${colorHex}" stroke="#ffffff" stroke-width="1.5"/><circle cx="12" cy="11" r="4" fill="#ffffff"/></svg>`;
+      }
+
+      function getGoogleMapsNavUrl(s) {
+        return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(s.name + ' ' + (s.address || ''));
+      }
+      function getGoogleMapsSearchUrl(s) {
+        return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s.name + ' ' + (s.address || ''));
+      }
+
+      // 從後端載入資料並繪製
+      async function loadStoresFromServer(dateStr) {
+        try {
+          updateAutoSaveStatus('saving', '載入中...');
+          const res = await fetch('/api/stores?date=' + dateStr);
+          const data = await res.json();
+          if (!data.success) throw new Error('載入失敗');
+
+          stores = data.stores;
+          lastServerUpdateTime = data.serverTime || '';
+          renderStoresUI();
+          updateAutoSaveStatus('saved', '🟢 共同編輯中 ' + (lastServerUpdateTime.split(' ').pop() || ''));
+        } catch (err) {
+          showToast('無法連接後端: ' + err.message, 3000);
+        }
+      }
+
+      function renderStoresUI() {
+        // 清理現有 Marker
+        storeStates.forEach(st => {
+          if (st.marker && map.hasLayer(st.marker)) {
+            map.removeLayer(st.marker);
+          }
+        });
+        storeStates.clear();
+        checkinSet.clear();
+
+        document.getElementById('list-east').innerHTML = '';
+        document.getElementById('list-west').innerHTML = '';
+        document.getElementById('list-diff').innerHTML = '';
+
+        stores.forEach((store, index) => {
+          if (store.isCheckedIn) {
+            checkinSet.add(store.id);
+          }
+
+          let icon = iconEast;
+          let badgeClass = 'east';
+          let badgeText = '🟢 主要名單 - 界線以東';
+          let targetList = document.getElementById('list-east');
+          let pinColor = '#2e7d32';
+
+          if (store.subGroup === '主要名單-西區') {
+            icon = iconWest;
+            badgeClass = 'west';
+            badgeText = '🔴 主要名單 - 界線以西';
+            targetList = document.getElementById('list-west');
+            pinColor = '#d32f2f';
+          } else if (store.subGroup === '非488名單') {
+            icon = iconDiff;
+            badgeClass = 'diff';
+            badgeText = '🟡 非 488 名單店家';
+            targetList = document.getElementById('list-diff');
+            pinColor = '#f59e0b';
+          }
+
+          const marker = L.marker([store.lat, store.lng], { icon: icon });
+
+          function updatePopupContent() {
+            const isCheckedIn = checkinSet.has(store.id);
+            const popupDiv = document.createElement('div');
+            popupDiv.innerHTML = `
+              <div class="pop-header">
+                <span class="pop-badge ${badgeClass}">${badgeText}</span>
+                <span style="font-size:0.75rem;color:#888;">#${index + 1}</span>
+              </div>
+              <div class="pop-title">${store.name}</div>
+              <div class="pop-addr">${store.address}</div>
+              <div class="pop-actions">
+                <a class="pop-btn pop-btn-nav" href="${getGoogleMapsNavUrl(store)}" target="_blank" rel="noopener">
+                  🚗 導航此店 ↗
+                </a>
+                <a class="pop-btn pop-btn-search" href="${getGoogleMapsSearchUrl(store)}" target="_blank" rel="noopener">
+                  🔍 搜尋地標 ↗
+                </a>
+                <button class="pop-btn pop-btn-checkin ${isCheckedIn ? 'checked-in' : ''}" id="pop-chk-${store.id}">
+                  ${isCheckedIn ? '✅ 已打卡' : '📍 打卡'}
+                </button>
+              </div>
+            `;
+            popupDiv.querySelector('#pop-chk-' + store.id).addEventListener('click', (e) => {
+              e.stopPropagation();
+              toggleCheckin(store.id);
+            });
+            return popupDiv;
+          }
+
+          marker.bindPopup(updatePopupContent());
+          marker.on('click', () => {
+            marker.setPopupContent(updatePopupContent());
+            highlightStoreRow(store.id);
+          });
+
+          if (store.isVisible) {
+            marker.addTo(map);
+          }
+
+          // 側邊欄 Row
+          const row = document.createElement('div');
+          row.className = 'store-row' + (store.isVisible ? '' : ' disabled');
+          row.id = 'store-row-' + store.id;
+          const isCheckedIn = checkinSet.has(store.id);
+
+          row.innerHTML = `
+            <input type="checkbox" class="item-checkbox" id="chk-store-${store.id}" ${store.isVisible ? 'checked' : ''} />
+            ${getSmallPinSvg(pinColor)}
+            <div class="store-info">
+              <div class="store-name-text" title="${store.name}">${index + 1}. ${store.name}</div>
+              <div class="store-addr-text" title="${store.address}">${store.address}</div>
+            </div>
+            <button class="checkin-btn ${isCheckedIn ? 'checked-in' : ''}" id="btn-chk-${store.id}">
+              ${isCheckedIn ? '✅ 已打卡' : '📍 打卡'}
+            </button>
+          `;
+
+          const chk = row.querySelector('.item-checkbox');
+          const btnCheckin = row.querySelector('#btn-chk-' + store.id);
+
+          chk.addEventListener('click', (e) => {
+            e.stopPropagation();
+            setStoreVisibility(store.id, chk.checked);
+          });
+
+          btnCheckin.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleCheckin(store.id);
+          });
+
+          row.addEventListener('click', () => {
+            focusStoreOnMap(store.id);
+          });
+
+          targetList.appendChild(row);
+
+          storeStates.set(store.id, {
+            store,
+            marker,
+            isVisible: store.isVisible,
+            rowElement: row,
+            chkElement: chk,
+            checkinBtn: btnCheckin
+          });
+        });
+
+        updateGroupCheckboxes();
+        updateActiveCountLabel();
+        updateCheckinStats();
+      }
+
+      function highlightStoreRow(storeId) {
+        document.querySelectorAll('.store-row').forEach(r => r.classList.remove('highlighted'));
+        const row = document.getElementById('store-row-' + storeId);
+        if (row) {
+          row.classList.add('highlighted');
+          row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+
+      function focusStoreOnMap(storeId) {
+        const state = storeStates.get(storeId);
+        if (!state) return;
+        highlightStoreRow(storeId);
+        map.flyTo([state.store.lat, state.store.lng], 16, { animate: true, duration: 0.6 });
+        setTimeout(() => {
+          if (!map.hasLayer(state.marker)) state.marker.addTo(map);
+          state.marker.openPopup();
+        }, 500);
+      }
+
+      async function setStoreVisibility(storeId, isVis) {
+        const state = storeStates.get(storeId);
+        if (!state) return;
+        state.isVisible = isVis;
+        state.chkElement.checked = isVis;
+        if (isVis) {
+          state.rowElement.classList.remove('disabled');
+          if (!map.hasLayer(state.marker)) state.marker.addTo(map);
+        } else {
+          state.rowElement.classList.add('disabled');
+          if (map.hasLayer(state.marker)) map.removeLayer(state.marker);
+        }
+        updateGroupCheckboxes();
+        updateActiveCountLabel();
+
+        // 呼叫後端更新
+        try {
+          updateAutoSaveStatus('saving', '儲存中...');
+          const res = await fetch('/api/stores/toggle-visibility', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              date: currentDate,
+              store_id: Number(storeId.replace('store-', '')),
+              is_visible: isVis
+            })
+          });
+          const data = await res.json();
+          if (data.success) {
+            lastServerUpdateTime = data.serverTime;
+            updateAutoSaveStatus('saved', '🟢 共同編輯中 ' + (lastServerUpdateTime.split(' ').pop() || ''));
+          }
+        } catch (e) {}
+      }
+
+      async function toggleCheckin(storeId) {
+        const numId = Number(storeId.replace('store-', ''));
+        const isCurrentlyChecked = checkinSet.has(storeId);
+        const nextState = !isCurrentlyChecked;
+
+        if (nextState) checkinSet.add(storeId);
+        else checkinSet.delete(storeId);
+
+        const state = storeStates.get(storeId);
+        if (state && state.checkinBtn) {
+          state.checkinBtn.textContent = nextState ? '✅ 已打卡' : '📍 打卡';
+          if (nextState) state.checkinBtn.classList.add('checked-in');
+          else state.checkinBtn.classList.remove('checked-in');
+        }
+
+        updateCheckinStats();
+        showToast(nextState ? `✅ 【${state.store.name}】已成功打卡！` : `已取消【${state.store.name}】打卡`, 2000);
+
+        try {
+          const res = await fetch('/api/stores/toggle-checkin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              date: currentDate,
+              store_id: numId,
+              is_checked_in: nextState
+            })
+          });
+          const data = await res.json();
+          if (data.success) {
+            lastServerUpdateTime = data.serverTime;
+          }
+        } catch (e) {}
+      }
+
+      function updateActiveCountLabel() {
+        let active = 0;
+        storeStates.forEach(st => { if (st.isVisible) active++; });
+        document.getElementById('activeCountLabel').textContent = `目前顯示：${active} / ${stores.length} 處店家`;
+      }
+
+      function updateCheckinStats() {
+        document.getElementById('checkinStatsLabel').textContent = `已打卡：${checkinSet.size} 家`;
+      }
+
+      function updateGroupCheckboxes() {
+        const groups = [
+          { blockId: 'group-east-block', chkId: 'chk-group-east', countId: 'count-east', sub: '主要名單-東區' },
+          { blockId: 'group-west-block', chkId: 'chk-group-west', countId: 'count-west', sub: '主要名單-西區' },
+          { blockId: 'group-diff-block', chkId: 'chk-group-diff', countId: 'count-diff', sub: '非488名單' }
+        ];
+        groups.forEach(g => {
+          let total = 0, checked = 0;
+          storeStates.forEach(st => {
+            if (st.store.subGroup === g.sub) {
+              total++;
+              if (st.isVisible) checked++;
+            }
+          });
+          document.getElementById(g.countId).textContent = `${checked}/${total} 家`;
+          const chk = document.getElementById(g.chkId);
+          chk.checked = (checked === total && total > 0);
+          chk.indeterminate = (checked > 0 && checked < total);
+        });
+      }
+
+      // 批次開關
+      async function batchSetVisibility(filterFn, note) {
+        const hiddenIds = [];
+        let active = 0;
+        storeStates.forEach((state, id) => {
+          const vis = filterFn(state.store);
+          state.isVisible = vis;
+          state.chkElement.checked = vis;
+          if (vis) {
+            active++;
+            state.rowElement.classList.remove('disabled');
+            if (!map.hasLayer(state.marker)) state.marker.addTo(map);
+          } else {
+            hiddenIds.push(Number(id.replace('store-', '')));
+            state.rowElement.classList.add('disabled');
+            if (map.hasLayer(state.marker)) map.removeLayer(state.marker);
+          }
+        });
+        updateGroupCheckboxes();
+        updateActiveCountLabel();
+
+        try {
+          updateAutoSaveStatus('saving', '更新中...');
+          const res = await fetch('/api/stores/batch-visibility', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              date: currentDate,
+              hidden_ids: hiddenIds,
+              action_note: note
+            })
+          });
+          const data = await res.json();
+          if (data.success) {
+            lastServerUpdateTime = data.serverTime;
+            updateAutoSaveStatus('saved', '🟢 共同編輯中 ' + (lastServerUpdateTime.split(' ').pop() || ''));
+          }
+        } catch (e) {}
+      }
+
+      // 快速按鈕
+      document.getElementById('btnShowAll').addEventListener('click', () => batchSetVisibility(() => true, '全部顯示'));
+      document.getElementById('btnHideAll').addEventListener('click', () => batchSetVisibility(() => false, '全部隱藏'));
+      document.getElementById('btnShowRedGreen').addEventListener('click', () => {
+        batchSetVisibility(s => s.subGroup === '主要名單-東區' || s.subGroup === '主要名單-西區', '🟢🔴 紅綠同時顯示');
+        showToast('已開啟東區(綠)與西區(紅)，非488(黃)已隱藏', 2500);
+      });
+      document.getElementById('btnOnlyEast').addEventListener('click', () => batchSetVisibility(s => s.subGroup === '主要名單-東區', '僅顯示東區'));
+      document.getElementById('btnOnlyWest').addEventListener('click', () => batchSetVisibility(s => s.subGroup === '主要名單-西區', '僅顯示西區'));
+      document.getElementById('btnOnlyDiff').addEventListener('click', () => batchSetVisibility(s => s.subGroup === '非488名單', '僅顯示非488'));
+
+      // 大分組 Checkbox 批次切換
+      function bindGroupCheckbox(chkId, subGroupName) {
+        document.getElementById(chkId).addEventListener('click', (e) => {
+          const targetVis = e.target.checked;
+          const hiddenIds = [];
+          storeStates.forEach((state, id) => {
+            if (state.store.subGroup === subGroupName) {
+              state.isVisible = targetVis;
+              state.chkElement.checked = targetVis;
+              if (targetVis) {
+                state.rowElement.classList.remove('disabled');
+                if (!map.hasLayer(state.marker)) state.marker.addTo(map);
+              } else {
+                state.rowElement.classList.add('disabled');
+                if (map.hasLayer(state.marker)) map.removeLayer(state.marker);
+              }
+            }
+            if (!state.isVisible) {
+              hiddenIds.push(Number(id.replace('store-', '')));
+            }
+          });
+          updateGroupCheckboxes();
+          updateActiveCountLabel();
+          fetch('/api/stores/batch-visibility', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ date: currentDate, hidden_ids: hiddenIds, action_note: '切換分組：' + subGroupName })
+          });
+        });
+      }
+      bindGroupCheckbox('chk-group-east', '主要名單-東區');
+      bindGroupCheckbox('chk-group-west', '主要名單-西區');
+      bindGroupCheckbox('chk-group-diff', '非488名單');
+
+      // 載入全開啟
+      document.getElementById('btnLoadAllOpen').addEventListener('click', async () => {
+        if (!confirm('確定要將今天的店家全部設為【開啟顯示】嗎？')) return;
+        showToast('正在載入全開啟...', 2000);
+        try {
+          const res = await fetch('/api/stores/load-all-open?date=' + currentDate, { method: 'POST' });
+          const data = await res.json();
+          if (data.success) {
+            loadStoresFromServer(currentDate);
+            showToast('☀️ 已成功將今日 500 筆店家全部開啟顯示！', 3000);
+          }
+        } catch (e) {}
+      });
+
+      // 回到昨天最後紀錄
+      document.getElementById('btnLoadYesterday').addEventListener('click', async () => {
+        if (!confirm('確定要載入昨天最後一次的存檔紀錄到今天嗎？')) return;
+        showToast('正在讀取昨天紀錄...', 2000);
+        try {
+          const res = await fetch('/api/stores/load-yesterday?date=' + currentDate, { method: 'POST' });
+          const data = await res.json();
+          if (data.success) {
+            loadStoresFromServer(currentDate);
+            showToast(`↩️ 成功載入昨日 (${data.yesterdayDate}) 最後存檔！開啟：${data.activeCount} 家，關閉：${data.closedCount} 家`, 3500);
+          } else {
+            showToast(data.detail || '找不到昨日紀錄', 3000);
+          }
+        } catch (e) {
+          showToast('讀取失敗', 2000);
+        }
+      });
+
+      // 另存自訂版本 Modal
+      const saveModalOverlay = document.getElementById('saveModalOverlay');
+      const saveVersionNameInput = document.getElementById('saveVersionNameInput');
+      document.getElementById('btnOpenSaveModal').addEventListener('click', () => {
+        let active = 0;
+        storeStates.forEach(st => { if (st.isVisible) active++; });
+        const timeNow = new Date().toLocaleTimeString('zh-TW', { hour12: false, hour: '2-digit', minute: '2-digit' });
+        saveVersionNameInput.value = `自訂名單 (${active}家) - ${timeNow}`;
+        document.getElementById('saveModalStatsInfo').textContent = `包含：開啟 ${active} 家 ｜ 關閉 ${stores.length - active} 家 ｜ 日期：${currentDate}`;
+        saveModalOverlay.style.display = 'flex';
+        setTimeout(() => saveVersionNameInput.select(), 100);
+      });
+      document.getElementById('saveModalCloseBtn').addEventListener('click', () => saveModalOverlay.style.display = 'none');
+      document.getElementById('saveModalCancelBtn').addEventListener('click', () => saveModalOverlay.style.display = 'none');
+
+      document.getElementById('saveModalConfirmBtn').addEventListener('click', async () => {
+        const vName = saveVersionNameInput.value.trim();
+        if (!vName) { alert('請輸入版本名稱！'); return; }
+        saveModalOverlay.style.display = 'none';
+
+        const hiddenIds = [];
+        storeStates.forEach((st, id) => {
+          if (!st.isVisible) hiddenIds.push(Number(id.replace('store-', '')));
+        });
+        const checkedIds = Array.from(checkinSet).map(id => Number(id.replace('store-', '')));
+
+        try {
+          const res = await fetch('/api/versions/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              date: currentDate,
+              version_name: vName,
+              hidden_ids: hiddenIds,
+              checked_ids: checkedIds
+            })
+          });
+          const data = await res.json();
+          if (data.success) {
+            showToast(`✅ 成功儲存版本【${data.versionName}】！\n全員皆可於【讀取版本歷程】查看並套用！`, 4000);
+          }
+        } catch (e) {}
+      });
+
+      // 讀取版本歷程 Modal
+      const historyModalOverlay = document.getElementById('historyModalOverlay');
+      const historyListContainer = document.getElementById('historyListContainer');
+      let historyData = { list: [], namedList: [] };
+      let currentTab = 'all';
+
+      document.getElementById('btnOpenHistoryModal').addEventListener('click', async () => {
+        historyModalOverlay.style.display = 'flex';
+        historyListContainer.innerHTML = '<div style="text-align:center;padding:24px;color:#888;">⏳ 讀取版本中...</div>';
+        try {
+          const res = await fetch('/api/versions?date=' + currentDate);
+          historyData = await res.json();
+          renderHistoryList();
+        } catch (e) {
+          historyListContainer.innerHTML = '<div style="text-align:center;padding:24px;color:#c5221f;">讀取失敗</div>';
+        }
+      });
+      document.getElementById('historyModalCloseBtn').addEventListener('click', () => historyModalOverlay.style.display = 'none');
+
+      document.getElementById('tabAllVersions').addEventListener('click', () => {
+        currentTab = 'all';
+        document.getElementById('tabAllVersions').classList.add('active');
+        document.getElementById('tabNamedVersions').classList.remove('active');
+        renderHistoryList();
+      });
+      document.getElementById('tabNamedVersions').addEventListener('click', () => {
+        currentTab = 'named';
+        document.getElementById('tabNamedVersions').classList.add('active');
+        document.getElementById('tabAllVersions').classList.remove('active');
+        renderHistoryList();
+      });
+
+      function renderHistoryList() {
+        const list = (currentTab === 'named') ? historyData.namedList : historyData.list;
+        if (!list || list.length === 0) {
+          historyListContainer.innerHTML = `
+            <div style="text-align:center;padding:30px;color:#888;">
+              ${currentTab === 'named' ? '目前尚無手動命名的自訂版本，請先點擊【💾 另存自訂版本】！' : '目前尚無更新紀錄'}
+            </div>
+          `;
+          return;
+        }
+
+        historyListContainer.innerHTML = '';
+        list.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'history-card' + (item.isNamed ? ' is-named-card' : '');
+          card.innerHTML = `
+            <div class="history-meta">
+              <div style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:#888;margin-bottom:3px;">
+                <span>${item.timestamp}</span>
+                ${item.isNamed ? `<span class="history-badge badge-named">🏷️ ${item.versionName}</span>` : ''}
+              </div>
+              <div style="font-weight:700;font-size:0.88rem;color:#202124;">${item.action}</div>
+              <div style="font-size:0.75rem;color:#5f6368;margin-top:2px;">開啟：${item.activeCount} 家 ｜ 關閉：${item.closedCount} 家</div>
+            </div>
+            <button class="history-revert-btn" id="btn-rev-${item.id}">↩️ 讀取此版本</button>
+          `;
+
+          card.querySelector('#btn-rev-' + item.id).addEventListener('click', async () => {
+            if (!confirm(`確定要讀取並套用【${item.versionName || item.action}】嗎？\n(全體同仁將同步此版本)`)) return;
+            try {
+              const res = await fetch('/api/versions/revert', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ date: currentDate, version_id: item.id })
+              });
+              const data = await res.json();
+              if (data.success) {
+                historyModalOverlay.style.display = 'none';
+                loadStoresFromServer(currentDate);
+                showToast(`✅ 成功切換至版本【${data.versionName}】！`, 3000);
+              }
+            } catch (e) {}
+          });
+
+          historyListContainer.appendChild(card);
+        });
+      }
+
+      // 共同編輯即時同步輪詢 (每 8 秒自動輪詢一次)
+      async function pollCollaborativeUpdate() {
+        if (isSyncing) return;
+        try {
+          const res = await fetch(`/api/stores/poll?date=${currentDate}&client_time=${encodeURIComponent(lastServerUpdateTime)}`);
+          const data = await res.json();
+          if (data.success && data.hasUpdate) {
+            lastServerUpdateTime = data.serverTime;
+            const hiddenSet = new Set(data.hiddenIds);
+            const checkedSet = new Set(data.checkedInIds);
+
+            checkinSet.clear();
+            checkedSet.forEach(id => checkinSet.add('store-' + id));
+
+            storeStates.forEach((state, id) => {
+              const numId = Number(id.replace('store-', ''));
+              const shouldBeVis = !hiddenSet.has(numId);
+              if (state.isVisible !== shouldBeVis) {
+                state.isVisible = shouldBeVis;
+                state.chkElement.checked = shouldBeVis;
+                if (shouldBeVis) {
+                  state.rowElement.classList.remove('disabled');
+                  if (!map.hasLayer(state.marker)) state.marker.addTo(map);
+                } else {
+                  state.rowElement.classList.add('disabled');
+                  if (map.hasLayer(state.marker)) map.removeLayer(state.marker);
+                }
+              }
+
+              const isChk = checkinSet.has(id);
+              if (state.checkinBtn) {
+                state.checkinBtn.textContent = isChk ? '✅ 已打卡' : '📍 打卡';
+                if (isChk) state.checkinBtn.classList.add('checked-in');
+                else state.checkinBtn.classList.remove('checked-in');
+              }
+            });
+
+            updateGroupCheckboxes();
+            updateActiveCountLabel();
+            updateCheckinStats();
+
+            const timeOnly = lastServerUpdateTime ? (lastServerUpdateTime.split(' ').pop() || '') : '';
+            showToast(`👥 已即時同步協作者的最新變更 (${timeOnly})`, 2500);
+            updateAutoSaveStatus('saved', '🟢 共同編輯中 ' + timeOnly);
+          }
+        } catch (e) {}
+      }
+
+      // 同步按鈕
+      document.getElementById('btnSyncServer').addEventListener('click', async () => {
+        const btn = document.getElementById('btnSyncServer');
+        btn.classList.add('spinning');
+        await loadStoresFromServer(currentDate);
+        btn.classList.remove('spinning');
+        showToast('✅ 已同步至最新狀態！', 2000);
+      });
+
+      // 搜尋功能 (Enter 直達開窗)
+      const searchInput = document.getElementById('searchInput');
+      const searchClearBtn = document.getElementById('searchClearBtn');
+
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.trim().toLowerCase();
+        searchClearBtn.style.display = q ? 'block' : 'none';
+        stores.forEach(store => {
+          const state = storeStates.get(store.id);
+          const matches = !q || store.name.toLowerCase().includes(q) || store.address.toLowerCase().includes(q);
+          state.rowElement.style.display = matches ? 'flex' : 'none';
+        });
+      });
+
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const q = searchInput.value.trim().toLowerCase();
+          if (!q) return;
+          const found = stores.find(s => s.name.toLowerCase().includes(q) || s.address.toLowerCase().includes(q));
+          if (found) {
+            focusStoreOnMap(found.id);
+            showToast('已定位至：' + found.name, 2000);
+          }
+        }
+      });
+
+      searchClearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchClearBtn.style.display = 'none';
+        stores.forEach(store => {
+          storeStates.get(store.id).rowElement.style.display = 'flex';
+        });
+      });
+
+      // 側邊欄收合
+      const sidebar = document.getElementById('sidebar');
+      const floatingToggleBtn = document.getElementById('floatingToggleBtn');
+      const menuToggleBtn = document.getElementById('menuToggleBtn');
+      const toggleIcon = document.getElementById('toggleIcon');
+      const toggleText = document.getElementById('toggleText');
+
+      function toggleSidebar() {
+        const isCollapsed = sidebar.classList.toggle('collapsed');
+        toggleIcon.textContent = isCollapsed ? '▶' : '◀';
+        toggleText.textContent = isCollapsed ? '展開清單' : '收合清單';
+        setTimeout(() => map.invalidateSize(), 260);
+      }
+      floatingToggleBtn.addEventListener('click', toggleSidebar);
+      menuToggleBtn.addEventListener('click', toggleSidebar);
+
+      window.toggleGroupExpand = function(groupId) {
+        document.getElementById(groupId).classList.toggle('expanded');
+      };
+
+      // 啟動
+      loadStoresFromServer(currentDate);
+      autoPollInterval = setInterval(pollCollaborativeUpdate, 8000);
+    </script>
+  </body>
+</html>
