@@ -1,7 +1,7 @@
 /**
  * Google Apps Script - 花蓮店家每日開關排程與地圖 Web App (店名精準定位與具名版本版)
  * 升級功能：
- * 1. 【店名精確定位與校準】：全面校正因地址誤判的店家標記位置 (如吉安黃昏市場、中正路商圈、大同街、延平街等)。
+ * 1. 【店名精確定位與強制校準】：全面校正因地址誤判的店家標記位置 (特別是東湳釣具行、高橋動物醫院、花蓮一信國光分社、吉安黃昏市場等)。
  * 2. 【試算表自訂坐標連動】：支援直接讀取與自訂試算表第 8、9 欄的經緯度坐標，手動調整立即反映於地圖。
  * 3. 【一鍵坐標校準選單】：提供試算表一鍵更新所有店家為最新校準坐標的功能。
  * 4. 【Google 地圖店名導航】：Popup 與導航連結全面升級為「店名 + 地址」搜尋，精準直達店家門市。
@@ -112,8 +112,21 @@ function getOrCreateHistorySheet(ss) {
   return histSheet;
 }
 
+// 🌟 精確坐標與分組對照字典 (強制糾正已知地址誤判點)
+var PRECISE_COORDINATE_FIXES = {
+  1: { lat: 23.973890, lng: 121.578260, subGroup: '主要名單-西區' },      // 蘇姵綸營業所 (吉安黃昏市場)
+  5: { lat: 23.978850, lng: 121.588100, subGroup: '非488名單' },          // 廣隆進企業有限公司 (吉安中原路一段)
+  66: { lat: 23.978500, lng: 121.608800, subGroup: '主要名單-東區' },     // 竇允辰公館 (大同街98巷)
+  142: { lat: 23.971250, lng: 121.600350, subGroup: '非488名單' },        // 中正華廈速食店 (中正路231號，中正國小對面)
+  143: { lat: 23.969313, lng: 121.595063, subGroup: '主要名單-東區' },     // 東湳釣具行 (中正路29號，近長安街)
+  145: { lat: 23.969420, lng: 121.595150, subGroup: '主要名單-東區' },     // 花蓮一信國光分社 (中正路32號)
+  191: { lat: 23.970578, lng: 121.596152, subGroup: '主要名單-東區' },     // 高橋動物醫院 (中正路91號)
+  266: { lat: 23.974800, lng: 121.609200, subGroup: '主要名單-東區' },     // 林勤龍娃娃機光復街店 (光復街60號)
+  288: { lat: 23.986200, lng: 121.599300, subGroup: '主要名單-西區' }      // 豪謙國際有限公司丼物園 (延平街148巷22號)
+};
+
 // ------------------------------------------
-// 核心：查詢指定日期的店家資料 (支援試算表自訂坐標)
+// 核心：查詢指定日期的店家資料 (支援試算表自訂坐標與強制糾錯)
 // ------------------------------------------
 function getStoresForDate(dateStr) {
   var defaultList = getDefaultStores();
@@ -145,7 +158,7 @@ function getStoresForDate(dateStr) {
         checkedInStoreIds.add(storeNum);
       }
 
-      // 🌟 讀取試算表自訂緯度與經度 (若有有效填寫)
+      // 讀取試算表自訂緯度與經度
       var customLat = parseFloat(row[7]);
       var customLng = parseFloat(row[8]);
       if (!isNaN(customLat) && !isNaN(customLng) && customLat > 20 && customLng > 120) {
@@ -161,10 +174,25 @@ function getStoresForDate(dateStr) {
 
   return defaultList.map(function(s, idx) {
     var num = idx + 1;
-    var coords = customCoords.get(num) || { lat: s.lat, lng: s.lng };
+    var coords = { lat: s.lat, lng: s.lng };
+    var finalSubGroup = s.subGroup;
+
+    // 優先套用官方店名精確校正
+    if (PRECISE_COORDINATE_FIXES[num]) {
+      coords = PRECISE_COORDINATE_FIXES[num];
+      finalSubGroup = PRECISE_COORDINATE_FIXES[num].subGroup;
+    } else if (customCoords.has(num)) {
+      var c = customCoords.get(num);
+      // 排除誤判到北埔機場的舊坐標 (lat > 24.01)
+      if (c.lat <= 24.01) {
+        coords = c;
+      }
+    }
+
     return Object.assign({}, s, {
       lat: coords.lat,
       lng: coords.lng,
+      subGroup: finalSubGroup,
       isVisible: !hiddenStoreIds.has(num),
       isCheckedIn: checkedInStoreIds.has(num)
     });
@@ -595,13 +623,13 @@ function apiGetStoresForDate(dateStr) {
 }
 
 // ------------------------------------------
-// 🌟 核心新功能：一鍵校準試算表中所有店家的坐標
+// 🌟 一鍵校準試算表中所有店家的坐標
 // ------------------------------------------
 function menuUpdateAllStoreCoordinates() {
   var ui = SpreadsheetApp.getUi();
   var confirm = ui.alert(
     "校準店家坐標",
-    "確定要將【當日店家清單】中的所有店家經緯度更新為最新校準的精確坐標嗎？\n(將修正吉安黃昏市場、大同街、中正路等誤判點位)",
+    "確定要將【當日店家清單】中的所有店家經緯度更新為最新精確坐標嗎？\n(將修正東湳釣具行、高橋動物醫院、花蓮一信國光分社、吉安黃昏市場等點位至正確位置)",
     ui.ButtonSet.YES_NO
   );
   if (confirm !== ui.Button.YES) return;
@@ -627,8 +655,17 @@ function menuUpdateAllStoreCoordinates() {
 
   for (var i = 0; i < numRows; i++) {
     var s = defaultStores[i];
-    latLngValues.push([s.lat, s.lng]);
-    subGroupValues.push([s.subGroup, s.region, s.color]);
+    var num = i + 1;
+    var finalLat = s.lat;
+    var finalLng = s.lng;
+    var finalSub = s.subGroup;
+    if (PRECISE_COORDINATE_FIXES[num]) {
+      finalLat = PRECISE_COORDINATE_FIXES[num].lat;
+      finalLng = PRECISE_COORDINATE_FIXES[num].lng;
+      finalSub = PRECISE_COORDINATE_FIXES[num].subGroup;
+    }
+    latLngValues.push([finalLat, finalLng]);
+    subGroupValues.push([finalSub, s.region, s.color]);
   }
 
   // 更新 H 欄(緯度)與 I 欄(經度)
@@ -778,16 +815,25 @@ function setupSheetWithData() {
   sheet.getRange(3, 1, 1, headers[0].length).setFontWeight("bold").setBackground("#c5221f").setFontColor("#ffffff");
 
   var rows = stores.map(function(s, idx) {
+    var num = idx + 1;
+    var finalLat = s.lat;
+    var finalLng = s.lng;
+    var finalSub = s.subGroup;
+    if (PRECISE_COORDINATE_FIXES[num]) {
+      finalLat = PRECISE_COORDINATE_FIXES[num].lat;
+      finalLng = PRECISE_COORDINATE_FIXES[num].lng;
+      finalSub = PRECISE_COORDINATE_FIXES[num].subGroup;
+    }
     return [
       idx + 1,
       true,
       s.name,
       s.address,
-      s.subGroup,
+      finalSub,
       s.region,
       s.color,
-      s.lat,
-      s.lng,
+      finalLat,
+      finalLng,
       s.estimated ? "位置為地址估算" : ""
     ];
   });
@@ -888,7 +934,7 @@ function getDefaultStores() {
     "isPrimary488": false,
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
-    "region": "非488店家",
+    "region": "界線以西",
     "color": "黃色",
     "colorHex": "#f59e0b",
     "delta": -0.01427115384616684
@@ -2910,7 +2956,7 @@ function getDefaultStores() {
     "isPrimary488": false,
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
-    "region": "非488店家",
+    "region": "界線以東",
     "color": "黃色",
     "colorHex": "#f59e0b",
     "delta": 0.0064557692307687375
@@ -2919,8 +2965,8 @@ function getDefaultStores() {
     "id": "store-143",
     "name": "東湳釣具行",
     "address": "花蓮縣花蓮市中正路29號",
-    "lat": 23.96945,
-    "lng": 121.594985,
+    "lat": 23.969313,
+    "lng": 121.595063,
     "estimated": false,
     "isPrimary488": true,
     "group": "主要488名單",
@@ -2949,8 +2995,8 @@ function getDefaultStores() {
     "id": "store-145",
     "name": "花蓮一信國光分社",
     "address": "花蓮縣花蓮市中正路32號",
-    "lat": 23.9695,
-    "lng": 121.595,
+    "lat": 23.96942,
+    "lng": 121.59515,
     "estimated": false,
     "isPrimary488": true,
     "group": "主要488名單",
