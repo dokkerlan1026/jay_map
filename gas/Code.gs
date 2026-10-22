@@ -1,10 +1,10 @@
 /**
- * Google Apps Script - 花蓮店家每日開關排程與地圖 Web App (歷史載入修復版)
- * 修正重點：
- * 1. 歷史紀錄查詢改為「倒序由後往前查」，精確載入最新一次存檔 (解決載入昨天依然 500 筆問題)
- * 2. 徹底解決時區轉換導致的日期偏差 (正規化 YYYY-MM-DD 比對)
- * 3. 載入昨天/指定日期時，同步回傳最新店家陣列供前端無縫更新
- * 4. 存檔歷史表時避免重複產生 Date 物件字串，維護乾淨整潔的歷史紀錄
+ * Google Apps Script - 花蓮店家每日開關排程與地圖 Web App
+ * 升級功能：
+ * 1. 【有動作就自動更新】：只要在網頁或試算表進行任何開關、打卡或篩選，即自動同步試算表並記錄歷史。
+ * 2. 【記錄最後 10 次更新】：歷史表完整保存每一次變更，並提供 API 即時提取最後 10 次歷史版本。
+ * 3. 【一鍵回到昨天最後紀錄】：精確鎖定昨天最後一次存檔版本，快速回溯。
+ * 4. 【版本自由回溯】：支援在網頁上一鍵回復至最近 10 次內的任何一個歷史版本。
  */
 
 function doGet(e) {
@@ -31,16 +31,16 @@ function onOpen() {
     .addItem('🟢 1. 建立/初始化 500 筆店家工作表', 'setupSheetWithData')
     .addSeparator()
     .addItem('☀️ 2. 【隔天操作】載入全開啟 (全部勾選顯示)', 'menuLoadAllActive')
-    .addItem('📋 3. 【複製前日】載入昨天的開關狀態', 'menuLoadYesterday')
-    .addItem('📅 4. 【指定載入】載入指定日期的開關狀態', 'menuLoadCustomDate')
-    .addItem('💾 5. 【手動存檔】儲存今日開關狀態至歷史紀錄', 'menuSaveCurrentToHistory')
+    .addItem('📋 3. 【一鍵回溯】回到昨天的最後紀錄', 'menuLoadYesterdayLast')
+    .addItem('📜 4. 【檢視歷史】檢視最近 10 次更新紀錄', 'menuShowRecentHistory')
+    .addItem('📅 5. 【指定載入】載入指定日期的開關狀態', 'menuLoadCustomDate')
     .addSeparator()
     .addItem('🌐 6. 開啟地圖 Web App 網頁', 'openWebAppUrl')
     .addToUi();
 }
 
 // ------------------------------------------
-// 日期工具函式 (完全避免時區偏差)
+// 日期工具函式 (台北時區 GMT+8，完全避免時區偏差)
 // ------------------------------------------
 function getTodayString() {
   return Utilities.formatDate(new Date(), "Asia/Taipei", "yyyy-MM-dd");
@@ -56,7 +56,6 @@ function getYesterdayString(dateStr) {
   return Utilities.formatDate(dt, "Asia/Taipei", "yyyy-MM-dd");
 }
 
-// 統一將各種輸入 (Date 物件、"2026-10-21"、"Wed Oct 21...") 轉為 "YYYY-MM-DD"
 function normalizeDateString(val) {
   if (!val) return "";
   if (val instanceof Date) {
@@ -79,11 +78,34 @@ function normalizeDateString(val) {
   return str;
 }
 
-// 萃取純數字序號
 function parseStoreNum(rawId) {
   if (typeof rawId === 'number') return rawId;
   var digits = String(rawId).replace(/\D/g, '');
   return digits ? parseInt(digits, 10) : 0;
+}
+
+// ------------------------------------------
+// 取得或建立歷史紀錄存檔工作表
+// ------------------------------------------
+function getOrCreateHistorySheet(ss) {
+  var histSheet = ss.getSheetByName("歷史紀錄存檔");
+  if (!histSheet) {
+    histSheet = ss.insertSheet("歷史紀錄存檔");
+    var headers = [["版本時間", "所屬日期", "操作動作說明", "開啟總數", "關閉總數", "關閉店家序號清單", "已打卡店家序號清單"]];
+    histSheet.getRange(1, 1, 1, headers[0].length).setValues(headers);
+    histSheet.getRange(1, 1, 1, headers[0].length).setFontWeight("bold").setBackground("#e8f0fe");
+    histSheet.setFrozenRows(1);
+    histSheet.getRange("A:B").setNumberFormat("@");
+    histSheet.getRange("F:G").setNumberFormat("@");
+    histSheet.setColumnWidth(1, 160);
+    histSheet.setColumnWidth(2, 100);
+    histSheet.setColumnWidth(3, 200);
+    histSheet.setColumnWidth(4, 80);
+    histSheet.setColumnWidth(5, 80);
+    histSheet.setColumnWidth(6, 250);
+    histSheet.setColumnWidth(7, 180);
+  }
+  return histSheet;
 }
 
 // ------------------------------------------
@@ -119,8 +141,10 @@ function getStoresForDate(dateStr) {
       }
     }
   } else {
-    // 跨日期查詢：從歷史紀錄中載入
-    hiddenStoreIds = getHiddenStoreIdsFromHistory(targetDate);
+    // 跨日期查詢：從歷史紀錄中最新的一筆載入
+    var histRes = getLatestHistoryForDate(targetDate);
+    hiddenStoreIds = histRes.hiddenSet;
+    checkedInStoreIds = histRes.checkedInSet;
   }
 
   return defaultList.map(function(s, idx) {
@@ -132,178 +156,375 @@ function getStoresForDate(dateStr) {
   });
 }
 
-// 🌟 關鍵修復：從「最後一行倒序往回找」，精準載入最新一次存檔的狀態！
-function getHiddenStoreIdsFromHistory(dateStr) {
+// 倒序尋找指定日期的最後一次存檔
+function getLatestHistoryForDate(dateStr) {
   var hiddenSet = new Set();
+  var checkedInSet = new Set();
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  if (!ss) return hiddenSet;
+  if (!ss) return { hiddenSet: hiddenSet, checkedInSet: checkedInSet, found: false };
 
   var histSheet = ss.getSheetByName("歷史紀錄存檔");
-  if (!histSheet) return hiddenSet;
+  if (!histSheet) return { hiddenSet: hiddenSet, checkedInSet: checkedInSet, found: false };
 
   var targetDate = normalizeDateString(dateStr);
   var data = histSheet.getDataRange().getValues();
+  var isNewFormat = (data.length > 0 && data[0].length >= 7 && data[0][2] === "操作動作說明");
 
-  // 倒序查找：從最末列往上搜尋
   for (var i = data.length - 1; i >= 1; i--) {
-    var rowDate = normalizeDateString(data[i][0]);
+    var row = data[i];
+    var rowDate = isNewFormat ? normalizeDateString(row[1]) : normalizeDateString(row[0]);
     if (rowDate === targetDate) {
-      var hiddenListStr = String(data[i][1] || "");
+      var hiddenListStr = isNewFormat ? String(row[5] || "") : String(row[1] || "");
+      var checkedListStr = isNewFormat ? String(row[6] || "") : "";
+
       if (hiddenListStr) {
         hiddenListStr.split(",").forEach(function(idStr) {
           var n = parseInt(idStr.trim(), 10);
           if (!isNaN(n)) hiddenSet.add(n);
         });
       }
-      Logger.log("找到歷史存檔！日期：" + targetDate + "，關閉店家序號數：" + hiddenSet.size);
-      break;
+      if (checkedListStr) {
+        checkedListStr.split(",").forEach(function(idStr) {
+          var n = parseInt(idStr.trim(), 10);
+          if (!isNaN(n)) checkedInSet.add(n);
+        });
+      }
+      return {
+        hiddenSet: hiddenSet,
+        checkedInSet: checkedInSet,
+        found: true,
+        rowIndex: i + 1,
+        timestamp: String(row[0]),
+        action: isNewFormat ? String(row[2]) : "歷史存檔"
+      };
     }
   }
-  return hiddenSet;
+  return { hiddenSet: hiddenSet, checkedInSet: checkedInSet, found: false };
 }
 
-// 儲存狀態至歷史紀錄 (覆蓋同日期的舊紀錄，保持乾淨)
-function saveCurrentStatusToHistory(customDate) {
+// ------------------------------------------
+// 寫入一筆新的更新紀錄至歷史表
+// ------------------------------------------
+function appendHistoryRecord(dateStr, actionNote, hiddenIds, checkedInIds, activeCount) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  if (!ss) return;
+  if (!ss) return null;
 
-  var sheet = ss.getSheetByName("當日店家清單");
-  if (!sheet) return;
-
-  var dateStr = normalizeDateString(customDate || sheet.getRange("B1").getValue() || getTodayString());
-  var data = sheet.getDataRange().getValues();
-
-  var hiddenIds = [];
-  var activeCount = 0;
-  for (var i = 3; i < data.length; i++) {
-    var row = data[i];
-    var isVisible = (row[1] === true || String(row[1]).toUpperCase() === "TRUE");
-    var storeNum = parseStoreNum(row[0]);
-    if (!isVisible) {
-      hiddenIds.push(storeNum);
-    } else {
-      activeCount++;
-    }
-  }
-
-  var histSheet = ss.getSheetByName("歷史紀錄存檔");
-  if (!histSheet) {
-    histSheet = ss.insertSheet("歷史紀錄存檔");
-    histSheet.appendRow(["日期", "關閉的店家序號(逗號分隔)", "開啟總數", "關閉總數", "最後存檔時間"]);
-    histSheet.getRange(1, 1, 1, 5).setFontWeight("bold").setBackground("#e8f0fe");
-  }
-
-  // 設定 A 欄為純文字格式，避免自動轉成 Date 物件字串
-  histSheet.getRange("A:A").setNumberFormat("@");
-
-  var histData = histSheet.getDataRange().getValues();
-  var foundRow = -1;
-  for (var j = histData.length - 1; j >= 1; j--) {
-    var d = normalizeDateString(histData[j][0]);
-    if (d === dateStr) {
-      foundRow = j + 1;
-      break;
-    }
-  }
-
+  var histSheet = getOrCreateHistorySheet(ss);
   var nowStr = Utilities.formatDate(new Date(), "Asia/Taipei", "yyyy-MM-dd HH:mm:ss");
-  var rowValues = [dateStr, hiddenIds.join(","), activeCount, hiddenIds.length, nowStr];
+  var dStr = normalizeDateString(dateStr || getTodayString());
+  var closedCount = hiddenIds ? hiddenIds.length : 0;
+  var openCount = (typeof activeCount === 'number') ? activeCount : (500 - closedCount);
+  var hiddenStr = (hiddenIds && hiddenIds.length) ? hiddenIds.join(",") : "";
+  var checkedStr = (checkedInIds && checkedInIds.length) ? checkedInIds.join(",") : "";
 
-  if (foundRow > 0) {
-    histSheet.getRange(foundRow, 1, 1, 5).setValues([rowValues]);
-  } else {
-    histSheet.appendRow(rowValues);
-  }
-}
+  var rowValues = [nowStr, dStr, actionNote || "狀態更新", openCount, closedCount, hiddenStr, checkedStr];
+  histSheet.appendRow(rowValues);
 
-// ------------------------------------------
-// 載入全開啟 / 載入昨天 / 載入指定日期
-// ------------------------------------------
-function loadAllActive(targetDate) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  if (!ss) throw new Error("請先在 Google 試算表中執行！");
-
-  var sheet = ss.getSheetByName("當日店家清單");
-  if (!sheet) throw new Error("請先建立「當日店家清單」！");
-
-  var dateToSet = normalizeDateString(targetDate || getTodayString());
-  sheet.getRange("B1").setValue(dateToSet);
-
-  var lastRow = sheet.getLastRow();
-  var numRows = 0;
-  if (lastRow >= 4) {
-    numRows = lastRow - 3;
-    var trueValues = [];
-    for (var i = 0; i < numRows; i++) {
-      trueValues.push([true]);
-    }
-    sheet.getRange(4, 2, numRows, 1).setValues(trueValues);
-    sheet.getRange("D1").setValue("已顯示: " + numRows + " / " + numRows + " (全開啟)");
-  }
-
-  saveCurrentStatusToHistory(dateToSet);
-  var latestStores = getStoresForDate(dateToSet);
-
-  return { success: true, date: dateToSet, activeCount: numRows, stores: latestStores };
-}
-
-function loadStatusFromDate(sourceDateStr, targetDateStr) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  if (!ss) throw new Error("請先在 Google 試算表中執行！");
-
-  var sheet = ss.getSheetByName("當日店家清單");
-  if (!sheet) throw new Error("請先建立「當日店家清單」！");
-
-  var srcDate = normalizeDateString(sourceDateStr);
-  var targetDate = normalizeDateString(targetDateStr || getTodayString());
-  
-  // 倒序讀取來源日期的歷史關閉名單
-  var hiddenSet = getHiddenStoreIdsFromHistory(srcDate);
-  sheet.getRange("B1").setValue(targetDate);
-
-  var lastRow = sheet.getLastRow();
-  var numRows = 0;
-  var activeCount = 0;
-  if (lastRow >= 4) {
-    numRows = lastRow - 3;
-    var values = [];
-    for (var i = 1; i <= numRows; i++) {
-      var isVisible = !hiddenSet.has(i);
-      if (isVisible) activeCount++;
-      values.push([isVisible]);
-    }
-    sheet.getRange(4, 2, numRows, 1).setValues(values);
-    sheet.getRange("D1").setValue("已顯示: " + activeCount + " / " + numRows + " (來自 " + srcDate + ")");
-  }
-
-  // 儲存今日狀態
-  saveCurrentStatusToHistory(targetDate);
-
-  var latestStores = getStoresForDate(targetDate);
   return {
-    success: true,
-    targetDate: targetDate,
-    sourceDate: srcDate,
-    activeCount: activeCount,
-    closedCount: hiddenSet.size,
-    stores: latestStores
+    timestamp: nowStr,
+    date: dStr,
+    action: actionNote || "狀態更新",
+    activeCount: openCount,
+    closedCount: closedCount
   };
 }
 
-// 專為前端設計的一鍵載入昨天 API (由後端精確計算昨天日期)
-function apiLoadYesterdayStatus(currentDateStr) {
+// ------------------------------------------
+// 取得最近 10 次更新紀錄 (供前端下拉選單即時呈現)
+// ------------------------------------------
+function apiGetRecentHistory(limit) {
   try {
-    var today = normalizeDateString(currentDateStr || getTodayString());
-    var yesterday = getYesterdayString(today);
-    return loadStatusFromDate(yesterday, today);
+    var maxCount = limit || 10;
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) return { success: false, msg: "未綁定試算表", list: [] };
+
+    var histSheet = ss.getSheetByName("歷史紀錄存檔");
+    if (!histSheet) return { success: true, list: [] };
+
+    var data = histSheet.getDataRange().getValues();
+    if (data.length <= 1) return { success: true, list: [] };
+
+    var isNewFormat = (data[0].length >= 7 && data[0][2] === "操作動作說明");
+    var todayStr = getTodayString();
+    var yesterdayStr = getYesterdayString(todayStr);
+
+    var list = [];
+    var yesterdayLastMarked = false;
+
+    // 從最後一行往上收集
+    for (var i = data.length - 1; i >= 1; i--) {
+      var row = data[i];
+      var timeVal = String(row[0] || "");
+      var dateVal = isNewFormat ? normalizeDateString(row[1]) : normalizeDateString(row[0]);
+      var actionVal = isNewFormat ? String(row[2] || "狀態更新") : "手動存檔";
+      var openVal = isNewFormat ? parseInt(row[3], 10) : parseInt(row[2], 10);
+      var closeVal = isNewFormat ? parseInt(row[4], 10) : parseInt(row[3], 10);
+      var hiddenStr = isNewFormat ? String(row[5] || "") : String(row[1] || "");
+      var checkedStr = isNewFormat ? String(row[6] || "") : "";
+
+      var isYesterday = (dateVal === yesterdayStr);
+      var isYesterdayLast = false;
+      if (isYesterday && !yesterdayLastMarked) {
+        isYesterdayLast = true;
+        yesterdayLastMarked = true;
+      }
+
+      list.push({
+        rowIndex: i + 1,
+        timestamp: timeVal,
+        date: dateVal,
+        action: actionVal,
+        activeCount: isNaN(openVal) ? 0 : openVal,
+        closedCount: isNaN(closeVal) ? 0 : closeVal,
+        hiddenIds: hiddenStr,
+        checkedInIds: checkedStr,
+        isLatest: (list.length === 0),
+        isYesterdayLast: isYesterdayLast
+      });
+
+      if (list.length >= maxCount) break;
+    }
+
+    return {
+      success: true,
+      today: todayStr,
+      yesterday: yesterdayStr,
+      list: list
+    };
+  } catch (err) {
+    return { success: false, error: String(err), list: [] };
+  }
+}
+
+// ------------------------------------------
+// 核心 API：【有動作就更新】自動存檔完整狀態
+// ------------------------------------------
+function apiAutoSaveFullState(dateStr, hiddenIds, checkedInIds, actionNote) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) return { success: false, msg: "未綁定試算表" };
+
+    var sheet = ss.getSheetByName("當日店家清單");
+    if (!sheet) return { success: false, msg: "找不到【當日店家清單】工作表" };
+
+    var targetDate = normalizeDateString(dateStr || getTodayString());
+    sheet.getRange("B1").setValue(targetDate);
+
+    var hiddenSet = new Set((hiddenIds || []).map(function(id) { return parseStoreNum(id); }));
+    var checkedSet = new Set((checkedInIds || []).map(function(id) { return parseStoreNum(id); }));
+
+    var lastRow = sheet.getLastRow();
+    var numRows = 0;
+    var activeCount = 0;
+
+    if (lastRow >= 4) {
+      numRows = lastRow - 3;
+      var currentVisibility = sheet.getRange(4, 2, numRows, 1).getValues();
+      var currentNotes = sheet.getRange(4, 10, numRows, 1).getValues();
+
+      var visChanges = false;
+      var noteChanges = false;
+      var newVisibility = [];
+      var newNotes = [];
+
+      for (var i = 1; i <= numRows; i++) {
+        var isVis = !hiddenSet.has(i);
+        if (isVis) activeCount++;
+        newVisibility.push([isVis]);
+        if (currentVisibility[i - 1][0] !== isVis) {
+          visChanges = true;
+        }
+
+        var isChk = checkedSet.has(i);
+        var curNote = String(currentNotes[i - 1][0] || "");
+        var newNote = curNote;
+        if (isChk && curNote.indexOf("已打卡") === -1) {
+          var nowTime = Utilities.formatDate(new Date(), "Asia/Taipei", "HH:mm");
+          newNote = "已打卡 " + nowTime;
+          noteChanges = true;
+        } else if (!isChk && curNote.indexOf("已打卡") !== -1) {
+          newNote = curNote.replace(/已打卡\s*\d{2}:\d{2}/, "").trim();
+          noteChanges = true;
+        }
+        newNotes.push([newNote]);
+      }
+
+      if (visChanges) {
+        sheet.getRange(4, 2, numRows, 1).setValues(newVisibility);
+      }
+      if (noteChanges) {
+        sheet.getRange(4, 10, numRows, 1).setValues(newNotes);
+      }
+
+      sheet.getRange("D1").setValue("已顯示: " + activeCount + " / " + numRows);
+    }
+
+    // 寫入歷史表 (記錄本次更新)
+    var note = actionNote || ("自動存檔 (開啟 " + activeCount + " / 關閉 " + (hiddenSet.size) + ")");
+    var histRec = appendHistoryRecord(targetDate, note, Array.from(hiddenSet), Array.from(checkedSet), activeCount);
+
+    return {
+      success: true,
+      timestamp: histRec ? histRec.timestamp : Utilities.formatDate(new Date(), "Asia/Taipei", "HH:mm:ss"),
+      activeCount: activeCount,
+      closedCount: hiddenSet.size
+    };
   } catch (err) {
     return { success: false, error: String(err) };
   }
 }
 
 // ------------------------------------------
-// API 函式：非同步讀取與打卡連動
+// 核心 API：一鍵回到昨天的最後紀錄
 // ------------------------------------------
+function apiLoadYesterdayLastRecord(currentDateStr) {
+  try {
+    var today = normalizeDateString(currentDateStr || getTodayString());
+    var yesterday = getYesterdayString(today);
+
+    var hist = getLatestHistoryForDate(yesterday);
+    if (!hist.found) {
+      return {
+        success: false,
+        msg: "在【歷史紀錄存檔】中找不到昨日（" + yesterday + "）的存檔紀錄！",
+        yesterday: yesterday
+      };
+    }
+
+    // 將昨日狀態套用至今日
+    var hiddenArray = Array.from(hist.hiddenSet);
+    var checkedArray = Array.from(hist.checkedInSet);
+    var actionNote = "回復至昨日最後紀錄 (" + yesterday + " " + hist.timestamp + ")";
+
+    var saveRes = apiAutoSaveFullState(today, hiddenArray, checkedArray, actionNote);
+    var latestStores = getStoresForDate(today);
+
+    return {
+      success: true,
+      yesterdayDate: yesterday,
+      yesterdayTimestamp: hist.timestamp,
+      activeCount: saveRes.activeCount,
+      closedCount: saveRes.closedCount,
+      stores: latestStores
+    };
+  } catch (err) {
+    return { success: false, error: String(err) };
+  }
+}
+
+// ------------------------------------------
+// 核心 API：回復至指定歷史版本 (由最近 10 次清單觸發)
+// ------------------------------------------
+function apiRevertToHistoryVersion(rowIndexOrTimestamp, todayStr) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) return { success: false, msg: "未綁定試算表" };
+
+    var histSheet = ss.getSheetByName("歷史紀錄存檔");
+    if (!histSheet) return { success: false, msg: "找不到歷史紀錄表" };
+
+    var data = histSheet.getDataRange().getValues();
+    if (data.length <= 1) return { success: false, msg: "歷史紀錄為空" };
+
+    var isNewFormat = (data[0].length >= 7 && data[0][2] === "操作動作說明");
+    var targetRow = null;
+
+    if (typeof rowIndexOrTimestamp === 'number' && rowIndexOrTimestamp >= 2 && rowIndexOrTimestamp <= data.length) {
+      targetRow = data[rowIndexOrTimestamp - 1];
+    } else {
+      var queryStr = String(rowIndexOrTimestamp).trim();
+      for (var i = data.length - 1; i >= 1; i--) {
+        if (String(data[i][0]).indexOf(queryStr) !== -1) {
+          targetRow = data[i];
+          break;
+        }
+      }
+    }
+
+    if (!targetRow) {
+      return { success: false, msg: "找不到指定的歷史版本" };
+    }
+
+    var hiddenStr = isNewFormat ? String(targetRow[5] || "") : String(targetRow[1] || "");
+    var checkedStr = isNewFormat ? String(targetRow[6] || "") : "";
+    var targetTime = String(targetRow[0]);
+
+    var hiddenIds = [];
+    if (hiddenStr) {
+      hiddenStr.split(",").forEach(function(s) {
+        var n = parseInt(s.trim(), 10);
+        if (!isNaN(n)) hiddenIds.push(n);
+      });
+    }
+
+    var checkedIds = [];
+    if (checkedStr) {
+      checkedStr.split(",").forEach(function(s) {
+        var n = parseInt(s.trim(), 10);
+        if (!isNaN(n)) checkedIds.push(n);
+      });
+    }
+
+    var today = normalizeDateString(todayStr || getTodayString());
+    var actionNote = "回復至歷史版本 [" + targetTime + "]";
+    var saveRes = apiAutoSaveFullState(today, hiddenIds, checkedIds, actionNote);
+    var latestStores = getStoresForDate(today);
+
+    return {
+      success: true,
+      revertedTime: targetTime,
+      activeCount: saveRes.activeCount,
+      closedCount: saveRes.closedCount,
+      stores: latestStores
+    };
+  } catch (err) {
+    return { success: false, error: String(err) };
+  }
+}
+
+// ------------------------------------------
+// 載入全開啟 API
+// ------------------------------------------
+function loadAllActive(targetDate) {
+  var today = normalizeDateString(targetDate || getTodayString());
+  var saveRes = apiAutoSaveFullState(today, [], [], "☀️ 載入全開啟 (500家全部開啟)");
+  var latestStores = getStoresForDate(today);
+  return {
+    success: true,
+    date: today,
+    activeCount: 500,
+    closedCount: 0,
+    stores: latestStores
+  };
+}
+
+// 載入指定日期的狀態 API
+function loadStatusFromDate(sourceDateStr, targetDateStr) {
+  var srcDate = normalizeDateString(sourceDateStr);
+  var targetDate = normalizeDateString(targetDateStr || getTodayString());
+
+  var hist = getLatestHistoryForDate(srcDate);
+  var hiddenArray = Array.from(hist.hiddenSet);
+  var checkedArray = Array.from(hist.checkedInSet);
+  var actionNote = "載入歷史日期 [" + srcDate + "] 之開關設定";
+
+  var saveRes = apiAutoSaveFullState(targetDate, hiddenArray, checkedArray, actionNote);
+  var latestStores = getStoresForDate(targetDate);
+
+  return {
+    success: true,
+    targetDate: targetDate,
+    sourceDate: srcDate,
+    activeCount: saveRes.activeCount,
+    closedCount: saveRes.closedCount,
+    stores: latestStores
+  };
+}
+
+function apiLoadYesterdayStatus(currentDateStr) {
+  return apiLoadYesterdayLastRecord(currentDateStr);
+}
+
 function apiGetStoresForDate(dateStr) {
   try {
     var targetDate = normalizeDateString(dateStr || getTodayString());
@@ -314,43 +535,38 @@ function apiGetStoresForDate(dateStr) {
   }
 }
 
+// 單筆快速 API (相容舊呼叫)
 function apiToggleCheckin(rawStoreId, isCheckedIn) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    if (!ss) return { success: false, msg: "未綁定試算表" };
-
+    if (!ss) return { success: false };
     var sheet = ss.getSheetByName("當日店家清單");
-    if (!sheet) return { success: false, msg: "找不到工作表" };
-
+    if (!sheet) return { success: false };
     var num = parseStoreNum(rawStoreId);
-    if (!num) return { success: false, msg: "無效序號" };
-
+    if (!num) return { success: false };
     var rowNumber = num + 3;
     var nowTime = Utilities.formatDate(new Date(), "Asia/Taipei", "HH:mm");
     var noteVal = isCheckedIn ? ("已打卡 " + nowTime) : "";
     sheet.getRange(rowNumber, 10).setValue(noteVal);
     return { success: true };
-  } catch (err) {
-    return { success: false, error: String(err) };
+  } catch (e) {
+    return { success: false };
   }
 }
 
 function apiUpdateStoreStatus(rawStoreId, isVisible) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    if (!ss) return { success: false, msg: "未綁定試算表" };
-
+    if (!ss) return { success: false };
     var sheet = ss.getSheetByName("當日店家清單");
-    if (!sheet) return { success: false, msg: "找不到工作表" };
-
+    if (!sheet) return { success: false };
     var num = parseStoreNum(rawStoreId);
-    if (!num) return { success: false, msg: "無效序號" };
-
+    if (!num) return { success: false };
     var rowNumber = num + 3;
     sheet.getRange(rowNumber, 2).setValue(isVisible);
     return { success: true };
-  } catch (err) {
-    return { success: false, error: String(err) };
+  } catch (e) {
+    return { success: false };
   }
 }
 
@@ -358,22 +574,17 @@ function apiBatchUpdateStatus(updates) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     if (!ss) return { success: false };
-
     var sheet = ss.getSheetByName("當日店家清單");
     if (!sheet) return { success: false };
-
     updates.forEach(function(u) {
       var num = parseStoreNum(u.id);
       if (num) {
-        var row = num + 3;
-        sheet.getRange(row, 2).setValue(u.isVisible);
+        sheet.getRange(num + 3, 2).setValue(u.isVisible);
       }
     });
-
-    saveCurrentStatusToHistory();
     return { success: true };
-  } catch (err) {
-    return { success: false, error: String(err) };
+  } catch (e) {
+    return { success: false };
   }
 }
 
@@ -385,20 +596,42 @@ function menuLoadAllActive() {
   var res = ui.alert("載入全開啟", "確定要將今天的店家狀態全部設為【開啟顯示】嗎？", ui.ButtonSet.YES_NO);
   if (res === ui.Button.YES) {
     var out = loadAllActive();
-    ui.alert("成功！", "已成功將今天（" + out.date + "）所有店家設為開啟顯示！", ui.ButtonSet.OK);
+    ui.alert("成功！", "已成功將今天（" + out.date + "）所有 500 筆店家設為開啟顯示！", ui.ButtonSet.OK);
   }
 }
 
-function menuLoadYesterday() {
+function menuLoadYesterdayLast() {
   var ui = SpreadsheetApp.getUi();
   var today = getTodayString();
   var yesterday = getYesterdayString(today);
 
-  var res = ui.alert("載入昨天的設定", "確定要載入昨天（" + yesterday + "）的開關狀態作為今天（" + today + "）的紀錄嗎？", ui.ButtonSet.YES_NO);
+  var res = ui.alert("一鍵回到昨天最後紀錄", "確定要載入昨天（" + yesterday + "）的最後一次存檔紀錄到今天嗎？", ui.ButtonSet.YES_NO);
   if (res === ui.Button.YES) {
-    var out = loadStatusFromDate(yesterday, today);
-    ui.alert("載入完成！", "已載入昨日（" + yesterday + "）狀態至今日！\n- 開啟店家數：" + out.activeCount + " 家\n- 關閉店家數：" + out.closedCount + " 家", ui.ButtonSet.OK);
+    var out = apiLoadYesterdayLastRecord(today);
+    if (out.success) {
+      ui.alert("載入完成！", "已成功載入昨日（" + out.yesterdayDate + "）的最後存檔！\n- 存檔時間：" + out.yesterdayTimestamp + "\n- 開啟店家數：" + out.activeCount + " 家\n- 關閉店家數：" + out.closedCount + " 家", ui.ButtonSet.OK);
+    } else {
+      ui.alert("提示", out.msg || "找不到昨日紀錄！", ui.ButtonSet.OK);
+    }
   }
+}
+
+function menuShowRecentHistory() {
+  var res = apiGetRecentHistory(10);
+  var ui = SpreadsheetApp.getUi();
+  if (!res.success || !res.list || res.list.length === 0) {
+    ui.alert("歷史紀錄", "目前尚無歷史更新紀錄！", ui.ButtonSet.OK);
+    return;
+  }
+  var msg = "【最近更新紀錄 (最後 " + res.list.length + " 次)】\n\n";
+  res.list.forEach(function(item, idx) {
+    var tag = item.isLatest ? " [最新]" : (item.isYesterdayLast ? " ⭐[昨天最後]" : "");
+    msg += (idx + 1) + ". " + item.timestamp + tag + "\n";
+    msg += "   - 動作：" + item.action + "\n";
+    msg += "   - 狀態：開啟 " + item.activeCount + " 家 / 關閉 " + item.closedCount + " 家\n\n";
+  });
+  msg += "提示：您也可以在網頁 Web App 上方點擊【📜 最近 10 次紀錄】一鍵復原！";
+  ui.alert("最近更新紀錄", msg, ui.ButtonSet.OK);
 }
 
 function menuLoadCustomDate() {
@@ -414,13 +647,6 @@ function menuLoadCustomDate() {
     var out = loadStatusFromDate(srcDate, today);
     ui.alert("載入完成！", "已成功載入 " + srcDate + " 的設定！\n- 開啟店家數：" + out.activeCount + " 家\n- 關閉店家數：" + out.closedCount + " 家", ui.ButtonSet.OK);
   }
-}
-
-function menuSaveCurrentToHistory() {
-  var ui = SpreadsheetApp.getUi();
-  var today = getTodayString();
-  saveCurrentStatusToHistory(today);
-  ui.alert("存檔成功！", "今日（" + today + "）的開關紀錄已成功備份至【歷史紀錄存檔】工作表！", ui.ButtonSet.OK);
 }
 
 function openWebAppUrl() {
@@ -458,7 +684,7 @@ function setupSheetWithData() {
   sheet.getRange("B1").setValue(today).setFontWeight("bold").setFontColor("#1a73e8").setFontSize(12);
   sheet.getRange("C1").setValue("📊 狀態統計：").setFontWeight("bold");
   sheet.getRange("D1").setValue("已顯示: " + stores.length + " / " + stores.length).setFontWeight("bold");
-  sheet.getRange("E1").setValue("💡 提示：勾選/取消 B 欄可立即切換地圖顯示；透過上方選單可載入昨天或全開！").setFontColor("#5f6368");
+  sheet.getRange("E1").setValue("💡 自動更新機制：網頁端有任何勾選、篩選或打卡動作皆會自動存檔並記錄最近 10 次歷程！").setFontColor("#5f6368");
 
   var headers = [["序號", "顯示開關", "店名", "地址", "分組分類", "區域", "標記顏色", "緯度", "經度", "備註/打卡"]];
   sheet.getRange(3, 1, 1, headers[0].length).setValues(headers);
@@ -494,10 +720,12 @@ function setupSheetWithData() {
   sheet.setColumnWidth(5, 140);
   sheet.setColumnWidth(10, 130);
 
-  saveCurrentStatusToHistory(today);
+  // 初始化歷史表第一筆
+  getOrCreateHistorySheet(ss);
+  appendHistoryRecord(today, "初始化店家清單 (全開 500 家)", [], [], 500);
 
   var ui = SpreadsheetApp.getUi();
-  ui.alert("初始化完成！", "已成功建立【當日店家清單】工作表！\n\n1. B 欄已設定為核取方塊，打勾即可開啟/關閉顯示\n2. 第 10 欄會自動同步手機網頁端打卡狀態\n3. 點擊上方選單【🗺️ 店家地圖與每日排程】可進行隔天載入或全開！", ui.ButtonSet.OK);
+  ui.alert("初始化完成！", "已成功建立【當日店家清單】與【歷史紀錄存檔】！\n\n1. B 欄支援打勾即時切換顯示\n2. 網頁端任何動作皆會自動存檔至試算表\n3. 自動保留最後 10 次更新紀錄，方便隨時回到昨天或前幾次更新！", ui.ButtonSet.OK);
 }
 
 function getDefaultStores() {
