@@ -576,3 +576,29 @@ def index_page():
         with open(index_path, "r", encoding="utf-8") as f:
             return f.read()
     return "<h1>花蓮店家排程地圖建置中...</h1>"
+
+# ==========================================
+# 🌟 Gradio SDK 免費部署相容支援
+# ==========================================
+import gradio as gr
+
+index_path = os.path.join(STATIC_DIR, "index.html")
+full_html = ""
+if os.path.exists(index_path):
+    with open(index_path, "r", encoding="utf-8") as f:
+        full_html = f.read()
+
+custom_css = """
+.gradio-container { max-width: 100vw !important; padding: 0 !important; margin: 0 !important; }
+footer { display: none !important; }
+"""
+
+with gr.Blocks(title="jay的地圖 - 花蓮店家每日排程", css=custom_css) as demo:
+    gr.HTML(full_html)
+
+# 使用 Gradio 官方 mount 方法，根路徑 / 直接由 FastAPI 提供原生絲滑體驗
+app = gr.mount_gradio_app(app, demo, path="/gradio")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=7860)

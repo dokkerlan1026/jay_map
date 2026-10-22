@@ -3,12 +3,13 @@ title: 花蓮店家排程地圖
 emoji: 🗺️
 colorFrom: red
 colorTo: yellow
-sdk: docker
-app_port: 7860
+sdk: gradio
+sdk_version: 4.44.0
+app_file: app.py
 pinned: false
 ---
 
-# 花蓮店家每日排程地圖 (Hugging Face Space 版)
+# 花蓮店家每日排程地圖 (Hugging Face Gradio 免費版)
 
 專為花蓮 500 筆店家設計的高效能每日排程、地圖定位、打卡與多人即時共同編輯系統。
 
