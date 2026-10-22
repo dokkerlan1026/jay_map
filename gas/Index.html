@@ -703,7 +703,6 @@
       const STORAGE_VIS_KEY = 'hualien_vis_' + currentDate;
       const STORAGE_CHK_KEY = 'hualien_chk_' + currentDate;
 
-      // 🌟 第一重保險：本地持久化快取 (localStorage)
       let localVisMap = {};
       let localChkSet = new Set();
       try {
@@ -776,14 +775,13 @@
         return `<svg class="pin-svg" viewBox="0 0 24 34" fill="none"><path d="M12 0C5.372 0 0 5.373 0 12C0 19.5 12 34 12 34C12 34 24 19.5 24 12C24 5.373 18.628 0 12 0Z" fill="${colorHex}" stroke="#ffffff" stroke-width="1.5"/><circle cx="12" cy="11" r="4" fill="#ffffff"/></svg>`;
       }
 
-      function showToast(text, duration = 2000) {
+      function showToast(text, duration = 2500) {
         const toast = document.getElementById('toastBox');
         toast.textContent = text;
         toast.style.display = 'block';
         setTimeout(() => { toast.style.display = 'none'; }, duration);
       }
 
-      // 初始化打卡 Set (優先從 localStorage 還原)
       const checkinSet = new Set();
       stores.forEach(s => {
         if (localChkSet.has(s.id) || s.isCheckedIn) {
@@ -848,7 +846,6 @@
           highlightStoreRow(store.id);
         });
 
-        // 🌟 優先遵循本地 localStorage 的開關狀態
         let isInitiallyVisible = true;
         if (localVisMap[store.id] !== undefined) {
           isInitiallyVisible = localVisMap[store.id];
@@ -924,7 +921,6 @@
         }
       });
 
-      // 🌟 打卡：本地即時存檔 + 後端試算表備註同步
       function toggleCheckin(storeId) {
         const state = storeStates.get(storeId);
         if (!state) return;
@@ -959,7 +955,6 @@
         }
       }
 
-      // 🌟 開關店家：本地即時存檔 + 後端試算表同步
       function setStoreVisibility(storeId, isVisible, syncToSheet = false) {
         const state = storeStates.get(storeId);
         if (!state) return;
@@ -1101,37 +1096,51 @@
         stores.forEach(s => setStoreVisibility(s.id, s.subGroup === '非488名單'));
       });
 
+      // ----------------------------------------------------
+      // 🌟 核心修復：載入全開啟 / 載入昨天 / 載入指定日期
+      // ----------------------------------------------------
       document.getElementById('btnLoadAllOpen').addEventListener('click', () => {
         if (!confirm('確定要將今天的所有店家設為【全部開啟顯示】嗎？')) return;
         showToast('正在載入全開啟並同步至試算表...', 2000);
         stores.forEach(s => setStoreVisibility(s.id, true));
         if (typeof google !== 'undefined' && google.script && google.script.run) {
-          google.script.run.withSuccessHandler(() => {
+          google.script.run.withSuccessHandler((res) => {
             showToast('已成功載入全開啟！', 1800);
           }).loadAllActive();
         }
       });
 
+      // 🌟 關鍵修復：載入昨天的設定 (由後端精確計算並倒序載入最新存檔)
       document.getElementById('btnLoadYesterday').addEventListener('click', () => {
         if (!confirm('確定要載入【昨天的開關設定】到今天嗎？')) return;
-        showToast('正在讀取昨日設定...', 2500);
-        if (typeof google !== 'undefined' && google.script && google.script.run) {
-          const today = document.getElementById('dateSelector').value;
-          const yesterdayDate = new Date(today);
-          yesterdayDate.setDate(yesterdayDate.getDate() - 1);
-          const yStr = yesterdayDate.toISOString().slice(0, 10);
+        showToast('正在讀取昨日最新存檔紀錄...', 3000);
 
-          google.script.run.withSuccessHandler((res) => {
-            alert('已成功載入昨日（' + res.sourceDate + '）的開關設定！目前開啟：' + res.activeCount + ' 家');
-            if (res.targetDate) {
-              refreshDataAsync(res.targetDate);
-            }
-          }).loadStatusFromDate(yStr, today);
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          const currentInputDate = document.getElementById('dateSelector').value;
+          google.script.run
+            .withSuccessHandler((res) => {
+              if (res && res.success && res.stores) {
+                // 清空當日 local 快取，以昨天狀態為準
+                localVisMap = {};
+                res.stores.forEach(s => {
+                  setStoreVisibility(s.id, s.isVisible, false);
+                });
+                persistLocalState();
+                showToast(`✅ 成功載入昨日(${res.sourceDate})設定！開啟：${res.activeCount} 家，關閉：${res.closedCount} 家`, 3500);
+              } else {
+                showToast('載入失敗或無昨日紀錄', 2500);
+              }
+            })
+            .withFailureHandler((err) => {
+              showToast('讀取失敗: ' + err, 2500);
+            })
+            .apiLoadYesterdayStatus(currentInputDate);
         } else {
           alert('請在 Google Apps Script 發佈環境下執行！');
         }
       });
 
+      // 載入指定日期的設定
       document.getElementById('btnLoadCustom').addEventListener('click', () => {
         const chosenDate = document.getElementById('dateSelector').value;
         if (!chosenDate) {
@@ -1139,12 +1148,25 @@
           return;
         }
         if (confirm('確定要載入指定日期【' + chosenDate + '】的開關設定嗎？')) {
-          showToast('正在載入指定日期設定...', 2500);
+          showToast('正在載入指定日期設定...', 3000);
           if (typeof google !== 'undefined' && google.script && google.script.run) {
-            google.script.run.withSuccessHandler((res) => {
-              alert('已成功載入 ' + chosenDate + ' 的開關設定！目前開啟：' + res.activeCount + ' 家');
-              refreshDataAsync(chosenDate);
-            }).loadStatusFromDate(chosenDate, chosenDate);
+            google.script.run
+              .withSuccessHandler((res) => {
+                if (res && res.success && res.stores) {
+                  localVisMap = {};
+                  res.stores.forEach(s => {
+                    setStoreVisibility(s.id, s.isVisible, false);
+                  });
+                  persistLocalState();
+                  showToast(`✅ 成功載入 ${res.sourceDate} 設定！開啟：${res.activeCount} 家，關閉：${res.closedCount} 家`, 3500);
+                } else {
+                  showToast('無該日期的歷史紀錄', 2500);
+                }
+              })
+              .withFailureHandler((err) => {
+                showToast('讀取失敗: ' + err, 2500);
+              })
+              .loadStatusFromDate(chosenDate, chosenDate);
           }
         }
       });
@@ -1242,7 +1264,6 @@
         });
       });
 
-      // 初始化
       updateGroupCheckboxes();
       updateStats();
       updateCheckinStats();
