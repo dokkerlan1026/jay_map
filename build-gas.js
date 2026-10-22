@@ -50,14 +50,15 @@ function onOpen() {
     .createMenu('🗺️ 店家地圖與每日排程')
     .addItem('🟢 1. 建立/初始化 500 筆店家工作表', 'setupSheetWithData')
     .addItem('📍 2. 【校準坐標】依店名與最新精確坐標更新試算表', 'menuUpdateAllStoreCoordinates')
+    .addItem('👥 3. 【共同編輯】設定所有人同步編輯權限指引', 'menuShowCollaborationGuide')
     .addSeparator()
-    .addItem('💾 3. 【手動存檔】儲存並命名當前開關版本', 'menuSaveNamedVersion')
-    .addItem('📁 4. 【讀取版本】檢視並載入歷史/自訂版本', 'menuShowRecentHistory')
-    .addItem('☀️ 5. 【隔天操作】載入全開啟 (全部勾選顯示)', 'menuLoadAllActive')
-    .addItem('📋 6. 【一鍵回溯】回到昨天的最後紀錄', 'menuLoadYesterdayLast')
-    .addItem('📅 7. 【指定載入】載入指定日期的開關狀態', 'menuLoadCustomDate')
+    .addItem('💾 4. 【手動存檔】儲存並命名當前開關版本', 'menuSaveNamedVersion')
+    .addItem('📁 5. 【讀取版本】檢視並載入歷史/自訂版本', 'menuShowRecentHistory')
+    .addItem('☀️ 6. 【隔天操作】載入全開啟 (全部勾選顯示)', 'menuLoadAllActive')
+    .addItem('📋 7. 【一鍵回溯】回到昨天的最後紀錄', 'menuLoadYesterdayLast')
+    .addItem('📅 8. 【指定載入】載入指定日期的開關狀態', 'menuLoadCustomDate')
     .addSeparator()
-    .addItem('🌐 8. 開啟地圖 Web App 網頁', 'openWebAppUrl')
+    .addItem('🌐 9. 開啟地圖 Web App 網頁', 'openWebAppUrl')
     .addToUi();
 }
 
@@ -291,11 +292,11 @@ function appendHistoryRecord(dateStr, actionNote, hiddenIds, checkedInIds, activ
 }
 
 // ------------------------------------------
-// 取得最近更新版本 (包含自訂版本標註)
+// 取得最近更新版本 (支援自訂版本篩選與跨欄位相容)
 // ------------------------------------------
 function apiGetRecentHistory(limit) {
   try {
-    var maxCount = limit || 20;
+    var maxCount = limit || 30;
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     if (!ss) return { success: false, msg: "未綁定試算表", list: [], namedList: [] };
 
@@ -305,7 +306,29 @@ function apiGetRecentHistory(limit) {
     var data = histSheet.getDataRange().getValues();
     if (data.length <= 1) return { success: true, list: [], namedList: [] };
 
-    var isNewFormat = (data[0].length >= 7 && data[0][2] === "操作動作說明");
+    var header = data[0];
+    var colMap = {
+      time: 0,
+      date: 1,
+      action: 2,
+      open: 3,
+      close: 4,
+      hidden: 5,
+      checked: 6
+    };
+
+    // 智能彈性欄位比對 (相容任何歷史格式)
+    for (var c = 0; c < header.length; c++) {
+      var t = String(header[c] || "").trim();
+      if (/時間|timestamp/i.test(t)) colMap.time = c;
+      else if (/日期|date/i.test(t)) colMap.date = c;
+      else if (/動作|說明|版本|action|note/i.test(t)) colMap.action = c;
+      else if (/開啟|open/i.test(t)) colMap.open = c;
+      else if (/關閉|close/i.test(t)) colMap.close = c;
+      else if (/關閉.*序號|hidden/i.test(t)) colMap.hidden = c;
+      else if (/打卡.*序號|check/i.test(t)) colMap.checked = c;
+    }
+
     var todayStr = getTodayString();
     var yesterdayStr = getYesterdayString(todayStr);
 
@@ -316,13 +339,13 @@ function apiGetRecentHistory(limit) {
     // 從最後一行倒序收集
     for (var i = data.length - 1; i >= 1; i--) {
       var row = data[i];
-      var timeVal = String(row[0] || "");
-      var dateVal = isNewFormat ? normalizeDateString(row[1]) : normalizeDateString(row[0]);
-      var actionVal = isNewFormat ? String(row[2] || "狀態更新") : "手動存檔";
-      var openVal = isNewFormat ? parseInt(row[3], 10) : parseInt(row[2], 10);
-      var closeVal = isNewFormat ? parseInt(row[4], 10) : parseInt(row[3], 10);
-      var hiddenStr = isNewFormat ? String(row[5] || "") : String(row[1] || "");
-      var checkedStr = isNewFormat ? String(row[6] || "") : "";
+      var timeVal = String(row[colMap.time] || "");
+      var dateVal = normalizeDateString(row[colMap.date] || row[0]);
+      var actionVal = String(row[colMap.action] || "狀態更新");
+      var openVal = parseInt(row[colMap.open], 10);
+      var closeVal = parseInt(row[colMap.close], 10);
+      var hiddenStr = String(row[colMap.hidden] || "");
+      var checkedStr = String(row[colMap.checked] || "");
 
       var isYesterday = (dateVal === yesterdayStr);
       var isYesterdayLast = false;
@@ -331,10 +354,20 @@ function apiGetRecentHistory(limit) {
         yesterdayLastMarked = true;
       }
 
-      var isNamed = (actionVal.indexOf("🏷️") !== -1 || actionVal.indexOf("【自訂版本】") !== -1);
+      // 只要包含標籤、自訂版本字樣，或並非預設的自動存檔，均列入自訂命名版本
+      var isExplicitNamed = (actionVal.indexOf("🏷️") !== -1 || actionVal.indexOf("【自訂版本】") !== -1 || actionVal.indexOf("自訂命名") !== -1);
+      var isGenericAuto = (actionVal.indexOf("自動存檔") !== -1 || actionVal.indexOf("狀態變更") !== -1 || actionVal.indexOf("狀態更新") !== -1);
+      var isNamed = isExplicitNamed || (!isGenericAuto && actionVal.length > 0);
+
       var customName = "";
       if (isNamed) {
-        customName = actionVal.replace("🏷️", "").replace("【自訂版本】", "").replace("自訂命名：", "").trim();
+        customName = actionVal
+          .replace("🏷️", "")
+          .replace("【自訂版本】", "")
+          .replace("自訂命名：", "")
+          .replace("自訂命名:", "")
+          .trim();
+        if (!customName) customName = "自訂版本 (" + timeVal + ")";
       }
 
       var item = {
@@ -379,7 +412,7 @@ function apiSaveNamedVersion(versionName, dateStr, hiddenIds, checkedInIds) {
   try {
     var rawName = String(versionName || "").trim();
     if (!rawName) {
-      rawName = "自訂版本 - " + Utilities.formatDate(new Date(), "Asia/Taipei", "MM/dd HH:mm");
+      rawName = "自訂名單 - " + Utilities.formatDate(new Date(), "Asia/Taipei", "MM/dd HH:mm");
     }
     var actionNote = "🏷️ " + rawName;
     var curDate = normalizeDateString(dateStr || getTodayString());
@@ -402,7 +435,7 @@ function apiSaveNamedVersion(versionName, dateStr, hiddenIds, checkedInIds) {
 }
 
 // ------------------------------------------
-// 核心 API：【有動作就更新】自動存檔完整狀態
+// 核心 API：【有動作就更新】自動存檔完整狀態並廣播協同時間戳記
 // ------------------------------------------
 function apiAutoSaveFullState(dateStr, hiddenIds, checkedInIds, actionNote) {
   try {
@@ -448,7 +481,7 @@ function apiAutoSaveFullState(dateStr, hiddenIds, checkedInIds, actionNote) {
           newNote = "已打卡 " + nowTime;
           noteChanges = true;
         } else if (!isChk && curNote.indexOf("已打卡") !== -1) {
-          newNote = curNote.replace(/已打卡\\s*\\d{2}:\\d{2}/, "").trim();
+          newNote = curNote.replace(/已打卡\s*\d{2}:\d{2}/, "").trim();
           noteChanges = true;
         }
         newNotes.push([newNote]);
@@ -464,15 +497,97 @@ function apiAutoSaveFullState(dateStr, hiddenIds, checkedInIds, actionNote) {
       sheet.getRange("D1").setValue("已顯示: " + activeCount + " / " + numRows);
     }
 
+    var nowStr = Utilities.formatDate(new Date(), "Asia/Taipei", "yyyy-MM-dd HH:mm:ss");
+    sheet.getRange("E1").setValue("最後協作更新: " + nowStr);
+
     var note = actionNote || ("自動存檔 (開啟 " + activeCount + " / 關閉 " + (hiddenSet.size) + ")");
     var histRec = appendHistoryRecord(targetDate, note, Array.from(hiddenSet), Array.from(checkedSet), activeCount);
 
     return {
       success: true,
-      timestamp: histRec ? histRec.timestamp : Utilities.formatDate(new Date(), "Asia/Taipei", "HH:mm:ss"),
+      timestamp: nowStr,
       activeCount: activeCount,
-      closedCount: hiddenSet.size
+      closedCount: hiddenSet.size,
+      checkedInCount: checkedSet.size
     };
+  } catch (err) {
+    return { success: false, error: String(err) };
+  }
+}
+
+// ------------------------------------------
+// 🌟 核心 API：多人共同編輯狀態輪詢 (Collaborative Auto-Sync)
+// ------------------------------------------
+function apiGetCollaborativeState(dateStr, clientLastTime) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) return { success: false, msg: "未綁定試算表" };
+
+    var sheet = ss.getSheetByName("當日店家清單");
+    if (!sheet) return { success: false, msg: "找不到【當日店家清單】工作表" };
+
+    var targetDate = normalizeDateString(dateStr || getTodayString());
+    var sheetDate = normalizeDateString(sheet.getRange("B1").getValue());
+    var serverUpdateTime = String(sheet.getRange("E1").getValue() || "");
+
+    // 如果目前試算表正在呈現該日期
+    if (sheetDate === targetDate) {
+      // 若客戶端時間與伺服器時間完全一致，回傳無更新，極省頻寬與配額
+      if (clientLastTime && serverUpdateTime && clientLastTime === serverUpdateTime) {
+        return {
+          success: true,
+          hasUpdate: false,
+          serverUpdateTime: serverUpdateTime
+        };
+      }
+
+      var lastRow = sheet.getLastRow();
+      var hiddenIds = [];
+      var checkedInIds = [];
+      var activeCount = 0;
+
+      if (lastRow >= 4) {
+        var numRows = lastRow - 3;
+        var visData = sheet.getRange(4, 2, numRows, 1).getValues();
+        var noteData = sheet.getRange(4, 10, numRows, 1).getValues();
+
+        for (var i = 0; i < numRows; i++) {
+          var storeId = i + 1;
+          var isVis = (visData[i][0] === true || String(visData[i][0]).toUpperCase() === "TRUE");
+          if (isVis) {
+            activeCount++;
+          } else {
+            hiddenIds.push(storeId);
+          }
+
+          var note = String(noteData[i][0] || "");
+          if (note.indexOf("已打卡") !== -1) {
+            checkedInIds.push(storeId);
+          }
+        }
+      }
+
+      return {
+        success: true,
+        hasUpdate: true,
+        isSameDate: true,
+        serverUpdateTime: serverUpdateTime,
+        hiddenIds: hiddenIds,
+        checkedInIds: checkedInIds,
+        activeCount: activeCount,
+        closedCount: hiddenIds.length,
+        checkedInCount: checkedInIds.length
+      };
+    } else {
+      // 日期不同的狀況
+      return {
+        success: true,
+        hasUpdate: true,
+        isSameDate: false,
+        sheetDate: sheetDate,
+        serverUpdateTime: serverUpdateTime
+      };
+    }
   } catch (err) {
     return { success: false, error: String(err) };
   }
@@ -529,7 +644,19 @@ function apiRevertToHistoryVersion(rowIndexOrTimestamp, todayStr) {
     var data = histSheet.getDataRange().getValues();
     if (data.length <= 1) return { success: false, msg: "歷史紀錄為空" };
 
-    var isNewFormat = (data[0].length >= 7 && data[0][2] === "操作動作說明");
+    var header = data[0];
+    var colMap = { time: 0, date: 1, action: 2, open: 3, close: 4, hidden: 5, checked: 6 };
+    for (var c = 0; c < header.length; c++) {
+      var t = String(header[c] || "").trim();
+      if (/時間|timestamp/i.test(t)) colMap.time = c;
+      else if (/日期|date/i.test(t)) colMap.date = c;
+      else if (/動作|說明|版本|action|note/i.test(t)) colMap.action = c;
+      else if (/開啟|open/i.test(t)) colMap.open = c;
+      else if (/關閉|close/i.test(t)) colMap.close = c;
+      else if (/關閉.*序號|hidden/i.test(t)) colMap.hidden = c;
+      else if (/打卡.*序號|check/i.test(t)) colMap.checked = c;
+    }
+
     var targetRow = null;
 
     if (typeof rowIndexOrTimestamp === 'number' && rowIndexOrTimestamp >= 2 && rowIndexOrTimestamp <= data.length) {
@@ -537,7 +664,7 @@ function apiRevertToHistoryVersion(rowIndexOrTimestamp, todayStr) {
     } else {
       var queryStr = String(rowIndexOrTimestamp).trim();
       for (var i = data.length - 1; i >= 1; i--) {
-        if (String(data[i][0]).indexOf(queryStr) !== -1) {
+        if (String(data[i][colMap.time]).indexOf(queryStr) !== -1 || String(data[i][colMap.action]).indexOf(queryStr) !== -1) {
           targetRow = data[i];
           break;
         }
@@ -548,10 +675,10 @@ function apiRevertToHistoryVersion(rowIndexOrTimestamp, todayStr) {
       return { success: false, msg: "找不到指定的歷史版本" };
     }
 
-    var hiddenStr = isNewFormat ? String(targetRow[5] || "") : String(targetRow[1] || "");
-    var checkedStr = isNewFormat ? String(targetRow[6] || "") : "";
-    var targetTime = String(targetRow[0]);
-    var originAction = isNewFormat ? String(targetRow[2]) : "歷史存檔";
+    var hiddenStr = String(targetRow[colMap.hidden] || "");
+    var checkedStr = String(targetRow[colMap.checked] || "");
+    var targetTime = String(targetRow[colMap.time] || "");
+    var originAction = String(targetRow[colMap.action] || "歷史存檔");
 
     var hiddenIds = [];
     if (hiddenStr) {
@@ -638,6 +765,24 @@ function apiGetStoresForDate(dateStr) {
   } catch (err) {
     return { success: false, error: String(err) };
   }
+}
+
+// ------------------------------------------
+// 👥 多人共同編輯設定指引
+// ------------------------------------------
+function menuShowCollaborationGuide() {
+  var ui = SpreadsheetApp.getUi();
+  var msg = "【如何讓所有人都能共同編輯地圖？】\\n\\n" +
+    "1. 點擊 Apps Script 右上角【部署】>【管理部署作業】。\\n" +
+    "2. 點擊鉛筆圖示【編輯】。\\n" +
+    "3. 請特別確認以下兩項關鍵設定：\\n" +
+    "   - 「執行身分 (Execute as)」：請務必選擇【我 (Me)】\\n" +
+    "   - 「誰可以存取 (Who has access)」：請選擇【任何人 (Anyone)】\\n" +
+    "4. 版本選擇【新版本】，點擊【部署】。\\n\\n" +
+    "✨ 效果：\\n" +
+    "所有團隊同仁透過該 Web App 網址操作時，都會即時共同讀寫同一張試算表！\\n" +
+    "地圖系統具備每 10 秒自動輪詢與即時同步按鈕，一人打卡或變更，全員即時同步！";
+  ui.alert("👥 多人共同編輯設定指引", msg, ui.ButtonSet.OK);
 }
 
 // ------------------------------------------
@@ -1061,6 +1206,19 @@ const indexHtml = `<!doctype html>
       }
       .sched-btn:hover { background: #e8eaed; }
       
+      .sched-btn.action-sync {
+        background: #e0f2fe;
+        color: #0369a1;
+        border-color: #bae6fd;
+        font-weight: 700;
+      }
+      .sched-btn.action-sync:hover { background: #bae6fd; }
+      .sched-btn.action-sync.spinning .sync-icon {
+        display: inline-block;
+        animation: spinIcon 0.8s linear infinite;
+      }
+      @keyframes spinIcon { 100% { transform: rotate(360deg); } }
+
       .sched-btn.action-primary {
         background: #e8f0fe;
         color: #1a73e8;
@@ -1699,6 +1857,11 @@ const indexHtml = `<!doctype html>
         <span>📅 日期：</span>
         <input type="date" id="dateSelector" class="date-input" value="<?= currentDate ?>" />
         
+        <button class="sched-btn action-sync" id="btnSyncServer" title="立即取得所有人的最新打卡與開關狀態 (所有人共同編輯)">
+          <span class="sync-icon">🔄</span>
+          <span>同步最新狀態</span>
+        </button>
+
         <button class="sched-btn action-primary" id="btnLoadAllOpen" title="隔天快速載入全部打勾開啟">
           <span>☀️ 載入全開啟</span>
         </button>
@@ -1883,28 +2046,12 @@ const indexHtml = `<!doctype html>
       });
 
       const currentDate = document.getElementById('dateSelector').value || '<?= currentDate ?>';
-      const STORAGE_VIS_KEY = 'hualien_vis_' + currentDate;
-      const STORAGE_CHK_KEY = 'hualien_chk_' + currentDate;
-
-      let localVisMap = {};
-      let localChkSet = new Set();
-      try {
-        const v = localStorage.getItem(STORAGE_VIS_KEY);
-        if (v) localVisMap = JSON.parse(v);
-        const c = localStorage.getItem(STORAGE_CHK_KEY);
-        if (c) localChkSet = new Set(JSON.parse(c));
-      } catch (err) {}
-
-      function persistLocalState() {
-        try {
-          const visObj = {};
-          storeStates.forEach((st, id) => {
-            visObj[id] = st.isVisible;
-          });
-          localStorage.setItem(STORAGE_VIS_KEY, JSON.stringify(visObj));
-          localStorage.setItem(STORAGE_CHK_KEY, JSON.stringify(Array.from(checkinSet)));
-        } catch (e) {}
-      }
+      
+      // 🌟 共同編輯狀態管理 (以 Google 試算表雲端為單一真實資料來源)
+      let lastServerUpdateTime = '';
+      let isSyncing = false;
+      let isLocalSaving = false;
+      let autoPollInterval = null;
 
       // ==========================================
       // 有動作就自動存檔 (Debounce 800ms)
@@ -1920,8 +2067,8 @@ const indexHtml = `<!doctype html>
       }
 
       function triggerAutoSave(actionNote = '狀態變更') {
-        persistLocalState();
-        updateAutoSaveStatus('saving', '儲存中...');
+        isLocalSaving = true;
+        updateAutoSaveStatus('saving', '雲端儲存中...');
 
         if (autoSaveTimer) {
           clearTimeout(autoSaveTimer);
@@ -1934,6 +2081,7 @@ const indexHtml = `<!doctype html>
 
       function doAutoSaveToServer(actionNote) {
         if (typeof google === 'undefined' || !google.script || !google.script.run) {
+          isLocalSaving = false;
           updateAutoSaveStatus('saved', '本機已儲存');
           return;
         }
@@ -1947,17 +2095,115 @@ const indexHtml = `<!doctype html>
 
         google.script.run
           .withSuccessHandler((res) => {
+            isLocalSaving = false;
             if (res && res.success) {
+              lastServerUpdateTime = res.timestamp || '';
               const timeStr = res.timestamp ? res.timestamp.split(' ').pop() : '';
-              updateAutoSaveStatus('saved', '已自動儲存 ' + timeStr);
+              updateAutoSaveStatus('saved', '已同步雲端 ' + timeStr);
             } else {
-              updateAutoSaveStatus('saved', '已存於快取');
+              updateAutoSaveStatus('saved', '已存入試算表');
             }
           })
           .withFailureHandler((err) => {
-            updateAutoSaveStatus('saved', '已暫存 (網路稍後重試)');
+            isLocalSaving = false;
+            updateAutoSaveStatus('saved', '暫存中 (稍後自動重試)');
           })
           .apiAutoSaveFullState(curDate, hiddenIds, checkedInIds, actionNote);
+      }
+
+      // ==========================================
+      // 🌟 多人共同編輯即時同步 (Collaborative Sync)
+      // ==========================================
+      function applyCollaborativeUpdate(updateData, isManual = false) {
+        if (!updateData || !updateData.success) return;
+        if (!updateData.hasUpdate && !isManual) return;
+
+        lastServerUpdateTime = updateData.serverUpdateTime || '';
+        const hiddenSet = new Set((updateData.hiddenIds || []).map(Number));
+        const checkedSet = new Set((updateData.checkedInIds || []).map(Number));
+
+        // 同步打卡集合
+        checkinSet.clear();
+        checkedSet.forEach(id => checkinSet.add(id));
+
+        // 同步所有店家可見度與標記
+        storeStates.forEach((state, id) => {
+          const shouldBeVis = !hiddenSet.has(id);
+          if (state.isVisible !== shouldBeVis) {
+            state.isVisible = shouldBeVis;
+            if (shouldBeVis) {
+              if (!map.hasLayer(state.marker)) state.marker.addTo(map);
+            } else {
+              if (map.hasLayer(state.marker)) map.removeLayer(state.marker);
+            }
+            if (state.chkElement) state.chkElement.checked = shouldBeVis;
+            if (state.rowElement) {
+              if (shouldBeVis) state.rowElement.classList.remove('disabled');
+              else state.rowElement.classList.add('disabled');
+            }
+          }
+
+          // 同步打卡按鈕顯示
+          const isChk = checkinSet.has(id);
+          if (state.checkinBtn) {
+            state.checkinBtn.textContent = isChk ? '✅ 已打卡' : '📍 打卡';
+            if (isChk) state.checkinBtn.classList.add('checked-in');
+            else state.checkinBtn.classList.remove('checked-in');
+          }
+        });
+
+        updateActiveCountLabel();
+
+        const timeOnly = lastServerUpdateTime ? (lastServerUpdateTime.split(' ').pop() || '') : '';
+        if (isManual) {
+          showToast(\`✅ 已同步最新狀態！顯示 \${updateData.activeCount} 家，已打卡 \${checkinSet.size} 家\`, 3000);
+        } else if (updateData.hasUpdate) {
+          showToast(\`👥 已即時同步協作者的最新變更 (\${timeOnly})\`, 2500);
+        }
+        updateAutoSaveStatus('saved', '共同編輯中 ' + timeOnly);
+      }
+
+      function syncCollaborativeState(isManual = false) {
+        if (typeof google === 'undefined' || !google.script || !google.script.run) return;
+        if (isSyncing) return;
+        isSyncing = true;
+
+        const curDate = document.getElementById('dateSelector').value || currentDate;
+        const btnSyncServer = document.getElementById('btnSyncServer');
+        const btnSyncHeader = document.getElementById('btnSyncFromSheet');
+
+        if (isManual) {
+          updateAutoSaveStatus('saving', '同步雲端中...');
+          if (btnSyncServer) btnSyncServer.classList.add('spinning');
+          if (btnSyncHeader) btnSyncHeader.classList.add('spinning');
+        }
+
+        google.script.run
+          .withSuccessHandler((res) => {
+            isSyncing = false;
+            if (btnSyncServer) btnSyncServer.classList.remove('spinning');
+            if (btnSyncHeader) btnSyncHeader.classList.remove('spinning');
+            if (res && res.success) {
+              applyCollaborativeUpdate(res, isManual);
+            }
+          })
+          .withFailureHandler((err) => {
+            isSyncing = false;
+            if (btnSyncServer) btnSyncServer.classList.remove('spinning');
+            if (btnSyncHeader) btnSyncHeader.classList.remove('spinning');
+            if (isManual) showToast('同步失敗: ' + err, 3000);
+          })
+          .apiGetCollaborativeState(curDate, isManual ? '' : lastServerUpdateTime);
+      }
+
+      function startAutoPolling() {
+        if (autoPollInterval) clearInterval(autoPollInterval);
+        autoPollInterval = setInterval(() => {
+          // 只有在目前沒有存檔且沒有同步中時，背景安靜輪詢
+          if (!isLocalSaving && !isSyncing) {
+            syncCollaborativeState(false);
+          }
+        }, 10000);
       }
 
       // ==========================================
@@ -2015,7 +2261,7 @@ const indexHtml = `<!doctype html>
 
       const checkinSet = new Set();
       stores.forEach(s => {
-        if (localChkSet.has(s.id) || s.isCheckedIn) {
+        if (s.isCheckedIn) {
           checkinSet.add(s.id);
         }
       });
@@ -2087,12 +2333,7 @@ const indexHtml = `<!doctype html>
           highlightStoreRow(store.id);
         });
 
-        let isInitiallyVisible = true;
-        if (localVisMap[store.id] !== undefined) {
-          isInitiallyVisible = localVisMap[store.id];
-        } else if (store.isVisible !== undefined) {
-          isInitiallyVisible = store.isVisible;
-        }
+        let isInitiallyVisible = (store.isVisible !== undefined) ? store.isVisible : true;
 
         if (isInitiallyVisible) {
           marker.addTo(map);
@@ -2418,7 +2659,8 @@ const indexHtml = `<!doctype html>
             .withSuccessHandler((res) => {
               if (res && res.success) {
                 updateAutoSaveStatus('saved', '已存版本：' + res.versionName);
-                showToast(\`✅ 成功儲存版本【\${res.versionName}】！開啟：\${res.activeCount} 家，關閉：\${res.closedCount} 家\`, 4000);
+                showToast(\`✅ 成功儲存自訂版本【\${res.versionName}】！\\n所有協作者均可於【📜 讀取版本歷程】中查看並切換！\`, 4500);
+                syncCollaborativeState(false);
               } else {
                 showToast('存檔失敗: ' + (res ? res.error : ''), 3000);
               }
@@ -2540,7 +2782,7 @@ const indexHtml = `<!doctype html>
 
       function revertToVersion(item) {
         const title = item.isNamed ? ('自訂版本【' + item.customName + '】') : ('版本【' + item.timestamp + '】');
-        if (!confirm('確定要讀取並套用' + title + '的開關與打卡設定嗎？')) return;
+        if (!confirm('確定要讀取並套用' + title + '的開關與打卡設定嗎？\n(全體協作者將同步更新此版本)')) return;
 
         showToast('正在讀取' + title + '...', 3000);
 
@@ -2549,14 +2791,26 @@ const indexHtml = `<!doctype html>
           google.script.run
             .withSuccessHandler((res) => {
               if (res && res.success && res.stores) {
-                localVisMap = {};
+                checkinSet.clear();
                 res.stores.forEach(s => {
                   setStoreVisibility(s.id, s.isVisible);
+                  if (s.isCheckedIn) {
+                    checkinSet.add(s.id);
+                  }
+                  const state = storeStates.get(s.id);
+                  if (state && state.checkinBtn) {
+                    state.checkinBtn.textContent = s.isCheckedIn ? '✅ 已打卡' : '📍 打卡';
+                    if (s.isCheckedIn) state.checkinBtn.classList.add('checked-in');
+                    else state.checkinBtn.classList.remove('checked-in');
+                  }
                 });
-                persistLocalState();
+                updateActiveCountLabel();
+                updateCheckinStats();
                 historyModalOverlay.style.display = 'none';
-                updateAutoSaveStatus('saved', '已讀取：' + (item.isNamed ? item.customName : item.timestamp));
+                updateAutoSaveStatus('saved', '已切換：' + (item.isNamed ? item.customName : item.timestamp));
                 showToast(\`✅ 成功讀取版本！開啟：\${res.activeCount} 家，關閉：\${res.closedCount} 家\`, 3500);
+                // 讀取後廣播同步
+                syncCollaborativeState(false);
               } else {
                 showToast(res.msg || '版本讀取失敗', 2500);
               }
@@ -2656,8 +2910,15 @@ const indexHtml = `<!doctype html>
         }
       }
 
+      const btnSyncServer = document.getElementById('btnSyncServer');
+      if (btnSyncServer) {
+        btnSyncServer.addEventListener('click', () => {
+          syncCollaborativeState(true);
+        });
+      }
+
       document.getElementById('btnSyncFromSheet').addEventListener('click', () => {
-        refreshDataAsync();
+        syncCollaborativeState(true);
       });
 
       window.toggleGroupExpand = function(groupId) {
@@ -2723,6 +2984,12 @@ const indexHtml = `<!doctype html>
       updateGroupCheckboxes();
       updateStats();
       updateCheckinStats();
+
+      // 🌟 啟動多人共同編輯即時輪詢 (每 10 秒自動同步協作者更動)
+      startAutoPolling();
+      setTimeout(() => {
+        syncCollaborativeState(false);
+      }, 1000);
     </script>
   </body>
 </html>
