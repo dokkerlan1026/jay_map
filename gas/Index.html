@@ -160,21 +160,41 @@
         display: inline-flex;
         align-items: center;
         gap: 4px;
-        transition: background 120ms ease;
+        transition: all 120ms ease;
       }
       .sched-btn:hover { background: #e8eaed; }
+      
       .sched-btn.action-primary {
         background: #e8f0fe;
         color: #1a73e8;
         border-color: #c2e7ff;
       }
       .sched-btn.action-primary:hover { background: #d2e3fc; }
+
+      .sched-btn.action-save {
+        background: #e6f4ea;
+        color: #137333;
+        border-color: #a8dab5;
+        font-weight: 700;
+      }
+      .sched-btn.action-save:hover {
+        background: #ceead6;
+      }
+
       .sched-btn.action-history {
         background: #fef3c7;
         color: #92400e;
         border-color: #fde68a;
       }
       .sched-btn.action-history:hover { background: #fde68a; }
+
+      .sched-btn.action-named {
+        background: #f3e8ff;
+        color: #6b21a8;
+        border-color: #e9d5ff;
+        font-weight: 700;
+      }
+      .sched-btn.action-named:hover { background: #e9d5ff; }
 
       /* 即時自動儲存狀態標籤 */
       .autosave-pill {
@@ -556,11 +576,11 @@
         font-weight: 700;
       }
 
-      /* 最近 10 次歷史浮動面板 */
+      /* 歷史與具名版本面板 */
       .history-modal-overlay {
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0,0,0,0.3);
+        background: rgba(0,0,0,0.35);
         z-index: 2000;
         display: none;
         align-items: center;
@@ -570,11 +590,11 @@
         background: white;
         border-radius: 8px;
         width: 90%;
-        max-width: 580px;
-        max-height: 80vh;
+        max-width: 620px;
+        max-height: 85vh;
         display: flex;
         flex-direction: column;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
         overflow: hidden;
       }
       .history-modal-header {
@@ -602,6 +622,29 @@
         padding: 0 4px;
       }
       .history-modal-close:hover { color: #202124; }
+
+      .history-tabs {
+        display: flex;
+        background: #f1f3f4;
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 12px;
+      }
+      .history-tab {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        border: none;
+        background: none;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+      }
+      .history-tab.active {
+        color: #1a73e8;
+        border-bottom-color: #1a73e8;
+        background: white;
+      }
+
       .history-list {
         padding: 12px;
         overflow-y: auto;
@@ -625,6 +668,10 @@
         border-color: #1a73e8;
         background: #f8fbff;
       }
+      .history-card.is-named-card {
+        border-color: #d8b4fe;
+        background: #faf5ff;
+      }
       .history-card.yesterday-last {
         border-color: #f59e0b;
         background: #fffbeb;
@@ -637,6 +684,7 @@
         align-items: center;
         gap: 8px;
         margin-bottom: 4px;
+        flex-wrap: wrap;
       }
       .history-time {
         font-weight: 700;
@@ -653,13 +701,18 @@
         background: #e6f4ea;
         color: #137333;
       }
+      .history-badge.badge-named {
+        background: #f3e8ff;
+        color: #6b21a8;
+        border: 1px solid #d8b4fe;
+      }
       .history-badge.badge-yesterday {
         background: #fef3c7;
         color: #b45309;
         border: 1px solid #fde68a;
       }
       .history-desc {
-        font-size: 0.78rem;
+        font-size: 0.8rem;
         color: var(--text-secondary);
       }
       .history-counts {
@@ -750,8 +803,12 @@
           <span>↩️ 回到昨天最後紀錄</span>
         </button>
 
-        <button class="sched-btn" id="btnOpenHistoryModal" title="檢視最後 10 次更新紀錄並自由回到任一版本">
-          <span>📜 最近 10 次紀錄 ▼</span>
+        <button class="sched-btn action-save" id="btnOpenSaveModal" title="手動儲存並命名當前開關版本">
+          <span>💾 另存自訂版本</span>
+        </button>
+
+        <button class="sched-btn action-named" id="btnOpenHistoryModal" title="檢視所有歷史/具名版本並一鍵讀取">
+          <span>📜 讀取版本歷程 ▼</span>
         </button>
 
         <button class="sched-btn" id="btnLoadCustom" title="載入選取日期的歷史設定">
@@ -843,14 +900,45 @@
       <div id="map"></div>
     </div>
 
-    <!-- 最近 10 次更新歷史彈窗 -->
+    <!-- 1. 手動命名存檔 Modal -->
+    <div class="history-modal-overlay" id="saveModalOverlay">
+      <div class="history-modal" style="max-width: 440px;">
+        <div class="history-modal-header">
+          <div class="history-modal-title">
+            <span>💾 儲存自訂版本</span>
+          </div>
+          <button class="history-modal-close" id="saveModalCloseBtn">×</button>
+        </div>
+        <div style="padding: 18px; display:flex; flex-direction:column; gap:12px;">
+          <label style="font-size:0.85rem; font-weight:600; color:var(--text-primary);">
+            請為當前開關狀態輸入版本名稱：
+          </label>
+          <input type="text" id="saveVersionNameInput" class="search-input" placeholder="例如：週四下午名單、重點大店特選..." maxlength="30" />
+          <div style="font-size:0.75rem; color:var(--text-secondary);" id="saveModalStatsInfo">
+            目前狀態：計算中...
+          </div>
+          <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:8px;">
+            <button class="sched-btn" id="saveModalCancelBtn" type="button">取消</button>
+            <button class="sched-btn action-save" id="saveModalConfirmBtn" type="button" style="background:#188038;color:white;border-color:#137333;font-weight:700;">
+              ✅ 確認儲存版本
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 版本歷程與讀取 Modal -->
     <div class="history-modal-overlay" id="historyModalOverlay">
       <div class="history-modal">
         <div class="history-modal-header">
           <div class="history-modal-title">
-            <span>📜 最近 10 次更新紀錄</span>
+            <span>📜 版本歷程與讀取</span>
           </div>
           <button class="history-modal-close" id="historyModalCloseBtn">×</button>
+        </div>
+        <div class="history-tabs">
+          <button class="history-tab active" id="tabAllVersions">全部更新紀錄 (最近20次)</button>
+          <button class="history-tab" id="tabNamedVersions">🏷️ 僅看自訂具名版本</button>
         </div>
         <div class="history-list" id="historyListContainer">
           <div style="text-align:center;padding:24px;color:#888;">載入中...</div>
@@ -1296,7 +1384,7 @@
       });
 
       // ----------------------------------------------------
-      // 🌟 載入全開啟
+      // 載入全開啟
       // ----------------------------------------------------
       document.getElementById('btnLoadAllOpen').addEventListener('click', () => {
         if (!confirm('確定要將今天的所有店家設為【全部開啟顯示】嗎？')) return;
@@ -1306,7 +1394,7 @@
       });
 
       // ----------------------------------------------------
-      // 🌟 核心升級：一鍵回到昨天最後紀錄 (鎖定昨日最新存檔)
+      // 一鍵回到昨天最後紀錄
       // ----------------------------------------------------
       document.getElementById('btnLoadYesterday').addEventListener('click', () => {
         if (!confirm('確定要一鍵載入【昨天的最後一次存檔紀錄】嗎？')) return;
@@ -1338,48 +1426,141 @@
       });
 
       // ----------------------------------------------------
-      // 🌟 核心升級：最近 10 次更新歷史彈窗與版本自由回溯
+      // 🌟 核心新功能：手動具名存檔 Modal
+      // ----------------------------------------------------
+      const saveModalOverlay = document.getElementById('saveModalOverlay');
+      const saveModalCloseBtn = document.getElementById('saveModalCloseBtn');
+      const saveModalCancelBtn = document.getElementById('saveModalCancelBtn');
+      const saveModalConfirmBtn = document.getElementById('saveModalConfirmBtn');
+      const saveVersionNameInput = document.getElementById('saveVersionNameInput');
+      const saveModalStatsInfo = document.getElementById('saveModalStatsInfo');
+      const btnOpenSaveModal = document.getElementById('btnOpenSaveModal');
+
+      function openSaveModal() {
+        let activeCount = 0;
+        storeStates.forEach(st => { if (st.isVisible) activeCount++; });
+        const closedCount = stores.length - activeCount;
+        const curDate = document.getElementById('dateSelector').value || currentDate;
+        const defaultName = '自訂名單 (' + activeCount + '家) - ' + (new Date().toLocaleTimeString('zh-TW', { hour12: false, hour: '2-digit', minute: '2-digit' }));
+
+        saveVersionNameInput.value = defaultName;
+        saveModalStatsInfo.textContent = `目前包含：開啟 ${activeCount} 家 ｜ 關閉 ${closedCount} 家 ｜ 日期：${curDate}`;
+        saveModalOverlay.style.display = 'flex';
+        setTimeout(() => saveVersionNameInput.select(), 100);
+      }
+
+      function closeSaveModal() {
+        saveModalOverlay.style.display = 'none';
+      }
+
+      btnOpenSaveModal.addEventListener('click', openSaveModal);
+      saveModalCloseBtn.addEventListener('click', closeSaveModal);
+      saveModalCancelBtn.addEventListener('click', closeSaveModal);
+      saveModalOverlay.addEventListener('click', (e) => {
+        if (e.target === saveModalOverlay) closeSaveModal();
+      });
+
+      saveModalConfirmBtn.addEventListener('click', () => {
+        const vName = saveVersionNameInput.value.trim();
+        if (!vName) {
+          alert('請輸入版本名稱！');
+          return;
+        }
+
+        closeSaveModal();
+        showToast('正在儲存自訂版本【' + vName + '】...', 3000);
+        updateAutoSaveStatus('saving', '具名存檔中...');
+
+        const hiddenIds = [];
+        storeStates.forEach((st, id) => {
+          if (!st.isVisible) hiddenIds.push(id);
+        });
+        const checkedInIds = Array.from(checkinSet);
+        const curDate = document.getElementById('dateSelector').value || currentDate;
+
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          google.script.run
+            .withSuccessHandler((res) => {
+              if (res && res.success) {
+                updateAutoSaveStatus('saved', '已存版本：' + res.versionName);
+                showToast(`✅ 成功儲存版本【${res.versionName}】！開啟：${res.activeCount} 家，關閉：${res.closedCount} 家`, 4000);
+              } else {
+                showToast('存檔失敗: ' + (res ? res.error : ''), 3000);
+              }
+            })
+            .withFailureHandler((err) => {
+              showToast('儲存失敗: ' + err, 3000);
+            })
+            .apiSaveNamedVersion(vName, curDate, hiddenIds, checkedInIds);
+        } else {
+          updateAutoSaveStatus('saved', '本機已儲存版本：' + vName);
+          showToast('✅ 本機已模擬儲存版本【' + vName + '】', 2500);
+        }
+      });
+
+      // ----------------------------------------------------
+      // 🌟 核心新功能：版本歷程與一鍵讀取 (支援自訂版本篩選)
       // ----------------------------------------------------
       const historyModalOverlay = document.getElementById('historyModalOverlay');
       const historyListContainer = document.getElementById('historyListContainer');
       const btnOpenHistoryModal = document.getElementById('btnOpenHistoryModal');
       const historyModalCloseBtn = document.getElementById('historyModalCloseBtn');
+      const tabAllVersions = document.getElementById('tabAllVersions');
+      const tabNamedVersions = document.getElementById('tabNamedVersions');
+
+      let currentHistoryData = { list: [], namedList: [] };
+      let currentFilterTab = 'all'; // 'all' or 'named'
 
       function openHistoryModal() {
         historyModalOverlay.style.display = 'flex';
-        historyListContainer.innerHTML = '<div style="text-align:center;padding:24px;color:#888;">⏳ 正在讀取最近 10 次更新版本...</div>';
+        historyListContainer.innerHTML = '<div style="text-align:center;padding:24px;color:#888;">⏳ 正在讀取版本紀錄...</div>';
 
         if (typeof google !== 'undefined' && google.script && google.script.run) {
           google.script.run
             .withSuccessHandler((res) => {
-              if (!res || !res.success || !res.list || res.list.length === 0) {
+              if (!res || !res.success) {
                 historyListContainer.innerHTML = '<div style="text-align:center;padding:24px;color:#888;">尚無歷史更新紀錄</div>';
                 return;
               }
-              renderHistoryList(res.list);
+              currentHistoryData = res;
+              renderCurrentHistoryList();
             })
             .withFailureHandler((err) => {
               historyListContainer.innerHTML = '<div style="text-align:center;padding:24px;color:#c5221f;">讀取失敗: ' + err + '</div>';
             })
-            .apiGetRecentHistory(10);
+            .apiGetRecentHistory(20);
         } else {
           historyListContainer.innerHTML = `
             <div style="text-align:center;padding:20px;color:#666;">
-              <p>【本機離線展示模式】</p>
-              <p style="font-size:12px;margin-top:6px;">發布至 Google Apps Script 後將列出最後 10 次更新歷程！</p>
+              <p>【本機展示模式】</p>
+              <p style="font-size:12px;margin-top:6px;">發佈至 Google Apps Script 後，此處可一鍵讀取所有手動命名與自動存檔版本！</p>
             </div>
           `;
         }
       }
 
-      function renderHistoryList(list) {
+      function renderCurrentHistoryList() {
+        const listToRender = (currentFilterTab === 'named') ? (currentHistoryData.namedList || []) : (currentHistoryData.list || []);
+
+        if (!listToRender || listToRender.length === 0) {
+          historyListContainer.innerHTML = `
+            <div style="text-align:center;padding:30px;color:#888;">
+              <p>${currentFilterTab === 'named' ? '目前尚無手動命名的自訂版本，請先點擊【💾 另存自訂版本】！' : '目前尚無更新紀錄'}</p>
+            </div>
+          `;
+          return;
+        }
+
         historyListContainer.innerHTML = '';
-        list.forEach((item, idx) => {
+        listToRender.forEach((item) => {
           const card = document.createElement('div');
-          card.className = 'history-card' + (item.isYesterdayLast ? ' yesterday-last' : '');
+          const isNamed = item.isNamed;
+          card.className = 'history-card' + (isNamed ? ' is-named-card' : (item.isYesterdayLast ? ' yesterday-last' : ''));
 
           let badgeHtml = '';
-          if (item.isLatest) {
+          if (isNamed) {
+            badgeHtml = `<span class="history-badge badge-named">🏷️ 自訂：${item.customName}</span>`;
+          } else if (item.isLatest) {
             badgeHtml = '<span class="history-badge badge-latest">最新版本</span>';
           } else if (item.isYesterdayLast) {
             badgeHtml = '<span class="history-badge badge-yesterday">⭐ 昨天的最後紀錄</span>';
@@ -1391,11 +1572,11 @@
                 <span class="history-time">${item.timestamp}</span>
                 ${badgeHtml}
               </div>
-              <div class="history-desc">動作：${item.action || '狀態更新'}</div>
+              <div class="history-desc">${isNamed ? ('📌 版本名稱：<b>' + item.customName + '</b>') : ('動作：' + (item.action || '狀態更新'))}</div>
               <div class="history-counts">📊 開啟：${item.activeCount} 家 ｜ 關閉：${item.closedCount} 家</div>
             </div>
             <button class="history-revert-btn" id="btn-revert-${item.rowIndex}">
-              ↩️ 回到此版本
+              ↩️ 讀取此版本
             </button>
           `;
 
@@ -1408,9 +1589,25 @@
         });
       }
 
+      tabAllVersions.addEventListener('click', () => {
+        currentFilterTab = 'all';
+        tabAllVersions.classList.add('active');
+        tabNamedVersions.classList.remove('active');
+        renderCurrentHistoryList();
+      });
+
+      tabNamedVersions.addEventListener('click', () => {
+        currentFilterTab = 'named';
+        tabNamedVersions.classList.add('active');
+        tabAllVersions.classList.remove('active');
+        renderCurrentHistoryList();
+      });
+
       function revertToVersion(item) {
-        if (!confirm('確定要將店家狀態回復至【' + item.timestamp + '】嗎？')) return;
-        showToast('正在回復至該版本...', 2500);
+        const title = item.isNamed ? ('自訂版本【' + item.customName + '】') : ('版本【' + item.timestamp + '】');
+        if (!confirm('確定要讀取並套用' + title + '的開關與打卡設定嗎？')) return;
+
+        showToast('正在讀取' + title + '...', 3000);
 
         if (typeof google !== 'undefined' && google.script && google.script.run) {
           const curDate = document.getElementById('dateSelector').value;
@@ -1423,14 +1620,14 @@
                 });
                 persistLocalState();
                 historyModalOverlay.style.display = 'none';
-                updateAutoSaveStatus('saved', '已回復至 ' + item.timestamp);
-                showToast(`✅ 成功回復版本！開啟：${res.activeCount} 家，關閉：${res.closedCount} 家`, 3500);
+                updateAutoSaveStatus('saved', '已讀取：' + (item.isNamed ? item.customName : item.timestamp));
+                showToast(`✅ 成功讀取版本！開啟：${res.activeCount} 家，關閉：${res.closedCount} 家`, 3500);
               } else {
-                showToast(res.msg || '版本回復失敗', 2500);
+                showToast(res.msg || '版本讀取失敗', 2500);
               }
             })
             .withFailureHandler((err) => {
-              showToast('回復失敗: ' + err, 2500);
+              showToast('讀取失敗: ' + err, 2500);
             })
             .apiRevertToHistoryVersion(item.rowIndex, curDate);
         }
