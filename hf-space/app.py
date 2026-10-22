@@ -1,25 +1,27 @@
 import os
 import json
-import sqlite3
 from datetime import datetime, timedelta
 from typing import List, Optional
 from io import BytesIO
 
-from fastapi import FastAPI, HTTPException, Query, Response
-from fastapi.responses import HTMLResponse, StreamingResponse
+from contextlib import asynccontextmanager
+
+import psycopg
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+
+from database import ensure_date_initialized as db_ensure_date_initialized
+from database import get_db, healthcheck, init_db
 
 # ==========================================
 # 基礎設定與資料載入
 # ==========================================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(BASE_DIR, "stores_data.json")
-DB_PATH = os.path.join(BASE_DIR, "stores.db")
-
-app = FastAPI(title="花蓮店家排程地圖", version="2.0.0")
 
 # 載入基礎 500 筆店家資料
 with open(DATA_FILE, "r", encoding="utf-8") as f:
@@ -45,50 +47,27 @@ for s in DEFAULT_STORES:
         s["subGroup"] = PRECISE_FIXES[s["id"]]["subGroup"]
 
 # ==========================================
-# 資料庫初始化
+# 應用程式與資料庫初始化
 # ==========================================
-def get_db():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    return conn
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    init_db()
+    yield
 
-def init_db():
-    with get_db() as conn:
-        cursor = conn.cursor()
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS store_daily_state (
-                date TEXT,
-                store_id INTEGER,
-                is_visible INTEGER DEFAULT 1,
-                is_checked_in INTEGER DEFAULT 0,
-                checkin_time TEXT,
-                updated_at TEXT,
-                PRIMARY KEY (date, store_id)
-            )
-        """)
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS version_history (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                date TEXT,
-                action TEXT,
-                version_name TEXT,
-                is_named INTEGER DEFAULT 0,
-                active_count INTEGER,
-                closed_count INTEGER,
-                hidden_ids TEXT,
-                checked_ids TEXT,
-                created_at TEXT
-            )
-        """)
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS sync_meta (
-                key TEXT PRIMARY KEY,
-                value TEXT
-            )
-        """)
-        conn.commit()
+app = FastAPI(title="花蓮店家排程地圖", version="3.0.0", lifespan=lifespan)
 
-init_db()
+@app.exception_handler(psycopg.Error)
+async def database_error_handler(_request: Request, _exc: psycopg.Error):
+    return JSONResponse(
+        status_code=503,
+        content={"detail": "Database temporarily unavailable"},
+    )
+
+@app.get("/health")
+def health():
+    if not healthcheck():
+        raise HTTPException(status_code=503, detail="Database unavailable")
+    return {"status": "ok"}
 
 def get_now_str():
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -102,31 +81,19 @@ def get_yesterday_str(base_date: str):
 
 def update_sync_time(conn, target_date: str):
     now_str = get_now_str()
-    conn.execute("INSERT OR REPLACE INTO sync_meta (key, value) VALUES (?, ?)", (f"last_update_{target_date}", now_str))
-    conn.commit()
+    conn.execute(
+        """INSERT INTO sync_meta (key, value) VALUES (%s, %s)
+           ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value""",
+        (f"last_update_{target_date}", now_str),
+    )
     return now_str
 
 def get_sync_time(conn, target_date: str) -> str:
-    row = conn.execute("SELECT value FROM sync_meta WHERE key = ?", (f"last_update_{target_date}",)).fetchone()
+    row = conn.execute("SELECT value FROM sync_meta WHERE key = %s", (f"last_update_{target_date}",)).fetchone()
     return row["value"] if row else ""
 
-# 確保當日資料初始化 (若無則預設全開)
 def ensure_date_initialized(conn, target_date: str):
-    row = conn.execute("SELECT COUNT(*) as cnt FROM store_daily_state WHERE date = ?", (target_date,)).fetchone()
-    if row["cnt"] == 0:
-        # 新增一天的初始全開資料
-        now_str = get_now_str()
-        items = [(target_date, idx + 1, 1, 0, "", now_str) for idx in range(len(DEFAULT_STORES))]
-        conn.executemany("""
-            INSERT INTO store_daily_state (date, store_id, is_visible, is_checked_in, checkin_time, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """, items)
-        # 寫入一筆初始歷史版本
-        conn.execute("""
-            INSERT INTO version_history (date, action, version_name, is_named, active_count, closed_count, hidden_ids, checked_ids, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (target_date, "初始預設 (500家全部開啟)", "預設全開", 0, len(DEFAULT_STORES), 0, "", "", now_str))
-        update_sync_time(conn, target_date)
+    db_ensure_date_initialized(conn, target_date, len(DEFAULT_STORES))
 
 # ==========================================
 # Pydantic 請求模型
@@ -168,7 +135,7 @@ def get_stores(date: Optional[str] = None):
         rows = conn.execute("""
             SELECT store_id, is_visible, is_checked_in, checkin_time, updated_at
             FROM store_daily_state
-            WHERE date = ?
+            WHERE date = %s
             ORDER BY store_id ASC
         """, (target_date,)).fetchall()
         
@@ -218,7 +185,7 @@ def poll_collaborative_state(date: Optional[str] = None, client_time: Optional[s
         rows = conn.execute("""
             SELECT store_id, is_visible, is_checked_in
             FROM store_daily_state
-            WHERE date = ?
+            WHERE date = %s
         """, (target_date,)).fetchall()
         
         hidden_ids = [r["store_id"] for r in rows if not r["is_visible"]]
@@ -243,9 +210,9 @@ def toggle_visibility(req: VisibilityToggleRequest):
         now_str = get_now_str()
         conn.execute("""
             UPDATE store_daily_state
-            SET is_visible = ?, updated_at = ?
-            WHERE date = ? AND store_id = ?
-        """, (1 if req.is_visible else 0, now_str, req.date, req.store_id))
+            SET is_visible = %s, updated_at = %s
+            WHERE date = %s AND store_id = %s
+        """, (req.is_visible, now_str, req.date, req.store_id))
         
         # 記錄狀態變更並更新時間戳記
         sync_time = update_sync_time(conn, req.date)
@@ -258,11 +225,11 @@ def batch_visibility(req: BatchVisibilityRequest):
         hidden_set = set(req.hidden_ids)
         
         # 批次更新
-        updates = [(0 if (i + 1) in hidden_set else 1, now_str, req.date, i + 1) for i in range(len(DEFAULT_STORES))]
-        conn.executemany("""
+        updates = [((i + 1) not in hidden_set, now_str, req.date, i + 1) for i in range(len(DEFAULT_STORES))]
+        conn.cursor().executemany("""
             UPDATE store_daily_state
-            SET is_visible = ?, updated_at = ?
-            WHERE date = ? AND store_id = ?
+            SET is_visible = %s, updated_at = %s
+            WHERE date = %s AND store_id = %s
         """, updates)
         
         active_count = len(DEFAULT_STORES) - len(hidden_set)
@@ -270,8 +237,8 @@ def batch_visibility(req: BatchVisibilityRequest):
         hidden_str = ",".join(map(str, req.hidden_ids))
         conn.execute("""
             INSERT INTO version_history (date, action, version_name, is_named, active_count, closed_count, hidden_ids, checked_ids, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (req.date, req.action_note, "", 0, active_count, len(hidden_set), hidden_str, "", now_str))
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (req.date, req.action_note, "", False, active_count, len(hidden_set), hidden_str, "", now_str))
         
         sync_time = update_sync_time(conn, req.date)
         return {"success": True, "activeCount": active_count, "serverTime": sync_time}
@@ -283,9 +250,9 @@ def toggle_checkin(req: CheckinToggleRequest):
         chk_time = datetime.now().strftime("%H:%M") if req.is_checked_in else ""
         conn.execute("""
             UPDATE store_daily_state
-            SET is_checked_in = ?, checkin_time = ?, updated_at = ?
-            WHERE date = ? AND store_id = ?
-        """, (1 if req.is_checked_in else 0, chk_time, now_str, req.date, req.store_id))
+            SET is_checked_in = %s, checkin_time = %s, updated_at = %s
+            WHERE date = %s AND store_id = %s
+        """, (req.is_checked_in, chk_time, now_str, req.date, req.store_id))
         
         sync_time = update_sync_time(conn, req.date)
         return {"success": True, "checkinTime": chk_time, "serverTime": sync_time}
@@ -297,14 +264,14 @@ def load_all_open(date: Optional[str] = None):
         now_str = get_now_str()
         conn.execute("""
             UPDATE store_daily_state
-            SET is_visible = 1, updated_at = ?
-            WHERE date = ?
+            SET is_visible = TRUE, updated_at = %s
+            WHERE date = %s
         """, (now_str, target_date))
         
         conn.execute("""
             INSERT INTO version_history (date, action, version_name, is_named, active_count, closed_count, hidden_ids, checked_ids, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (target_date, "☀️ 載入全開啟 (500家全部顯示)", "", 0, len(DEFAULT_STORES), 0, "", "", now_str))
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (target_date, "☀️ 載入全開啟 (500家全部顯示)", "", False, len(DEFAULT_STORES), 0, "", "", now_str))
         
         sync_time = update_sync_time(conn, target_date)
         return {"success": True, "activeCount": len(DEFAULT_STORES), "closedCount": 0, "serverTime": sync_time}
@@ -318,7 +285,7 @@ def load_yesterday(date: Optional[str] = None):
         # 尋找昨天最後一次存檔紀錄
         last_hist = conn.execute("""
             SELECT * FROM version_history
-            WHERE date = ?
+            WHERE date = %s
             ORDER BY id DESC
             LIMIT 1
         """, (yesterday,)).fetchone()
@@ -328,7 +295,7 @@ def load_yesterday(date: Optional[str] = None):
             y_rows = conn.execute("""
                 SELECT store_id, is_visible, is_checked_in
                 FROM store_daily_state
-                WHERE date = ?
+                WHERE date = %s
             """, (yesterday,)).fetchall()
             if not y_rows:
                 raise HTTPException(status_code=404, detail=f"找不到昨天 ({yesterday}) 的任何存檔或排程紀錄！")
@@ -345,21 +312,21 @@ def load_yesterday(date: Optional[str] = None):
         updates = []
         for i in range(len(DEFAULT_STORES)):
             s_id = i + 1
-            vis = 0 if s_id in hidden_set else 1
-            chk = 1 if s_id in checked_set else 0
+            vis = s_id not in hidden_set
+            chk = s_id in checked_set
             updates.append((vis, chk, now_str, target_date, s_id))
             
-        conn.executemany("""
+        conn.cursor().executemany("""
             UPDATE store_daily_state
-            SET is_visible = ?, is_checked_in = ?, updated_at = ?
-            WHERE date = ? AND store_id = ?
+            SET is_visible = %s, is_checked_in = %s, updated_at = %s
+            WHERE date = %s AND store_id = %s
         """, updates)
         
         active_count = len(DEFAULT_STORES) - len(hidden_ids)
         conn.execute("""
             INSERT INTO version_history (date, action, version_name, is_named, active_count, closed_count, hidden_ids, checked_ids, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (target_date, f"↩️ 回復昨日最後紀錄 ({yesterday})", "", 0, active_count, len(hidden_ids), last_hist["hidden_ids"] if last_hist else "", "", now_str))
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (target_date, f"↩️ 回復昨日最後紀錄 ({yesterday})", "", False, active_count, len(hidden_ids), last_hist["hidden_ids"] if last_hist else "", "", now_str))
         
         sync_time = update_sync_time(conn, target_date)
         return {
@@ -414,16 +381,16 @@ def save_named_version(req: SaveNamedVersionRequest):
         active_count = len(DEFAULT_STORES) - len(req.hidden_ids)
         closed_count = len(req.hidden_ids)
         
-        cursor = conn.cursor()
-        cursor.execute("""
+        version_id = conn.execute("""
             INSERT INTO version_history (date, action, version_name, is_named, active_count, closed_count, hidden_ids, checked_ids, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (req.date, f"🏷️ 自訂版本：{req.version_name}", req.version_name, 1, active_count, closed_count, hidden_str, checked_str, now_str))
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            RETURNING id
+        """, (req.date, f"🏷️ 自訂版本：{req.version_name}", req.version_name, True, active_count, closed_count, hidden_str, checked_str, now_str)).fetchone()["id"]
         
         sync_time = update_sync_time(conn, req.date)
         return {
             "success": True,
-            "versionId": cursor.lastrowid,
+            "versionId": version_id,
             "versionName": req.version_name,
             "activeCount": active_count,
             "closedCount": closed_count,
@@ -433,7 +400,7 @@ def save_named_version(req: SaveNamedVersionRequest):
 @app.post("/api/versions/revert")
 def revert_version(req: RevertVersionRequest):
     with get_db() as conn:
-        hist = conn.execute("SELECT * FROM version_history WHERE id = ?", (req.version_id,)).fetchone()
+        hist = conn.execute("SELECT * FROM version_history WHERE id = %s", (req.version_id,)).fetchone()
         if not hist:
             raise HTTPException(status_code=404, detail="找不到指定的歷史版本！")
             
@@ -446,22 +413,22 @@ def revert_version(req: RevertVersionRequest):
         updates = []
         for i in range(len(DEFAULT_STORES)):
             s_id = i + 1
-            vis = 0 if s_id in hidden_set else 1
-            chk = 1 if s_id in checked_set else 0
+            vis = s_id not in hidden_set
+            chk = s_id in checked_set
             updates.append((vis, chk, now_str, req.date, s_id))
             
-        conn.executemany("""
+        conn.cursor().executemany("""
             UPDATE store_daily_state
-            SET is_visible = ?, is_checked_in = ?, updated_at = ?
-            WHERE date = ? AND store_id = ?
+            SET is_visible = %s, is_checked_in = %s, updated_at = %s
+            WHERE date = %s AND store_id = %s
         """, updates)
         
         active_count = len(DEFAULT_STORES) - len(hidden_ids)
         v_title = hist["version_name"] or hist["action"]
         conn.execute("""
             INSERT INTO version_history (date, action, version_name, is_named, active_count, closed_count, hidden_ids, checked_ids, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (req.date, f"讀取版本 [{v_title}]", "", 0, active_count, len(hidden_ids), hist["hidden_ids"], hist["checked_ids"], now_str))
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (req.date, f"讀取版本 [{v_title}]", "", False, active_count, len(hidden_ids), hist["hidden_ids"], hist["checked_ids"], now_str))
         
         sync_time = update_sync_time(conn, req.date)
         return {
@@ -509,7 +476,7 @@ def export_excel(date: Optional[str] = None):
         rows = conn.execute("""
             SELECT store_id, is_visible, is_checked_in, checkin_time
             FROM store_daily_state
-            WHERE date = ?
+            WHERE date = %s
             ORDER BY store_id ASC
         """, (target_date,)).fetchall()
         state_map = {r["store_id"]: r for r in rows}
@@ -577,28 +544,6 @@ def index_page():
             return f.read()
     return "<h1>花蓮店家排程地圖建置中...</h1>"
 
-# ==========================================
-# 🌟 Gradio SDK 免費部署相容支援
-# ==========================================
-import gradio as gr
-
-index_path = os.path.join(STATIC_DIR, "index.html")
-full_html = ""
-if os.path.exists(index_path):
-    with open(index_path, "r", encoding="utf-8") as f:
-        full_html = f.read()
-
-custom_css = """
-.gradio-container { max-width: 100vw !important; padding: 0 !important; margin: 0 !important; }
-footer { display: none !important; }
-"""
-
-with gr.Blocks(title="jay的地圖 - 花蓮店家每日排程", css=custom_css) as demo:
-    gr.HTML(full_html)
-
-# 使用 Gradio 官方 mount 方法，根路徑 / 直接由 FastAPI 提供原生絲滑體驗
-app = gr.mount_gradio_app(app, demo, path="/gradio")
-
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=7860)
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", "8000")))
