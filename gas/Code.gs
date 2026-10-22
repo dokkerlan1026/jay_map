@@ -1,10 +1,12 @@
 /**
- * Google Apps Script - 花蓮店家每日開關排程與地圖 Web App (具名版本與動作自動更新版)
+ * Google Apps Script - 花蓮店家每日開關排程與地圖 Web App (店名精準定位與具名版本版)
  * 升級功能：
- * 1. 【手動具名存檔】：使用者可自訂版本名稱 (如「週五巡檢名單」、「重要客戶特選」) 手動儲存。
- * 2. 【具名版本讀取】：在版本清單中一鍵讀取還原任何已命名的版本或自動更新版本。
- * 3. 【有動作就自動更新】：勾選、打卡、分組切換皆自動非同步儲存至試算表。
- * 4. 【一鍵回到昨天最後紀錄】：精確鎖定昨天最後一次存檔版本。
+ * 1. 【店名精確定位與校準】：全面校正因地址誤判的店家標記位置 (如吉安黃昏市場、中正路商圈、大同街、延平街等)。
+ * 2. 【試算表自訂坐標連動】：支援直接讀取與自訂試算表第 8、9 欄的經緯度坐標，手動調整立即反映於地圖。
+ * 3. 【一鍵坐標校準選單】：提供試算表一鍵更新所有店家為最新校準坐標的功能。
+ * 4. 【Google 地圖店名導航】：Popup 與導航連結全面升級為「店名 + 地址」搜尋，精準直達店家門市。
+ * 5. 【手動具名存檔與讀取】：支援使用者自訂版本名稱與一鍵讀取還原。
+ * 6. 【有動作就自動更新】：勾選、打卡、分組切換皆自動非同步儲存至試算表與歷史紀錄。
  */
 
 function doGet(e) {
@@ -29,14 +31,15 @@ function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('🗺️ 店家地圖與每日排程')
     .addItem('🟢 1. 建立/初始化 500 筆店家工作表', 'setupSheetWithData')
+    .addItem('📍 2. 【校準坐標】依店名與最新精確坐標更新試算表', 'menuUpdateAllStoreCoordinates')
     .addSeparator()
-    .addItem('💾 2. 【手動存檔】儲存並命名當前開關版本', 'menuSaveNamedVersion')
-    .addItem('📁 3. 【讀取版本】檢視並載入歷史/自訂版本', 'menuShowRecentHistory')
-    .addItem('☀️ 4. 【隔天操作】載入全開啟 (全部勾選顯示)', 'menuLoadAllActive')
-    .addItem('📋 5. 【一鍵回溯】回到昨天的最後紀錄', 'menuLoadYesterdayLast')
-    .addItem('📅 6. 【指定載入】載入指定日期的開關狀態', 'menuLoadCustomDate')
+    .addItem('💾 3. 【手動存檔】儲存並命名當前開關版本', 'menuSaveNamedVersion')
+    .addItem('📁 4. 【讀取版本】檢視並載入歷史/自訂版本', 'menuShowRecentHistory')
+    .addItem('☀️ 5. 【隔天操作】載入全開啟 (全部勾選顯示)', 'menuLoadAllActive')
+    .addItem('📋 6. 【一鍵回溯】回到昨天的最後紀錄', 'menuLoadYesterdayLast')
+    .addItem('📅 7. 【指定載入】載入指定日期的開關狀態', 'menuLoadCustomDate')
     .addSeparator()
-    .addItem('🌐 7. 開啟地圖 Web App 網頁', 'openWebAppUrl')
+    .addItem('🌐 8. 開啟地圖 Web App 網頁', 'openWebAppUrl')
     .addToUi();
 }
 
@@ -110,7 +113,7 @@ function getOrCreateHistorySheet(ss) {
 }
 
 // ------------------------------------------
-// 核心：查詢指定日期的店家資料
+// 核心：查詢指定日期的店家資料 (支援試算表自訂坐標)
 // ------------------------------------------
 function getStoresForDate(dateStr) {
   var defaultList = getDefaultStores();
@@ -127,6 +130,7 @@ function getStoresForDate(dateStr) {
 
   var hiddenStoreIds = new Set();
   var checkedInStoreIds = new Set();
+  var customCoords = new Map();
 
   if (sheetDate === targetDate) {
     for (var i = 3; i < data.length; i++) {
@@ -140,6 +144,13 @@ function getStoresForDate(dateStr) {
       if (note.indexOf("已打卡") !== -1) {
         checkedInStoreIds.add(storeNum);
       }
+
+      // 🌟 讀取試算表自訂緯度與經度 (若有有效填寫)
+      var customLat = parseFloat(row[7]);
+      var customLng = parseFloat(row[8]);
+      if (!isNaN(customLat) && !isNaN(customLng) && customLat > 20 && customLng > 120) {
+        customCoords.set(storeNum, { lat: customLat, lng: customLng });
+      }
     }
   } else {
     // 跨日期查詢：從歷史紀錄中最新的一筆載入
@@ -150,7 +161,10 @@ function getStoresForDate(dateStr) {
 
   return defaultList.map(function(s, idx) {
     var num = idx + 1;
+    var coords = customCoords.get(num) || { lat: s.lat, lng: s.lng };
     return Object.assign({}, s, {
+      lat: coords.lat,
+      lng: coords.lng,
       isVisible: !hiddenStoreIds.has(num),
       isCheckedIn: checkedInStoreIds.has(num)
     });
@@ -313,7 +327,7 @@ function apiGetRecentHistory(limit) {
 }
 
 // ------------------------------------------
-// 🌟 核心 API：【手動具名存檔】
+// 核心 API：【手動具名存檔】
 // ------------------------------------------
 function apiSaveNamedVersion(versionName, dateStr, hiddenIds, checkedInIds) {
   try {
@@ -581,6 +595,51 @@ function apiGetStoresForDate(dateStr) {
 }
 
 // ------------------------------------------
+// 🌟 核心新功能：一鍵校準試算表中所有店家的坐標
+// ------------------------------------------
+function menuUpdateAllStoreCoordinates() {
+  var ui = SpreadsheetApp.getUi();
+  var confirm = ui.alert(
+    "校準店家坐標",
+    "確定要將【當日店家清單】中的所有店家經緯度更新為最新校準的精確坐標嗎？\n(將修正吉安黃昏市場、大同街、中正路等誤判點位)",
+    ui.ButtonSet.YES_NO
+  );
+  if (confirm !== ui.Button.YES) return;
+
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("當日店家清單");
+  if (!sheet) {
+    ui.alert("錯誤", "找不到【當日店家清單】工作表，請先執行初始化！", ui.ButtonSet.OK);
+    return;
+  }
+
+  var defaultStores = getDefaultStores();
+  var lastRow = sheet.getLastRow();
+  if (lastRow < 4) {
+    ui.alert("提示", "清單中尚無店家資料！", ui.ButtonSet.OK);
+    return;
+  }
+
+  var numRows = Math.min(lastRow - 3, defaultStores.length);
+  var latLngValues = [];
+  var colorValues = [];
+  var subGroupValues = [];
+
+  for (var i = 0; i < numRows; i++) {
+    var s = defaultStores[i];
+    latLngValues.push([s.lat, s.lng]);
+    subGroupValues.push([s.subGroup, s.region, s.color]);
+  }
+
+  // 更新 H 欄(緯度)與 I 欄(經度)
+  sheet.getRange(4, 8, numRows, 2).setValues(latLngValues);
+  // 更新 E 欄(分組分類)、F 欄(區域)、G 欄(標記顏色)
+  sheet.getRange(4, 5, numRows, 3).setValues(subGroupValues);
+
+  ui.alert("坐標校準完成！", "已成功將 " + numRows + " 筆店家的經緯度與分組更新為最新精確位置！\n\n重新開啟或整理地圖 Web App 即會顯示最新標記位置！", ui.ButtonSet.OK);
+}
+
+// ------------------------------------------
 // 試算表選單事件
 // ------------------------------------------
 function menuSaveNamedVersion() {
@@ -712,7 +771,7 @@ function setupSheetWithData() {
   sheet.getRange("B1").setValue(today).setFontWeight("bold").setFontColor("#1a73e8").setFontSize(12);
   sheet.getRange("C1").setValue("📊 狀態統計：").setFontWeight("bold");
   sheet.getRange("D1").setValue("已顯示: " + stores.length + " / " + stores.length).setFontWeight("bold");
-  sheet.getRange("E1").setValue("💡 具名版本與自動更新：支援隨時手動命名版本與讀取，任何開關動作皆自動存檔！").setFontColor("#5f6368");
+  sheet.getRange("E1").setValue("💡 具名版本與精確坐標：支援隨時手動命名版本與讀取，任何開關動作皆自動存檔！").setFontColor("#5f6368");
 
   var headers = [["序號", "顯示開關", "店名", "地址", "分組分類", "區域", "標記顏色", "緯度", "經度", "備註/打卡"]];
   sheet.getRange(3, 1, 1, headers[0].length).setValues(headers);
@@ -746,13 +805,15 @@ function setupSheetWithData() {
   sheet.setColumnWidth(3, 200);
   sheet.setColumnWidth(4, 260);
   sheet.setColumnWidth(5, 140);
+  sheet.setColumnWidth(8, 90);
+  sheet.setColumnWidth(9, 90);
   sheet.setColumnWidth(10, 130);
 
   getOrCreateHistorySheet(ss);
   appendHistoryRecord(today, "🏷️ 初始預設版本 (全開 500 家)", [], [], 500);
 
   var ui = SpreadsheetApp.getUi();
-  ui.alert("初始化完成！", "已成功建立【當日店家清單】與【歷史紀錄存檔】！\n\n1. B 欄支援打勾即時切換顯示\n2. 支援手動儲存命名版本並隨時讀取\n3. 具備有動作就自動更新與一鍵回到昨天紀錄！", ui.ButtonSet.OK);
+  ui.alert("初始化完成！", "已成功建立【當日店家清單】與【歷史紀錄存檔】！\n\n1. B 欄支援打勾即時切換顯示\n2. H、I 欄為最新精確經緯度，支援直接編輯\n3. 具備店名精準導航、手動具名存檔與自動更新！", ui.ButtonSet.OK);
 }
 
 function getDefaultStores() {
@@ -761,16 +822,16 @@ function getDefaultStores() {
     "id": "store-1",
     "name": "蘇姵綸營業所",
     "address": "花蓮縣吉安鄉中山路50號(G49.G50攤位)",
-    "lat": 23.97419,
-    "lng": 121.611724,
-    "estimated": true,
+    "lat": 23.97389,
+    "lng": 121.57826,
+    "estimated": false,
     "isPrimary488": true,
     "group": "主要488名單",
-    "delta": 0.014550538461534757,
-    "subGroup": "主要名單-東區",
-    "region": "界線以東",
-    "color": "綠色",
-    "colorHex": "#257a4e"
+    "delta": -0.018578846153843642,
+    "subGroup": "主要名單-西區",
+    "region": "界線以西",
+    "color": "紅色",
+    "colorHex": "#e53e3e"
   },
   {
     "id": "store-2",
@@ -821,15 +882,16 @@ function getDefaultStores() {
     "id": "store-5",
     "name": "廣隆進企業有限公司",
     "address": "花蓮縣吉安鄉中原路82號",
-    "lat": 23.964778,
-    "lng": 121.60324,
+    "lat": 23.97885,
+    "lng": 121.5881,
     "estimated": false,
     "isPrimary488": false,
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
     "color": "黃色",
-    "colorHex": "#f59e0b"
+    "colorHex": "#f59e0b",
+    "delta": -0.01427115384616684
   },
   {
     "id": "store-6",
@@ -1721,16 +1783,16 @@ function getDefaultStores() {
     "id": "store-66",
     "name": "竇允辰公館",
     "address": "花蓮縣花蓮市大同街98巷5-1號",
-    "lat": 23.985248,
-    "lng": 121.581054,
+    "lat": 23.9785,
+    "lng": 121.6088,
     "estimated": false,
     "isPrimary488": true,
     "group": "主要488名單",
-    "delta": -0.028453384615389155,
-    "subGroup": "主要名單-西區",
-    "region": "界線以西",
-    "color": "紅色",
-    "colorHex": "#e53e3e"
+    "delta": 0.006819230769224305,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-67",
@@ -2842,30 +2904,31 @@ function getDefaultStores() {
     "id": "store-142",
     "name": "中正華廈速食店",
     "address": "花蓮縣花蓮市中正路231號",
-    "lat": 24.02451,
-    "lng": 121.61028,
+    "lat": 23.97125,
+    "lng": 121.60035,
     "estimated": false,
     "isPrimary488": false,
     "group": "非488名單(另色標記)",
     "subGroup": "非488名單",
     "region": "非488店家",
     "color": "黃色",
-    "colorHex": "#f59e0b"
+    "colorHex": "#f59e0b",
+    "delta": 0.0064557692307687375
   },
   {
     "id": "store-143",
     "name": "東湳釣具行",
     "address": "花蓮縣花蓮市中正路29號",
-    "lat": 24.024698,
-    "lng": 121.611032,
+    "lat": 23.96945,
+    "lng": 121.594985,
     "estimated": false,
     "isPrimary488": true,
     "group": "主要488名單",
-    "delta": -0.04247730769229463,
-    "subGroup": "主要名單-西區",
-    "region": "界線以西",
-    "color": "紅色",
-    "colorHex": "#e53e3e"
+    "delta": 0.0030984615384568315,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-144",
@@ -2886,16 +2949,16 @@ function getDefaultStores() {
     "id": "store-145",
     "name": "花蓮一信國光分社",
     "address": "花蓮縣花蓮市中正路32號",
-    "lat": 24.02413,
-    "lng": 121.60936,
+    "lat": 23.9695,
+    "lng": 121.595,
     "estimated": false,
     "isPrimary488": true,
     "group": "主要488名單",
-    "delta": -0.0435157692307655,
-    "subGroup": "主要名單-西區",
-    "region": "界線以西",
-    "color": "紅色",
-    "colorHex": "#e53e3e"
+    "delta": 0.0030576923076921503,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-146",
@@ -3569,16 +3632,16 @@ function getDefaultStores() {
     "id": "store-191",
     "name": "高橋動物醫院",
     "address": "花蓮縣花蓮市中正路91號",
-    "lat": 24.023994,
-    "lng": 121.60913,
+    "lat": 23.970578,
+    "lng": 121.596152,
     "estimated": false,
     "isPrimary488": true,
     "group": "主要488名單",
-    "delta": -0.04359407692307116,
-    "subGroup": "主要名單-西區",
-    "region": "界線以西",
-    "color": "紅色",
-    "colorHex": "#e53e3e"
+    "delta": 0.003007307692314498,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-192",
@@ -4680,16 +4743,16 @@ function getDefaultStores() {
     "id": "store-266",
     "name": "林勤龍娃娃機光復街店",
     "address": "花蓮縣花蓮市光復路60號",
-    "lat": 24.024363,
-    "lng": 121.608374,
+    "lat": 23.9748,
+    "lng": 121.6092,
     "estimated": false,
     "isPrimary488": true,
     "group": "主要488名單",
-    "delta": -0.044761653846137506,
-    "subGroup": "主要名單-西區",
-    "region": "界線以西",
-    "color": "紅色",
-    "colorHex": "#e53e3e"
+    "delta": 0.0113461538461479,
+    "subGroup": "主要名單-東區",
+    "region": "界線以東",
+    "color": "綠色",
+    "colorHex": "#257a4e"
   },
   {
     "id": "store-267",
@@ -5003,12 +5066,12 @@ function getDefaultStores() {
     "id": "store-288",
     "name": "豪謙國際有限公司丼物園",
     "address": "花蓮縣花蓮市延平路148巷22號",
-    "lat": 24.023173,
-    "lng": 121.60471,
+    "lat": 23.9862,
+    "lng": 121.5993,
     "estimated": false,
     "isPrimary488": true,
     "group": "主要488名單",
-    "delta": -0.04709834615383102,
+    "delta": -0.011269230769229921,
     "subGroup": "主要名單-西區",
     "region": "界線以西",
     "color": "紅色",
